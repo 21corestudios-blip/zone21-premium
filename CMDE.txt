@@ -1,0 +1,17 @@
+cd zone-21-global
+
+Lancement serveur :
+npm run dev
+
+Lancement Stripe :
+stripe listen --forward-to localhost:3000/api/webhooks/stripe
+
+Adresses :
+http://localhost:3000
+http://localhost:3000/dashboard
+
+Sauvegarde GIT :
+git status
+git add .
+git commit -m "chore: add prettier, CI workflow and project README"
+git push

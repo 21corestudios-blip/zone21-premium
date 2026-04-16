@@ -1,0 +1,13 @@
+import ImmersiveImageSection from "@/components/sections/home/ImmersiveImageSection";
+
+export default function Zone06Image() {
+  return (
+    <ImmersiveImageSection
+      src="/images/home/a_propos/en-tete.jpg"
+      alt=""
+      backgroundClassName="bg-[#121110]"
+      imageClassName="object-cover object-[center_20%]"
+      overlayClassName="bg-gradient-to-b from-transparent via-[#121110]/10 to-[#121110]/65 mix-blend-multiply"
+    />
+  );
+}
