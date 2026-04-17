@@ -24,7 +24,7 @@ const themeClasses = {
     button: "bg-[#EAE8E3] text-[#121110] hover:bg-white",
   },
   light: {
-    section: "bg-[#F7F5F0] text-[#121110]",
+    section: "bg-white text-[#121110]",
     eyebrow: "text-[#121110]/38",
     heading: "text-[#121110]",
     paragraph: "text-[#121110]/72",

@@ -13,7 +13,7 @@ export default function ImmersiveImageSection({
   alt,
   imageClassName = "object-cover object-center",
   overlayClassName,
-  backgroundClassName = "",
+  backgroundClassName = "bg-white",
 }: ImmersiveImageSectionProps) {
   return (
     <section

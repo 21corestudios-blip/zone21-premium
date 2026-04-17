@@ -6,7 +6,7 @@ export default function Zone02Image() {
       src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop"
       alt=""
       imageClassName="object-cover object-center"
-      overlayClassName="bg-[#121110]/20 mix-blend-multiply"
+      backgroundClassName="bg-white"
     />
   );
 }
