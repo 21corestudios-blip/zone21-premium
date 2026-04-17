@@ -1,4 +1,4 @@
-import SplitShowcaseSection from "@/components/sections/home/SplitShowcaseSection";
+import SplitShowcaseSection from "./shared/SplitShowcaseSection";
 
 export default function Zone07Contact() {
   return (

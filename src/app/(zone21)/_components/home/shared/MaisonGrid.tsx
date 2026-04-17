@@ -1,4 +1,4 @@
-import SplitShowcaseSection from "@/components/sections/home/SplitShowcaseSection";
+import SplitShowcaseSection from "./SplitShowcaseSection";
 
 export default function MaisonGrid() {
   return (

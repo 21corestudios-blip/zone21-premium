@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import ContactForm from "@/components/sections/contact/ContactForm";
+import ContactForm from "./shared/ContactForm";
 
 export default function ContactContent() {
   return (

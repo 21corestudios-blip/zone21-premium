@@ -1,4 +1,4 @@
-import Hero from "@/components/sections/home/Hero";
+import Hero from "./shared/Hero";
 
 export default function HeroSection() {
   return (

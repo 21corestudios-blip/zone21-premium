@@ -1,4 +1,4 @@
-import EditorialManifesto from "@/components/sections/home/EditorialManifesto";
+import EditorialManifesto from "./shared/EditorialManifesto";
 
 export default function Zone01Manifesto() {
   return (

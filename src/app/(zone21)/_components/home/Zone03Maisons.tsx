@@ -1,4 +1,4 @@
-import MaisonGrid from "@/components/sections/home/MaisonGrid";
+import MaisonGrid from "./shared/MaisonGrid";
 
 export default function Zone03Maisons() {
   return (

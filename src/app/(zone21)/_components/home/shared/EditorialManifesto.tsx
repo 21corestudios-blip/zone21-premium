@@ -1,5 +1,5 @@
 import { homeData } from "@/data/home.data";
-import SplitShowcaseSection from "@/components/sections/home/SplitShowcaseSection";
+import SplitShowcaseSection from "./SplitShowcaseSection";
 
 export default function EditorialManifesto() {
   const { tagline, paragraphs, image } = homeData.manifesto;

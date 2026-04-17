@@ -1,4 +1,4 @@
-import ImmersiveImageSection from "@/components/sections/home/ImmersiveImageSection";
+import ImmersiveImageSection from "./shared/ImmersiveImageSection";
 
 export default function Zone06Image() {
   return (
