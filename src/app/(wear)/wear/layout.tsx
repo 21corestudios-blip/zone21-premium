@@ -1,5 +1,5 @@
-import FooterWear from "@/components/layout/wear/FooterWear";
-import HeaderWear from "@/components/layout/wear/HeaderWear";
+import FooterWear from "../_components/layout/FooterWear";
+import HeaderWear from "../_components/layout/HeaderWear";
 
 export default function WearLayout({
   children,
