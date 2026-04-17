@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 
 import { wearCollections } from "@/data/wear.catalog";
 import { wearProducts } from "@/data/wear.products";
+import AddToCartButton from "@/components/ui/AddToCartButton";
 
 type PageProps = {
   params: Promise<{
@@ -103,14 +104,13 @@ export default async function WearProductPage({ params }: PageProps) {
             </div>
 
             <div className="flex flex-col gap-4 pt-4 sm:flex-row">
-              <button
-                type="button"
-                className="inline-flex items-center justify-center bg-[#121110] px-8 py-4 text-[#F7F5F0] transition-colors duration-500 hover:bg-[#2A2826]"
-              >
-                <span className="font-sans text-[0.65rem] font-bold uppercase tracking-[0.25em]">
-                  Ajouter au panier
-                </span>
-              </button>
+              <AddToCartButton
+                id={currentProduct.id}
+                name={currentProduct.name}
+                price={currentProduct.price}
+                image={currentProduct.image}
+                collection={currentProduct.collection}
+              />
 
               <Link
                 href="/contact"

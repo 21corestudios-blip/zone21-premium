@@ -21,10 +21,10 @@ export default function FooterWear() {
             >
               <Image
                 src="/images/ui/21_wear_logo_blanc.svg"
-                alt="21 Wear"
-                width={300}
-                height={120}
-                className="h-14 w-auto md:h-20"
+                alt="ZONE 21"
+                width={120}
+                height={30}
+                className="h-14 w-auto md:h-16"
               />
             </Link>
 
