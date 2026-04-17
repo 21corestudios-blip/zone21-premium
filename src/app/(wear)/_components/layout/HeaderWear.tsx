@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+
+import { useScrolledHeader } from "@/components/shared/useScrolledHeader";
 
 const linkClassName =
   "text-[0.65rem] uppercase tracking-[0.25em] text-white/70 transition-colors duration-500 hover:text-white";
@@ -11,20 +12,7 @@ const collectionLinkClassName =
   "text-[0.6rem] uppercase tracking-[0.2em] text-white/55 transition-colors duration-500 hover:text-white";
 
 export default function HeaderWear() {
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  const isScrolled = useScrolledHeader();
 
   return (
     <header
@@ -42,12 +30,12 @@ export default function HeaderWear() {
             className="flex-shrink-0 transition-opacity duration-500 hover:opacity-80"
           >
             <Image
-              src="/images/ui/logo_signature_or.png"
+              src="/images/ui/21_wear_logo_blanc.svg"
               alt="21 Wear"
-              width={120}
-              height={30}
+              width={300}
+              height={120}
               priority
-              className="h-12 w-auto md:h-16"
+              className="h-14 w-auto md:h-20"
             />
           </Link>
 

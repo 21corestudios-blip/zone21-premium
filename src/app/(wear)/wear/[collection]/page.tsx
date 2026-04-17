@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
+import WearProductsGrid from "@/app/(wear)/_components/wear/WearProductsGrid";
 import { wearCollections } from "@/data/wear.catalog";
+import { wearProducts } from "@/data/wear.products";
 
 type PageProps = {
   params: Promise<{
@@ -46,6 +48,10 @@ export default async function WearCollectionPage({ params }: PageProps) {
     notFound();
   }
 
+  const collectionProducts = wearProducts.filter(
+    (product) => product.collection === collection,
+  );
+
   return (
     <main className="flex min-h-screen flex-col bg-[#F7F5F0]">
       <section className="relative h-[100dvh] min-h-screen w-full overflow-hidden bg-[#121110]">
@@ -67,17 +73,17 @@ export default async function WearCollectionPage({ params }: PageProps) {
         </div>
       </section>
 
-      <section className="flex min-h-screen items-center justify-center px-6 py-24 md:px-12">
-        <div className="max-w-3xl text-center">
-          <span className="font-sans text-[0.65rem] uppercase tracking-[0.3em] text-[#121110]/40">
-            21 Wear
-          </span>
+      <section className="mx-auto w-full max-w-4xl px-6 py-20 text-center md:px-12 md:py-24">
+        <span className="font-sans text-[0.65rem] uppercase tracking-[0.3em] text-[#121110]/40">
+          21 Wear
+        </span>
 
-          <p className="mt-8 font-sans text-base font-light leading-relaxed text-[#121110]/70 md:text-lg">
-            {currentCollection.description}
-          </p>
-        </div>
+        <p className="mt-8 font-sans text-base font-light leading-relaxed text-[#121110]/70 md:text-lg">
+          {currentCollection.description}
+        </p>
       </section>
+
+      <WearProductsGrid collection={collection} products={collectionProducts} />
     </main>
   );
 }

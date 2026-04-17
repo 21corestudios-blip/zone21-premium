@@ -20,11 +20,11 @@ export default function FooterWear() {
               className="inline-block transition-opacity duration-500 hover:opacity-80"
             >
               <Image
-                src="/images/ui/logo_signature_or.png"
+                src="/images/ui/21_wear_logo_blanc.svg"
                 alt="21 Wear"
-                width={120}
-                height={30}
-                className="h-12 w-auto md:h-16"
+                width={300}
+                height={120}
+                className="h-14 w-auto md:h-20"
               />
             </Link>
 
