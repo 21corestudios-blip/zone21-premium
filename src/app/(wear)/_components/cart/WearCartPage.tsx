@@ -188,12 +188,6 @@ export default function WearCartPage() {
             </button>
           </div>
 
-          <div className="hidden grid-cols-[minmax(0,1fr)_140px_160px] gap-6 border-b border-[#121110]/10 pb-4 font-sans text-[0.62rem] uppercase tracking-[0.24em] text-[#121110]/38 md:grid">
-            <span>Produit</span>
-            <span className="text-center">Quantité</span>
-            <span className="text-right">Total</span>
-          </div>
-
           <div className="space-y-0">
             {items.map((item) => {
               const selectionKey = `${item.productId}-${item.size}`;
@@ -202,10 +196,9 @@ export default function WearCartPage() {
               return (
                 <article
                   key={selectionKey}
-                  className="grid gap-5 border-b border-[#121110]/8 py-6 md:grid-cols-[minmax(0,1fr)_140px_160px] md:gap-6"
+                  className="border-b border-[#121110]/8 py-6"
                 >
-                <div className="grid grid-cols-[72px_minmax(0,1fr)] gap-4 sm:grid-cols-[88px_minmax(0,1fr)] sm:gap-5">
-                  <label className="flex items-start gap-4">
+                  <div className="flex items-start gap-4">
                     <input
                       type="checkbox"
                       checked={isSelected}
@@ -214,96 +207,102 @@ export default function WearCartPage() {
                       aria-label={`Sélectionner ${item.product.name}`}
                     />
 
-                    <div className="grid min-w-0 flex-1 grid-cols-[72px_minmax(0,1fr)] gap-4 sm:grid-cols-[88px_minmax(0,1fr)] sm:gap-5">
-                      <Link
-                        href={`/wear/${item.product.collection}/${item.product.id}`}
-                        className="relative aspect-[4/5] overflow-hidden border border-[#121110]/8 bg-white"
-                      >
-                        <Image
-                          src={item.product.image}
-                          alt={item.product.name}
-                          fill
-                          sizes="88px"
-                          className="object-cover"
-                        />
-                      </Link>
+                    <div className="min-w-0 flex-1">
+                      <div className="grid grid-cols-[72px_minmax(0,1fr)] gap-4 sm:grid-cols-[88px_minmax(0,1fr)] sm:gap-5">
+                        <Link
+                          href={`/wear/${item.product.collection}/${item.product.id}`}
+                          className="relative aspect-[4/5] overflow-hidden border border-[#121110]/8 bg-white"
+                        >
+                          <Image
+                            src={item.product.image}
+                            alt={item.product.name}
+                            fill
+                            sizes="88px"
+                            className="object-cover"
+                          />
+                        </Link>
 
-                      <div className="min-w-0">
-                        <div className="flex items-start justify-between gap-4">
-                          <div>
-                            <p className="font-sans text-[0.58rem] uppercase tracking-[0.24em] text-[#121110]/38">
-                              {collectionLabels.get(item.product.collection) ??
-                                item.product.collection}
-                            </p>
+                        <div className="min-w-0">
+                          <div className="flex items-start justify-between gap-4">
                             <Link
                               href={`/wear/${item.product.collection}/${item.product.id}`}
-                              className="mt-2 block font-sans text-sm uppercase tracking-[0.18em] text-[#121110] transition-colors duration-300 hover:text-[#121110]/70"
+                              className="block font-sans text-sm uppercase tracking-[0.18em] text-[#121110] transition-colors duration-300 hover:text-[#121110]/70"
                             >
                               {item.product.name}
                             </Link>
+
+                            <button
+                              type="button"
+                              onClick={() => removeItem(item.productId, item.size)}
+                              className="text-[0.58rem] uppercase tracking-[0.24em] text-[#121110]/35 transition-colors duration-300 hover:text-[#121110]"
+                              aria-label={`Retirer ${item.product.name} du panier`}
+                            >
+                              Retirer
+                            </button>
                           </div>
 
-                          <button
-                            type="button"
-                            onClick={() => removeItem(item.productId, item.size)}
-                            className="text-[0.58rem] uppercase tracking-[0.24em] text-[#121110]/35 transition-colors duration-300 hover:text-[#121110]"
-                            aria-label={`Retirer ${item.product.name} du panier`}
-                          >
-                            Retirer
-                          </button>
-                        </div>
+                          <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 font-sans text-[0.62rem] uppercase tracking-[0.22em] text-[#121110]/48">
+                            <span>
+                              {collectionLabels.get(item.product.collection) ??
+                                item.product.collection}
+                            </span>
+                            <span className="hidden h-3 w-px bg-[#121110]/10 sm:block" />
+                            <span>Taille {item.size}</span>
+                            <span className="hidden h-3 w-px bg-[#121110]/10 sm:block" />
+                            <span>
+                              Prix unitaire{" "}
+                              {formatWearPrice(
+                                item.product.priceCents,
+                                item.product.currency,
+                              )}
+                            </span>
+                          </div>
 
-                        <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 font-sans text-[0.62rem] uppercase tracking-[0.22em] text-[#121110]/48">
-                          <span>Taille {item.size}</span>
-                          <span>
-                            Prix unitaire{" "}
-                            {formatWearPrice(
-                              item.product.priceCents,
-                              item.product.currency,
-                            )}
+                          <p className="mt-3 max-w-xl font-sans text-sm font-light leading-relaxed text-[#121110]/62">
+                            {item.product.description}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="mt-5 flex flex-wrap items-center justify-between gap-4 border-t border-[#121110]/8 pt-4">
+                        <div className="flex items-center gap-3">
+                          <span className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-[#121110]/38">
+                            Quantité
                           </span>
+                          <div className="inline-flex items-center border border-[#121110]/12">
+                            <button
+                              type="button"
+                              onClick={() => decrementItem(item.productId, item.size)}
+                              className="px-4 py-3 text-sm text-[#121110]/75 transition-colors duration-300 hover:text-[#121110]"
+                              aria-label={`Diminuer la quantité de ${item.product.name}`}
+                            >
+                              -
+                            </button>
+                            <span className="min-w-12 px-2 text-center font-sans text-[0.72rem] uppercase tracking-[0.18em] text-[#121110]/70">
+                              {item.quantity}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => incrementItem(item.productId, item.size)}
+                              className="px-4 py-3 text-sm text-[#121110]/75 transition-colors duration-300 hover:text-[#121110]"
+                              aria-label={`Augmenter la quantité de ${item.product.name}`}
+                            >
+                              +
+                            </button>
+                          </div>
                         </div>
 
-                        <p className="mt-4 max-w-xl font-sans text-sm font-light leading-relaxed text-[#121110]/62">
-                          {item.product.description}
-                        </p>
+                        <div className="flex items-center gap-4">
+                          <span className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-[#121110]/38">
+                            Total ligne
+                          </span>
+                          <p className="font-serif text-xl text-[#121110]">
+                            {item.lineTotalFormatted}
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  </label>
-                </div>
-
-                <div className="flex items-center md:justify-center">
-                  <div className="inline-flex items-center border border-[#121110]/12">
-                    <button
-                      type="button"
-                      onClick={() => decrementItem(item.productId, item.size)}
-                      className="px-4 py-3 text-sm text-[#121110]/75 transition-colors duration-300 hover:text-[#121110]"
-                      aria-label={`Diminuer la quantité de ${item.product.name}`}
-                    >
-                      -
-                    </button>
-                    <span className="min-w-12 px-2 text-center font-sans text-[0.72rem] uppercase tracking-[0.18em] text-[#121110]/70">
-                      {item.quantity}
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => incrementItem(item.productId, item.size)}
-                      className="px-4 py-3 text-sm text-[#121110]/75 transition-colors duration-300 hover:text-[#121110]"
-                      aria-label={`Augmenter la quantité de ${item.product.name}`}
-                    >
-                      +
-                    </button>
                   </div>
-                </div>
-
-                <div className="flex items-center justify-between md:justify-end">
-                  <span className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-[#121110]/35 md:hidden">
-                    Total
-                  </span>
-                  <p className="font-serif text-xl text-[#121110]">
-                    {item.lineTotalFormatted}
-                  </p>
-                </div>
                 </article>
               );
             })}
