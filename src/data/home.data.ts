@@ -47,7 +47,7 @@ export const homeData: HomeData = {
     tagline:
       "Une architecture créative dédiée à l'émergence des maisons de demain.",
     image: {
-      src: "/images/home/editorial/manifesto-vision.jpg",
+      src: "/images/editorial/manifesto-vision.jpg",
       alt: "Vision de la Maison Zone 21",
     },
     paragraphs: [
@@ -66,7 +66,7 @@ export const homeData: HomeData = {
         alt: "Campagne 21 Wear",
       },
       href: "/wear",
-      gridClass: "md:col-span-2 md:row-span-2 aspect-[3/4] md:aspect-auto",
+      gridClass: "portrait",
     },
     {
       id: "core",
@@ -77,7 +77,7 @@ export const homeData: HomeData = {
         alt: "21 Core Studios",
       },
       href: "/core-studios",
-      gridClass: "md:col-span-2 aspect-[4/3]",
+      gridClass: "portrait",
     },
     {
       id: "prod",
@@ -88,7 +88,18 @@ export const homeData: HomeData = {
         alt: "21 Production",
       },
       href: "/prod",
-      gridClass: "md:col-span-2 aspect-square",
+      gridClass: "portrait",
+    },
+    {
+      id: "talents",
+      name: "21 TALENTS AGENCY",
+      category: "Promotion de Talents",
+      image: {
+        src: "/images/brands/21-core/studio-1.webp",
+        alt: "Agence créative 21 Talents Agency",
+      },
+      href: "/talents-agency",
+      gridClass: "portrait",
     },
   ],
 };

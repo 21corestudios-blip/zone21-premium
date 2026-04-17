@@ -1,0 +1,38 @@
+import Image from "next/image";
+import Link from "next/link";
+
+import { wearData } from "@/data/wear.data";
+
+export default function WearCollectionsGrid() {
+  return (
+    <section className="mx-auto w-full max-w-7xl px-6 py-24 md:px-12 md:py-32">
+      <div className="grid grid-cols-1 gap-x-12 gap-y-20 md:grid-cols-2 md:gap-y-28">
+        {wearData.collections.map((collection) => (
+          <Link
+            key={collection.id}
+            href={collection.href}
+            aria-label={`Découvrir la collection ${collection.name}`}
+            className="group flex cursor-pointer flex-col"
+          >
+            <div className="relative mb-8 aspect-[4/5] w-full overflow-hidden bg-[#EAE8E3]">
+              <Image
+                src={collection.image}
+                alt={collection.name}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover transition-transform duration-1000 group-hover:scale-105"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-black/0 transition-colors duration-700 group-hover:bg-black/10" />
+            </div>
+
+            <div className="flex items-center justify-center px-2 text-center">
+              <h2 className="font-sans text-sm uppercase tracking-[0.2em] text-[#121110] transition-colors duration-500 group-hover:text-[#121110]/70 md:text-base">
+                {collection.name}
+              </h2>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
+}

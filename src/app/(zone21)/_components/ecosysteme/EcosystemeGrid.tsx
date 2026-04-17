@@ -3,19 +3,8 @@ import Link from "next/link";
 
 import { homeData } from "@/data/home.data";
 
-const extraMaison = {
-  id: "talents",
-  name: "21 TALENTS AGENCY",
-  category: "Promotion de Talents",
-  image: {
-    src: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=2000&auto=format&fit=crop",
-    alt: "Agence créative 21 Talents Agency",
-  },
-  href: "/contact",
-};
-
 export default function EcosystemeGrid() {
-  const maisons = [...homeData.maisons, extraMaison];
+  const { maisons } = homeData;
 
   return (
     <section className="w-full bg-[#121110] px-6 py-6 md:px-12 md:py-8">
@@ -25,7 +14,7 @@ export default function EcosystemeGrid() {
             key={maison.id}
             href={maison.href}
             aria-label={`Découvrir ${maison.name}`}
-            className="group relative h-full min-w-[78vw] snap-center overflow-hidden bg-[#1a1918] md:min-w-[48vw] xl:min-w-0 xl:flex-1"
+            className="group relative block h-full shrink-0 min-w-[78vw] snap-center overflow-hidden bg-[#1a1918] md:min-w-[48vw] xl:min-w-0 xl:flex-1"
           >
             <Image
               src={maison.image.src}
