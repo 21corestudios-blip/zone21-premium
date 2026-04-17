@@ -3,7 +3,7 @@ import ImmersiveImageSection from "@/components/sections/home/ImmersiveImageSect
 export default function Zone06Image() {
   return (
     <ImmersiveImageSection
-      src="/images/home/a_propos/en-tete.jpg"
+      src="/images/a_propos/en-tete.jpg"
       alt=""
       backgroundClassName="bg-white"
       imageClassName="object-cover object-[center_20%]"

@@ -55,7 +55,7 @@ export default function AboutOrigins() {
 
         <div className="relative h-full min-h-[50vh] overflow-hidden">
           <Image
-            src="/images/home/a_propos/photo_texte.jpg"
+            src="/images/a_propos/photo_texte.jpg"
             alt="L'exigence Zone 21"
             fill
             sizes="(max-width: 1024px) 100vw, 50vw"

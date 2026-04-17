@@ -11,7 +11,7 @@ export default function MaisonGrid() {
         "Au cœur de cet ensemble, une ligne demeure invariable : l’exigence absolue, la maîtrise du détail, et le refus de tout compromis.",
         "Zone 21 réunit des univers distincts, mais guidés par une même volonté : concevoir avec justesse, élever les standards, et inscrire chaque geste dans une vision plus large.",
       ]}
-      imageSrc="/images/home/editorial/Ecosysteme.jpg"
+      imageSrc="/images/editorial/Ecosysteme.jpg"
       imageAlt="L'Écosystème Zone 21"
       imagePosition="left"
       theme="light"

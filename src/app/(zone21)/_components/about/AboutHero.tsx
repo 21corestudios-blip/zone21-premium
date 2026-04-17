@@ -5,7 +5,7 @@ export default function AboutHero() {
     <section className="relative h-[100dvh] min-h-screen w-full overflow-hidden bg-[#121110]">
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/home/a_propos/en-tete.jpg"
+          src="/images/a_propos/en-tete.jpg"
           alt="Architecture Zone 21"
           fill
           priority
