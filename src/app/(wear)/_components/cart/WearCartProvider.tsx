@@ -38,14 +38,11 @@ interface WearCartContextValue {
   subtotalCents: number;
   subtotalFormatted: string;
   isHydrated: boolean;
-  isOpen: boolean;
   addItem: (product: WearProduct, size: WearProductSize) => void;
   decrementItem: (productId: string, size: WearProductSize) => void;
   incrementItem: (productId: string, size: WearProductSize) => void;
   removeItem: (productId: string, size: WearProductSize) => void;
   clearCart: () => void;
-  openCart: () => void;
-  closeCart: () => void;
 }
 
 const WearCartContext = createContext<WearCartContextValue | null>(null);
@@ -85,7 +82,6 @@ function sanitizeStoredItems(value: unknown): WearCartStoredItem[] {
 export default function WearCartProvider({ children }: { children: ReactNode }) {
   const [storedItems, setStoredItems] = useState<WearCartStoredItem[]>([]);
   const [isHydrated, setIsHydrated] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     try {
@@ -161,8 +157,6 @@ export default function WearCartProvider({ children }: { children: ReactNode }) 
           : item,
       );
     });
-
-    setIsOpen(true);
   };
 
   const incrementItem = (productId: string, size: WearProductSize) => {
@@ -213,16 +207,13 @@ export default function WearCartProvider({ children }: { children: ReactNode }) 
       subtotalCents,
       subtotalFormatted: formatWearPrice(subtotalCents),
       isHydrated,
-      isOpen,
       addItem,
       decrementItem,
       incrementItem,
       removeItem,
       clearCart,
-      openCart: () => setIsOpen(true),
-      closeCart: () => setIsOpen(false),
     }),
-    [isHydrated, isOpen, itemCount, items, subtotalCents],
+    [isHydrated, itemCount, items, subtotalCents],
   );
 
   return (

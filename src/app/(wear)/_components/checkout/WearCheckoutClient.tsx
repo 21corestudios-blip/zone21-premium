@@ -162,11 +162,11 @@ export default function WearCheckoutClient() {
           finaliser le checkout.
         </p>
         <Link
-          href="/wear"
+          href="/wear/panier"
           className="mt-10 inline-flex items-center justify-center bg-[#121110] px-8 py-4 text-[#F7F5F0] transition-colors duration-300 hover:bg-[#2A2826]"
         >
           <span className="font-sans text-[0.65rem] font-bold uppercase tracking-[0.24em]">
-            Retour à la boutique
+            Aller au panier
           </span>
         </Link>
       </section>

@@ -8,7 +8,7 @@ import { useScrolledHeader } from "@/hooks/useScrolledHeader";
 import NavigationDrawer from "./NavigationDrawer";
 
 const desktopLinkClassName =
-  "text-[0.65rem] uppercase tracking-[0.25em] text-white/70 transition-colors duration-500 hover:text-white";
+  "text-[0.65rem] uppercase tracking-[0.25em] text-white/78 transition-colors duration-500 hover:text-white";
 
 export default function Header() {
   const isScrolled = useScrolledHeader();
@@ -26,12 +26,19 @@ export default function Header() {
             : "border-transparent bg-transparent py-8"
         }`}
       >
-        <div className="flex w-full items-center justify-between px-6 lg:px-12">
+        {!isScrolled ? (
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/58 via-black/24 to-transparent"
+          />
+        ) : null}
+
+        <div className="relative flex w-full items-center justify-between px-6 lg:px-12">
           <div className="flex items-center gap-12 lg:gap-16">
             <Link
               href="/"
               aria-label="Retour à l’accueil Zone 21"
-              className="flex-shrink-0 transition-opacity duration-500 hover:opacity-80"
+              className="flex-shrink-0 drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-opacity duration-500 hover:opacity-80"
             >
               <Image
                 src="/images/ui/logo-zone21-light.svg"
@@ -73,7 +80,7 @@ export default function Header() {
                 aria-label="Ouvrir le menu"
                 aria-expanded={isDrawerOpen}
                 aria-controls="navigation-drawer"
-                className={desktopLinkClassName}
+                className={`${desktopLinkClassName} drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)]`}
               >
                 Menu
               </button>
@@ -86,7 +93,7 @@ export default function Header() {
                 aria-label="Ouvrir le menu"
                 aria-expanded={isDrawerOpen}
                 aria-controls="navigation-drawer"
-                className="flex flex-col gap-[5px] p-2"
+                className="flex flex-col gap-[5px] p-2 drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)]"
               >
                 <span className="h-[1px] w-5 bg-white transition-transform duration-500" />
                 <span className="h-[1px] w-5 bg-white transition-transform duration-500" />
