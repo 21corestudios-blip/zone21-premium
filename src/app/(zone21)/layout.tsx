@@ -9,7 +9,7 @@ export default function Zone21Layout({
   return (
     <>
       <Header />
-      <main className="flex-grow">{children}</main>
+      <div className="flex-grow">{children}</div>
       <Footer />
     </>
   );

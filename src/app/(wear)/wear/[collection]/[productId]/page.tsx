@@ -3,9 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import WearAddToCartForm from "@/app/(wear)/_components/cart/WearAddToCartForm";
 import { wearCollections } from "@/data/wear.catalog";
-import { wearProducts } from "@/data/wear.products";
-import AddToCartButton from "@/components/ui/AddToCartButton";
+import { formatWearPrice, wearProducts } from "@/data/wear.products";
 
 type PageProps = {
   params: Promise<{
@@ -85,7 +85,10 @@ export default async function WearProductPage({ params }: PageProps) {
               </h1>
 
               <p className="font-sans text-sm uppercase tracking-[0.15em] text-[#121110]/55 md:text-base">
-                {currentProduct.price}
+                {formatWearPrice(
+                  currentProduct.priceCents,
+                  currentProduct.currency,
+                )}
               </p>
             </div>
 
@@ -97,24 +100,16 @@ export default async function WearProductPage({ params }: PageProps) {
               <p className="font-sans text-base font-light leading-relaxed text-[#121110]/72 md:text-lg">
                 Chaque pièce 21 Wear s’inscrit dans une approche de construction
                 lente, de précision des volumes et d’exigence textile. Cette
-                version constitue ici une base de catalogue premium, prête à
-                accueillir ensuite les variantes, tailles, stocks et modules
-                d’achat.
+                base intègre désormais la sélection de taille et le panier, en
+                préparation de l’étape checkout.
               </p>
             </div>
 
-            <div className="flex flex-col gap-4 pt-4 sm:flex-row">
-              <AddToCartButton
-                id={currentProduct.id}
-                name={currentProduct.name}
-                price={currentProduct.price}
-                image={currentProduct.image}
-                collection={currentProduct.collection}
-              />
-
+            <div className="flex flex-col gap-6 pt-4">
+              <WearAddToCartForm product={currentProduct} />
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center border border-[#121110]/15 px-8 py-4 text-[#121110] transition-colors duration-500 hover:border-[#121110]/35"
+                className="inline-flex items-center justify-center border border-[#121110]/15 px-8 py-4 text-[#121110] transition-colors duration-500 hover:border-[#121110]/35 sm:w-fit"
               >
                 <span className="font-sans text-[0.65rem] font-bold uppercase tracking-[0.25em]">
                   Demande Privée

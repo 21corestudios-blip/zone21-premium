@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { useScrolledHeader } from "@/components/shared/useScrolledHeader";
+import { useScrolledHeader } from "@/hooks/useScrolledHeader";
 import NavigationDrawer from "./NavigationDrawer";
 
 const desktopLinkClassName =

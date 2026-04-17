@@ -1,3 +1,5 @@
+import WearCartDrawer from "../_components/cart/WearCartDrawer";
+import WearCartProvider from "../_components/cart/WearCartProvider";
 import FooterWear from "../_components/layout/FooterWear";
 import HeaderWear from "../_components/layout/HeaderWear";
 
@@ -7,10 +9,11 @@ export default function WearLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <WearCartProvider>
       <HeaderWear />
-      <main className="flex-grow">{children}</main>
+      <div className="flex-grow">{children}</div>
       <FooterWear />
-    </>
+      <WearCartDrawer />
+    </WearCartProvider>
   );
 }

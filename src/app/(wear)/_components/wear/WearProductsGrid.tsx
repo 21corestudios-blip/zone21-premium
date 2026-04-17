@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import type { WearProduct } from "@/data/wear.products";
+import { formatWearPrice, type WearProduct } from "@/data/wear.products";
 
 interface WearProductsGridProps {
   collection: string;
@@ -39,7 +39,7 @@ export default function WearProductsGrid({
                   {product.name}
                 </h2>
                 <span className="font-sans text-sm uppercase tracking-[0.12em] text-[#121110]/60">
-                  {product.price}
+                  {formatWearPrice(product.priceCents, product.currency)}
                 </span>
               </div>
 
