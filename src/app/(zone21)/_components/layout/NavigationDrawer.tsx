@@ -18,6 +18,21 @@ const primaryLinks = [
   { name: "Mentions légales", href: "/mentions-legales" },
 ];
 
+const sectionLabelClassName =
+  "font-sans text-[0.62rem] uppercase tracking-[0.26em] text-white/35";
+
+const primaryLinkTextClassName =
+  "font-sans text-[0.92rem] uppercase tracking-[0.24em] text-white/88 transition-all duration-500 ease-out group-hover:translate-x-2 group-hover:text-white md:text-[1rem]";
+
+const ecosystemTitleClassName =
+  "font-sans text-[0.92rem] uppercase tracking-[0.24em] text-white/88 transition-all duration-500 ease-out group-hover:translate-x-2 group-hover:text-white md:text-[1rem]";
+
+const ecosystemCategoryClassName =
+  "font-sans text-[0.54rem] uppercase tracking-[0.2em] text-white/30 transition-colors duration-500 group-hover:text-white/48";
+
+const ecosystemNameClassName =
+  "mt-2 font-sans text-[0.82rem] uppercase tracking-[0.22em] text-white/88 transition-all duration-500 ease-out group-hover:translate-x-2 group-hover:text-white md:text-[0.88rem]";
+
 export default function NavigationDrawer({
   isOpen,
   onClose,
@@ -111,7 +126,7 @@ export default function NavigationDrawer({
           aria-label="Navigation principale du menu"
         >
           <div className="border-b border-white/5 pb-10">
-            <p className="mb-6 font-sans text-[0.62rem] uppercase tracking-[0.26em] text-white/35">
+            <p className={`mb-6 ${sectionLabelClassName}`}>
               Navigation
             </p>
 
@@ -123,7 +138,7 @@ export default function NavigationDrawer({
                   className="group flex w-max items-center"
                   onClick={handleClose}
                 >
-                  <span className="font-serif text-[2.1rem] font-light tracking-[0.01em] text-white/90 transition-all duration-500 ease-out group-hover:translate-x-3 group-hover:text-white md:text-[2.45rem]">
+                  <span className={primaryLinkTextClassName}>
                     {item.name}
                   </span>
                 </Link>
@@ -134,7 +149,7 @@ export default function NavigationDrawer({
           <div
             className="border-b border-white/5 py-10"
             onMouseEnter={() => setIsEcosystemOpen(true)}
-            onMouseLeave={() => setIsEcosystemOpen(false)}
+              onMouseLeave={() => setIsEcosystemOpen(false)}
           >
             <button
               type="button"
@@ -143,7 +158,7 @@ export default function NavigationDrawer({
               aria-expanded={isEcosystemOpen}
               aria-controls="drawer-ecosystem"
             >
-              <span className="font-serif text-4xl font-light tracking-wide text-white/90 transition-all duration-500 ease-out group-hover:translate-x-3 group-hover:text-white md:text-5xl">
+              <span className={ecosystemTitleClassName}>
                 Écosystème
               </span>
             </button>
@@ -173,10 +188,10 @@ export default function NavigationDrawer({
                       onClick={handleClose}
                       className="group block"
                     >
-                      <p className="whitespace-nowrap font-sans text-[0.54rem] uppercase tracking-[0.2em] text-white/30 transition-colors duration-500 group-hover:text-white/48">
+                      <p className={`whitespace-nowrap ${ecosystemCategoryClassName}`}>
                         {item.category}
                       </p>
-                      <p className="mt-2 font-serif text-[1.55rem] leading-none tracking-[0.01em] text-white/88 transition-all duration-500 ease-out group-hover:translate-x-2 group-hover:text-white md:text-[1.7rem]">
+                      <p className={ecosystemNameClassName}>
                         {item.name}
                       </p>
                     </Link>
