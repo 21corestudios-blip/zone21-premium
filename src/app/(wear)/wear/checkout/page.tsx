@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function WearCheckoutPage() {
   return (
-    <main className="flex min-h-screen flex-col bg-[#F7F5F0]">
+    <main className="flex min-h-screen flex-col bg-white">
       <WearCheckoutClient />
     </main>
   );

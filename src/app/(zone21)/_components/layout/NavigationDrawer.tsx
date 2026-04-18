@@ -1,8 +1,10 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+
+import { homeData } from "@/data/home.data";
 
 interface NavigationDrawerProps {
   isOpen: boolean;
@@ -11,20 +13,22 @@ interface NavigationDrawerProps {
 
 const primaryLinks = [
   { name: "Accueil", href: "/" },
-  { name: "Écosystème", href: "/ecosysteme" },
+  { name: "Contact", href: "/contact" },
   { name: "À propos", href: "/a-propos" },
-  { name: "Contact", href: "/contact" },
-];
-
-const secondaryLinks = [
-  { name: "Contact", href: "/contact" },
-  { name: "Espace Client (Login)", href: "/login" },
+  { name: "Mentions légales", href: "/mentions-legales" },
 ];
 
 export default function NavigationDrawer({
   isOpen,
   onClose,
 }: NavigationDrawerProps) {
+  const [isEcosystemOpen, setIsEcosystemOpen] = useState(false);
+  const houses = homeData.maisons.map((house) => ({
+    name: house.name,
+    href: house.href,
+    category: house.category,
+  }));
+
   useEffect(() => {
     if (!isOpen) {
       document.body.style.overflow = "unset";
@@ -33,9 +37,14 @@ export default function NavigationDrawer({
 
     document.body.style.overflow = "hidden";
 
+    const handleClose = () => {
+      setIsEcosystemOpen(false);
+      onClose();
+    };
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        onClose();
+        handleClose();
       }
     };
 
@@ -47,13 +56,18 @@ export default function NavigationDrawer({
     };
   }, [isOpen, onClose]);
 
+  const handleClose = () => {
+    setIsEcosystemOpen(false);
+    onClose();
+  };
+
   return (
     <>
       <div
         className={`fixed inset-0 z-[60] bg-[#121110]/40 backdrop-blur-sm transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${
           isOpen ? "visible opacity-100" : "invisible opacity-0"
         }`}
-        onClick={onClose}
+        onClick={handleClose}
         aria-hidden="true"
       />
 
@@ -69,7 +83,7 @@ export default function NavigationDrawer({
         <div className="flex items-center justify-between p-6 md:p-12">
           <Link
             href="/"
-            onClick={onClose}
+            onClick={handleClose}
             aria-label="Retour à l’accueil Zone 21"
             className="transition-opacity duration-500 hover:opacity-80"
           >
@@ -84,7 +98,7 @@ export default function NavigationDrawer({
 
           <button
             type="button"
-            onClick={onClose}
+            onClick={handleClose}
             aria-label="Fermer le menu"
             className="text-[0.65rem] uppercase tracking-[0.25em] text-white/70 transition-colors duration-500 hover:text-white"
           >
@@ -93,35 +107,85 @@ export default function NavigationDrawer({
         </div>
 
         <nav
-          className="mt-12 flex flex-col gap-6 overflow-y-auto px-6 md:px-12"
+          className="mt-8 flex flex-1 flex-col overflow-y-auto px-6 pb-8 md:px-12"
           aria-label="Navigation principale du menu"
         >
-          {primaryLinks.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className="group flex w-max items-center"
-              onClick={onClose}
+          <div className="border-b border-white/5 pb-10">
+            <p className="mb-6 font-sans text-[0.62rem] uppercase tracking-[0.26em] text-white/35">
+              Navigation
+            </p>
+
+            <div className="flex flex-col gap-5">
+              {primaryLinks.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="group flex w-max items-center"
+                  onClick={handleClose}
+                >
+                  <span className="font-serif text-[2.1rem] font-light tracking-[0.01em] text-white/90 transition-all duration-500 ease-out group-hover:translate-x-3 group-hover:text-white md:text-[2.45rem]">
+                    {item.name}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <div
+            className="border-b border-white/5 py-10"
+            onMouseEnter={() => setIsEcosystemOpen(true)}
+            onMouseLeave={() => setIsEcosystemOpen(false)}
+          >
+            <button
+              type="button"
+              onClick={() => setIsEcosystemOpen((current) => !current)}
+              className="group flex w-max items-center text-left"
+              aria-expanded={isEcosystemOpen}
+              aria-controls="drawer-ecosystem"
             >
               <span className="font-serif text-4xl font-light tracking-wide text-white/90 transition-all duration-500 ease-out group-hover:translate-x-3 group-hover:text-white md:text-5xl">
-                {item.name}
+                Écosystème
               </span>
-            </Link>
-          ))}
-        </nav>
+            </button>
 
-        <div className="mt-auto flex flex-col gap-6 border-t border-white/5 p-6 md:p-12">
-          {secondaryLinks.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              onClick={onClose}
-              className="text-[0.65rem] uppercase tracking-[0.25em] text-white/50 transition-colors duration-500 hover:text-white"
+            <div
+              id="drawer-ecosystem"
+              className={`grid overflow-hidden transition-[grid-template-rows,opacity,margin] duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${
+                isEcosystemOpen
+                  ? "mt-8 grid-rows-[1fr] opacity-100"
+                  : "mt-0 grid-rows-[0fr] opacity-0"
+              }`}
             >
-              {item.name}
-            </Link>
-          ))}
-        </div>
+              <div className="min-h-0">
+                <div className="flex flex-col gap-5 border-l border-white/10 pl-6">
+                  <Link
+                    href="/ecosysteme"
+                    onClick={handleClose}
+                    className="font-sans text-[0.72rem] uppercase tracking-[0.24em] text-white/52 transition-colors duration-500 hover:text-white/80"
+                  >
+                    Vue d&apos;ensemble
+                  </Link>
+
+                  {houses.map((item) => (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      onClick={handleClose}
+                      className="group block"
+                    >
+                      <p className="whitespace-nowrap font-sans text-[0.54rem] uppercase tracking-[0.2em] text-white/30 transition-colors duration-500 group-hover:text-white/48">
+                        {item.category}
+                      </p>
+                      <p className="mt-2 font-serif text-[1.55rem] leading-none tracking-[0.01em] text-white/88 transition-all duration-500 ease-out group-hover:translate-x-2 group-hover:text-white md:text-[1.7rem]">
+                        {item.name}
+                      </p>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
       </div>
     </>
   );

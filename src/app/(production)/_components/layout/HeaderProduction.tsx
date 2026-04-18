@@ -4,19 +4,19 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { useWearCart } from "@/app/(wear)/_components/cart/WearCartProvider";
 import NavigationDrawer from "@/app/(zone21)/_components/layout/NavigationDrawer";
 import { useScrolledHeader } from "@/hooks/useScrolledHeader";
+import { useProductionCart } from "../cart/ProductionCartProvider";
 
 const linkClassName =
   "text-[0.65rem] uppercase tracking-[0.25em] text-white/78 transition-colors duration-500 hover:text-white";
 
-const collectionLinkClassName =
+const artistLinkClassName =
   "text-[0.6rem] uppercase tracking-[0.2em] text-white/72 transition-colors duration-500 hover:text-white";
 
-export default function HeaderWear() {
+export default function HeaderProduction() {
   const isScrolled = useScrolledHeader();
-  const { itemCount, isHydrated } = useWearCart();
+  const { itemCount, isHydrated } = useProductionCart();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const openDrawer = () => setIsDrawerOpen(true);
@@ -41,8 +41,8 @@ export default function HeaderWear() {
         <div className="relative flex w-full items-center justify-between px-6 lg:px-12">
           <div className="flex items-center gap-10 lg:gap-14">
             <Link
-              href="/wear"
-              aria-label="Retour à l’accueil 21 Wear"
+              href="/prod"
+              aria-label="Retour à l’accueil 21 Production"
               className="flex-shrink-0 drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-opacity duration-500 hover:opacity-80"
             >
               <Image
@@ -57,19 +57,16 @@ export default function HeaderWear() {
 
             <nav
               className="hidden items-center gap-5 lg:flex"
-              aria-label="Collections 21 Wear"
+              aria-label="Artistes 21 Production"
             >
-              <Link href="/wear/classic" className={collectionLinkClassName}>
-                Classic
+              <Link href="/prod/nova" className={artistLinkClassName}>
+                Nova
               </Link>
-              <Link href="/wear/urban" className={collectionLinkClassName}>
-                Urban
+              <Link href="/prod/elya" className={artistLinkClassName}>
+                Elya
               </Link>
-              <Link href="/wear/heritage" className={collectionLinkClassName}>
-                Heritage
-              </Link>
-              <Link href="/wear/studio" className={collectionLinkClassName}>
-                Studio
+              <Link href="/prod/kael" className={artistLinkClassName}>
+                Kael
               </Link>
             </nav>
           </div>
@@ -77,7 +74,7 @@ export default function HeaderWear() {
           <div className="flex items-center gap-4 md:gap-6 lg:gap-8">
             <nav
               className="hidden items-center gap-6 md:flex lg:gap-8"
-              aria-label="Navigation 21 Wear"
+              aria-label="Navigation 21 Production"
             >
               <Link href="/" className={linkClassName}>
                 Zone 21
@@ -104,9 +101,9 @@ export default function HeaderWear() {
             </nav>
 
             <Link
-              href="/wear/panier"
+              href="/prod/panier"
               className="inline-flex items-center gap-3 border border-white/16 px-4 py-2 text-[0.6rem] uppercase tracking-[0.25em] text-white/88 drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-colors duration-500 hover:border-white/30 hover:text-white"
-              aria-label="Voir le panier 21 Wear"
+              aria-label="Voir le panier 21 Production"
             >
               <span>Panier</span>
               <span className="inline-flex min-w-6 items-center justify-center rounded-full border border-white/18 px-2 py-1 text-[0.58rem] tracking-[0.18em] text-white/72">

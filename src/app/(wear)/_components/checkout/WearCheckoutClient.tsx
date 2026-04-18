@@ -174,24 +174,49 @@ export default function WearCheckoutClient() {
   }
 
   return (
-    <section className="mx-auto w-full max-w-7xl px-6 pb-20 pt-28 md:px-12 md:pb-28 md:pt-36">
-      <div className="mb-14 max-w-3xl">
-        <p className="font-sans text-[0.68rem] uppercase tracking-[0.32em] text-[#121110]/42">
-          21 Wear Checkout
-        </p>
-        <h1 className="mt-6 font-serif text-4xl leading-[0.96] text-[#121110] md:text-6xl">
-          Finaliser la sélection avant paiement
-        </h1>
-        <p className="mt-6 max-w-2xl font-sans text-base font-light leading-relaxed text-[#121110]/68 md:text-lg">
-          Cette étape consolide les informations client et valide le panier côté
-          application. Le paiement est maintenant intégré via Stripe Elements
-          dans une interface 21 Wear conservée sur le site.
-        </p>
+    <section className="mx-auto w-full max-w-[1480px] bg-white px-6 pb-20 pt-28 md:px-12 md:pb-28 md:pt-36">
+      <div className="border-b border-[#121110]/10 pb-8">
+        <nav className="flex items-center gap-3 font-sans text-[0.62rem] uppercase tracking-[0.24em] text-[#121110]/42">
+          <Link
+            href="/wear"
+            className="transition-colors duration-300 hover:text-[#121110]"
+          >
+            21 Wear
+          </Link>
+          <span>/</span>
+          <Link
+            href="/wear/panier"
+            className="transition-colors duration-300 hover:text-[#121110]"
+          >
+            Panier
+          </Link>
+          <span>/</span>
+          <span className="text-[#121110]/70">Checkout</span>
+        </nav>
+
+        <div className="mt-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="font-sans text-[0.68rem] uppercase tracking-[0.32em] text-[#121110]/42">
+              Checkout
+            </p>
+            <h1 className="mt-4 font-serif text-4xl leading-none text-[#121110] md:text-6xl">
+              Paiement
+            </h1>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-4 font-sans text-[0.65rem] uppercase tracking-[0.22em] text-[#121110]/48">
+            <span>{itemCount} article{itemCount > 1 ? "s" : ""}</span>
+            <span className="h-3 w-px bg-[#121110]/12" />
+            <span>Paiement sécurisé Stripe</span>
+            <span className="h-3 w-px bg-[#121110]/12" />
+            <span>Interface 21 Wear</span>
+          </div>
+        </div>
       </div>
 
-      <div className="grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(340px,0.9fr)] lg:items-start">
+      <div className="grid gap-12 pt-10 lg:grid-cols-[minmax(0,1.2fr)_380px] lg:items-start">
         <div className="space-y-10">
-          <section className="border border-[#121110]/10 bg-white/55 p-6 md:p-8">
+          <section className="border border-[#121110]/10 bg-white p-6 md:p-8">
             <div className="mb-8">
               <p className="font-sans text-[0.65rem] uppercase tracking-[0.26em] text-[#121110]/42">
                 Informations client
@@ -270,7 +295,7 @@ export default function WearCheckoutClient() {
             </div>
           </section>
 
-          <section className="border border-[#121110]/10 bg-white/55 p-6 md:p-8">
+          <section className="border border-[#121110]/10 bg-white p-6 md:p-8">
             <div className="mb-8">
               <p className="font-sans text-[0.65rem] uppercase tracking-[0.26em] text-[#121110]/42">
                 Notes
@@ -294,7 +319,7 @@ export default function WearCheckoutClient() {
             </label>
           </section>
 
-          <section className="border border-[#121110]/10 bg-white/55 p-6 md:p-8">
+          <section className="border border-[#121110]/10 bg-white p-6 md:p-8">
             <div className="mb-8">
               <p className="font-sans text-[0.65rem] uppercase tracking-[0.26em] text-[#121110]/42">
                 Paiement
@@ -355,56 +380,97 @@ export default function WearCheckoutClient() {
           ) : null}
         </div>
 
-        <aside className="border border-[#121110]/10 bg-[#121110] p-6 text-[#EAE8E3] md:p-8 lg:sticky lg:top-28">
-          <p className="font-sans text-[0.65rem] uppercase tracking-[0.28em] text-white/42">
-            Résumé
-          </p>
-          <h2 className="mt-4 font-serif text-3xl text-white">
-            Sélection en cours
-          </h2>
+        <aside className="space-y-4 lg:sticky lg:top-28">
+          <div className="border border-[#121110]/10 bg-white p-6 md:p-8">
+            <p className="font-sans text-[0.65rem] uppercase tracking-[0.28em] text-[#121110]/42">
+              Order Summary
+            </p>
+            <h2 className="mt-4 font-serif text-3xl text-[#121110]">
+              Résumé du checkout
+            </h2>
 
-          <div className="mt-8 space-y-5">
+            <div className="mt-8 space-y-5">
             {items.map((item) => (
               <article
                 key={`${item.productId}-${item.size}`}
-                className="border-b border-white/10 pb-5"
+                className="border-b border-[#121110]/10 pb-5"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <h3 className="font-sans text-sm uppercase tracking-[0.18em] text-white">
+                    <h3 className="font-sans text-sm uppercase tracking-[0.18em] text-[#121110]">
                       {item.product.name}
                     </h3>
-                    <p className="mt-2 font-sans text-[0.65rem] uppercase tracking-[0.22em] text-white/45">
+                    <p className="mt-2 font-sans text-[0.65rem] uppercase tracking-[0.22em] text-[#121110]/45">
                       Taille {item.size} · Quantité {item.quantity}
                     </p>
                   </div>
-                  <p className="font-serif text-lg text-[#D5C4AE]">
+                  <p className="font-serif text-lg text-[#121110]">
                     {item.lineTotalFormatted}
                   </p>
                 </div>
               </article>
             ))}
+            </div>
+
+            <div className="mt-8 space-y-4 border-t border-[#121110]/10 pt-6">
+              <div className="flex items-center justify-between gap-4 font-sans text-sm text-[#121110]/72">
+                <span>Sous-total</span>
+                <span>{subtotalFormatted}</span>
+              </div>
+              <div className="flex items-center justify-between gap-4 font-sans text-sm text-[#121110]/72">
+                <span>Livraison standard</span>
+                <span>Offerte</span>
+              </div>
+              <div className="flex items-center justify-between gap-4 border-t border-[#121110]/10 pt-4">
+                <span className="font-sans text-[0.68rem] uppercase tracking-[0.24em] text-[#121110]/52">
+                  Total estimé
+                </span>
+                <span className="font-serif text-2xl text-[#121110]">
+                  {subtotalFormatted}
+                </span>
+              </div>
+            </div>
+
+            <p className="mt-5 font-sans text-[0.72rem] font-light leading-relaxed text-[#121110]/58">
+              Référence checkout
+              {intentOrderReference
+                ? ` : ${intentOrderReference}`
+                : " en préparation"}.
+            </p>
           </div>
 
-          <div className="mt-8 border-t border-white/10 pt-6">
-            <div className="flex items-end justify-between gap-4">
+          <div className="border border-[#121110]/10 bg-white p-6">
+            <div className="space-y-4">
               <div>
-                <p className="font-sans text-[0.65rem] uppercase tracking-[0.28em] text-white/42">
-                  Sous-total
+                <p className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-[#121110]/40">
+                  Paiement
                 </p>
-              <p className="mt-3 font-serif text-3xl text-[#D5C4AE]">
-                {subtotalFormatted}
-              </p>
-            </div>
-            <p className="font-sans text-[0.65rem] uppercase tracking-[0.2em] text-white/45">
-              {itemCount} article{itemCount > 1 ? "s" : ""}
-            </p>
-            </div>
+                <p className="mt-2 font-sans text-sm font-light leading-relaxed text-[#121110]/66">
+                  Saisie sécurisée de la carte et des moyens de paiement via
+                  Stripe Elements, sans sortir de l’univers 21 Wear.
+                </p>
+              </div>
 
-            <p className="mt-5 font-sans text-sm font-light leading-relaxed text-white/58">
-              Référence checkout
-              {intentOrderReference ? ` : ${intentOrderReference}` : " en préparation"}.
-            </p>
+              <div className="border-t border-[#121110]/8 pt-4">
+                <p className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-[#121110]/40">
+                  Livraison
+                </p>
+                <p className="mt-2 font-sans text-sm font-light leading-relaxed text-[#121110]/66">
+                  Les taxes et options définitives sont consolidées avant la
+                  confirmation du paiement.
+                </p>
+              </div>
+
+              <div className="border-t border-[#121110]/8 pt-4">
+                <p className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-[#121110]/40">
+                  Retour
+                </p>
+                <p className="mt-2 font-sans text-sm font-light leading-relaxed text-[#121110]/66">
+                  Tu peux revenir au panier à tout moment pour ajuster la
+                  sélection avant validation.
+                </p>
+              </div>
+            </div>
           </div>
         </aside>
       </div>
