@@ -6,7 +6,7 @@ import { wearData } from "@/data/wear.data";
 export default function WearCollectionsGrid() {
   return (
     <section className="mx-auto w-full max-w-7xl px-6 py-24 md:px-12 md:py-32">
-      <div className="grid grid-cols-1 gap-x-12 gap-y-20 md:grid-cols-2 md:gap-y-28">
+      <div className="grid grid-cols-1 gap-x-12 gap-y-20 md:grid-cols-2 md:gap-y-28 xl:grid-cols-4">
         {wearData.collections.map((collection) => (
           <Link
             key={collection.id}
@@ -19,16 +19,19 @@ export default function WearCollectionsGrid() {
                 src={collection.image}
                 alt={collection.name}
                 fill
-                sizes="(max-width: 768px) 100vw, 50vw"
+                sizes="(max-width: 768px) 100vw, (max-width: 1279px) 50vw, 25vw"
                 className="object-cover transition-transform duration-1000 group-hover:scale-105"
               />
               <div className="pointer-events-none absolute inset-0 bg-black/0 transition-colors duration-700 group-hover:bg-black/10" />
             </div>
 
-            <div className="flex items-center justify-center px-2 text-center">
+            <div className="flex flex-col items-center justify-center px-2 text-center">
               <h2 className="font-sans text-sm uppercase tracking-[0.2em] text-[#121110] transition-colors duration-500 group-hover:text-[#121110]/70 md:text-base">
                 {collection.name}
               </h2>
+              <p className="mt-3 font-sans text-[0.62rem] uppercase tracking-[0.24em] text-[#121110]/40">
+                21 Wear
+              </p>
             </div>
           </Link>
         ))}

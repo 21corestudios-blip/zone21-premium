@@ -9,7 +9,7 @@ export default function CoreServicesGrid() {
       id="studios"
       className="mx-auto w-full max-w-7xl px-6 py-24 md:px-12 md:py-32"
     >
-      <div className="grid grid-cols-1 gap-x-12 gap-y-20 md:grid-cols-2 md:gap-y-28 xl:grid-cols-3">
+      <div className="grid grid-cols-1 gap-x-12 gap-y-20 md:grid-cols-2 md:gap-y-28 xl:grid-cols-4">
         {coreServices.map((service) => (
           <Link
             key={service.slug}
@@ -22,7 +22,7 @@ export default function CoreServicesGrid() {
                 src={service.image}
                 alt={service.name}
                 fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1279px) 50vw, 33vw"
+                sizes="(max-width: 768px) 100vw, (max-width: 1279px) 50vw, 25vw"
                 className="object-cover transition-transform duration-1000 group-hover:scale-105"
               />
               <div className="pointer-events-none absolute inset-0 bg-black/0 transition-colors duration-700 group-hover:bg-black/10" />
