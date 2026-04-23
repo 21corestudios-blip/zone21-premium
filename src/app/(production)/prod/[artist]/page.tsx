@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
+import ProductionMiniPlayer from "@/app/(production)/_components/production/ProductionMiniPlayer";
 import ProductionProductsGrid from "@/app/(production)/_components/production/ProductionProductsGrid";
+import ProductionStorefrontCategories from "@/app/(production)/_components/production/ProductionStorefrontCategories";
 import { productionArtists } from "@/data/production.artists";
 import { productionProducts } from "@/data/production.products";
 
@@ -47,6 +49,9 @@ export default async function ProductionArtistPage({ params }: PageProps) {
   const artistProducts = productionProducts.filter(
     (product) => product.artist === artist,
   );
+  const audioProducts = artistProducts.filter(
+    (product) => product.kind === "Beat" || product.kind === "Album",
+  );
 
   return (
     <main className="flex min-h-screen flex-col bg-[#F7F5F0]">
@@ -87,6 +92,12 @@ export default async function ProductionArtistPage({ params }: PageProps) {
           {currentArtist.tagline}
         </p>
       </section>
+
+      <ProductionStorefrontCategories artistSlug={artist} />
+
+      {audioProducts.length ? (
+        <ProductionMiniPlayer products={audioProducts} />
+      ) : null}
 
       <ProductionProductsGrid artistSlug={artist} products={artistProducts} />
     </main>

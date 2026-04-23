@@ -11,8 +11,8 @@ import {
 
 import {
   formatProductionPrice,
-  getProductionProductById,
-  type ProductionProduct,
+  getProductionCatalogItemById,
+  type ProductionSellable,
 } from "@/data/production.products";
 
 const STORAGE_KEY = "zone21-production-cart";
@@ -24,7 +24,7 @@ interface ProductionCartStoredItem {
 }
 
 export interface ProductionCartItem extends ProductionCartStoredItem {
-  product: ProductionProduct;
+  product: ProductionSellable;
   lineTotalCents: number;
   lineTotalFormatted: string;
 }
@@ -35,7 +35,7 @@ interface ProductionCartContextValue {
   subtotalCents: number;
   subtotalFormatted: string;
   isHydrated: boolean;
-  addItem: (product: ProductionProduct) => void;
+  addItem: (product: ProductionSellable) => void;
   decrementItem: (productId: string) => void;
   incrementItem: (productId: string) => void;
   removeItem: (productId: string) => void;
@@ -61,7 +61,7 @@ function sanitizeStoredItems(value: unknown): ProductionCartStoredItem[] {
       return [];
     }
 
-    if (!getProductionProductById(entry.productId)) {
+    if (!getProductionCatalogItemById(entry.productId)) {
       return [];
     }
 
@@ -115,7 +115,7 @@ export default function ProductionCartProvider({
 
   const items = useMemo<ProductionCartItem[]>(() => {
     return storedItems.flatMap((item) => {
-      const product = getProductionProductById(item.productId);
+      const product = getProductionCatalogItemById(item.productId);
 
       if (!product) {
         return [];
@@ -145,7 +145,7 @@ export default function ProductionCartProvider({
     return items.reduce((total, item) => total + item.lineTotalCents, 0);
   }, [items]);
 
-  const addItem = (product: ProductionProduct) => {
+  const addItem = (product: ProductionSellable) => {
     setStoredItems((currentItems) => {
       const existingItemIndex = currentItems.findIndex(
         (item) => item.productId === product.id,

@@ -195,6 +195,9 @@ export default function ProductionCartPage() {
               const isSelected = validSelectedItems.includes(item.productId);
               const artistName =
                 artistLabels.get(item.product.artist) ?? item.product.artist;
+              const detailHref = `/prod/${item.product.artist}/${
+                item.product.parentProductId ?? item.product.id
+              }`;
 
               return (
                 <article key={item.productId} className="border-b border-[#121110]/8 py-6">
@@ -210,7 +213,7 @@ export default function ProductionCartPage() {
                     <div className="min-w-0 flex-1">
                       <div className="grid grid-cols-[72px_minmax(0,1fr)] gap-4 sm:grid-cols-[88px_minmax(0,1fr)] sm:gap-5">
                         <Link
-                          href={`/prod/${item.product.artist}/${item.product.id}`}
+                          href={detailHref}
                           className="relative aspect-[4/5] overflow-hidden border border-[#121110]/8 bg-white"
                         >
                           <Image
@@ -225,7 +228,7 @@ export default function ProductionCartPage() {
                         <div className="min-w-0">
                           <div className="flex items-start justify-between gap-4">
                             <Link
-                              href={`/prod/${item.product.artist}/${item.product.id}`}
+                              href={detailHref}
                               className="block font-sans text-sm uppercase tracking-[0.18em] text-[#121110] transition-colors duration-300 hover:text-[#121110]/70"
                             >
                               {item.product.name}
@@ -245,6 +248,18 @@ export default function ProductionCartPage() {
                             <span>{artistName}</span>
                             <span className="hidden h-3 w-px bg-[#121110]/10 sm:block" />
                             <span>{item.product.kind}</span>
+                            {item.product.parentProductName ? (
+                              <>
+                                <span className="hidden h-3 w-px bg-[#121110]/10 sm:block" />
+                                <span>{item.product.parentProductName}</span>
+                              </>
+                            ) : null}
+                            {item.product.availability === "preorder" ? (
+                              <>
+                                <span className="hidden h-3 w-px bg-[#121110]/10 sm:block" />
+                                <span>Précommande</span>
+                              </>
+                            ) : null}
                             <span className="hidden h-3 w-px bg-[#121110]/10 sm:block" />
                             <span>
                               Prix unitaire{" "}
