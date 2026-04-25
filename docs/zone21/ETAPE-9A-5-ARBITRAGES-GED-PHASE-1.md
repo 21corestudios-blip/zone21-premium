@@ -85,7 +85,7 @@ La phase 1 doit démarrer sur un périmètre documentaire à risque réduit, for
 
 Workflow cible retenu :
 
-`brouillon -> soumis -> en validation -> valide ou rejete -> archive si remplace`
+`brouillon -> soumis -> en validation -> validé ou rejeté -> archivé si remplacé`
 
 ### Définition des états
 
