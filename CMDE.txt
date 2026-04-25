@@ -13,5 +13,5 @@ http://localhost:3000/dashboard
 Sauvegarde GIT :
 git status
 git add .
-git commit -m "docs: define-zone21-ged-phase-1-naming"
+git commit -m "docs: arbitrate-zone21-ged-phase-1-domains-paths"
 git push
