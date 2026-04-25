@@ -31,3 +31,11 @@ Règles :
 - le code doit lire uniquement `process.env.Z21_ACTIVE_BASE_PATH` ;
 - le message `BASE ACTIVE À VÉRIFIER` est normal si la variable est absente ;
 - ce message disparaît dès que `Z21_ACTIVE_BASE_PATH` est correctement renseignée dans `.env.local`.
+
+## GED ZONE 21 — statut actuel
+
+- la GED est en phase de cadrage ;
+- aucune écriture documentaire n'est active ;
+- le portail reste en lecture seule ;
+- les routes de gouvernance exposent uniquement des règles et contrôles ;
+- aucune modification Drive, NAS ou ZONE21_DEV n'est possible à ce stade.
