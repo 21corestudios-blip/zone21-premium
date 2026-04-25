@@ -13,5 +13,5 @@ http://localhost:3000/dashboard
 Sauvegarde GIT :
 git status
 git add .
-git commit -m "chore: add prettier, CI workflow and project README"
+git commit -m "docs: define-zone21-ged-phase-1-naming"
 git push
