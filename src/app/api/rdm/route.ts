@@ -2,6 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { getRequestSession } from "@/lib/auth";
 import {
+  governancePolicySummary,
+  listGovernanceRolePolicies,
+} from "@/lib/governance-policy";
+import { serializeGovernanceRecord } from "@/lib/governance-service";
+import {
   getAccessibleCategories,
   getAccessibleStatuses,
   getAccessibleTypes,
@@ -55,6 +60,7 @@ export async function GET(request: NextRequest) {
       activeBaseError: activeBaseState.error,
       governanceSyncStatus: governanceOverview.overallStatus,
       governanceCounts: governanceOverview.counts,
+      governancePolicy: governancePolicySummary,
     },
     filters: {
       query: query ?? "",
@@ -68,6 +74,20 @@ export async function GET(request: NextRequest) {
       types: getAccessibleTypes(session.role),
     },
     total: records.length,
-    records: records.map((record) => serializeRdmRecord(record, session.role)),
+    governance: {
+      rolePolicies: listGovernanceRolePolicies(),
+      workflowStates: [
+        "brouillon",
+        "soumis",
+        "en_validation",
+        "validé",
+        "archivé",
+        "rejeté",
+      ],
+    },
+    records: records.map((record) => ({
+      ...serializeRdmRecord(record, session.role),
+      governance: serializeGovernanceRecord(session.role, record),
+    })),
   });
 }
