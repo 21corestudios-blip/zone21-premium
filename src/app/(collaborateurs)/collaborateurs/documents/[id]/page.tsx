@@ -276,6 +276,10 @@ export default async function CollaboratorDocumentPage({
             </h2>
             <div className="mt-5 space-y-4 text-sm leading-7 text-white/70">
               <p>Décision registre liée : {record.registerDecision ?? "Aucune"}</p>
+              <p>
+                Code anomalie gouvernance :{" "}
+                {record.governanceIssueCode ?? "Aucun"}
+              </p>
               <p>Remplace : {record.replaces ?? "Aucun"}</p>
               <p>Remplacé par : {record.replacedBy ?? "Aucun"}</p>
               {canManageAccess ? (

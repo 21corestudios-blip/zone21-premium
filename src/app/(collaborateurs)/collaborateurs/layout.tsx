@@ -20,9 +20,10 @@ export default async function CollaboratorsLayout({
   children: React.ReactNode;
 }) {
   const session = await getSession();
+  const showGlobalFooter = Boolean(session);
 
   return (
-    <div className="min-h-screen bg-[#121110] text-[#EAE8E3]">
+    <div className="flex min-h-screen flex-col overflow-x-clip bg-[#121110] text-[#EAE8E3]">
       <header className="border-b border-white/8 bg-[#121110]/92 backdrop-blur-md">
         <div className="flex w-full items-center justify-between gap-6 px-6 py-5 lg:px-10 2xl:px-14">
           <div className="flex items-center gap-5">
@@ -86,14 +87,40 @@ export default async function CollaboratorsLayout({
         </div>
       </header>
 
-      {children}
+      <div className="flex-1">
+        {children}
+      </div>
 
-      <footer className="border-t border-white/8">
-        <div className="flex w-full flex-col gap-3 px-6 py-6 text-[0.68rem] uppercase tracking-[0.22em] text-white/35 md:flex-row md:items-center md:justify-between lg:px-10 2xl:px-14">
-          <span>ZONE21_DEV reste la base active unique de référence.</span>
-          <span>Portail lecture seule en phase de structuration.</span>
-        </div>
-      </footer>
+      {showGlobalFooter ? (
+        <footer className="mt-12 border-t border-white/8 bg-[#0A0A09]">
+          <div className="grid w-full gap-8 px-6 py-10 lg:grid-cols-[minmax(0,1.1fr)_0.9fr_auto] lg:px-10 2xl:px-14">
+            <div>
+              <p className="text-[0.62rem] uppercase tracking-[0.28em] text-[#C5B39B]">
+                Portail collaborateurs
+              </p>
+              <p className="mt-3 max-w-2xl text-sm leading-7 text-white/60">
+                Interface de consultation, filtrage, export et téléchargement des
+                documents actifs, sans déplacement de l&apos;autorité normative hors
+                de ZONE21_DEV.
+              </p>
+            </div>
+
+            <div className="space-y-3 text-[0.68rem] uppercase tracking-[0.22em] text-white/35">
+              <p>ZONE21_DEV reste la base active unique de référence.</p>
+              <p>Portail lecture seule en phase de structuration.</p>
+            </div>
+
+            <div className="flex items-start lg:justify-end">
+              <Link
+                href="/contact"
+                className="rounded-full border border-white/12 px-4 py-2 text-[0.64rem] uppercase tracking-[0.24em] text-white/72 transition-colors duration-500 hover:border-white/25 hover:text-white"
+              >
+                Support collaborateurs
+              </Link>
+            </div>
+          </div>
+        </footer>
+      ) : null}
     </div>
   );
 }

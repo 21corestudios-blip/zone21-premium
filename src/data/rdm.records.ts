@@ -1,6 +1,16 @@
 import type { RdmRecord } from "@/lib/rdm-types";
 
-const uncheckedAvailability = {
+const presentAvailability = {
+  docx: "présent",
+  pdf: "présent",
+} as const;
+
+const pdfToVerifyAvailability = {
+  docx: "présent",
+  pdf: "à vérifier",
+} as const;
+
+const allToVerifyAvailability = {
   docx: "à vérifier",
   pdf: "à vérifier",
 } as const;
@@ -29,10 +39,11 @@ export const rdmRecords: RdmRecord[] = [
     replaces: null,
     replacedBy: null,
     registerDecision: null,
-    observations: "Document-cadre maître actif du système documentaire.",
+    observations: "PDF actif à confirmer dans 02_PDF.",
     sourceOfTruth: "ZONE21_DEV",
-    governanceSyncStatus: "à jour",
-    fileAvailability: uncheckedAvailability,
+    governanceSyncStatus: "à vérifier",
+    governanceIssueCode: "PDF_A_CONFIRMER",
+    fileAvailability: pdfToVerifyAvailability,
     allowedRoles: [
       "direction",
       "admin_documentaire",
@@ -63,10 +74,11 @@ export const rdmRecords: RdmRecord[] = [
     replaces: null,
     replacedBy: null,
     registerDecision: null,
-    observations: "Registre décisionnel officiel actif.",
+    observations: "PDF actif à confirmer et synchroniser.",
     sourceOfTruth: "ZONE21_DEV",
-    governanceSyncStatus: "à jour",
-    fileAvailability: uncheckedAvailability,
+    governanceSyncStatus: "à vérifier",
+    governanceIssueCode: "PDF_A_CONFIRMER",
+    fileAvailability: pdfToVerifyAvailability,
     allowedRoles: [
       "direction",
       "admin_documentaire",
@@ -100,10 +112,11 @@ export const rdmRecords: RdmRecord[] = [
     replaces: null,
     replacedBy: null,
     registerDecision: null,
-    observations: "Directive opérationnelle active pour l'exécution IA.",
+    observations: "Statut, version, PDF et classement à confirmer.",
     sourceOfTruth: "ZONE21_DEV",
-    governanceSyncStatus: "à jour",
-    fileAvailability: uncheckedAvailability,
+    governanceSyncStatus: "à vérifier",
+    governanceIssueCode: "STATUT_A_CONFIRMER",
+    fileAvailability: allToVerifyAvailability,
     allowedRoles: [
       "direction",
       "admin_documentaire",
@@ -138,10 +151,10 @@ export const rdmRecords: RdmRecord[] = [
     replaces: null,
     replacedBy: null,
     registerDecision: null,
-    observations: "Référentiel maître actif des entités officielles.",
+    observations: "DOCX/PDF actifs confirmés. Aucune anomalie ouverte.",
     sourceOfTruth: "ZONE21_DEV",
     governanceSyncStatus: "à jour",
-    fileAvailability: uncheckedAvailability,
+    fileAvailability: presentAvailability,
     allowedRoles: [
       "direction",
       "admin_documentaire",
@@ -175,10 +188,10 @@ export const rdmRecords: RdmRecord[] = [
     replaces: null,
     replacedBy: null,
     registerDecision: null,
-    observations: "Charte active de codification documentaire.",
+    observations: "Charte active validée en étape 8.",
     sourceOfTruth: "ZONE21_DEV",
     governanceSyncStatus: "à jour",
-    fileAvailability: uncheckedAvailability,
+    fileAvailability: presentAvailability,
     allowedRoles: [
       "direction",
       "admin_documentaire",
@@ -215,11 +228,11 @@ export const rdmRecords: RdmRecord[] = [
     replaces: null,
     replacedBy: null,
     registerDecision: "DS-009A",
-    observations:
-      "Refonte tableau validée. La synchronisation finale du PDF reste à confirmer.",
+    observations: "Synchronisation RDM web / document maître RDM à finaliser.",
     sourceOfTruth: "ZONE21_DEV",
     governanceSyncStatus: "à vérifier",
-    fileAvailability: uncheckedAvailability,
+    governanceIssueCode: "RDM_SYNC_A_FINALISER",
+    fileAvailability: presentAvailability,
     allowedRoles: [
       "direction",
       "admin_documentaire",
@@ -256,10 +269,11 @@ export const rdmRecords: RdmRecord[] = [
     replacedBy: null,
     registerDecision: null,
     observations:
-      "Contradiction documentaire : statut interne encore non aligné avec la base active.",
+      "Contradiction active : statut Document de travail dans base active.",
     sourceOfTruth: "ZONE21_DEV",
     governanceSyncStatus: "bloqué",
-    fileAvailability: uncheckedAvailability,
+    governanceIssueCode: "ENTITE_STATUT_BLOQUE",
+    fileAvailability: presentAvailability,
     allowedRoles: [
       "direction",
       "admin_documentaire",
@@ -294,10 +308,11 @@ export const rdmRecords: RdmRecord[] = [
     replacedBy: null,
     registerDecision: null,
     observations:
-      "Contradiction documentaire et gouvernance à réaligner avant validation complète.",
+      "Contradiction active : statut Document de travail dans base active.",
     sourceOfTruth: "ZONE21_DEV",
     governanceSyncStatus: "bloqué",
-    fileAvailability: uncheckedAvailability,
+    governanceIssueCode: "ENTITE_STATUT_BLOQUE",
+    fileAvailability: presentAvailability,
     allowedRoles: [
       "direction",
       "admin_documentaire",
@@ -334,10 +349,11 @@ export const rdmRecords: RdmRecord[] = [
     replacedBy: null,
     registerDecision: null,
     observations:
-      "Contradiction documentaire et gouvernance à réaligner avant validation complète.",
+      "Contradiction active : statut Document de travail dans base active.",
     sourceOfTruth: "ZONE21_DEV",
     governanceSyncStatus: "bloqué",
-    fileAvailability: uncheckedAvailability,
+    governanceIssueCode: "ENTITE_STATUT_BLOQUE",
+    fileAvailability: presentAvailability,
     allowedRoles: [
       "direction",
       "admin_documentaire",

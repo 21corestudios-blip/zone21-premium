@@ -29,6 +29,7 @@ const exportHeaders = [
   "Remplace",
   "Remplacé par",
   "Décision registre liée",
+  "Code anomalie gouvernance",
   "Observations",
 ] as const;
 
@@ -52,6 +53,7 @@ function buildExportRows(records: RdmRecord[]) {
     record.replaces ?? "",
     record.replacedBy ?? "",
     record.registerDecision ?? "",
+    record.governanceIssueCode ?? "",
     record.observations,
   ]);
 }
@@ -97,6 +99,7 @@ function buildXlsxBuffer(records: RdmRecord[]) {
     { wch: 18 },
     { wch: 18 },
     { wch: 20 },
+    { wch: 24 },
     { wch: 48 },
   ];
 

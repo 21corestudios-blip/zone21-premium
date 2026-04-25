@@ -156,6 +156,36 @@ function getDecisionBadgeClass(value: string | null) {
   return "border-[#C5B39B]/25 bg-[#C5B39B]/10 text-[#E7D8BE]";
 }
 
+function getGovernanceCountBadgeClass(status: string) {
+  switch (status) {
+    case "à jour":
+      return "border-emerald-500/25 bg-emerald-500/10 text-emerald-200";
+    case "à vérifier":
+      return "border-amber-500/25 bg-amber-500/10 text-amber-200";
+    case "bloqué":
+      return "border-rose-500/25 bg-rose-500/10 text-rose-200";
+    case "archivé":
+      return "border-white/15 bg-white/[0.06] text-white/68";
+    default:
+      return "border-white/15 bg-white/[0.06] text-white/68";
+  }
+}
+
+function getGovernanceRowClass(status: string) {
+  switch (status) {
+    case "à jour":
+      return "bg-[linear-gradient(90deg,rgba(16,185,129,0.08)_0,rgba(16,185,129,0.04)_10px,transparent_10px)]";
+    case "à vérifier":
+      return "bg-[linear-gradient(90deg,rgba(245,158,11,0.08)_0,rgba(245,158,11,0.04)_10px,transparent_10px)]";
+    case "bloqué":
+      return "bg-[linear-gradient(90deg,rgba(244,63,94,0.08)_0,rgba(244,63,94,0.04)_10px,transparent_10px)]";
+    case "archivé":
+      return "bg-[linear-gradient(90deg,rgba(255,255,255,0.05)_0,rgba(255,255,255,0.02)_10px,transparent_10px)]";
+    default:
+      return "";
+  }
+}
+
 export default async function CollaboratorsPage({
   searchParams,
 }: {
@@ -340,11 +370,36 @@ export default async function CollaboratorsPage({
               {governanceOverview.overallStatus}
             </span>
           </div>
-          <p className="mt-3 text-sm text-white/62">
-            {governanceOverview.counts["à jour"]} à jour,{" "}
-            {governanceOverview.counts["à vérifier"]} à vérifier,{" "}
-            {governanceOverview.counts["bloqué"]} bloqués
-          </p>
+          <div className="mt-4 flex flex-wrap gap-2 text-[0.62rem] uppercase tracking-[0.18em]">
+            <span
+              className={`rounded-full border px-3 py-1 ${getGovernanceCountBadgeClass(
+                "à jour",
+              )}`}
+            >
+              {governanceOverview.counts["à jour"]} à jour
+            </span>
+            <span
+              className={`rounded-full border px-3 py-1 ${getGovernanceCountBadgeClass(
+                "à vérifier",
+              )}`}
+            >
+              {governanceOverview.counts["à vérifier"]} à vérifier
+            </span>
+            <span
+              className={`rounded-full border px-3 py-1 ${getGovernanceCountBadgeClass(
+                "bloqué",
+              )}`}
+            >
+              {governanceOverview.counts["bloqué"]} bloqués
+            </span>
+            <span
+              className={`rounded-full border px-3 py-1 ${getGovernanceCountBadgeClass(
+                "archivé",
+              )}`}
+            >
+              {governanceOverview.counts["archivé"]} archivés
+            </span>
+          </div>
         </div>
       </section>
 
@@ -481,6 +536,7 @@ export default async function CollaboratorsPage({
                   <col className="w-[10rem]" />
                   <col className="w-[12rem]" />
                   <col className="w-[28rem]" />
+                  <col className="w-[7rem]" />
                 </colgroup>
                 <thead>
                   <tr className="border-b border-white/8 bg-white/[0.02] text-left">
@@ -573,6 +629,9 @@ export default async function CollaboratorsPage({
                     <th className={desktopHeaderClass}>
                       Observations
                     </th>
+                    <th className={desktopHeaderClass}>
+                      PDF
+                    </th>
                   </tr>
                 </thead>
 
@@ -580,7 +639,9 @@ export default async function CollaboratorsPage({
                   {records.map((record) => (
                     <tr
                       key={record.id}
-                      className="border-b border-white/6 align-top transition-colors duration-500 hover:bg-white/[0.02]"
+                      className={`border-b border-white/6 align-top transition-colors duration-500 hover:bg-white/[0.02] ${getGovernanceRowClass(
+                        record.governanceSyncStatus,
+                      )}`}
                     >
                       <td className={`${desktopCellClass} whitespace-nowrap`}>
                         {record.id}
@@ -688,6 +749,16 @@ export default async function CollaboratorsPage({
                           {record.observations}
                         </div>
                       </td>
+                      <td className={`${desktopCellClass} whitespace-nowrap`}>
+                        <a
+                          href={`/api/documents/${record.id}/download?format=pdf&disposition=inline`}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex rounded-full border border-[#C5B39B]/35 px-3 py-1 text-[0.62rem] uppercase tracking-[0.22em] text-[#D5C1A1] transition-colors duration-500 hover:border-[#C5B39B]/55 hover:text-[#F7F5F0]"
+                        >
+                          Voir
+                        </a>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -698,7 +769,9 @@ export default async function CollaboratorsPage({
               {records.map((record) => (
                 <article
                   key={record.id}
-                  className="rounded-[1.5rem] border border-white/8 bg-white/[0.02] p-5"
+                  className={`rounded-[1.5rem] border border-white/8 bg-white/[0.02] p-5 ${getGovernanceRowClass(
+                    record.governanceSyncStatus,
+                  )}`}
                 >
                   <div className="flex flex-wrap items-center gap-3">
                     <span className="rounded-full border border-white/10 px-3 py-1 text-[0.62rem] uppercase tracking-[0.22em] text-white/48">
@@ -899,6 +972,14 @@ export default async function CollaboratorsPage({
                     >
                       Ouvrir la fiche
                     </Link>
+                    <a
+                      href={`/api/documents/${record.id}/download?format=pdf&disposition=inline`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="rounded-full border border-white/12 px-4 py-2 text-[0.62rem] uppercase tracking-[0.24em] text-white/75 transition-colors duration-500 hover:border-white/25 hover:text-white"
+                    >
+                      Voir PDF
+                    </a>
                     <a
                       href={`/api/documents/${record.id}/download?format=pdf`}
                       className="rounded-full border border-[#C5B39B]/35 px-4 py-2 text-[0.62rem] uppercase tracking-[0.24em] text-[#D5C1A1] transition-colors duration-500 hover:border-[#C5B39B]/55 hover:text-[#F7F5F0]"

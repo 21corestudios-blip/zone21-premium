@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Zone 21 Premium
 
-## Getting Started
+Portail Next.js de consultation et d'exploitation pour l'écosystème ZONE 21.
 
-First, run the development server:
+## Démarrage
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvrir [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Variables d'environnement
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copier `.env.example` vers `.env.local` et compléter les valeurs nécessaires.
 
-## Learn More
+## RDM collaborateurs — configuration locale
 
-To learn more about Next.js, take a look at the following resources:
+Le portail RDM lit les métadonnées sans configuration supplémentaire.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Pour activer la vérification réelle des fichiers et les téléchargements DOCX/PDF, créer un fichier `.env.local` avec :
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+Z21_ACTIVE_BASE_PATH="/Users/gregloupiac/Library/CloudStorage/GoogleDrive-21corestudios@gmail.com/Mon Drive/ZONE21_DEV"
+```
 
-## Deploy on Vercel
+Règles :
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- ne jamais coder ce chemin en dur dans les fichiers TypeScript ;
+- le code doit lire uniquement `process.env.Z21_ACTIVE_BASE_PATH` ;
+- le message `BASE ACTIVE À VÉRIFIER` est normal si la variable est absente ;
+- ce message disparaît dès que `Z21_ACTIVE_BASE_PATH` est correctement renseignée dans `.env.local`.

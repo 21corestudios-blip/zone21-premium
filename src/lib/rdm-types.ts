@@ -22,6 +22,13 @@ export type GovernanceSyncStatus =
   | "archivé";
 
 export type FileAvailabilityStatus = "présent" | "manquant" | "à vérifier";
+export type GovernanceIssueCode =
+  | "PDF_A_CONFIRMER"
+  | "STATUT_A_CONFIRMER"
+  | "VERSION_A_CONFIRMER"
+  | "DOCX_DANS_02_PDF"
+  | "ENTITE_STATUT_BLOQUE"
+  | "RDM_SYNC_A_FINALISER";
 
 export type CollaboratorAccessLevel = "Oui" | "Non" | "Restreint";
 
@@ -58,6 +65,7 @@ export interface RdmRecord {
   observations: string;
   sourceOfTruth: "ZONE21_DEV";
   governanceSyncStatus: GovernanceSyncStatus;
+  governanceIssueCode?: GovernanceIssueCode;
   fileAvailability: FileAvailability;
   allowedRoles: CollaboratorRole[];
   availableFormats: DownloadFormat[];
