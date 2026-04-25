@@ -1,7 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { getRequestSession } from "@/lib/auth";
-import { getRdmRecordById, serializeRdmRecord } from "@/lib/rdm-service";
+import {
+  getActiveBaseState,
+  getRdmRecordById,
+  serializeRdmRecord,
+} from "@/lib/rdm-service";
 
 export async function GET(
   request: NextRequest,
@@ -26,8 +30,17 @@ export async function GET(
     );
   }
 
+  const activeBaseState = getActiveBaseState();
+
   return NextResponse.json({
     session,
+    registry: {
+      sourceOfTruth: activeBaseState.sourceOfTruth,
+      mode: activeBaseState.mode,
+      activeBasePath: activeBaseState.basePath,
+      activeBaseAvailable: activeBaseState.isAvailable,
+      activeBaseError: activeBaseState.error,
+    },
     record: serializeRdmRecord(record, session.role),
   });
 }

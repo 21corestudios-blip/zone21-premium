@@ -4,8 +4,15 @@ import { getRequestSession } from "@/lib/auth";
 import {
   getAccessibleCategories,
   getAccessibleStatuses,
+  getAccessibleTypes,
+  getActiveBaseState,
+  getGovernanceOverview,
   listRdmRecords,
   serializeRdmRecord,
+  type RdmSortKey,
+  type RdmStatusFilter,
+  type RdmTypeFilter,
+  type SortDirection,
 } from "@/lib/rdm-service";
 
 export async function GET(request: NextRequest) {
@@ -20,32 +27,35 @@ export async function GET(request: NextRequest) {
 
   const { searchParams } = new URL(request.url);
   const query = searchParams.get("q") ?? undefined;
-  const type = searchParams.get("type") ?? "all";
-  const status = searchParams.get("status") ?? "all";
+  const type = (searchParams.get("type") ?? "all") as RdmTypeFilter;
+  const status = (searchParams.get("status") ?? "all") as RdmStatusFilter;
   const category = searchParams.get("category") ?? "all";
-  const sort = searchParams.get("sort") ?? "updatedAt";
-  const dir = searchParams.get("dir") ?? "desc";
+  const sort = (searchParams.get("sort") ?? "updatedAt") as RdmSortKey;
+  const dir = (searchParams.get("dir") ?? "desc") as SortDirection;
 
   const records = listRdmRecords({
     role: session.role,
     query,
-    type: type as "all" | "DOC" | "DIR",
-    status: status as "all" | "Validé" | "Document de travail" | "Archivé",
+    type,
+    status,
     category,
-    sortKey: sort as
-      | "id"
-      | "reference"
-      | "title"
-      | "status"
-      | "ownerEntity"
-      | "category"
-      | "version"
-      | "updatedAt",
-    sortDirection: dir as "asc" | "desc",
+    sortKey: sort,
+    sortDirection: dir,
   });
+  const activeBaseState = getActiveBaseState();
+  const governanceOverview = getGovernanceOverview(records);
 
   return NextResponse.json({
     session,
+    registry: {
+      sourceOfTruth: activeBaseState.sourceOfTruth,
+      mode: activeBaseState.mode,
+      activeBasePath: activeBaseState.basePath,
+      activeBaseAvailable: activeBaseState.isAvailable,
+      activeBaseError: activeBaseState.error,
+      governanceSyncStatus: governanceOverview.overallStatus,
+      governanceCounts: governanceOverview.counts,
+    },
     filters: {
       query: query ?? "",
       type,
@@ -55,6 +65,7 @@ export async function GET(request: NextRequest) {
       dir,
       categories: getAccessibleCategories(session.role),
       statuses: getAccessibleStatuses(session.role),
+      types: getAccessibleTypes(session.role),
     },
     total: records.length,
     records: records.map((record) => serializeRdmRecord(record, session.role)),

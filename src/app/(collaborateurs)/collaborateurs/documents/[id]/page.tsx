@@ -3,9 +3,17 @@ import { notFound } from "next/navigation";
 
 import CollaboratorAccessGate from "../../_components/CollaboratorAccessGate";
 import { getSession } from "@/lib/auth";
-import { hasPermission } from "@/lib/rbac";
-import { getRdmRecordById } from "@/lib/rdm-service";
 import { roleDetails } from "@/lib/permissions";
+import {
+  getCollaboratorAccessLabel,
+  getConfidentialityLabel,
+  getFileAvailabilityLabel,
+  getGovernanceSyncClasses,
+  getGovernanceSyncLabel,
+  getSourceNormativeLabel,
+} from "@/lib/rdm-presenters";
+import { hasPermission } from "@/lib/rbac";
+import { getActiveBaseState, getRdmRecordById } from "@/lib/rdm-service";
 
 export default async function CollaboratorDocumentPage({
   params,
@@ -31,6 +39,7 @@ export default async function CollaboratorDocumentPage({
     notFound();
   }
 
+  const activeBaseState = getActiveBaseState();
   const canManageAccess = hasPermission(session.role, "manage_access");
   const pdfPreviewUrl = `/api/documents/${record.id}/download?format=pdf&disposition=inline`;
 
@@ -73,9 +82,28 @@ export default async function CollaboratorDocumentPage({
           <h1 className="mt-4 font-serif text-4xl text-[#F7F5F0] md:text-5xl">
             {record.title}
           </h1>
-          <p className="mt-5 max-w-3xl text-sm leading-7 text-white/68 md:text-base">
-            {record.observations}
+          <p className="mt-5 max-w-4xl text-sm leading-7 text-white/68 md:text-base">
+            Cette fiche est une vue collaborateurs en lecture seule. Elle
+            reflète le registre documentaire web sans déplacer l&apos;autorité des
+            documents maîtres hors de ZONE21_DEV.
           </p>
+
+          <div className="mt-6 flex flex-wrap gap-3">
+            <span className="rounded-full border border-white/10 px-4 py-2 text-[0.62rem] uppercase tracking-[0.22em] text-white/72">
+              Source de vérité : {record.sourceOfTruth}
+            </span>
+            <span className="rounded-full border border-white/10 px-4 py-2 text-[0.62rem] uppercase tracking-[0.22em] text-white/72">
+              Mode : lecture seule
+            </span>
+            <span
+              className={`rounded-full border px-4 py-2 text-[0.62rem] uppercase tracking-[0.22em] ${getGovernanceSyncClasses(
+                record.governanceSyncStatus,
+              )}`}
+            >
+              Synchronisation gouvernance :{" "}
+              {getGovernanceSyncLabel(record)}
+            </span>
+          </div>
         </div>
 
         <div className="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.28)]">
@@ -97,6 +125,15 @@ export default async function CollaboratorDocumentPage({
           ) : null}
         </div>
       </section>
+
+      {activeBaseState.error ? (
+        <section className="rounded-[1.5rem] border border-amber-500/25 bg-amber-500/10 p-5 text-sm leading-7 text-amber-100">
+          <p className="text-[0.62rem] uppercase tracking-[0.24em] text-amber-200/80">
+            Base active à vérifier
+          </p>
+          <p className="mt-3">{activeBaseState.error}</p>
+        </section>
+      ) : null}
 
       <section className="grid gap-5 lg:grid-cols-[minmax(0,1.2fr)_0.8fr]">
         <article className="rounded-[1.75rem] border border-white/10 bg-[#161513] p-6 shadow-[0_20px_70px_rgba(0,0,0,0.24)]">
@@ -153,9 +190,25 @@ export default async function CollaboratorDocumentPage({
               </dt>
               <dd className="mt-2 text-sm text-white/78">{record.updatedAt}</dd>
             </div>
-            <div className="md:col-span-2">
+            <div>
               <dt className="text-[0.58rem] uppercase tracking-[0.24em] text-white/35">
                 Source normative
+              </dt>
+              <dd className="mt-2 text-sm text-white/78">
+                {getSourceNormativeLabel(record)}
+              </dd>
+            </div>
+            <div>
+              <dt className="text-[0.58rem] uppercase tracking-[0.24em] text-white/35">
+                Disponibilité fichiers
+              </dt>
+              <dd className="mt-2 text-sm text-white/78">
+                {getFileAvailabilityLabel(record.fileAvailability)}
+              </dd>
+            </div>
+            <div className="md:col-span-2">
+              <dt className="text-[0.58rem] uppercase tracking-[0.24em] text-white/35">
+                Source normative de référence
               </dt>
               <dd className="mt-2 text-sm leading-7 text-white/78">
                 {record.normativeSources.join(" ; ")}
@@ -173,6 +226,24 @@ export default async function CollaboratorDocumentPage({
         </article>
 
         <aside className="space-y-5">
+          <article className="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-6 shadow-[0_20px_70px_rgba(0,0,0,0.2)]">
+            <h2 className="text-[0.7rem] uppercase tracking-[0.28em] text-white/35">
+              Référence système
+            </h2>
+
+            <div className="mt-5 space-y-4 text-sm leading-7 text-white/70">
+              <p>Source de vérité : {record.sourceOfTruth}</p>
+              <p>Mode : lecture seule</p>
+              <p>
+                Synchronisation gouvernance : {record.governanceSyncStatus}
+              </p>
+              <p>
+                Accès collaborateurs : {getCollaboratorAccessLabel(record)}
+              </p>
+              <p>Confidentialité : {getConfidentialityLabel(record)}</p>
+            </div>
+          </article>
+
           <article className="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-6 shadow-[0_20px_70px_rgba(0,0,0,0.2)]">
             <h2 className="text-[0.7rem] uppercase tracking-[0.28em] text-white/35">
               Chemins actifs
@@ -204,14 +275,15 @@ export default async function CollaboratorDocumentPage({
               Gouvernance web
             </h2>
             <div className="mt-5 space-y-4 text-sm leading-7 text-white/70">
-              <p>Accès collaborateurs : {record.collaboratorAccess}</p>
-              <p>Confidentialité : {record.confidentiality}</p>
               <p>Décision registre liée : {record.registerDecision ?? "Aucune"}</p>
               <p>Remplace : {record.replaces ?? "Aucun"}</p>
               <p>Remplacé par : {record.replacedBy ?? "Aucun"}</p>
               {canManageAccess ? (
                 <p>
-                  Rôles autorisés : {record.allowedRoles.map((role) => roleDetails[role].label).join(", ")}
+                  Rôles autorisés :{" "}
+                  {record.allowedRoles
+                    .map((role) => roleDetails[role].label)
+                    .join(", ")}
                 </p>
               ) : null}
             </div>
@@ -249,8 +321,8 @@ export default async function CollaboratorDocumentPage({
             >
               <div className="flex min-h-[18rem] flex-col items-center justify-center gap-4 px-6 py-10 text-center">
                 <p className="max-w-2xl text-sm leading-7 text-white/62">
-                  L’aperçu PDF intégré n’est pas disponible dans ce navigateur ou
-                  le fichier n’est pas accessible pour cette session.
+                  L&apos;aperçu PDF intégré n&apos;est pas disponible dans ce navigateur
+                  ou le fichier n&apos;est pas accessible pour cette session.
                 </p>
                 <div className="flex flex-wrap justify-center gap-3">
                   <a

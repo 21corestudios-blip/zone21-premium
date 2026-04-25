@@ -20,10 +20,14 @@ export async function GET(
   const { id } = await context.params;
   const { searchParams } = new URL(request.url);
   const format = (searchParams.get("format") ?? "pdf") as DownloadFormat;
-  const disposition = searchParams.get("disposition") === "inline" ? "inline" : "attachment";
+  const disposition =
+    searchParams.get("disposition") === "inline" ? "inline" : "attachment";
 
   if (format !== "pdf" && format !== "docx") {
-    return NextResponse.json({ error: "Format non supporté." }, { status: 400 });
+    return NextResponse.json(
+      { error: "Format non supporté." },
+      { status: 400 },
+    );
   }
 
   const payload = await getDownloadPayload({
@@ -43,7 +47,9 @@ export async function GET(
     return NextResponse.json(
       {
         error:
+          payload.baseError ??
           "Le fichier source n'a pas été trouvé sur la base active ZONE21_DEV.",
+        sourceOfTruth: payload.record.sourceOfTruth,
         sourcePath: payload.systemPath,
       },
       { status: 503 },

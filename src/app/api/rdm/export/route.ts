@@ -1,7 +1,5 @@
-import { spawn } from "node:child_process";
-import { existsSync } from "node:fs";
-
 import { NextRequest, NextResponse } from "next/server";
+import * as XLSX from "xlsx";
 
 import { getRequestSession } from "@/lib/auth";
 import {
@@ -9,7 +7,7 @@ import {
   getConfidentialityLabel,
   getSourceNormativeLabel,
 } from "@/lib/rdm-presenters";
-import { listRdmRecords } from "@/lib/rdm-service";
+import { listRdmRecords, type RdmSortKey, type RdmStatusFilter, type RdmTypeFilter, type SortDirection } from "@/lib/rdm-service";
 import type { RdmRecord } from "@/lib/rdm-types";
 
 const exportHeaders = [
@@ -32,7 +30,7 @@ const exportHeaders = [
   "Remplacé par",
   "Décision registre liée",
   "Observations",
-];
+] as const;
 
 function buildExportRows(records: RdmRecord[]) {
   return records.map((record) => [
@@ -74,107 +72,52 @@ function buildCsvBuffer(records: RdmRecord[]) {
   return Buffer.from(`\uFEFF${lines.join("\n")}`, "utf-8");
 }
 
-function resolvePythonExecutable() {
-  const candidates = [
-    process.env.Z21_PYTHON_BIN,
-    "/Users/gregloupiac/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
-    "python3",
-  ].filter(Boolean) as string[];
+function buildXlsxBuffer(records: RdmRecord[]) {
+  const sheet = XLSX.utils.aoa_to_sheet([
+    [...exportHeaders],
+    ...buildExportRows(records),
+  ]);
 
-  return candidates.find((candidate) => candidate === "python3" || existsSync(candidate));
-}
+  sheet["!cols"] = [
+    { wch: 16 },
+    { wch: 34 },
+    { wch: 44 },
+    { wch: 10 },
+    { wch: 20 },
+    { wch: 10 },
+    { wch: 56 },
+    { wch: 56 },
+    { wch: 24 },
+    { wch: 24 },
+    { wch: 16 },
+    { wch: 20 },
+    { wch: 18 },
+    { wch: 18 },
+    { wch: 20 },
+    { wch: 18 },
+    { wch: 18 },
+    { wch: 20 },
+    { wch: 48 },
+  ];
 
-async function buildXlsxBuffer(records: RdmRecord[]) {
-  const pythonExecutable = resolvePythonExecutable();
+  sheet["!autofilter"] = {
+    ref: XLSX.utils.encode_range({
+      s: { c: 0, r: 0 },
+      e: { c: exportHeaders.length - 1, r: Math.max(records.length, 1) },
+    }),
+  };
+  sheet["!freeze"] = { xSplit: 0, ySplit: 1 };
 
-  if (!pythonExecutable) {
-    throw new Error("Aucun interpréteur Python disponible pour l'export XLSX.");
-  }
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, sheet, "RDM");
 
-  const pythonScript = `
-import io
-import json
-import sys
-from openpyxl import Workbook
-from openpyxl.styles import Font, PatternFill, Border, Side, Alignment
-from openpyxl.utils import get_column_letter
-
-payload = json.load(sys.stdin)
-headers = payload["headers"]
-rows = payload["rows"]
-
-wb = Workbook()
-ws = wb.active
-ws.title = "RDM"
-ws.freeze_panes = "A2"
-
-header_fill = PatternFill(fill_type="solid", fgColor="1A1918")
-header_font = Font(color="F7F5F0", bold=True)
-thin_side = Side(style="thin", color="2B2825")
-
-for col_idx, header in enumerate(headers, start=1):
-    cell = ws.cell(row=1, column=col_idx, value=header)
-    cell.fill = header_fill
-    cell.font = header_font
-    cell.alignment = Alignment(horizontal="center", vertical="center")
-    cell.border = Border(left=thin_side, right=thin_side, top=thin_side, bottom=thin_side)
-
-for row_idx, row in enumerate(rows, start=2):
-    for col_idx, value in enumerate(row, start=1):
-        cell = ws.cell(row=row_idx, column=col_idx, value=value)
-        cell.alignment = Alignment(vertical="top", wrap_text=True)
-        cell.border = Border(left=thin_side, right=thin_side, top=thin_side, bottom=thin_side)
-
-widths = [16, 30, 42, 10, 20, 10, 55, 55, 24, 24, 16, 18, 18, 18, 20, 18, 18, 20, 44]
-for idx, width in enumerate(widths, start=1):
-    ws.column_dimensions[get_column_letter(idx)].width = width
-
-output = io.BytesIO()
-wb.save(output)
-sys.stdout.buffer.write(output.getvalue())
-`.trim();
-
-  const payload = JSON.stringify({
-    headers: exportHeaders,
-    rows: buildExportRows(records),
-  });
-
-  return await new Promise<Buffer>((resolve, reject) => {
-    const child = spawn(pythonExecutable, ["-c", pythonScript], {
-      stdio: ["pipe", "pipe", "pipe"],
-    });
-    const stdoutChunks: Buffer[] = [];
-    const stderrChunks: Buffer[] = [];
-
-    child.stdout.on("data", (chunk: Buffer) => {
-      stdoutChunks.push(chunk);
-    });
-
-    child.stderr.on("data", (chunk: Buffer) => {
-      stderrChunks.push(chunk);
-    });
-
-    child.on("error", (error) => {
-      reject(error);
-    });
-
-    child.on("close", (code) => {
-      if (code === 0) {
-        resolve(Buffer.concat(stdoutChunks));
-        return;
-      }
-
-      reject(
-        new Error(
-          Buffer.concat(stderrChunks).toString("utf-8") ||
-            `Export XLSX impossible (code ${code ?? "inconnu"}).`,
-        ),
-      );
-    });
-
-    child.stdin.write(payload);
-    child.stdin.end();
-  });
+  return Buffer.from(
+    XLSX.write(workbook, {
+      type: "buffer",
+      bookType: "xlsx",
+      compression: true,
+    }),
+  );
 }
 
 export async function GET(request: NextRequest) {
@@ -189,29 +132,21 @@ export async function GET(request: NextRequest) {
 
   const { searchParams } = new URL(request.url);
   const query = searchParams.get("q") ?? undefined;
-  const type = searchParams.get("type") ?? "all";
-  const status = searchParams.get("status") ?? "all";
+  const type = (searchParams.get("type") ?? "all") as RdmTypeFilter;
+  const status = (searchParams.get("status") ?? "all") as RdmStatusFilter;
   const category = searchParams.get("category") ?? "all";
-  const sort = searchParams.get("sort") ?? "updatedAt";
-  const dir = searchParams.get("dir") ?? "desc";
+  const sort = (searchParams.get("sort") ?? "updatedAt") as RdmSortKey;
+  const dir = (searchParams.get("dir") ?? "desc") as SortDirection;
   const format = searchParams.get("format") ?? "csv";
 
   const records = listRdmRecords({
     role: session.role,
     query,
-    type: type as "all" | "DOC" | "DIR",
-    status: status as "all" | "Validé" | "Document de travail" | "Archivé",
+    type,
+    status,
     category,
-    sortKey: sort as
-      | "id"
-      | "reference"
-      | "title"
-      | "status"
-      | "ownerEntity"
-      | "category"
-      | "version"
-      | "updatedAt",
-    sortDirection: dir as "asc" | "desc",
+    sortKey: sort,
+    sortDirection: dir,
   });
 
   if (format === "csv") {
@@ -226,30 +161,19 @@ export async function GET(request: NextRequest) {
   }
 
   if (format === "xlsx") {
-    try {
-      const buffer = await buildXlsxBuffer(records);
-
-      return new NextResponse(new Uint8Array(buffer), {
-        status: 200,
-        headers: {
-          "Content-Type":
-            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-          "Content-Disposition": 'attachment; filename="zone21-rdm-export.xlsx"',
-          "Cache-Control": "private, no-store",
-        },
-      });
-    } catch (error) {
-      return NextResponse.json(
-        {
-          error:
-            error instanceof Error
-              ? error.message
-              : "Export XLSX indisponible.",
-        },
-        { status: 500 },
-      );
-    }
+    return new NextResponse(new Uint8Array(buildXlsxBuffer(records)), {
+      status: 200,
+      headers: {
+        "Content-Type":
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "Content-Disposition": 'attachment; filename="zone21-rdm-export.xlsx"',
+        "Cache-Control": "private, no-store",
+      },
+    });
   }
 
-  return NextResponse.json({ error: "Format d'export non supporté." }, { status: 400 });
+  return NextResponse.json(
+    { error: "Format d'export non supporté." },
+    { status: 400 },
+  );
 }

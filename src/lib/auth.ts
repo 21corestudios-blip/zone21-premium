@@ -1,7 +1,11 @@
 import type { NextRequest } from "next/server";
 import { cookies } from "next/headers";
 
-import { collaboratorRoles, roleDetails, type CollaboratorRole } from "./permissions";
+import {
+  collaboratorRoles,
+  roleDetails,
+  type CollaboratorRole,
+} from "./permissions";
 
 export const SESSION_ROLE_COOKIE = "z21_collab_role";
 export const SESSION_NAME_COOKIE = "z21_collab_name";
@@ -74,3 +78,9 @@ export function getRequestSession(request: NextRequest) {
       request.headers.get("x-zone21-name"),
   );
 }
+
+// Prototype only:
+// this role cookie is useful to structure the collaborators UI and RBAC flows,
+// but it is not production-grade authentication. A real implementation must
+// replace it with server-validated identity, signed sessions, and role claims
+// issued by a trusted auth provider without breaking the current API shape.

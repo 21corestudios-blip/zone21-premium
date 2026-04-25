@@ -1,33 +1,40 @@
-import type { RdmRecord } from "./rdm-types";
+import type {
+  FileAvailability,
+  GovernanceSyncStatus,
+  RdmRecord,
+} from "./rdm-types";
 
 export function getSourceNormativeLabel(record: RdmRecord) {
-  return record.normativeSources.length > 0 ? "Oui" : "Non";
+  return record.isNormativeSource ? "Oui" : "Non";
 }
 
 export function getCollaboratorAccessLabel(record: RdmRecord) {
-  const normalized = record.collaboratorAccess.toLowerCase();
-
-  if (normalized.includes("non")) {
-    return "Non";
-  }
-
-  if (normalized.includes("restreint") || record.allowedRoles.length < 6) {
-    return "Restreint";
-  }
-
-  return "Oui";
+  return record.collaboratorAccess;
 }
 
 export function getConfidentialityLabel(record: RdmRecord) {
-  const normalized = record.confidentiality.toLowerCase();
+  return record.confidentiality;
+}
 
-  if (normalized.includes("admin")) {
-    return "Admin";
+export function getGovernanceSyncLabel(record: RdmRecord) {
+  return record.governanceSyncStatus;
+}
+
+export function getGovernanceSyncClasses(status: GovernanceSyncStatus) {
+  switch (status) {
+    case "à jour":
+      return "border-emerald-500/25 bg-emerald-500/10 text-emerald-200";
+    case "à vérifier":
+      return "border-amber-500/25 bg-amber-500/10 text-amber-200";
+    case "bloqué":
+      return "border-rose-500/25 bg-rose-500/10 text-rose-200";
+    case "archivé":
+      return "border-white/10 bg-white/[0.06] text-white/65";
+    default:
+      return "border-white/10 bg-white/[0.06] text-white/65";
   }
+}
 
-  if (normalized.includes("public")) {
-    return "Public interne";
-  }
-
-  return "Restreint";
+export function getFileAvailabilityLabel(availability: FileAvailability) {
+  return `DOCX ${availability.docx} / PDF ${availability.pdf}`;
 }
