@@ -13,5 +13,5 @@ http://localhost:3000/dashboard
 Sauvegarde GIT :
 git status
 git add .
-git commit -m "docs: arbitrate-zone21-ged-phase-1-domains-paths"
+git commit -m "feat: implement-zone21-ged-writer-dry-run"
 git push
