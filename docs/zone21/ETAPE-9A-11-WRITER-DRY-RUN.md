@@ -2,7 +2,7 @@
 
 ## Statut du document
 
-Document de description du writer GED ZONE 21 implémente en mode `dry-run`.
+Document de description du writer GED ZONE 21 implémenté en mode `dry-run`.
 
 Cette étape n'active aucune écriture documentaire réelle. Le composant code ne fait que simuler les contrôles, les chemins théoriques, l'archivage théorique et l'aperçu de journal d'audit.
 
@@ -39,7 +39,7 @@ Rien dans cette étape ne doit :
 - générer un vrai `PDF` ;
 - déplacer un fichier ;
 - archiver un fichier réel ;
-- exposer une route d'ecriture `POST`, `PUT`, `PATCH` ou `DELETE`.
+- exposer une route d'écriture `POST`, `PUT`, `PATCH` ou `DELETE`.
 
 ## 4. Règles intégrées au dry-run
 
@@ -76,8 +76,8 @@ Le dry-run ne prouve pas encore :
 - la conversion réelle `PDF` ;
 - la gestion effective des locks et de la concurrence ;
 - la reprise réelle après échec ;
-- la relecture physique post-ecriture.
+- la relecture physique post-écriture.
 
 ## 7. Utilité de cette étape
 
-Cette étape sert a valider le comportement logique du futur writer sans prendre aucun risque documentaire. Elle permet de verifier les conventions GED, les cas de blocage et les sorties attendues avant toute future activation d'un writer reel.
+Cette étape sert à valider le comportement logique du futur writer sans prendre aucun risque documentaire. Elle permet de vérifier les conventions GED, les cas de blocage et les sorties attendues avant toute future activation d'un writer réel.
