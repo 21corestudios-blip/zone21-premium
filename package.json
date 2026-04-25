@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:ged-writer": "node --import tsx --test src/tests/ged/writer.dryrun.test.ts"
+    "test:ged-writer": "node --import tsx --test src/tests/ged/writer.dryrun.test.ts src/tests/ged/writer.security.test.ts"
   },
   "dependencies": {
     "@stripe/react-stripe-js": "^6.2.0",

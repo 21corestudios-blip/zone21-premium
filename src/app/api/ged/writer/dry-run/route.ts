@@ -83,6 +83,7 @@ export async function GET(request: NextRequest) {
 
   return NextResponse.json({
     session,
+    writerLocked: configuration.writerLocked,
     writer: configuration,
     domains: {
       active: configuration.rules.domainsActive,
