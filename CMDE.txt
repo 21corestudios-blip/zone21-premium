@@ -13,5 +13,5 @@ http://localhost:3000/dashboard
 Sauvegarde GIT :
 git status
 git add .
-git commit -m "feat: validate-zone21-docx-pdf-sandbox"
+git commit -m "docs: define-zone21-writer-activation-strategy"
 git push
