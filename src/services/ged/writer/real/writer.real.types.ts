@@ -52,6 +52,24 @@ export interface GenerationPlan {
   };
 }
 
+export interface SandboxExecutionResult {
+  format: "docx" | "pdf";
+  sandboxPath: string;
+  verified: boolean;
+  sizeBytes: number;
+  skipped?: boolean;
+  reason?: string;
+  commandExecuted?: string;
+}
+
+export interface SandboxExecutionSummary {
+  sandboxRoot: string;
+  docxPath: string;
+  pdfPath: string;
+  archiveDocxPath: string | null;
+  archivePdfPath: string | null;
+}
+
 export interface RealWriterOutput {
   enabled: false;
   mode: "real-plan";

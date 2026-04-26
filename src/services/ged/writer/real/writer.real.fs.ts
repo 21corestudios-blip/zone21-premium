@@ -1,5 +1,6 @@
 import path from "node:path";
 
+import { gedConfig } from "@/config/ged.config";
 import type { WriterDomain, WriterPrefix } from "../writer.types";
 
 import type {
@@ -9,6 +10,7 @@ import type {
 } from "./writer.real.types";
 
 const realWriterBasePath = "/ZONE21_DEV/90_GED_PHASE_1" as const;
+const zone21DevPrefix = "/ZONE21_DEV/";
 
 interface RealWriterPaths {
   docx: string;
@@ -156,4 +158,54 @@ export function buildArchivePlan(
 
 export function getRealWriterBasePath() {
   return realWriterBasePath;
+}
+
+export function getGedSandboxPath() {
+  return path.resolve(gedConfig.sandbox.path);
+}
+
+export function isZone21DevPath(targetPath: string) {
+  return targetPath.includes(zone21DevPrefix) ||
+    targetPath.startsWith("/ZONE21_DEV/") ||
+    targetPath === "/ZONE21_DEV";
+}
+
+export function assertSandboxPath(targetPath: string) {
+  if (!gedConfig.security.realExecutionSandboxOnly) {
+    throw new Error(
+      "Execution sandbox obligatoire : toute ecriture reelle hors sandbox est interdite.",
+    );
+  }
+
+  if (isZone21DevPath(targetPath)) {
+    throw new Error(
+      "Chemin interdit : aucune ecriture reelle n'est autorisee vers ZONE21_DEV.",
+    );
+  }
+
+  const sandboxRoot = getGedSandboxPath();
+  const resolvedTarget = path.resolve(targetPath);
+  const sandboxPrefix = `${sandboxRoot}${path.sep}`;
+
+  if (resolvedTarget !== sandboxRoot && !resolvedTarget.startsWith(sandboxPrefix)) {
+    throw new Error(
+      "Chemin interdit : toute execution reelle doit rester strictement dans GED_SANDBOX_PATH.",
+    );
+  }
+
+  return {
+    sandboxRoot,
+    resolvedTarget,
+  };
+}
+
+export function mapTheoreticalPathToSandbox(theoreticalPath: string) {
+  if (!theoreticalPath.startsWith(zone21DevPrefix)) {
+    throw new Error(
+      "Chemin theorique invalide : le writer reel attend une cible logique issue de /ZONE21_DEV/.",
+    );
+  }
+
+  const relativePath = theoreticalPath.slice(zone21DevPrefix.length);
+  return path.join(getGedSandboxPath(), relativePath);
 }

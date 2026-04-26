@@ -3,14 +3,21 @@ import { validateWriterInput } from "../writer.validator";
 
 import { buildDocxGenerationPlan } from "./writer.real.docx";
 import {
+  assertSandboxPath,
   buildArchivePlan,
   buildFileWritePlan,
   buildRealWriterPaths,
+  getGedSandboxPath,
   getRealWriterBasePath,
+  mapTheoreticalPathToSandbox,
   validateRealWriterPaths,
 } from "./writer.real.fs";
 import { buildPdfGenerationPlan } from "./writer.real.pdf";
-import type { RealWriterInput, RealWriterOutput } from "./writer.real.types";
+import type {
+  RealWriterInput,
+  RealWriterOutput,
+  SandboxExecutionSummary,
+} from "./writer.real.types";
 
 export function buildRealWriterInput(
   input: WriterInput,
@@ -65,4 +72,32 @@ export function buildRealWriterPlan(input: RealWriterInput): RealWriterOutput {
       "Aucune operation filesystem n'est executee dans cette etape.",
     ],
   };
+}
+
+export function buildSandboxExecutionSummary(
+  input: RealWriterInput,
+): SandboxExecutionSummary {
+  const paths = buildRealWriterPaths(input);
+  const summary = {
+    sandboxRoot: getGedSandboxPath(),
+    docxPath: mapTheoreticalPathToSandbox(paths.docx),
+    pdfPath: mapTheoreticalPathToSandbox(paths.pdf),
+    archiveDocxPath: paths.archiveDocx
+      ? mapTheoreticalPathToSandbox(paths.archiveDocx)
+      : null,
+    archivePdfPath: paths.archivePdf
+      ? mapTheoreticalPathToSandbox(paths.archivePdf)
+      : null,
+  };
+
+  assertSandboxPath(summary.docxPath);
+  assertSandboxPath(summary.pdfPath);
+  if (summary.archiveDocxPath) {
+    assertSandboxPath(summary.archiveDocxPath);
+  }
+  if (summary.archivePdfPath) {
+    assertSandboxPath(summary.archivePdfPath);
+  }
+
+  return summary;
 }

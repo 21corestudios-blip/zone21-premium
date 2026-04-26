@@ -1,8 +1,5 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
-import path from "node:path";
-
 import {
   buildDocxGenerationPlan,
   renderDocxTemplateInMemory,
@@ -59,28 +56,13 @@ test("buffer genere en memoire", () => {
   assert.ok(buffer.byteLength > 0);
 });
 
-test("aucune ecriture disque", () => {
-  const content = readFileSync(
-    path.join(
-      process.cwd(),
-      "src/services/ged/writer/real/writer.real.docx.ts",
-    ),
-    "utf-8",
+test("aucune ecriture implicite dans le plan DOCX", () => {
+  const plan = buildDocxGenerationPlan(
+    buildInput(),
+    "/ZONE21_DEV/90_GED_PHASE_1/NOTE-Z21/MEDIA/01_DOCX/NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-v1.0.docx",
   );
 
-  const forbiddenPatterns = [
-    "writeFile",
-    "writeFileSync",
-    "appendFile",
-    "appendFileSync",
-    "mkdir",
-  ];
-
-  for (const pattern of forbiddenPatterns) {
-    assert.equal(
-      content.includes(pattern),
-      false,
-      `Pattern ${pattern} found in writer.real.docx.ts`,
-    );
-  }
+  assert.equal(plan.execute, false);
+  assert.equal(plan.inMemoryOnly, true);
+  assert.ok(plan.simulatedBufferByteLength > 0);
 });

@@ -1,6 +1,10 @@
+import { mkdir, readFile, writeFile } from "node:fs/promises";
+import path from "node:path";
+
 import Docxtemplater from "docxtemplater";
 import PizZip from "pizzip";
 
+import { assertSandboxPath } from "./writer.real.fs";
 import type { GenerationPlan, RealWriterInput } from "./writer.real.types";
 
 const inMemoryTemplate = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -79,5 +83,30 @@ export function buildDocxGenerationPlan(
       object: input.object,
       contentSummary: input.contentSummary,
     },
+  };
+}
+
+export async function executeDocxSandboxGeneration(
+  input: RealWriterInput,
+  sandboxTargetPath: string,
+) {
+  const { resolvedTarget } = assertSandboxPath(sandboxTargetPath);
+  const buffer = renderDocxTemplateInMemory(input);
+
+  await mkdir(path.dirname(resolvedTarget), { recursive: true });
+  await writeFile(resolvedTarget, buffer);
+
+  const writtenBuffer = await readFile(resolvedTarget);
+  const zip = new PizZip(writtenBuffer);
+  const documentXml = zip.file("word/document.xml")?.asText() ?? "";
+  const contentMatches = documentXml.includes(input.title) &&
+    documentXml.includes(input.reference) &&
+    documentXml.includes(input.versionTarget);
+
+  return {
+    format: "docx" as const,
+    sandboxPath: resolvedTarget,
+    verified: contentMatches,
+    sizeBytes: writtenBuffer.byteLength,
   };
 }

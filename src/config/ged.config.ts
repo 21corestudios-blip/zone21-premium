@@ -5,9 +5,13 @@ export const gedConfig = {
     simulationOnly: true,
     forbidFilesystemWrites: true,
     forbidRealExec: true,
+    realExecutionSandboxOnly: true,
   },
   writer: {
     mode: "simulation",
     realExecutionEnabled: false,
+  },
+  sandbox: {
+    path: process.env.GED_SANDBOX_PATH ?? "/tmp/zone21_ged_sandbox",
   },
 } as const;

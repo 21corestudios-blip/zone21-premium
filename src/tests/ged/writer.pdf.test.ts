@@ -1,11 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
-import path from "node:path";
 
 import {
   buildLibreOfficeCommandPreview,
   buildPdfGenerationPlan,
+  getLibreOfficeBinaryPath,
 } from "@/services/ged/writer/real/writer.real.pdf";
 import type { RealWriterInput } from "@/services/ged/writer/real/writer.real.types";
 
@@ -55,28 +54,13 @@ test("coherence parametres", () => {
   assert.ok(plan.commandPreview?.includes("LibreOffice.app"));
 });
 
-test("aucun exec", () => {
-  const content = readFileSync(
-    path.join(
-      process.cwd(),
-      "src/services/ged/writer/real/writer.real.pdf.ts",
-    ),
-    "utf-8",
+test("aucun exec implicite dans le plan PDF", async () => {
+  const plan = buildPdfGenerationPlan(
+    buildInput(),
+    "/ZONE21_DEV/90_GED_PHASE_1/NOTE-Z21/MEDIA/02_PDF/NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-v1.0.pdf",
   );
 
-  const forbiddenPatterns = [
-    "exec(",
-    "execSync",
-    "spawn(",
-    "spawnSync",
-    "fork(",
-  ];
-
-  for (const pattern of forbiddenPatterns) {
-    assert.equal(
-      content.includes(pattern),
-      false,
-      `Pattern ${pattern} found in writer.real.pdf.ts`,
-    );
-  }
+  assert.equal(plan.execute, false);
+  assert.ok(Boolean(plan.commandPreview));
+  await getLibreOfficeBinaryPath();
 });
