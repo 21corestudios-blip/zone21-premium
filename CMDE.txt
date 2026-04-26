@@ -13,5 +13,5 @@ http://localhost:3000/dashboard
 Sauvegarde GIT :
 git status
 git add .
-git commit -m "test: validate-zone21-ged-writer-dry-run"
+git commit -m "test: make-ged-writer-security-tests-portable"
 git push

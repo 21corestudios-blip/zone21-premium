@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
+import path from "node:path";
 
 import * as writerRoute from "@/app/api/ged/writer/dry-run/route";
 import { assertWriterLocked } from "@/services/ged/writer/writer.guard";
@@ -28,11 +29,12 @@ test("aucune fonction d'ecriture exposee", () => {
 });
 
 test("aucune mutation filesystem possible dans la couche writer", () => {
+  const projectRoot = process.cwd();
   const filesToCheck = [
-    "/Users/gregloupiac/zone21-premium/src/services/ged/writer/writer.service.ts",
-    "/Users/gregloupiac/zone21-premium/src/services/ged/writer/writer.guard.ts",
-    "/Users/gregloupiac/zone21-premium/src/services/ged/writer/writer.validator.ts",
-    "/Users/gregloupiac/zone21-premium/src/services/ged/writer/writer.dryrun.ts",
+    path.join(projectRoot, "src/services/ged/writer/writer.service.ts"),
+    path.join(projectRoot, "src/services/ged/writer/writer.guard.ts"),
+    path.join(projectRoot, "src/services/ged/writer/writer.validator.ts"),
+    path.join(projectRoot, "src/services/ged/writer/writer.dryrun.ts"),
   ];
 
   const forbiddenPatterns = [
