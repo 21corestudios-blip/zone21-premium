@@ -38,6 +38,10 @@ export interface GenerationPlan {
   targetPath: string;
   execute: false;
   pipeline: string[];
+  templateLoaded: boolean;
+  inMemoryOnly: true;
+  simulatedBufferByteLength: number;
+  commandPreview?: string;
   inputs: {
     reference: string;
     title: string;

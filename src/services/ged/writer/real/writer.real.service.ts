@@ -60,6 +60,8 @@ export function buildRealWriterPlan(input: RealWriterInput): RealWriterOutput {
       `DOCX theorique conforme: ${String(pathValidation.docxConforms)}.`,
       `PDF theorique conforme: ${String(pathValidation.pdfConforms)}.`,
       `Racine GED phase 1 respectee: ${String(pathValidation.usesGedPhaseOneRoot)}.`,
+      `Buffer DOCX memoire prepare: ${String(docxPlan.simulatedBufferByteLength > 0)}.`,
+      `Commande PDF simulee: ${String(Boolean(pdfPlan.commandPreview))}.`,
       "Aucune operation filesystem n'est executee dans cette etape.",
     ],
   };
