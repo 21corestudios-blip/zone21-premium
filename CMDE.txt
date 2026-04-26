@@ -13,5 +13,5 @@ http://localhost:3000/dashboard
 Sauvegarde GIT :
 git status
 git add .
-git commit -m "feat: enable-zone21-writer-real-staging-execution"
+git commit -m "test: prepare-zone21-writer-real-test-prerequisites"
 git push
