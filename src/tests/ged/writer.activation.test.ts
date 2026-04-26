@@ -93,6 +93,17 @@ test("activation autorisee en STAGING", async () => {
   await withWriterEnv("staging", "true", async () => {
     assert.equal(isWriterActivationAllowed(getWriterRuntimeConfig()), true);
     assert.equal(assertWriterActivationAllowed(getWriterRuntimeConfig()), true);
+
+    const result = await executeRealWriter(buildRealWriterInput(buildValidInput()));
+
+    assert.equal(result.mode, "staging-authorization");
+    assert.equal(result.status, "authorized");
+    assert.equal(
+      result.summary.includes(
+        "Aucune ecriture physique n'a ete effectuee dans ZONE21_DEV.",
+      ),
+      true,
+    );
   });
 });
 

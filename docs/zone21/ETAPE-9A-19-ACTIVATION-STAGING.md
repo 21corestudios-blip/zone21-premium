@@ -2,7 +2,7 @@
 
 ## Statut
 
-Cette étape prépare et implémente l'activation contrôlée du writer GED réel uniquement pour l'environnement `staging`.
+Cette étape prépare et implémente l'activation contrôlée du writer GED uniquement pour l'environnement `staging`, sans encore autoriser l'écriture physique dans `ZONE21_DEV`.
 
 Le comportement cible est le suivant :
 
@@ -32,7 +32,7 @@ Si une de ces conditions manque :
 
 ### STAGING
 
-- écriture réelle autorisable
+- activation théorique autorisable
 - uniquement si le flag d'activation est explicitement positionné
 - uniquement si la validation GED est complète
 
@@ -45,28 +45,26 @@ Si une de ces conditions manque :
 
 Deux niveaux de protection sont maintenus :
 
-- `assertSandboxPath` pour toute génération intermédiaire
-- `assertZone21DevPath` pour toute écriture finale
+- `assertSandboxPath` pour le périmètre sandbox
+- `assertZone21DevPath` pour vérifier la cible documentaire théorique
 
 Conséquence :
 
-- la génération continue de passer par le sandbox
-- seule la copie finale peut viser `ZONE21_DEV`
+- le périmètre sandbox reste strictement contrôlé
+- la cible documentaire reste bornée à `/ZONE21_DEV/` sur le plan logique
 - toute incohérence de chemin bloque l'exécution
+- aucune copie finale n'est encore autorisée
 
-## Processus d'exécution réelle
+## Processus d'activation contrôlée
 
-En `staging`, l'exécution réelle suit l'ordre suivant :
+En `staging`, le writer suit désormais l'ordre suivant :
 
 1. validation GED complète
-2. génération DOCX dans le sandbox
-3. conversion PDF dans le sandbox
-4. archivage de la version précédente si demandé
-5. copie vers la cible réelle dans `ZONE21_DEV`
-6. relecture physique des fichiers écrits
-7. retour de statut
+2. autorisation `staging` confirmée
+3. vérification théorique des chemins cibles
+4. retour d'un statut non-écrivant
 
-Chaque étape peut échouer et bloquer immédiatement la suite.
+L'écriture finale dans `ZONE21_DEV` reste explicitement non activée à ce stade.
 
 ## Journalisation
 
@@ -83,14 +81,14 @@ Cette journalisation vise à rendre visible :
 
 - un blocage d'activation
 - un blocage de validation
-- un succès d'écriture réelle
+- une activation théorique autorisée en `staging`
 
 ## Limites actuelles
 
 - aucune activation n'est faite automatiquement
 - aucune route API d'écriture n'est encore exposée
 - l'environnement local courant reste hors `staging`
-- l'écriture réelle n'est donc pas activée dans l'usage courant du projet
+- l'écriture réelle finale dans `ZONE21_DEV` n'est pas encore activée
 
 ## Risques surveillés
 
@@ -102,4 +100,4 @@ Cette journalisation vise à rendre visible :
 
 ## Conclusion
 
-Le writer réel devient activable en `staging` uniquement, sous conditions strictes. Le mode courant du projet reste inchangé tant que l'environnement n'est pas explicitement préparé pour cette activation.
+Le writer devient autorisable théoriquement en `staging` uniquement, sous conditions strictes. Le mode courant du projet reste inchangé et non-écrivant tant qu'une future étape n'activera pas explicitement l'écriture finale dans `ZONE21_DEV`.

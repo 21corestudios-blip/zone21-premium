@@ -9,7 +9,6 @@ import { validateWriterInput } from "../writer.validator";
 
 import {
   buildDocxGenerationPlan,
-  executeDocxSandboxGeneration,
 } from "./writer.real.docx";
 import {
   assertSandboxPath,
@@ -17,17 +16,13 @@ import {
   buildArchivePlan,
   buildFileWritePlan,
   buildRealWriterPaths,
-  copySandboxFileToZone21Dev,
   getGedSandboxPath,
   getRealWriterBasePath,
   mapTheoreticalPathToSandbox,
-  moveZone21DevFileToArchive,
   validateRealWriterPaths,
-  verifyZone21DevFile,
 } from "./writer.real.fs";
 import {
   buildPdfGenerationPlan,
-  executePdfSandboxConversion,
 } from "./writer.real.pdf";
 import type {
   RealWriterInput,
@@ -110,10 +105,10 @@ export function buildSandboxExecutionSummary(
   assertSandboxPath(summary.docxPath);
   assertSandboxPath(summary.pdfPath);
   if (summary.archiveDocxPath) {
-    assertSandboxPath(summary.archiveDocxPath);
+    assertZone21DevPath(paths.archiveDocx!);
   }
   if (summary.archivePdfPath) {
-    assertSandboxPath(summary.archivePdfPath);
+    assertZone21DevPath(paths.archivePdf!);
   }
 
   return summary;
@@ -153,7 +148,6 @@ export async function executeRealWriter(
   }
 
   const paths = buildRealWriterPaths(input);
-  const sandboxSummary = buildSandboxExecutionSummary(input);
   const steps: string[] = [];
 
   assertZone21DevPath(paths.docx);
@@ -165,114 +159,33 @@ export async function executeRealWriter(
     assertZone21DevPath(paths.archivePdf);
   }
 
-  const sandboxDocxResult = await executeDocxSandboxGeneration(
-    input,
-    sandboxSummary.docxPath,
-  );
-
-  if (!sandboxDocxResult.verified) {
-    const auditLog = logGedAuditEvent({
-      user: input.validatedBy,
-      action: "writer_real_execution_blocked",
-      file: input.reference,
-      version: input.versionTarget,
-      status: "blocked",
-      errors: ["La generation DOCX sandbox n'a pas pu etre verifiee."],
-    });
-
-    throw Object.assign(
-      new Error(
-        "Execution writer bloquee : la generation DOCX reelle n'a pas pu etre validee.",
-      ),
-      { auditLog, sandboxDocxResult },
-    );
-  }
-
-  steps.push("generation_docx_sandbox");
-
-  const sandboxPdfResult = await executePdfSandboxConversion(
-    input,
-    sandboxSummary.docxPath,
-    sandboxSummary.pdfPath,
-  );
-
-  if (sandboxPdfResult.skipped || !sandboxPdfResult.verified) {
-    const auditLog = logGedAuditEvent({
-      user: input.validatedBy,
-      action: "writer_real_execution_blocked",
-      file: input.reference,
-      version: input.versionTarget,
-      status: "blocked",
-      errors: [
-        sandboxPdfResult.reason ??
-          "La conversion PDF reelle n'a pas pu etre verifiee.",
-      ],
-    });
-
-    throw Object.assign(
-      new Error(
-        "Execution writer bloquee : la conversion PDF reelle n'a pas pu etre validee.",
-      ),
-      { auditLog, sandboxPdfResult },
-    );
-  }
-
-  steps.push("generation_pdf_sandbox");
-
-  if (input.archiveRequired) {
-    if (!paths.archiveDocx || !paths.archivePdf || !input.sourceReference) {
-      throw new Error(
-        "Execution writer bloquee : le plan d'archivage est incomplet.",
-      );
-    }
-
-    await moveZone21DevFileToArchive(
-      `${getRealWriterBasePath()}/${input.documentType}/${input.domain}/01_DOCX/${input.sourceReference}.docx`,
-      paths.archiveDocx,
-    );
-    await moveZone21DevFileToArchive(
-      `${getRealWriterBasePath()}/${input.documentType}/${input.domain}/02_PDF/${input.sourceReference}.pdf`,
-      paths.archivePdf,
-    );
-    steps.push("archivage_version_precedente");
-  }
-
-  const docxSystemPath = await copySandboxFileToZone21Dev(
-    sandboxSummary.docxPath,
-    paths.docx,
-  );
-  const pdfSystemPath = await copySandboxFileToZone21Dev(
-    sandboxSummary.pdfPath,
-    paths.pdf,
-  );
-  steps.push("ecriture_zone21_dev");
-
-  const rereadDocx = await verifyZone21DevFile(paths.docx);
-  const rereadPdf = await verifyZone21DevFile(paths.pdf);
-  const rereadConfirmed = rereadDocx.sizeBytes > 0 && rereadPdf.sizeBytes > 0;
-  steps.push("relecture_physique");
-  steps.push("mise_a_jour_rdm");
+  steps.push("validation_ged_complete");
+  steps.push("activation_theorique_staging_autorisee");
+  steps.push("verification_theorique_des_chemins_zone21_dev");
+  steps.push("aucune_ecriture_finale_executee");
 
   const auditLog = logGedAuditEvent({
     user: input.validatedBy,
-    action: "writer_real_execution_success",
+    action: "writer_staging_authorized_non_writing",
     file: input.reference,
     version: input.versionTarget,
-    status: "written",
+    status: "authorized",
     errors: [],
   });
 
   return {
     enabled: true,
-    mode: "real-execution",
+    mode: "staging-authorization",
     executionAllowed: true,
-    status: "written",
-    docxPath: docxSystemPath,
-    pdfPath: pdfSystemPath,
-    archiveDocxPath: paths.archiveDocx,
-    archivePdfPath: paths.archivePdf,
-    rereadConfirmed,
+    status: "authorized",
+    targetPath: paths.docx,
+    archivePath: paths.archiveDocx,
     auditLog,
     steps,
+    summary: [
+      "Activation theorique autorisee en staging.",
+      "Aucune ecriture physique n'a ete effectuee dans ZONE21_DEV.",
+      "Le writer reste non-ecrivant a ce stade.",
+    ],
   };
 }
