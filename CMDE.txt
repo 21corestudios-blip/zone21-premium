@@ -13,5 +13,5 @@ http://localhost:3000/dashboard
 Sauvegarde GIT :
 git status
 git add .
-git commit -m "test: make-ged-writer-security-tests-portable"
+git commit -m "docs: select-zone21-ged-tech-stack"
 git push
