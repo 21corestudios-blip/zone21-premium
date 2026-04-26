@@ -13,5 +13,5 @@ http://localhost:3000/dashboard
 Sauvegarde GIT :
 git status
 git add .
-git commit -m "test: execute-zone21-writer-real-controlled-test"
+git commit -m "test: validate-libreoffice-pdf-conversion-linux"
 git push
