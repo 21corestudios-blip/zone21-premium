@@ -13,5 +13,5 @@ http://localhost:3000/dashboard
 Sauvegarde GIT :
 git status
 git add .
-git commit -m "docs: define-zone21-writer-activation-strategy"
+git commit -m "feat: enable-zone21-writer-staging-only"
 git push

@@ -4,6 +4,7 @@ import type {
   WriterInput,
   WriterStatus,
 } from "../writer.types";
+import type { GedAuditLogEntry } from "../../audit/logger";
 
 export interface RealWriterInput extends WriterInput {
   sourceReference?: string | null;
@@ -91,4 +92,18 @@ export interface RealWriterOutput {
     execute: false;
   };
   summary: string[];
+}
+
+export interface RealWriterExecutionResult {
+  enabled: true;
+  mode: "real-execution";
+  executionAllowed: true;
+  status: "written";
+  docxPath: string;
+  pdfPath: string;
+  archiveDocxPath: string | null;
+  archivePdfPath: string | null;
+  rereadConfirmed: boolean;
+  auditLog: GedAuditLogEntry;
+  steps: string[];
 }

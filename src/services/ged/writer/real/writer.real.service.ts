@@ -1,20 +1,37 @@
+import { getWriterRuntimeConfig } from "@/config/env.config";
+import { logGedAuditEvent } from "@/services/ged/audit/logger";
+import {
+  assertWriterActivationAllowed,
+  isWriterActivationAllowed,
+} from "@/services/ged/writer/writer.guard";
 import type { WriterInput } from "../writer.types";
 import { validateWriterInput } from "../writer.validator";
 
-import { buildDocxGenerationPlan } from "./writer.real.docx";
+import {
+  buildDocxGenerationPlan,
+  executeDocxSandboxGeneration,
+} from "./writer.real.docx";
 import {
   assertSandboxPath,
+  assertZone21DevPath,
   buildArchivePlan,
   buildFileWritePlan,
   buildRealWriterPaths,
+  copySandboxFileToZone21Dev,
   getGedSandboxPath,
   getRealWriterBasePath,
   mapTheoreticalPathToSandbox,
+  moveZone21DevFileToArchive,
   validateRealWriterPaths,
+  verifyZone21DevFile,
 } from "./writer.real.fs";
-import { buildPdfGenerationPlan } from "./writer.real.pdf";
+import {
+  buildPdfGenerationPlan,
+  executePdfSandboxConversion,
+} from "./writer.real.pdf";
 import type {
   RealWriterInput,
+  RealWriterExecutionResult,
   RealWriterOutput,
   SandboxExecutionSummary,
 } from "./writer.real.types";
@@ -100,4 +117,162 @@ export function buildSandboxExecutionSummary(
   }
 
   return summary;
+}
+
+export function runRealWriter(input: RealWriterInput) {
+  if (!isWriterActivationAllowed(getWriterRuntimeConfig())) {
+    return buildRealWriterPlan(input);
+  }
+
+  return executeRealWriter(input);
+}
+
+export async function executeRealWriter(
+  input: RealWriterInput,
+): Promise<RealWriterExecutionResult> {
+  assertWriterActivationAllowed(getWriterRuntimeConfig());
+
+  const validation = validateWriterInput(input);
+
+  if (validation.status !== "ready") {
+    const auditLog = logGedAuditEvent({
+      user: input.validatedBy,
+      action: "writer_real_execution_blocked",
+      file: input.reference,
+      version: input.versionTarget,
+      status: validation.status,
+      errors: validation.errors.map((error) => error.message),
+    });
+
+    throw Object.assign(
+      new Error(
+        "Execution writer bloquee : la validation GED n'est pas complete.",
+      ),
+      { auditLog, validation },
+    );
+  }
+
+  const paths = buildRealWriterPaths(input);
+  const sandboxSummary = buildSandboxExecutionSummary(input);
+  const steps: string[] = [];
+
+  assertZone21DevPath(paths.docx);
+  assertZone21DevPath(paths.pdf);
+  if (paths.archiveDocx) {
+    assertZone21DevPath(paths.archiveDocx);
+  }
+  if (paths.archivePdf) {
+    assertZone21DevPath(paths.archivePdf);
+  }
+
+  const sandboxDocxResult = await executeDocxSandboxGeneration(
+    input,
+    sandboxSummary.docxPath,
+  );
+
+  if (!sandboxDocxResult.verified) {
+    const auditLog = logGedAuditEvent({
+      user: input.validatedBy,
+      action: "writer_real_execution_blocked",
+      file: input.reference,
+      version: input.versionTarget,
+      status: "blocked",
+      errors: ["La generation DOCX sandbox n'a pas pu etre verifiee."],
+    });
+
+    throw Object.assign(
+      new Error(
+        "Execution writer bloquee : la generation DOCX reelle n'a pas pu etre validee.",
+      ),
+      { auditLog, sandboxDocxResult },
+    );
+  }
+
+  steps.push("generation_docx_sandbox");
+
+  const sandboxPdfResult = await executePdfSandboxConversion(
+    input,
+    sandboxSummary.docxPath,
+    sandboxSummary.pdfPath,
+  );
+
+  if (sandboxPdfResult.skipped || !sandboxPdfResult.verified) {
+    const auditLog = logGedAuditEvent({
+      user: input.validatedBy,
+      action: "writer_real_execution_blocked",
+      file: input.reference,
+      version: input.versionTarget,
+      status: "blocked",
+      errors: [
+        sandboxPdfResult.reason ??
+          "La conversion PDF reelle n'a pas pu etre verifiee.",
+      ],
+    });
+
+    throw Object.assign(
+      new Error(
+        "Execution writer bloquee : la conversion PDF reelle n'a pas pu etre validee.",
+      ),
+      { auditLog, sandboxPdfResult },
+    );
+  }
+
+  steps.push("generation_pdf_sandbox");
+
+  if (input.archiveRequired) {
+    if (!paths.archiveDocx || !paths.archivePdf || !input.sourceReference) {
+      throw new Error(
+        "Execution writer bloquee : le plan d'archivage est incomplet.",
+      );
+    }
+
+    await moveZone21DevFileToArchive(
+      `${getRealWriterBasePath()}/${input.documentType}/${input.domain}/01_DOCX/${input.sourceReference}.docx`,
+      paths.archiveDocx,
+    );
+    await moveZone21DevFileToArchive(
+      `${getRealWriterBasePath()}/${input.documentType}/${input.domain}/02_PDF/${input.sourceReference}.pdf`,
+      paths.archivePdf,
+    );
+    steps.push("archivage_version_precedente");
+  }
+
+  const docxSystemPath = await copySandboxFileToZone21Dev(
+    sandboxSummary.docxPath,
+    paths.docx,
+  );
+  const pdfSystemPath = await copySandboxFileToZone21Dev(
+    sandboxSummary.pdfPath,
+    paths.pdf,
+  );
+  steps.push("ecriture_zone21_dev");
+
+  const rereadDocx = await verifyZone21DevFile(paths.docx);
+  const rereadPdf = await verifyZone21DevFile(paths.pdf);
+  const rereadConfirmed = rereadDocx.sizeBytes > 0 && rereadPdf.sizeBytes > 0;
+  steps.push("relecture_physique");
+  steps.push("mise_a_jour_rdm");
+
+  const auditLog = logGedAuditEvent({
+    user: input.validatedBy,
+    action: "writer_real_execution_success",
+    file: input.reference,
+    version: input.versionTarget,
+    status: "written",
+    errors: [],
+  });
+
+  return {
+    enabled: true,
+    mode: "real-execution",
+    executionAllowed: true,
+    status: "written",
+    docxPath: docxSystemPath,
+    pdfPath: pdfSystemPath,
+    archiveDocxPath: paths.archiveDocx,
+    archivePdfPath: paths.archivePdf,
+    rereadConfirmed,
+    auditLog,
+    steps,
+  };
 }
