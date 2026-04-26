@@ -13,5 +13,5 @@ http://localhost:3000/dashboard
 Sauvegarde GIT :
 git status
 git add .
-git commit -m "feat: integrate-zone21-docx-pdf-engines-safe-mode"
+git commit -m "test: include-zone21-docx-pdf-writer-tests"
 git push
