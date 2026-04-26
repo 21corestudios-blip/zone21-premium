@@ -2,184 +2,173 @@
 
 ## Statut
 
-Étape exécutée sur périmètre `TEST`, mais non validée.
+Étape exécutée sur périmètre `TEST` et validée après reprise de la conversion PDF via Linux staging.
 
-Le writer réel n'est pas validé à ce stade.
+Le writer réel est validé sur le scénario nominal complet et sur le scénario de rollback contrôlé.
 
-## Périmètre préparé
+## Périmètre utilisé
 
-Un périmètre isolé a été créé dans la base active locale :
+Le test a été strictement limité à :
 
-- `/Users/gregloupiac/Mon Drive (21corestudios@gmail.com)/ZONE21_DEV/90_GED_PHASE_1/TEST/NOTE-Z21/MEDIA/01_DOCX/`
-- `/Users/gregloupiac/Mon Drive (21corestudios@gmail.com)/ZONE21_DEV/90_GED_PHASE_1/TEST/NOTE-Z21/MEDIA/02_PDF/`
-- `/Users/gregloupiac/Mon Drive (21corestudios@gmail.com)/ZONE21_DEV/90_GED_PHASE_1/TEST/NOTE-Z21/MEDIA/99_ARCHIVES/01_DOCX/`
-- `/Users/gregloupiac/Mon Drive (21corestudios@gmail.com)/ZONE21_DEV/90_GED_PHASE_1/TEST/NOTE-Z21/MEDIA/99_ARCHIVES/02_PDF/`
+- `/Users/gregloupiac/Mon Drive (21corestudios@gmail.com)/ZONE21_DEV/90_GED_PHASE_1/TEST/`
 
-Une sauvegarde préalable a aussi été créée :
+Arborescence concernée :
 
-- `/Users/gregloupiac/Mon Drive (21corestudios@gmail.com)/ZONE21_DEV/90_GED_PHASE_1/TEST/NOTE-Z21/MEDIA/00_PRE_TEST_BACKUP/`
+- `NOTE-Z21/MEDIA/01_DOCX/`
+- `NOTE-Z21/MEDIA/02_PDF/`
+- `NOTE-Z21/MEDIA/99_ARCHIVES/01_DOCX/`
+- `NOTE-Z21/MEDIA/99_ARCHIVES/02_PDF/`
 
-## Sources créées manuellement
+Sauvegarde préalable conservée :
 
-Les fichiers source de test `v1.0` ont été préparés avec une référence conforme :
+- `NOTE-Z21/MEDIA/00_PRE_TEST_BACKUP/`
 
-- `NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-v1.0.docx`
-- `NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-v1.0.pdf`
+## Préconditions validées
 
-Les deux fichiers sont présents, non vides et lisibles au niveau structurel :
-
-- DOCX : archive ZIP OOXML valide
-- PDF : document PDF 1 page valide
-
-## Préparation d'exécution
-
-Le test réel a été lancé avec :
+Configuration d'exécution :
 
 - `NODE_ENV=staging`
 - `WRITER_ENABLED=true`
 - `WRITER_REAL_EXECUTION_CONFIRMED=true`
+- `PDF_ENGINE=linux`
+- `PDF_LINUX_INSTANCE=zone21-pdf-linux`
 - `Z21_ACTIVE_BASE_PATH=/Users/gregloupiac/Mon Drive (21corestudios@gmail.com)/ZONE21_DEV/90_GED_PHASE_1/TEST`
 
-Le périmètre `TEST` a été contraint via un miroir interne afin que le writer n'écrive que dans :
+Environnement Linux :
 
-- `/90_GED_PHASE_1/TEST/NOTE-Z21/MEDIA/...`
+- instance Lima active : `zone21-pdf-linux`
+- LibreOffice Linux opérationnel : `LibreOffice 25.8.5.2`
 
-## Résultat du test réel principal v1.0 -> v1.1
+Note de contexte :
 
-Référence source :
+- le blocage initial observé sur macOS venait de LibreOffice local en mode headless
+- la validation finale a donc été rejouée avec conversion PDF déportée sur Linux staging
 
-- `NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-v1.0`
+## Références testées
 
-Référence cible :
+Scénario nominal :
 
-- `NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-v1.1`
+- source : `NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-v1.0`
+- cible : `NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-v1.1`
+
+Scénario de rollback :
+
+- source : `NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-v1.1`
+- cible : `NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-v1.2`
+
+## Résultat du scénario nominal v1.0 -> v1.1
+
+Pipeline exécuté :
+
+- validation GED
+- génération DOCX sandbox
+- transfert vers Linux
+- conversion PDF Linux
+- récupération PDF sandbox
+- archivage `v1.0`
+- écriture `v1.1` DOCX
+- écriture `v1.1` PDF
+- relecture physique
 
 Résultat global :
 
-- échec du pipeline au stade conversion PDF LibreOffice
+- `OK`
 
-Erreur observée :
+Contrôles constatés :
 
-- le writer a bien généré le `DOCX` sandbox `v1.1`
-- LibreOffice a échoué avec un code retour `134`
-- aucun `PDF` `v1.1` n'a été produit
-- aucune écriture finale n'a été faite dans le périmètre `TEST`
+### DOCX
 
-## Contrôle détaillé OK / KO
+- fichier `v1.1` présent : `OK`
+- taille `> 0` : `OK` (`3776` octets)
+- structure DOCX lisible : `OK`
+- archive OOXML ouvrable : `OK`
 
-### A. DOCX
+### PDF
 
-- `v1.1` créé dans `ZONE21_DEV/TEST` : `KO`
-- taille `> 0` dans la cible finale : `KO`
-- ouverture OK dans la cible finale : `KO`
+- fichier `v1.1` présent : `OK`
+- taille `> 0` : `OK` (`16738` octets)
+- conversion LibreOffice Linux réussie : `OK`
+- fichier reconnu comme PDF 1 page : `OK`
 
-Complément :
+### Archivage
 
-- un `v1.1.docx` sandbox a bien été généré
-- archive ZIP valide
-- contenu XML cohérent
+- `v1.0.docx` déplacé en archive : `OK`
+- `v1.0.pdf` déplacé en archive : `OK`
+- aucun doublon actif `v1.0` : `OK`
 
-### B. PDF
+### Structure
 
-- `v1.1` créé dans `ZONE21_DEV/TEST` : `KO`
-- taille `> 0` : `KO`
-- conversion LibreOffice réussie : `KO`
-
-### C. Archivage
-
-- `v1.0` déplacé en `99_ARCHIVES` : `KO`
-- aucun doublon : `OK`
-
-Précision :
-
-- l'échec est intervenu avant toute écriture finale ; la source `v1.0` est donc restée en place
-
-### D. Structure
-
-- aucun fichier parasite dans `TEST` : `OK`
 - arborescence respectée : `OK`
+- aucun fichier parasite créé par le scénario nominal : `OK`
 
-### E. Logs
+### Logs
 
-- étapes complètes présentes : `OK`
+- pipeline complet tracé : `OK`
 - aucune erreur silencieuse : `OK`
 
-Étapes tracées :
+Étapes présentes dans les logs :
 
-- `start`
 - `validation_ged_complete`
 - `generation_docx_sandbox`
-- `failure`
+- `generation_pdf_sandbox`
+- `archivage_version_precedente`
+- `copie_docx_zone21_dev`
+- `copie_pdf_zone21_dev`
+- `relecture_physique_zone21_dev`
 
-## Analyse de l'anomalie principale
+## Résultat du rollback contrôlé v1.1 -> v1.2
 
-Le blocage réel n'est plus un problème de configuration ou d'absence de LibreOffice.
+Méthode :
 
-Le problème observé est plus précis :
+- erreur forcée sur la copie PDF finale via collision contrôlée sur le chemin cible `v1.2.pdf`
 
-- le `DOCX` généré par le writer est structurellement lisible comme archive OOXML minimale ;
-- LibreOffice échoue néanmoins lors de la conversion réelle en PDF ;
-- cela indique que le document généré n'est pas encore suffisamment compatible pour une conversion LibreOffice stable en conditions réelles.
+Point d'échec obtenu :
 
-## Test de rollback contrôlé
+- après archivage `v1.1`
+- après copie DOCX `v1.2`
+- avant copie PDF `v1.2`
 
-Un second scénario contrôlé a été lancé sur le même périmètre `TEST` pour valider le rollback.
+Résultat global :
 
-Erreur provoquée :
+- `OK`
 
-- échec forcé au moment de la copie PDF finale
+Contrôles constatés après rollback :
 
-Résultat :
+- aucune `v1.2` finale active : `OK`
+- `v1.1.docx` restauré en actif : `OK`
+- `v1.1.pdf` restauré en actif : `OK`
+- aucune archive résiduelle `v1.1` : `OK`
+- archives `v1.0` conservées : `OK`
+- aucun résidu parasite après nettoyage de l'injecteur de panne : `OK`
 
-- archivage temporaire déclenché
-- copie DOCX déclenchée
-- rollback exécuté
-- restauration complète de `v1.0`
-- absence de `v1.1` final
-- archives revenues à l'état vide
+## Vérification physique finale de l'état TEST
 
-Statut rollback :
+État final confirmé après les deux scénarios :
 
-- restauration complète `v1.0` : `OK`
-- absence de `v1.1` corrompu dans `TEST` : `OK`
-- absence de doublon final : `OK`
+- actif DOCX : `NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-v1.1.docx`
+- actif PDF : `NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-v1.1.pdf`
+- archives DOCX : `NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-v1.0.docx`
+- archives PDF : `NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-v1.0.pdf`
 
-## Validation
+Absences confirmées :
 
-Statut de l'étape :
-
-- périmètre test : prêt
-- fichiers source : prêts
-- sauvegarde préalable : faite
-- référence de test : conforme
-- base active : réalignée
-- test réel principal : non validé
-- rollback réel sur base active : validé sur scénario d'erreur contrôlé
-
-## Anomalies à lever avant nouveau test
-
-- corriger la compatibilité LibreOffice du `DOCX` généré par le writer
-- relancer ensuite un unique test manuel contrôlé `v1.0 -> v1.1`
-- ne pas déclarer le writer validé tant que :
-  - `DOCX` final créé
-  - `PDF` final créé
-  - archivage final confirmé
-  - rollback confirmé
-  - relecture physique confirmée
+- pas de `v1.0` en actif
+- pas de `v1.2` en actif
+- pas d'archive résiduelle `v1.1`
 
 ## Conclusion
 
-Cette étape n'est pas validée fonctionnellement comme validation réelle complète du writer.
+Validation finale :
 
-Ce qui est validé :
+- scénario nominal complet : `VALIDÉ`
+- rollback contrôlé : `VALIDÉ`
+- writer GED réel sur périmètre `TEST` : `VALIDÉ`
 
-- périmètre réel `TEST`
-- configuration `staging`
-- logs d'exécution
-- rollback contrôlé
+La chaîne complète est donc validée sur ce périmètre contrôlé :
 
-Ce qui n'est pas validé :
-
-- conversion PDF réelle sur le `DOCX` produit par le writer
-- création complète `v1.1` en base active `TEST`
-- archivage réel final associé au scénario nominal
+- `DOCX`
+- `PDF`
+- archivage
+- écriture
+- relecture physique
+- rollback
