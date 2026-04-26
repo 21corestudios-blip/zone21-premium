@@ -13,5 +13,5 @@ http://localhost:3000/dashboard
 Sauvegarde GIT :
 git status
 git add .
-git commit -m "test: validate-libreoffice-pdf-conversion-linux"
+git commit -m "feat: integrate-linux-pdf-conversion-into-zone21-writer"
 git push

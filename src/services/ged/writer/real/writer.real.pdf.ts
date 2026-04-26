@@ -4,6 +4,10 @@ import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 
 import { gedConfig } from "@/config/ged.config";
+import {
+  buildLinuxPdfCommandPreview,
+  executeLinuxPdfConversion,
+} from "@/services/ged/pdf/linux-pdf.service";
 
 import { assertSandboxPath } from "./writer.real.fs";
 import type { GenerationPlan, RealWriterInput } from "./writer.real.types";
@@ -37,11 +41,9 @@ export function buildPdfGenerationPlan(
     /\.pdf$/,
     ".docx",
   );
-  const commandPreview = buildLibreOfficeCommandPreview(
-    input,
-    docxPath,
-    targetPath,
-  );
+  const commandPreview = gedConfig.pdf.engine === "linux"
+    ? buildLinuxPdfCommandPreview(input, docxPath, targetPath)
+    : buildLibreOfficeCommandPreview(input, docxPath, targetPath);
 
   return {
     format: "pdf",
@@ -86,6 +88,10 @@ export async function executePdfSandboxConversion(
 ) {
   const { resolvedTarget: resolvedDocxPath } = assertSandboxPath(sandboxDocxPath);
   const { resolvedTarget: resolvedPdfPath } = assertSandboxPath(sandboxPdfPath);
+
+  if (gedConfig.pdf.engine === "linux") {
+    return executeLinuxPdfConversion(input, resolvedDocxPath, resolvedPdfPath);
+  }
 
   const libreOfficeBinaryPath = await getLibreOfficeBinaryPath();
 

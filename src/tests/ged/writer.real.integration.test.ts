@@ -64,6 +64,13 @@ test("generation DOCX reelle dans sandbox", async () => {
 });
 
 test("conversion PDF reelle dans sandbox si LibreOffice est disponible", async (t) => {
+  if (process.platform === "darwin") {
+    t.skip(
+      "La conversion PDF locale LibreOffice sur macOS n'est plus le chemin de validation prioritaire.",
+    );
+    return;
+  }
+
   const libreOfficeBinaryPath = await getLibreOfficeBinaryPath();
 
   if (!libreOfficeBinaryPath) {

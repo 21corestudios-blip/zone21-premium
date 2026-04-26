@@ -30,6 +30,22 @@ function buildInput(): RealWriterInput {
   };
 }
 
+function withPdfEngine<T>(engine: "linux" | "local", callback: () => T) {
+  const previousEngine = process.env.PDF_ENGINE;
+
+  process.env.PDF_ENGINE = engine;
+
+  try {
+    return callback();
+  } finally {
+    if (previousEngine === undefined) {
+      delete process.env.PDF_ENGINE;
+    } else {
+      process.env.PDF_ENGINE = previousEngine;
+    }
+  }
+}
+
 test("commande construite", () => {
   const command = buildLibreOfficeCommandPreview(
     buildInput(),
@@ -42,22 +58,39 @@ test("commande construite", () => {
   assert.ok(command.includes("pdf"));
 });
 
-test("coherence parametres", () => {
-  const plan = buildPdfGenerationPlan(
-    buildInput(),
-    "/ZONE21_DEV/90_GED_PHASE_1/NOTE-Z21/MEDIA/02_PDF/NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-v1.0.pdf",
+test("coherence parametres en moteur linux", () => {
+  const plan = withPdfEngine("linux", () =>
+    buildPdfGenerationPlan(
+      buildInput(),
+      "/ZONE21_DEV/90_GED_PHASE_1/NOTE-Z21/MEDIA/02_PDF/NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-v1.0.pdf",
+    )
   );
 
   assert.equal(plan.inMemoryOnly, true);
+  assert.equal(plan.execute, false);
+  assert.ok(Boolean(plan.commandPreview));
+  assert.ok(plan.commandPreview?.includes("limactl shell"));
+});
+
+test("fallback local si PDF_ENGINE=local", () => {
+  const plan = withPdfEngine("local", () =>
+    buildPdfGenerationPlan(
+      buildInput(),
+      "/ZONE21_DEV/90_GED_PHASE_1/NOTE-Z21/MEDIA/02_PDF/NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-v1.0.pdf",
+    )
+  );
+
   assert.equal(plan.execute, false);
   assert.ok(Boolean(plan.commandPreview));
   assert.ok(plan.commandPreview?.includes("LibreOffice.app"));
 });
 
 test("aucun exec implicite dans le plan PDF", async () => {
-  const plan = buildPdfGenerationPlan(
-    buildInput(),
-    "/ZONE21_DEV/90_GED_PHASE_1/NOTE-Z21/MEDIA/02_PDF/NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-v1.0.pdf",
+  const plan = withPdfEngine("linux", () =>
+    buildPdfGenerationPlan(
+      buildInput(),
+      "/ZONE21_DEV/90_GED_PHASE_1/NOTE-Z21/MEDIA/02_PDF/NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-v1.0.pdf",
+    )
   );
 
   assert.equal(plan.execute, false);
