@@ -45,6 +45,10 @@ interface ResolvedPathResult {
 
 let cachedActiveBaseState: ActiveBaseState | null = null;
 
+export function resetActiveBaseStateCache() {
+  cachedActiveBaseState = null;
+}
+
 function normalizeSearchValue(value: string) {
   return value
     .normalize("NFD")

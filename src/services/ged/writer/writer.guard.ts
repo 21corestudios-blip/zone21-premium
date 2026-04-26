@@ -17,7 +17,8 @@ export function isWriterActivationAllowed(
   runtimeConfig: WriterRuntimeConfig = getWriterRuntimeConfig(),
 ) {
   return runtimeConfig.writerEnabled && runtimeConfig.writerEnvAllowed &&
-    runtimeConfig.env !== "production";
+    runtimeConfig.env !== "production" &&
+    runtimeConfig.writerRealExecutionConfirmed;
 }
 
 export function assertWriterActivationAllowed(
@@ -38,6 +39,12 @@ export function assertWriterActivationAllowed(
   if (!runtimeConfig.writerEnvAllowed) {
     throw new Error(
       "Activation writer refusée : l'environnement doit être strictement staging.",
+    );
+  }
+
+  if (!runtimeConfig.writerRealExecutionConfirmed) {
+    throw new Error(
+      "Activation writer refusée : WRITER_REAL_EXECUTION_CONFIRMED=true est obligatoire.",
     );
   }
 

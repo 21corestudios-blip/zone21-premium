@@ -1,6 +1,8 @@
+import { access, copyFile, mkdir, rename, rm, stat } from "node:fs/promises";
 import path from "node:path";
 
 import { gedConfig } from "@/config/ged.config";
+import { resolveSystemPath } from "@/lib/rdm-service";
 import type { WriterDomain, WriterPrefix } from "../writer.types";
 
 import type {
@@ -173,12 +175,22 @@ export function isZone21DevPath(targetPath: string) {
 export function assertZone21DevPath(virtualPath: string) {
   if (!isZone21DevPath(virtualPath)) {
     throw new Error(
-      "Chemin interdit : la cible theorique doit rester sous /ZONE21_DEV/.",
+      "Chemin interdit : l'ecriture finale ne peut viser qu'un chemin logique sous /ZONE21_DEV/.",
+    );
+  }
+
+  const resolved = resolveSystemPath(virtualPath);
+
+  if (!resolved.systemPath) {
+    throw new Error(
+      resolved.error ??
+        "Impossible de resoudre le chemin physique cible dans ZONE21_DEV.",
     );
   }
 
   return {
     virtualPath,
+    systemPath: resolved.systemPath,
   };
 }
 
@@ -220,4 +232,71 @@ export function mapTheoreticalPathToSandbox(theoreticalPath: string) {
 
   const relativePath = theoreticalPath.slice(zone21DevPrefix.length);
   return path.join(getGedSandboxPath(), relativePath);
+}
+
+export async function ensureDirectoryForFile(targetPath: string) {
+  await mkdir(path.dirname(targetPath), { recursive: true });
+}
+
+export async function copySandboxFileToZone21Dev(
+  sandboxPath: string,
+  zone21VirtualPath: string,
+) {
+  assertSandboxPath(sandboxPath);
+  const resolvedZone21Path = assertZone21DevPath(zone21VirtualPath);
+
+  await ensureDirectoryForFile(resolvedZone21Path.systemPath);
+  await copyFile(sandboxPath, resolvedZone21Path.systemPath);
+
+  return resolvedZone21Path.systemPath;
+}
+
+export async function moveZone21DevFileToArchive(
+  sourceVirtualPath: string,
+  archiveVirtualPath: string,
+) {
+  const sourcePath = assertZone21DevPath(sourceVirtualPath);
+  const archivePath = assertZone21DevPath(archiveVirtualPath);
+
+  await access(sourcePath.systemPath);
+  await ensureDirectoryForFile(archivePath.systemPath);
+  await rename(sourcePath.systemPath, archivePath.systemPath);
+
+  return {
+    sourceSystemPath: sourcePath.systemPath,
+    archiveSystemPath: archivePath.systemPath,
+  };
+}
+
+export async function restoreZone21DevArchivedFile(
+  archiveVirtualPath: string,
+  sourceVirtualPath: string,
+) {
+  const archivePath = assertZone21DevPath(archiveVirtualPath);
+  const sourcePath = assertZone21DevPath(sourceVirtualPath);
+
+  await access(archivePath.systemPath);
+  await ensureDirectoryForFile(sourcePath.systemPath);
+  await rename(archivePath.systemPath, sourcePath.systemPath);
+
+  return {
+    archiveSystemPath: archivePath.systemPath,
+    sourceSystemPath: sourcePath.systemPath,
+  };
+}
+
+export async function deleteZone21DevFile(virtualPath: string) {
+  const resolved = assertZone21DevPath(virtualPath);
+  await rm(resolved.systemPath, { force: true });
+}
+
+export async function verifyZone21DevFile(virtualPath: string) {
+  const resolved = assertZone21DevPath(virtualPath);
+  const fileStats = await stat(resolved.systemPath);
+
+  return {
+    systemPath: resolved.systemPath,
+    exists: true,
+    sizeBytes: fileStats.size,
+  };
 }

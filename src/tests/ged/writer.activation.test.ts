@@ -16,10 +16,12 @@ import type { WriterInput } from "@/services/ged/writer/writer.types";
 function withWriterEnv<T>(
   env: string,
   enabled: string | undefined,
+  confirmed: string | undefined,
   callback: () => T | Promise<T>,
 ) {
   const previousEnv = process.env.NODE_ENV;
   const previousWriterEnabled = process.env.WRITER_ENABLED;
+  const previousConfirmed = process.env.WRITER_REAL_EXECUTION_CONFIRMED;
 
   process.env.NODE_ENV = env;
 
@@ -27,6 +29,11 @@ function withWriterEnv<T>(
     delete process.env.WRITER_ENABLED;
   } else {
     process.env.WRITER_ENABLED = enabled;
+  }
+  if (confirmed === undefined) {
+    delete process.env.WRITER_REAL_EXECUTION_CONFIRMED;
+  } else {
+    process.env.WRITER_REAL_EXECUTION_CONFIRMED = confirmed;
   }
 
   const run = async () => callback();
@@ -42,6 +49,11 @@ function withWriterEnv<T>(
       delete process.env.WRITER_ENABLED;
     } else {
       process.env.WRITER_ENABLED = previousWriterEnabled;
+    }
+    if (previousConfirmed === undefined) {
+      delete process.env.WRITER_REAL_EXECUTION_CONFIRMED;
+    } else {
+      process.env.WRITER_REAL_EXECUTION_CONFIRMED = previousConfirmed;
     }
   });
 }
@@ -66,7 +78,7 @@ function buildValidInput(): WriterInput {
 }
 
 test("activation refusee en DEV", async () => {
-  await withWriterEnv("development", "true", async () => {
+  await withWriterEnv("development", "true", "true", async () => {
     assert.equal(isWriterActivationAllowed(getWriterRuntimeConfig()), false);
     assert.throws(
       () => assertWriterActivationAllowed(getWriterRuntimeConfig()),
@@ -80,7 +92,7 @@ test("activation refusee en DEV", async () => {
 });
 
 test("activation refusee sans flag", async () => {
-  await withWriterEnv("staging", undefined, async () => {
+  await withWriterEnv("staging", undefined, "true", async () => {
     assert.equal(isWriterActivationAllowed(getWriterRuntimeConfig()), false);
     assert.throws(
       () => assertWriterActivationAllowed(getWriterRuntimeConfig()),
@@ -90,25 +102,14 @@ test("activation refusee sans flag", async () => {
 });
 
 test("activation autorisee en STAGING", async () => {
-  await withWriterEnv("staging", "true", async () => {
+  await withWriterEnv("staging", "true", "true", async () => {
     assert.equal(isWriterActivationAllowed(getWriterRuntimeConfig()), true);
     assert.equal(assertWriterActivationAllowed(getWriterRuntimeConfig()), true);
-
-    const result = await executeRealWriter(buildRealWriterInput(buildValidInput()));
-
-    assert.equal(result.mode, "staging-authorization");
-    assert.equal(result.status, "authorized");
-    assert.equal(
-      result.summary.includes(
-        "Aucune ecriture physique n'a ete effectuee dans ZONE21_DEV.",
-      ),
-      true,
-    );
   });
 });
 
 test("ecriture bloquee si erreur", async () => {
-  await withWriterEnv("staging", "true", async () => {
+  await withWriterEnv("staging", "true", "true", async () => {
     const invalidInput = buildRealWriterInput({
       ...buildValidInput(),
       versionTarget: "invalid",
@@ -123,6 +124,16 @@ test("ecriture bloquee si erreur", async () => {
         await executeRealWriter(invalidInput);
       },
       /validation GED/,
+    );
+  });
+});
+
+test("activation refusee sans confirmation explicite", async () => {
+  await withWriterEnv("staging", "true", undefined, async () => {
+    assert.equal(isWriterActivationAllowed(getWriterRuntimeConfig()), false);
+    assert.throws(
+      () => assertWriterActivationAllowed(getWriterRuntimeConfig()),
+      /WRITER_REAL_EXECUTION_CONFIRMED=true/,
     );
   });
 });

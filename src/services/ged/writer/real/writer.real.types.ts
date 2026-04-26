@@ -96,11 +96,14 @@ export interface RealWriterOutput {
 
 export interface RealWriterExecutionResult {
   enabled: true;
-  mode: "staging-authorization";
+  mode: "real-execution";
   executionAllowed: true;
-  status: "authorized";
-  targetPath: string;
-  archivePath: string | null;
+  status: "written";
+  docxPath: string;
+  pdfPath: string;
+  archiveDocxPath: string | null;
+  archivePdfPath: string | null;
+  rereadConfirmed: boolean;
   auditLog: GedAuditLogEntry;
   steps: string[];
   summary: string[];

@@ -1,4 +1,7 @@
+export type GedAuditLogLevel = "start" | "step" | "success" | "failure";
+
 export interface GedAuditLogPayload {
+  level: GedAuditLogLevel;
   user: string;
   action: string;
   file: string;
@@ -23,7 +26,7 @@ export function createGedAuditLogEntry(
 export function logGedAuditEvent(payload: GedAuditLogPayload) {
   const entry = createGedAuditLogEntry(payload);
 
-  if (entry.errors.length > 0) {
+  if (entry.level === "failure" || entry.errors.length > 0) {
     console.warn("[GED_AUDIT]", entry);
   } else {
     console.info("[GED_AUDIT]", entry);
