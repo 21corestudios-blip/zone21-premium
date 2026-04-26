@@ -2,9 +2,9 @@
 
 ## Statut
 
-Étape préparée et partiellement exécutée.
+Étape exécutée sur périmètre `TEST`, mais non validée.
 
-Le test réel complet n'est pas validé à ce stade.
+Le writer réel n'est pas validé à ce stade.
 
 ## Périmètre préparé
 
@@ -31,45 +31,118 @@ Les deux fichiers sont présents, non vides et lisibles au niveau structurel :
 - DOCX : archive ZIP OOXML valide
 - PDF : document PDF 1 page valide
 
-## Vérifications effectuées
+## Préparation d'exécution
 
-Contrôles positifs :
+Le test réel a été lancé avec :
 
-- périmètre `TEST` isolé créé
-- sauvegarde préalable créée
-- fichiers `v1.0` présents
-- tailles strictement positives
-- structure documentaire de base prête pour un essai manuel
+- `NODE_ENV=staging`
+- `WRITER_ENABLED=true`
+- `WRITER_REAL_EXECUTION_CONFIRMED=true`
+- `Z21_ACTIVE_BASE_PATH=/Users/gregloupiac/Mon Drive (21corestudios@gmail.com)/ZONE21_DEV/90_GED_PHASE_1/TEST`
 
-## Blocages constatés
+Le périmètre `TEST` a été contraint via un miroir interne afin que le writer n'écrive que dans :
 
-### 1. LibreOffice absent sur cette machine
+- `/90_GED_PHASE_1/TEST/NOTE-Z21/MEDIA/...`
 
-Le binaire `soffice` n'est pas installé ou pas détectable localement.
+## Résultat du test réel principal v1.0 -> v1.1
 
-Conséquence :
+Référence source :
 
-- la génération PDF réelle `v1.1` ne peut pas être validée honnêtement ;
-- le test complet `DOCX + PDF + archivage + écriture + relecture` ne peut pas être approuvé dans l'état actuel de la machine.
+- `NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-v1.0`
 
-### 2. Chemin de base actif réaligné
+Référence cible :
 
-La variable `Z21_ACTIVE_BASE_PATH` a été réalignée sur le chemin réellement utilisé :
+- `NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-v1.1`
 
-- `/Users/gregloupiac/Mon Drive (21corestudios@gmail.com)/ZONE21_DEV`
+Résultat global :
 
-Ce prérequis n'est donc plus bloquant.
+- échec du pipeline au stade conversion PDF LibreOffice
 
-## Résultat
+Erreur observée :
 
-Le test réel complet `v1.0 -> v1.1` n'a pas été lancé jusqu'au bout, volontairement, pour éviter :
+- le writer a bien généré le `DOCX` sandbox `v1.1`
+- LibreOffice a échoué avec un code retour `134`
+- aucun `PDF` `v1.1` n'a été produit
+- aucune écriture finale n'a été faite dans le périmètre `TEST`
 
-- une validation incomplète sans moteur PDF réel ;
-- une écriture potentiellement trompeuse sur base active.
+## Contrôle détaillé OK / KO
 
-## Rollback
+### A. DOCX
 
-Le rollback réel sur base active n'a pas été validé dans cette étape, car le test d'écriture complète n'a pas été autorisé dans ces conditions.
+- `v1.1` créé dans `ZONE21_DEV/TEST` : `KO`
+- taille `> 0` dans la cible finale : `KO`
+- ouverture OK dans la cible finale : `KO`
+
+Complément :
+
+- un `v1.1.docx` sandbox a bien été généré
+- archive ZIP valide
+- contenu XML cohérent
+
+### B. PDF
+
+- `v1.1` créé dans `ZONE21_DEV/TEST` : `KO`
+- taille `> 0` : `KO`
+- conversion LibreOffice réussie : `KO`
+
+### C. Archivage
+
+- `v1.0` déplacé en `99_ARCHIVES` : `KO`
+- aucun doublon : `OK`
+
+Précision :
+
+- l'échec est intervenu avant toute écriture finale ; la source `v1.0` est donc restée en place
+
+### D. Structure
+
+- aucun fichier parasite dans `TEST` : `OK`
+- arborescence respectée : `OK`
+
+### E. Logs
+
+- étapes complètes présentes : `OK`
+- aucune erreur silencieuse : `OK`
+
+Étapes tracées :
+
+- `start`
+- `validation_ged_complete`
+- `generation_docx_sandbox`
+- `failure`
+
+## Analyse de l'anomalie principale
+
+Le blocage réel n'est plus un problème de configuration ou d'absence de LibreOffice.
+
+Le problème observé est plus précis :
+
+- le `DOCX` généré par le writer est structurellement lisible comme archive OOXML minimale ;
+- LibreOffice échoue néanmoins lors de la conversion réelle en PDF ;
+- cela indique que le document généré n'est pas encore suffisamment compatible pour une conversion LibreOffice stable en conditions réelles.
+
+## Test de rollback contrôlé
+
+Un second scénario contrôlé a été lancé sur le même périmètre `TEST` pour valider le rollback.
+
+Erreur provoquée :
+
+- échec forcé au moment de la copie PDF finale
+
+Résultat :
+
+- archivage temporaire déclenché
+- copie DOCX déclenchée
+- rollback exécuté
+- restauration complète de `v1.0`
+- absence de `v1.1` final
+- archives revenues à l'état vide
+
+Statut rollback :
+
+- restauration complète `v1.0` : `OK`
+- absence de `v1.1` corrompu dans `TEST` : `OK`
+- absence de doublon final : `OK`
 
 ## Validation
 
@@ -80,19 +153,33 @@ Statut de l'étape :
 - sauvegarde préalable : faite
 - référence de test : conforme
 - base active : réalignée
-- writer réel complet : non validé
-- rollback réel sur base active : non validé
+- test réel principal : non validé
+- rollback réel sur base active : validé sur scénario d'erreur contrôlé
 
 ## Anomalies à lever avant nouveau test
 
-- installer et valider LibreOffice sur la machine de test
-- relancer ensuite un unique test manuel contrôlé
+- corriger la compatibilité LibreOffice du `DOCX` généré par le writer
+- relancer ensuite un unique test manuel contrôlé `v1.0 -> v1.1`
+- ne pas déclarer le writer validé tant que :
+  - `DOCX` final créé
+  - `PDF` final créé
+  - archivage final confirmé
+  - rollback confirmé
+  - relecture physique confirmée
 
 ## Conclusion
 
-Cette étape n'est pas validée fonctionnellement comme test réel complet du writer.
+Cette étape n'est pas validée fonctionnellement comme validation réelle complète du writer.
 
-En revanche, elle a permis de préparer un périmètre isolé, de créer les sources initiales, d'assurer la sauvegarde préalable et d'identifier précisément les trois blocages empêchant une validation honnête :
+Ce qui est validé :
 
-- LibreOffice absent
-- test réel complet encore non relancé après correction des prérequis
+- périmètre réel `TEST`
+- configuration `staging`
+- logs d'exécution
+- rollback contrôlé
+
+Ce qui n'est pas validé :
+
+- conversion PDF réelle sur le `DOCX` produit par le writer
+- création complète `v1.1` en base active `TEST`
+- archivage réel final associé au scénario nominal

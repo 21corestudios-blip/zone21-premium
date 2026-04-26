@@ -13,5 +13,5 @@ http://localhost:3000/dashboard
 Sauvegarde GIT :
 git status
 git add .
-git commit -m "test: prepare-zone21-writer-real-test-prerequisites"
+git commit -m "test: execute-zone21-writer-real-controlled-test"
 git push
