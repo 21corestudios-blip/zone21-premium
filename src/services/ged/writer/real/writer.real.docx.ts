@@ -1,5 +1,7 @@
+import { readFileSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 import Docxtemplater from "docxtemplater";
 import PizZip from "pizzip";
@@ -7,35 +9,32 @@ import PizZip from "pizzip";
 import { assertSandboxPath } from "./writer.real.fs";
 import type { GenerationPlan, RealWriterInput } from "./writer.real.types";
 
-const inMemoryTemplate = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
-  <w:body>
-    <w:p><w:r><w:t>{title}</w:t></w:r></w:p>
-    <w:p><w:r><w:t>{reference}</w:t></w:r></w:p>
-    <w:p><w:r><w:t>{version}</w:t></w:r></w:p>
-    <w:p><w:r><w:t>{contentSummary}</w:t></w:r></w:p>
-  </w:body>
-</w:document>`;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-function buildTemplateArchive() {
-  const zip = new PizZip();
-  zip.file("[Content_Types].xml", `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
-  <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
-  <Default Extension="xml" ContentType="application/xml"/>
-  <Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>
-</Types>`);
-  zip.folder("_rels")?.file(".rels", `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
-  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>
-</Relationships>`);
-  zip.folder("word")?.file("document.xml", inMemoryTemplate);
+function resolveTemplatePath(templateKey: string) {
+  const templateFileByKey: Record<string, string> = {
+    "note-z21-standard-v1": "note-z21-standard-v1.docx",
+  };
 
-  return zip;
+  const templateFileName = templateFileByKey[templateKey];
+
+  if (!templateFileName) {
+    throw new Error(`Modele DOCX introuvable pour la cle ${templateKey}.`);
+  }
+
+  return path.join(__dirname, "templates", templateFileName);
 }
 
-export function renderDocxTemplateInMemory(input: RealWriterInput) {
-  const zip = buildTemplateArchive();
+function loadTemplateBuffer(templateKey: string) {
+  return readFileSync(resolveTemplatePath(templateKey));
+}
+
+function renderDocxTemplate(
+  templateBuffer: Buffer,
+  input: RealWriterInput,
+) {
+  const zip = new PizZip(templateBuffer);
   const doc = new Docxtemplater(zip, {
     paragraphLoop: true,
     linebreaks: true,
@@ -54,11 +53,17 @@ export function renderDocxTemplateInMemory(input: RealWriterInput) {
   }) as Buffer;
 }
 
+export function renderDocxTemplateInMemory(input: RealWriterInput) {
+  const templateBuffer = loadTemplateBuffer(input.templateKey);
+  return renderDocxTemplate(templateBuffer, input);
+}
+
 export function buildDocxGenerationPlan(
   input: RealWriterInput,
   targetPath: string,
 ): GenerationPlan {
-  const buffer = renderDocxTemplateInMemory(input);
+  const templateBuffer = loadTemplateBuffer(input.templateKey);
+  const buffer = renderDocxTemplate(templateBuffer, input);
 
   return {
     format: "docx",
@@ -91,7 +96,8 @@ export async function executeDocxSandboxGeneration(
   sandboxTargetPath: string,
 ) {
   const { resolvedTarget } = assertSandboxPath(sandboxTargetPath);
-  const buffer = renderDocxTemplateInMemory(input);
+  const templateBuffer = loadTemplateBuffer(input.templateKey);
+  const buffer = renderDocxTemplate(templateBuffer, input);
 
   await mkdir(path.dirname(resolvedTarget), { recursive: true });
   await writeFile(resolvedTarget, buffer);
