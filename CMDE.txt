@@ -13,5 +13,5 @@ http://localhost:3000/dashboard
 Sauvegarde GIT :
 git status
 git add .
-git commit -m "test: validate-zone21-writer-final-pipeline"
+git commit -m "feat: enable-zone21-writer-controlled-scope-phase2"
 git push

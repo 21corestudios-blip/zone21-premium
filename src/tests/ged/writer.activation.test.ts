@@ -1,6 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { mkdirSync, rmSync } from "node:fs";
+import os from "node:os";
+import path from "node:path";
 
+import { resetActiveBaseStateCache } from "@/lib/rdm-service";
 import { getWriterRuntimeConfig } from "@/config/env.config";
 import {
   executeRealWriter,
@@ -17,11 +21,13 @@ function withWriterEnv<T>(
   env: string,
   enabled: string | undefined,
   confirmed: string | undefined,
+  basePath: string | undefined,
   callback: () => T | Promise<T>,
 ) {
   const previousEnv = process.env.NODE_ENV;
   const previousWriterEnabled = process.env.WRITER_ENABLED;
   const previousConfirmed = process.env.WRITER_REAL_EXECUTION_CONFIRMED;
+  const previousBase = process.env.Z21_ACTIVE_BASE_PATH;
 
   process.env.NODE_ENV = env;
 
@@ -35,6 +41,12 @@ function withWriterEnv<T>(
   } else {
     process.env.WRITER_REAL_EXECUTION_CONFIRMED = confirmed;
   }
+  if (basePath === undefined) {
+    delete process.env.Z21_ACTIVE_BASE_PATH;
+  } else {
+    process.env.Z21_ACTIVE_BASE_PATH = basePath;
+  }
+  resetActiveBaseStateCache();
 
   const run = async () => callback();
 
@@ -55,7 +67,24 @@ function withWriterEnv<T>(
     } else {
       process.env.WRITER_REAL_EXECUTION_CONFIRMED = previousConfirmed;
     }
+    if (previousBase === undefined) {
+      delete process.env.Z21_ACTIVE_BASE_PATH;
+    } else {
+      process.env.Z21_ACTIVE_BASE_PATH = previousBase;
+    }
+    resetActiveBaseStateCache();
   });
+}
+
+function createAllowedTestScope() {
+  const basePath = path.join(
+    os.tmpdir(),
+    "zone21_ged_activation_scope",
+    "90_GED_PHASE_1",
+    "TEST",
+  );
+  mkdirSync(basePath, { recursive: true });
+  return basePath;
 }
 
 function buildValidInput(): WriterInput {
@@ -78,7 +107,7 @@ function buildValidInput(): WriterInput {
 }
 
 test("activation refusee en DEV", async () => {
-  await withWriterEnv("development", "true", "true", async () => {
+  await withWriterEnv("development", "true", "true", undefined, async () => {
     assert.equal(isWriterActivationAllowed(getWriterRuntimeConfig()), false);
     assert.throws(
       () => assertWriterActivationAllowed(getWriterRuntimeConfig()),
@@ -92,7 +121,7 @@ test("activation refusee en DEV", async () => {
 });
 
 test("activation refusee sans flag", async () => {
-  await withWriterEnv("staging", undefined, "true", async () => {
+  await withWriterEnv("staging", undefined, "true", undefined, async () => {
     assert.equal(isWriterActivationAllowed(getWriterRuntimeConfig()), false);
     assert.throws(
       () => assertWriterActivationAllowed(getWriterRuntimeConfig()),
@@ -102,17 +131,20 @@ test("activation refusee sans flag", async () => {
 });
 
 test("activation autorisee en STAGING", async () => {
-  await withWriterEnv("staging", "true", "true", async () => {
+  await withWriterEnv("staging", "true", "true", undefined, async () => {
     assert.equal(isWriterActivationAllowed(getWriterRuntimeConfig()), true);
     assert.equal(assertWriterActivationAllowed(getWriterRuntimeConfig()), true);
   });
 });
 
 test("ecriture bloquee si erreur", async () => {
-  await withWriterEnv("staging", "true", "true", async () => {
-    const invalidInput = buildRealWriterInput({
-      ...buildValidInput(),
-      versionTarget: "invalid",
+  const scopeBasePath = createAllowedTestScope();
+
+  try {
+    await withWriterEnv("staging", "true", "true", scopeBasePath, async () => {
+      const invalidInput = buildRealWriterInput({
+        ...buildValidInput(),
+        versionTarget: "invalid",
       reference: "NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-invalid",
       fileName: "NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-invalid.docx",
       pathTarget:
@@ -125,11 +157,17 @@ test("ecriture bloquee si erreur", async () => {
       },
       /validation GED/,
     );
-  });
+    });
+  } finally {
+    rmSync(path.join(os.tmpdir(), "zone21_ged_activation_scope"), {
+      recursive: true,
+      force: true,
+    });
+  }
 });
 
 test("activation refusee sans confirmation explicite", async () => {
-  await withWriterEnv("staging", "true", undefined, async () => {
+  await withWriterEnv("staging", "true", undefined, undefined, async () => {
     assert.equal(isWriterActivationAllowed(getWriterRuntimeConfig()), false);
     assert.throws(
       () => assertWriterActivationAllowed(getWriterRuntimeConfig()),

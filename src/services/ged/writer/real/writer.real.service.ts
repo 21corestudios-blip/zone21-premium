@@ -2,6 +2,7 @@ import { getWriterRuntimeConfig } from "@/config/env.config";
 import { logGedAuditEvent } from "@/services/ged/audit/logger";
 import {
   assertWriterActivationAllowed,
+  assertWriterScopeAllowed,
   isWriterActivationAllowed,
 } from "@/services/ged/writer/writer.guard";
 import type { WriterInput } from "../writer.types";
@@ -154,6 +155,7 @@ export async function executeRealWriter(
   dependencies: RealWriterDependencies = defaultRealWriterDependencies,
 ): Promise<RealWriterExecutionResult> {
   assertWriterActivationAllowed(getWriterRuntimeConfig());
+  const writerScope = assertWriterScopeAllowed();
 
   const validation = validateWriterInput(input);
 
@@ -166,6 +168,7 @@ export async function executeRealWriter(
       version: input.versionTarget,
       status: validation.status,
       errors: validation.errors.map((error) => error.message),
+      scope: writerScope.label,
     });
 
     throw Object.assign(
@@ -198,6 +201,7 @@ export async function executeRealWriter(
     version: input.versionTarget,
     status: "start",
     errors: [],
+    scope: writerScope.label,
   });
 
   try {
@@ -209,6 +213,7 @@ export async function executeRealWriter(
       version: input.versionTarget,
       status: validation.status,
       errors: [],
+      scope: writerScope.label,
     });
     steps.push("validation_ged_complete");
 
@@ -235,6 +240,7 @@ export async function executeRealWriter(
       version: input.versionTarget,
       status: "ok",
       errors: [],
+      scope: writerScope.label,
     });
     steps.push("generation_docx_sandbox");
 
@@ -263,6 +269,7 @@ export async function executeRealWriter(
       version: input.versionTarget,
       status: "ok",
       errors: [],
+      scope: writerScope.label,
     });
     steps.push("generation_pdf_sandbox");
 
@@ -306,6 +313,7 @@ export async function executeRealWriter(
         version: input.versionTarget,
         status: "ok",
         errors: [],
+        scope: writerScope.label,
       });
       steps.push("archivage_version_precedente");
     }
@@ -323,6 +331,7 @@ export async function executeRealWriter(
       version: input.versionTarget,
       status: "ok",
       errors: [],
+      scope: writerScope.label,
     });
     steps.push("copie_docx_zone21_dev");
 
@@ -339,6 +348,7 @@ export async function executeRealWriter(
       version: input.versionTarget,
       status: "ok",
       errors: [],
+      scope: writerScope.label,
     });
     steps.push("copie_pdf_zone21_dev");
 
@@ -360,6 +370,7 @@ export async function executeRealWriter(
       version: input.versionTarget,
       status: "ok",
       errors: [],
+      scope: writerScope.label,
     });
     steps.push("relecture_physique_zone21_dev");
 
@@ -371,6 +382,7 @@ export async function executeRealWriter(
       version: input.versionTarget,
       status: "written",
       errors: [],
+      scope: writerScope.label,
     });
 
     return {
@@ -412,6 +424,7 @@ export async function executeRealWriter(
       version: input.versionTarget,
       status: "failed",
       errors: [message],
+      scope: writerScope.label,
     });
 
     throw Object.assign(new Error(message), { auditLog, steps });

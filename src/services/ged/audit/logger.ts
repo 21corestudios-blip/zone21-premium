@@ -8,6 +8,7 @@ export interface GedAuditLogPayload {
   version: string;
   status: string;
   errors: string[];
+  scope?: "TEST" | "PHASE_2";
 }
 
 export interface GedAuditLogEntry extends GedAuditLogPayload {

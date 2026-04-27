@@ -107,7 +107,7 @@ async function cleanup(basePath: string, sandboxPath: string) {
 }
 
 test("ecriture reelle en sandbox puis ZONE21_DEV controle", async () => {
-  const basePath = "/tmp/zone21_ged_staging_base_success";
+  const basePath = "/tmp/zone21_ged_staging_base_success/90_GED_PHASE_1/TEST";
   const sandboxPath = "/tmp/zone21_ged_staging_sandbox_success";
   const executeInEnv = withWriterExecutionEnv(async () => {
     const realInput = await setupControlledBase(basePath, buildValidInput());
@@ -201,7 +201,7 @@ test("ecriture reelle en sandbox puis ZONE21_DEV controle", async () => {
 });
 
 test("rollback sur erreur", async () => {
-  const basePath = "/tmp/zone21_ged_staging_base_rollback";
+  const basePath = "/tmp/zone21_ged_staging_base_rollback/90_GED_PHASE_1/TEST";
   const sandboxPath = "/tmp/zone21_ged_staging_sandbox_rollback";
   const executeInEnv = withWriterExecutionEnv(async () => {
     const realInput = await setupControlledBase(basePath, buildValidInput());

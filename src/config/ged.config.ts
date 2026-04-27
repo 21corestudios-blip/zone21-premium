@@ -6,6 +6,52 @@ function getPdfLinuxMode() {
   return process.env.PDF_LINUX_MODE === "remote" ? "remote" : "local";
 }
 
+function normalizeAllowedWritePath(value: string) {
+  const normalized = value.replace(/\\/g, "/").trim().replace(/\/+/g, "/");
+
+  if (!normalized) {
+    return null;
+  }
+
+  const withLeadingSlash = normalized.startsWith("/")
+    ? normalized
+    : `/${normalized}`;
+
+  return withLeadingSlash.endsWith("/")
+    ? withLeadingSlash
+    : `${withLeadingSlash}/`;
+}
+
+function getAllowedWritePaths() {
+  const fallback = [
+    "/90_GED_PHASE_1/TEST/",
+    "/90_GED_PHASE_2/",
+  ];
+  const raw = process.env.GED_ALLOWED_WRITE_PATHS?.trim();
+
+  if (!raw) {
+    return fallback;
+  }
+
+  let candidates: unknown;
+
+  try {
+    candidates = raw.startsWith("[") ? JSON.parse(raw) : raw.split(",");
+  } catch {
+    return fallback;
+  }
+
+  if (!Array.isArray(candidates)) {
+    return fallback;
+  }
+
+  const normalized = candidates
+    .map((value) => normalizeAllowedWritePath(String(value)))
+    .filter((value): value is string => Boolean(value));
+
+  return normalized.length > 0 ? normalized : fallback;
+}
+
 export const gedConfig = {
   get libreOfficePath() {
     return process.env.LIBREOFFICE_PATH ??
@@ -23,6 +69,9 @@ export const gedConfig = {
   writer: {
     mode: "simulation",
     realExecutionEnabled: false,
+    get allowedWritePaths() {
+      return getAllowedWritePaths();
+    },
   },
   sandbox: {
     get path() {
