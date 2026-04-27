@@ -3,6 +3,7 @@ import { logGedAuditEvent } from "@/services/ged/audit/logger";
 import {
   assertWriterActivationAllowed,
   assertWriterScopeAllowed,
+  assertTargetPathAllowed,
   isWriterActivationAllowed,
 } from "@/services/ged/writer/writer.guard";
 import type { WriterInput } from "../writer.types";
@@ -283,22 +284,30 @@ export async function executeRealWriter(
       const sourcePdfPath =
         `${getRealWriterBasePath()}/${input.documentType}/${input.domain}/02_PDF/${input.sourceReference}.pdf`;
 
+      assertTargetPathAllowed(sourceDocxPath);
+      assertTargetPathAllowed(paths.archiveDocx);
       await dependencies.moveZone21DevFileToArchive(
         sourceDocxPath,
         paths.archiveDocx,
       );
       rollbackActions.push(async () => {
+        assertTargetPathAllowed(paths.archiveDocx!);
+        assertTargetPathAllowed(sourceDocxPath);
         await dependencies.restoreZone21DevArchivedFile(
           paths.archiveDocx!,
           sourceDocxPath,
         );
       });
 
+      assertTargetPathAllowed(sourcePdfPath);
+      assertTargetPathAllowed(paths.archivePdf);
       await dependencies.moveZone21DevFileToArchive(
         sourcePdfPath,
         paths.archivePdf,
       );
       rollbackActions.push(async () => {
+        assertTargetPathAllowed(paths.archivePdf!);
+        assertTargetPathAllowed(sourcePdfPath);
         await dependencies.restoreZone21DevArchivedFile(
           paths.archivePdf!,
           sourcePdfPath,
@@ -318,11 +327,15 @@ export async function executeRealWriter(
       steps.push("archivage_version_precedente");
     }
 
+    assertTargetPathAllowed(paths.docx);
     const docxSystemPath = await dependencies.copySandboxFileToZone21Dev(
       sandboxSummary.docxPath,
       paths.docx,
     );
-    rollbackActions.push(() => dependencies.deleteZone21DevFile(paths.docx));
+    rollbackActions.push(() => {
+      assertTargetPathAllowed(paths.docx);
+      return dependencies.deleteZone21DevFile(paths.docx);
+    });
     logGedAuditEvent({
       level: "step",
       user: input.validatedBy,
@@ -335,11 +348,15 @@ export async function executeRealWriter(
     });
     steps.push("copie_docx_zone21_dev");
 
+    assertTargetPathAllowed(paths.pdf);
     const pdfSystemPath = await dependencies.copySandboxFileToZone21Dev(
       sandboxSummary.pdfPath,
       paths.pdf,
     );
-    rollbackActions.push(() => dependencies.deleteZone21DevFile(paths.pdf));
+    rollbackActions.push(() => {
+      assertTargetPathAllowed(paths.pdf);
+      return dependencies.deleteZone21DevFile(paths.pdf);
+    });
     logGedAuditEvent({
       level: "step",
       user: input.validatedBy,

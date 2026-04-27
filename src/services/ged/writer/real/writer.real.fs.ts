@@ -3,6 +3,7 @@ import path from "node:path";
 
 import { gedConfig } from "@/config/ged.config";
 import { resolveSystemPath } from "@/lib/rdm-service";
+import { assertTargetPathAllowed } from "../writer.guard";
 import type { WriterDomain, WriterPrefix } from "../writer.types";
 
 import type {
@@ -188,6 +189,8 @@ export function assertZone21DevPath(virtualPath: string) {
     );
   }
 
+  assertTargetPathAllowed(virtualPath);
+
   return {
     virtualPath,
     systemPath: resolved.systemPath,
@@ -243,6 +246,7 @@ export async function copySandboxFileToZone21Dev(
   zone21VirtualPath: string,
 ) {
   assertSandboxPath(sandboxPath);
+  assertTargetPathAllowed(zone21VirtualPath);
   const resolvedZone21Path = assertZone21DevPath(zone21VirtualPath);
 
   await ensureDirectoryForFile(resolvedZone21Path.systemPath);
@@ -255,6 +259,8 @@ export async function moveZone21DevFileToArchive(
   sourceVirtualPath: string,
   archiveVirtualPath: string,
 ) {
+  assertTargetPathAllowed(sourceVirtualPath);
+  assertTargetPathAllowed(archiveVirtualPath);
   const sourcePath = assertZone21DevPath(sourceVirtualPath);
   const archivePath = assertZone21DevPath(archiveVirtualPath);
 
@@ -272,6 +278,8 @@ export async function restoreZone21DevArchivedFile(
   archiveVirtualPath: string,
   sourceVirtualPath: string,
 ) {
+  assertTargetPathAllowed(archiveVirtualPath);
+  assertTargetPathAllowed(sourceVirtualPath);
   const archivePath = assertZone21DevPath(archiveVirtualPath);
   const sourcePath = assertZone21DevPath(sourceVirtualPath);
 
@@ -286,6 +294,7 @@ export async function restoreZone21DevArchivedFile(
 }
 
 export async function deleteZone21DevFile(virtualPath: string) {
+  assertTargetPathAllowed(virtualPath);
   const resolved = assertZone21DevPath(virtualPath);
   await rm(resolved.systemPath, { force: true });
 }

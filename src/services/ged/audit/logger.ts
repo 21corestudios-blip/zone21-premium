@@ -9,6 +9,8 @@ export interface GedAuditLogPayload {
   status: string;
   errors: string[];
   scope?: "TEST" | "PHASE_2";
+  targetPath?: string;
+  controlResult?: "allowed" | "blocked";
 }
 
 export interface GedAuditLogEntry extends GedAuditLogPayload {

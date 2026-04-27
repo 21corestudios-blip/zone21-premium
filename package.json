@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:ged-writer": "node --import tsx --test src/tests/ged/writer.dryrun.test.ts src/tests/ged/writer.security.test.ts src/tests/ged/writer.docx.test.ts src/tests/ged/writer.pdf.test.ts src/tests/ged/writer.pdf.linux.test.ts src/tests/ged/writer.real.integration.test.ts src/tests/ged/writer.activation.test.ts src/tests/ged/writer.real.staging.test.ts src/tests/ged/writer.scope.test.ts"
+    "test:ged-writer": "node --import tsx --test src/tests/ged/writer.dryrun.test.ts src/tests/ged/writer.security.test.ts src/tests/ged/writer.docx.test.ts src/tests/ged/writer.pdf.test.ts src/tests/ged/writer.pdf.linux.test.ts src/tests/ged/writer.real.integration.test.ts src/tests/ged/writer.activation.test.ts src/tests/ged/writer.real.staging.test.ts src/tests/ged/writer.scope.test.ts src/tests/ged/writer.path.security.test.ts"
   },
   "dependencies": {
     "@stripe/react-stripe-js": "^6.2.0",
