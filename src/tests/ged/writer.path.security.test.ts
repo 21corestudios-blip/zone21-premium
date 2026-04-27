@@ -9,6 +9,7 @@ import { assertTargetPathAllowed } from "@/services/ged/writer/writer.guard";
 
 function withAllowedBasePath<T>(callback: () => T | Promise<T>) {
   const previousBase = process.env.Z21_ACTIVE_BASE_PATH;
+  const previousPhase2Enabled = process.env.PHASE_2_ENABLED;
   const basePath = path.join(
     os.tmpdir(),
     "zone21_ged_path_security",
@@ -18,6 +19,7 @@ function withAllowedBasePath<T>(callback: () => T | Promise<T>) {
 
   mkdirSync(basePath, { recursive: true });
   process.env.Z21_ACTIVE_BASE_PATH = basePath;
+  delete process.env.PHASE_2_ENABLED;
   resetActiveBaseStateCache();
 
   const run = async () => callback();
@@ -27,6 +29,11 @@ function withAllowedBasePath<T>(callback: () => T | Promise<T>) {
       delete process.env.Z21_ACTIVE_BASE_PATH;
     } else {
       process.env.Z21_ACTIVE_BASE_PATH = previousBase;
+    }
+    if (previousPhase2Enabled === undefined) {
+      delete process.env.PHASE_2_ENABLED;
+    } else {
+      process.env.PHASE_2_ENABLED = previousPhase2Enabled;
     }
 
     resetActiveBaseStateCache();
@@ -70,4 +77,56 @@ test("tentative injection chemin -> refus", async () => {
       /segments '\.\.'/,
     );
   });
+});
+
+test("PHASE_2 refusee si flag absent", async () => {
+  await withAllowedBasePath(async () => {
+    assert.throws(
+      () =>
+        assertTargetPathAllowed(
+          "/ZONE21_DEV/90_GED_PHASE_2/NOTE-Z21/MEDIA/01_DOCX/NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-v1.1.docx",
+        ),
+      /scope virtuel TEST/,
+    );
+  });
+});
+
+test("PHASE_2 autorisee si flag actif", async () => {
+  const previousBase = process.env.Z21_ACTIVE_BASE_PATH;
+  const previousPhase2Enabled = process.env.PHASE_2_ENABLED;
+  const basePath = path.join(
+    os.tmpdir(),
+    "zone21_ged_path_security_phase2",
+    "90_GED_PHASE_2",
+  );
+
+  mkdirSync(basePath, { recursive: true });
+  process.env.Z21_ACTIVE_BASE_PATH = basePath;
+  process.env.PHASE_2_ENABLED = "true";
+  resetActiveBaseStateCache();
+
+  try {
+    const result = assertTargetPathAllowed(
+      "/ZONE21_DEV/90_GED_PHASE_2/NOTE-Z21/MEDIA/01_DOCX/NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-v1.1.docx",
+    );
+
+    assert.equal(result.scope, "PHASE_2");
+    assert.equal(result.matchedPath, "/90_GED_PHASE_2/");
+  } finally {
+    if (previousBase === undefined) {
+      delete process.env.Z21_ACTIVE_BASE_PATH;
+    } else {
+      process.env.Z21_ACTIVE_BASE_PATH = previousBase;
+    }
+    if (previousPhase2Enabled === undefined) {
+      delete process.env.PHASE_2_ENABLED;
+    } else {
+      process.env.PHASE_2_ENABLED = previousPhase2Enabled;
+    }
+    resetActiveBaseStateCache();
+    rmSync(path.join(os.tmpdir(), "zone21_ged_path_security_phase2"), {
+      recursive: true,
+      force: true,
+    });
+  }
 });

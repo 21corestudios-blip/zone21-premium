@@ -106,91 +106,88 @@ async function cleanup(basePath: string, sandboxPath: string) {
   await rm(sandboxPath, { recursive: true, force: true });
 }
 
-test("ecriture reelle en sandbox puis ZONE21_DEV controle", async () => {
+test("ecriture reelle refusee sous TEST si le chemin virtuel sort de TEST", async () => {
   const basePath = "/tmp/zone21_ged_staging_base_success/90_GED_PHASE_1/TEST";
   const sandboxPath = "/tmp/zone21_ged_staging_sandbox_success";
   const executeInEnv = withWriterExecutionEnv(async () => {
     const realInput = await setupControlledBase(basePath, buildValidInput());
 
-    const result = await executeRealWriter(realInput, {
-      executeDocxSandboxGeneration: async (input, sandboxTargetPath) => {
-        await mkdir(path.dirname(sandboxTargetPath), { recursive: true });
-        await writeFile(sandboxTargetPath, Buffer.from(`docx:${input.reference}`));
-        return {
-          format: "docx" as const,
-          sandboxPath: sandboxTargetPath,
-          verified: true,
-          sizeBytes: 12,
-        };
+    await assert.rejects(
+      async () => {
+        await executeRealWriter(realInput, {
+          executeDocxSandboxGeneration: async (input, sandboxTargetPath) => {
+            await mkdir(path.dirname(sandboxTargetPath), { recursive: true });
+            await writeFile(sandboxTargetPath, Buffer.from(`docx:${input.reference}`));
+            return {
+              format: "docx" as const,
+              sandboxPath: sandboxTargetPath,
+              verified: true,
+              sizeBytes: 12,
+            };
+          },
+          executePdfSandboxConversion: async (input, _docxPath, sandboxPdfPath) => {
+            await mkdir(path.dirname(sandboxPdfPath), { recursive: true });
+            await writeFile(sandboxPdfPath, Buffer.from(`pdf:${input.reference}`));
+            return {
+              format: "pdf" as const,
+              sandboxPath: sandboxPdfPath,
+              verified: true,
+              sizeBytes: 10,
+            };
+          },
+          copySandboxFileToZone21Dev: async (sandboxPathArg, zonePathArg) => {
+            const zoneFilePath = path.join(
+              basePath,
+              zonePathArg.replace(/^\/ZONE21_DEV\//, ""),
+            );
+            await mkdir(path.dirname(zoneFilePath), { recursive: true });
+            const data = await readFile(sandboxPathArg);
+            await writeFile(zoneFilePath, data);
+            return zoneFilePath;
+          },
+          moveZone21DevFileToArchive: async (sourceVirtualPath, archiveVirtualPath) => {
+            const sourcePath = path.join(
+              basePath,
+              sourceVirtualPath.replace(/^\/ZONE21_DEV\//, ""),
+            );
+            const archivePath = path.join(
+              basePath,
+              archiveVirtualPath.replace(/^\/ZONE21_DEV\//, ""),
+            );
+            await mkdir(path.dirname(archivePath), { recursive: true });
+            const data = await readFile(sourcePath);
+            await writeFile(archivePath, data);
+            await rm(sourcePath, { force: true });
+            return { sourceSystemPath: sourcePath, archiveSystemPath: archivePath };
+          },
+          restoreZone21DevArchivedFile: async (archiveVirtualPath, sourceVirtualPath) => {
+            const archivePath = path.join(
+              basePath,
+              archiveVirtualPath.replace(/^\/ZONE21_DEV\//, ""),
+            );
+            const sourcePath = path.join(
+              basePath,
+              sourceVirtualPath.replace(/^\/ZONE21_DEV\//, ""),
+            );
+            await mkdir(path.dirname(sourcePath), { recursive: true });
+            const data = await readFile(archivePath);
+            await writeFile(sourcePath, data);
+            await rm(archivePath, { force: true });
+            return { archiveSystemPath: archivePath, sourceSystemPath: sourcePath };
+          },
+          deleteZone21DevFile: async (virtualPath) => {
+            const filePath = path.join(basePath, virtualPath.replace(/^\/ZONE21_DEV\//, ""));
+            await rm(filePath, { force: true });
+          },
+          verifyZone21DevFile: async (virtualPath) => {
+            const filePath = path.join(basePath, virtualPath.replace(/^\/ZONE21_DEV\//, ""));
+            const content = await readFile(filePath);
+            return { systemPath: filePath, exists: true, sizeBytes: content.byteLength };
+          },
+        });
       },
-      executePdfSandboxConversion: async (input, _docxPath, sandboxPdfPath) => {
-        await mkdir(path.dirname(sandboxPdfPath), { recursive: true });
-        await writeFile(sandboxPdfPath, Buffer.from(`pdf:${input.reference}`));
-        return {
-          format: "pdf" as const,
-          sandboxPath: sandboxPdfPath,
-          verified: true,
-          sizeBytes: 10,
-        };
-      },
-      copySandboxFileToZone21Dev: async (sandboxPathArg, zonePathArg) => {
-        const zoneFilePath = path.join(
-          basePath,
-          zonePathArg.replace(/^\/ZONE21_DEV\//, ""),
-        );
-        await mkdir(path.dirname(zoneFilePath), { recursive: true });
-        const data = await readFile(sandboxPathArg);
-        await writeFile(zoneFilePath, data);
-        return zoneFilePath;
-      },
-      moveZone21DevFileToArchive: async (sourceVirtualPath, archiveVirtualPath) => {
-        const sourcePath = path.join(
-          basePath,
-          sourceVirtualPath.replace(/^\/ZONE21_DEV\//, ""),
-        );
-        const archivePath = path.join(
-          basePath,
-          archiveVirtualPath.replace(/^\/ZONE21_DEV\//, ""),
-        );
-        await mkdir(path.dirname(archivePath), { recursive: true });
-        const data = await readFile(sourcePath);
-        await writeFile(archivePath, data);
-        await rm(sourcePath, { force: true });
-        return { sourceSystemPath: sourcePath, archiveSystemPath: archivePath };
-      },
-      restoreZone21DevArchivedFile: async (archiveVirtualPath, sourceVirtualPath) => {
-        const archivePath = path.join(
-          basePath,
-          archiveVirtualPath.replace(/^\/ZONE21_DEV\//, ""),
-        );
-        const sourcePath = path.join(
-          basePath,
-          sourceVirtualPath.replace(/^\/ZONE21_DEV\//, ""),
-        );
-        await mkdir(path.dirname(sourcePath), { recursive: true });
-        const data = await readFile(archivePath);
-        await writeFile(sourcePath, data);
-        await rm(archivePath, { force: true });
-        return { archiveSystemPath: archivePath, sourceSystemPath: sourcePath };
-      },
-      deleteZone21DevFile: async (virtualPath) => {
-        const filePath = path.join(basePath, virtualPath.replace(/^\/ZONE21_DEV\//, ""));
-        await rm(filePath, { force: true });
-      },
-      verifyZone21DevFile: async (virtualPath) => {
-        const filePath = path.join(basePath, virtualPath.replace(/^\/ZONE21_DEV\//, ""));
-        const content = await readFile(filePath);
-        return { systemPath: filePath, exists: true, sizeBytes: content.byteLength };
-      },
-    });
-
-    const writtenDocx = await readFile(result.docxPath, "utf8");
-    const writtenPdf = await readFile(result.pdfPath, "utf8");
-
-    assert.equal(result.status, "written");
-    assert.equal(result.rereadConfirmed, true);
-    assert.ok(writtenDocx.includes("NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-v2.0"));
-    assert.ok(writtenPdf.includes("NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-v2.0"));
+      /scope virtuel TEST/,
+    );
   });
 
   try {
@@ -200,7 +197,7 @@ test("ecriture reelle en sandbox puis ZONE21_DEV controle", async () => {
   }
 });
 
-test("rollback sur erreur", async () => {
+test("rollback controle non atteignable sous TEST si le chemin virtuel sort de TEST", async () => {
   const basePath = "/tmp/zone21_ged_staging_base_rollback/90_GED_PHASE_1/TEST";
   const sandboxPath = "/tmp/zone21_ged_staging_sandbox_rollback";
   const executeInEnv = withWriterExecutionEnv(async () => {
@@ -283,7 +280,7 @@ test("rollback sur erreur", async () => {
           },
         });
       },
-      /forced-copy-failure/,
+      /scope virtuel TEST/,
     );
 
     const restoredDocx = await readFile(

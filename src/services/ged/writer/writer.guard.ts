@@ -51,7 +51,7 @@ function toScopeLabel(allowedPath: string): WriterScopeLabel {
 
 function getVirtualPrefixesForScope(scope: WriterScopeLabel) {
   return scope === "TEST"
-    ? ["/90_GED_PHASE_1/TEST/", "/90_GED_PHASE_1/"]
+    ? ["/90_GED_PHASE_1/TEST/"]
     : ["/90_GED_PHASE_2/"];
 }
 
@@ -91,6 +91,7 @@ export function getWriterScopeInfo(
 export function assertWriterScopeAllowed(
   allowedWritePaths = gedConfig.writer.allowedWritePaths,
 ) {
+  const runtimeConfig = getWriterRuntimeConfig();
   const activeBaseState = getActiveBaseState();
 
   if (!activeBaseState.basePath) {
@@ -106,6 +107,39 @@ export function assertWriterScopeAllowed(
     throw new Error(
       `Activation writer refusée : Z21_ACTIVE_BASE_PATH doit rester strictement dans un périmètre autorisé (${allowedWritePaths.join(", ")}).`,
     );
+  }
+
+  if (scopeInfo.label === "PHASE_2" && !runtimeConfig.phase2Enabled) {
+    logGedAuditEvent({
+      level: "failure",
+      user: "writer-guard",
+      action: "writer_scope_phase2_gate",
+      file: "n/a",
+      version: "n/a",
+      status: "blocked",
+      errors: [
+        "Activation writer refusée : PHASE_2_ENABLED=true est obligatoire pour utiliser le périmètre PHASE_2.",
+      ],
+      scope: "PHASE_2",
+      controlResult: "blocked",
+    });
+    throw new Error(
+      "Activation writer refusée : PHASE_2_ENABLED=true est obligatoire pour utiliser le périmètre PHASE_2.",
+    );
+  }
+
+  if (scopeInfo.label === "PHASE_2" && runtimeConfig.phase2Enabled) {
+    logGedAuditEvent({
+      level: "step",
+      user: "writer-guard",
+      action: "writer_scope_phase2_gate",
+      file: "n/a",
+      version: "n/a",
+      status: "allowed",
+      errors: [],
+      scope: "PHASE_2",
+      controlResult: "allowed",
+    });
   }
 
   return scopeInfo;

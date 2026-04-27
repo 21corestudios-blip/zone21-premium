@@ -13,5 +13,5 @@ http://localhost:3000/dashboard
 Sauvegarde GIT :
 git status
 git add .
-git commit -m "feat: enforce-zone21-writer-path-level-security"
+git commit -m "feat: enforce-strict-test-scope-and-phase2-gate"
 git push

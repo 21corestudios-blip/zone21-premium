@@ -3,12 +3,14 @@ export const WRITER_ENABLED = process.env.WRITER_ENABLED === "true";
 export const WRITER_ENV_ALLOWED = ENV === "staging";
 export const WRITER_REAL_EXECUTION_CONFIRMED =
   process.env.WRITER_REAL_EXECUTION_CONFIRMED === "true";
+export const PHASE_2_ENABLED = process.env.PHASE_2_ENABLED === "true";
 
 export interface WriterRuntimeConfig {
   env: string;
   writerEnabled: boolean;
   writerEnvAllowed: boolean;
   writerRealExecutionConfirmed: boolean;
+  phase2Enabled: boolean;
 }
 
 export function getWriterRuntimeConfig(): WriterRuntimeConfig {
@@ -20,5 +22,6 @@ export function getWriterRuntimeConfig(): WriterRuntimeConfig {
     writerEnvAllowed: env === "staging",
     writerRealExecutionConfirmed:
       process.env.WRITER_REAL_EXECUTION_CONFIRMED === "true",
+    phase2Enabled: process.env.PHASE_2_ENABLED === "true",
   };
 }
