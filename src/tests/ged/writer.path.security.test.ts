@@ -4,7 +4,7 @@ import { mkdirSync, rmSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 
-import { resetActiveBaseStateCache } from "@/lib/rdm-service";
+import { resetActiveBaseStateCache, resolveSystemPath } from "@/lib/rdm-service";
 import { assertTargetPathAllowed } from "@/services/ged/writer/writer.guard";
 
 function withAllowedBasePath<T>(callback: () => T | Promise<T>) {
@@ -125,6 +125,72 @@ test("PHASE_2 autorisee si flag actif", async () => {
     }
     resetActiveBaseStateCache();
     rmSync(path.join(os.tmpdir(), "zone21_ged_path_security_phase2"), {
+      recursive: true,
+      force: true,
+    });
+  }
+});
+
+test("resolution systeme correcte sous TEST scope", async () => {
+  await withAllowedBasePath(async () => {
+    const resolved = resolveSystemPath(
+      "/ZONE21_DEV/90_GED_PHASE_1/TEST/NOTE-Z21/MEDIA/01_DOCX/NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-v1.1.docx",
+    );
+
+    assert.equal(
+      resolved.systemPath,
+      path.join(
+        os.tmpdir(),
+        "zone21_ged_path_security",
+        "90_GED_PHASE_1",
+        "TEST",
+        "NOTE-Z21/MEDIA/01_DOCX/NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-v1.1.docx",
+      ),
+    );
+  });
+});
+
+test("resolution systeme correcte sous PHASE_2 scope", async () => {
+  const previousBase = process.env.Z21_ACTIVE_BASE_PATH;
+  const previousPhase2Enabled = process.env.PHASE_2_ENABLED;
+  const basePath = path.join(
+    os.tmpdir(),
+    "zone21_ged_path_security_phase2_resolution",
+    "90_GED_PHASE_2",
+  );
+
+  mkdirSync(basePath, { recursive: true });
+  process.env.Z21_ACTIVE_BASE_PATH = basePath;
+  process.env.PHASE_2_ENABLED = "true";
+  resetActiveBaseStateCache();
+
+  try {
+    const resolved = resolveSystemPath(
+      "/ZONE21_DEV/90_GED_PHASE_2/NOTE-Z21/MEDIA/01_DOCX/NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-v1.1.docx",
+    );
+
+    assert.equal(
+      resolved.systemPath,
+      path.join(
+        os.tmpdir(),
+        "zone21_ged_path_security_phase2_resolution",
+        "90_GED_PHASE_2",
+        "NOTE-Z21/MEDIA/01_DOCX/NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-v1.1.docx",
+      ),
+    );
+  } finally {
+    if (previousBase === undefined) {
+      delete process.env.Z21_ACTIVE_BASE_PATH;
+    } else {
+      process.env.Z21_ACTIVE_BASE_PATH = previousBase;
+    }
+    if (previousPhase2Enabled === undefined) {
+      delete process.env.PHASE_2_ENABLED;
+    } else {
+      process.env.PHASE_2_ENABLED = previousPhase2Enabled;
+    }
+    resetActiveBaseStateCache();
+    rmSync(path.join(os.tmpdir(), "zone21_ged_path_security_phase2_resolution"), {
       recursive: true,
       force: true,
     });

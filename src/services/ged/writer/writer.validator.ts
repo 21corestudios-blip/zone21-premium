@@ -1,4 +1,5 @@
 import { rdmRecords } from "@/data/rdm.records";
+import { getWriterVirtualBasePath } from "./writer.guard";
 
 import type {
   WriterControlResult,
@@ -60,8 +61,6 @@ const writerAllowedObjectsByDomain: Record<WriterDomain, string[]> = {
   ],
 };
 
-const writerBasePath = "/ZONE21_DEV/90_GED_PHASE_1" as const;
-
 interface WriterValidationResult {
   status: WriterStatus;
   controls: WriterControlResult[];
@@ -107,6 +106,7 @@ function buildDocxPath(
   domain: WriterDomain,
   reference: string,
 ) {
+  const writerBasePath = getWriterVirtualBasePath();
   return `${writerBasePath}/${documentType}/${domain}/01_DOCX/${reference}.docx`;
 }
 
@@ -115,6 +115,7 @@ function buildPdfPath(
   domain: WriterDomain,
   reference: string,
 ) {
+  const writerBasePath = getWriterVirtualBasePath();
   return `${writerBasePath}/${documentType}/${domain}/02_PDF/${reference}.pdf`;
 }
 
@@ -123,6 +124,7 @@ function buildArchiveDocxPath(
   domain: WriterDomain,
   reference: string,
 ) {
+  const writerBasePath = getWriterVirtualBasePath();
   return `${writerBasePath}/${documentType}/${domain}/99_ARCHIVES/01_DOCX/${reference}.docx`;
 }
 
@@ -131,6 +133,7 @@ function buildArchivePdfPath(
   domain: WriterDomain,
   reference: string,
 ) {
+  const writerBasePath = getWriterVirtualBasePath();
   return `${writerBasePath}/${documentType}/${domain}/99_ARCHIVES/02_PDF/${reference}.pdf`;
 }
 
@@ -165,6 +168,7 @@ function resolveWriterStatus(errors: WriterError[]) {
 }
 
 export function getWriterRulesSummary(): WriterRulesSummary {
+  const writerBasePath = getWriterVirtualBasePath();
   return {
     prefixesAllowed: [...writerAllowedPrefixes],
     domainsActive: [...writerActiveDomains],
@@ -172,7 +176,7 @@ export function getWriterRulesSummary(): WriterRulesSummary {
     domainsForbidden: [...writerForbiddenDomains],
     basePath: writerBasePath,
     pathPattern:
-      "/ZONE21_DEV/90_GED_PHASE_1/[NOTE-Z21|PROC-Z21]/[DOMAINE]/01_DOCX/[REFERENCE].docx",
+      `${writerBasePath}/[NOTE-Z21|PROC-Z21]/[DOMAINE]/01_DOCX/[REFERENCE].docx`,
   };
 }
 

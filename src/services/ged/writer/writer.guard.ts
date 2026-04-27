@@ -15,6 +15,14 @@ export interface WriterScopeInfo {
   basePath: string;
 }
 
+export function getWriterVirtualBasePath(
+  scopeInfo: WriterScopeInfo | null = getWriterScopeInfo(),
+) {
+  return scopeInfo?.label === "PHASE_2"
+    ? "/ZONE21_DEV/90_GED_PHASE_2"
+    : "/ZONE21_DEV/90_GED_PHASE_1";
+}
+
 function normalizeScopePath(value: string) {
   const normalized = value.replace(/\\/g, "/").trim().replace(/\/+/g, "/");
 

@@ -3,7 +3,10 @@ import path from "node:path";
 
 import { gedConfig } from "@/config/ged.config";
 import { resolveSystemPath } from "@/lib/rdm-service";
-import { assertTargetPathAllowed } from "../writer.guard";
+import {
+  assertTargetPathAllowed,
+  getWriterVirtualBasePath,
+} from "../writer.guard";
 import type { WriterDomain, WriterPrefix } from "../writer.types";
 
 import type {
@@ -12,7 +15,6 @@ import type {
   RealWriterInput,
 } from "./writer.real.types";
 
-const realWriterBasePath = "/ZONE21_DEV/90_GED_PHASE_1" as const;
 const zone21DevPrefix = "/ZONE21_DEV/";
 
 interface RealWriterPaths {
@@ -27,7 +29,7 @@ function buildDocxPath(
   domain: WriterDomain,
   reference: string,
 ) {
-  return `${realWriterBasePath}/${documentType}/${domain}/01_DOCX/${reference}.docx`;
+  return `${getWriterVirtualBasePath()}/${documentType}/${domain}/01_DOCX/${reference}.docx`;
 }
 
 function buildPdfPath(
@@ -35,7 +37,7 @@ function buildPdfPath(
   domain: WriterDomain,
   reference: string,
 ) {
-  return `${realWriterBasePath}/${documentType}/${domain}/02_PDF/${reference}.pdf`;
+  return `${getWriterVirtualBasePath()}/${documentType}/${domain}/02_PDF/${reference}.pdf`;
 }
 
 function buildArchiveDocxPath(
@@ -43,7 +45,7 @@ function buildArchiveDocxPath(
   domain: WriterDomain,
   sourceReference: string,
 ) {
-  return `${realWriterBasePath}/${documentType}/${domain}/99_ARCHIVES/01_DOCX/${sourceReference}.docx`;
+  return `${getWriterVirtualBasePath()}/${documentType}/${domain}/99_ARCHIVES/01_DOCX/${sourceReference}.docx`;
 }
 
 function buildArchivePdfPath(
@@ -51,7 +53,7 @@ function buildArchivePdfPath(
   domain: WriterDomain,
   sourceReference: string,
 ) {
-  return `${realWriterBasePath}/${documentType}/${domain}/99_ARCHIVES/02_PDF/${sourceReference}.pdf`;
+  return `${getWriterVirtualBasePath()}/${documentType}/${domain}/99_ARCHIVES/02_PDF/${sourceReference}.pdf`;
 }
 
 export function buildRealWriterPaths(input: RealWriterInput): RealWriterPaths {
@@ -93,8 +95,8 @@ export function validateRealWriterPaths(
       path.posix.basename(paths.docx) === `${input.reference}.docx`,
     pdfFileNameConforms:
       path.posix.basename(paths.pdf) === `${input.reference}.pdf`,
-    usesGedPhaseOneRoot: paths.docx.startsWith(`${realWriterBasePath}/`) &&
-      paths.pdf.startsWith(`${realWriterBasePath}/`),
+    usesGedPhaseOneRoot: paths.docx.startsWith(`${getWriterVirtualBasePath()}/`) &&
+      paths.pdf.startsWith(`${getWriterVirtualBasePath()}/`),
   };
 }
 
@@ -149,8 +151,8 @@ export function buildArchivePlan(
     kind: "archive",
     archiveRequired: true,
     sourceReference,
-    sourceDocxPath: `${realWriterBasePath}/${input.documentType}/${input.domain}/01_DOCX/${sourceReference}.docx`,
-    sourcePdfPath: `${realWriterBasePath}/${input.documentType}/${input.domain}/02_PDF/${sourceReference}.pdf`,
+    sourceDocxPath: `${getWriterVirtualBasePath()}/${input.documentType}/${input.domain}/01_DOCX/${sourceReference}.docx`,
+    sourcePdfPath: `${getWriterVirtualBasePath()}/${input.documentType}/${input.domain}/02_PDF/${sourceReference}.pdf`,
     archiveDocxPath: paths.archiveDocx,
     archivePdfPath: paths.archivePdf,
     execute: false,
@@ -160,7 +162,7 @@ export function buildArchivePlan(
 }
 
 export function getRealWriterBasePath() {
-  return realWriterBasePath;
+  return getWriterVirtualBasePath();
 }
 
 export function getGedSandboxPath() {

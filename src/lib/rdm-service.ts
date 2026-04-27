@@ -197,10 +197,38 @@ export function resolveSystemPath(virtualPath: string): ResolvedPathResult {
     };
   }
 
+  const virtualRelativePath = virtualPath
+    .replace(/^\/?ZONE21_DEV\/?/, "")
+    .replace(/^\/+/, "");
+  const baseSegments = path
+    .resolve(activeBaseState.basePath)
+    .split(path.sep)
+    .filter(Boolean);
+  const virtualSegments = virtualRelativePath
+    .split("/")
+    .filter(Boolean);
+
+  let overlapLength = 0;
+  const maxOverlap = Math.min(baseSegments.length, virtualSegments.length);
+
+  for (let length = maxOverlap; length > 0; length -= 1) {
+    const baseTail = baseSegments.slice(-length).join("/");
+    const virtualHead = virtualSegments.slice(0, length).join("/");
+
+    if (baseTail === virtualHead) {
+      overlapLength = length;
+      break;
+    }
+  }
+
+  const resolvedRelativePath = virtualSegments
+    .slice(overlapLength)
+    .join(path.sep);
+
   return {
     systemPath: path.join(
       /* turbopackIgnore: true */ activeBaseState.basePath,
-      virtualPath.replace(/^\/?ZONE21_DEV\/?/, ""),
+      resolvedRelativePath,
     ),
     error: null,
   };

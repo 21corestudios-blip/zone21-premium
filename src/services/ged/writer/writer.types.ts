@@ -108,6 +108,6 @@ export interface WriterRulesSummary {
   domainsActive: WriterDomain[];
   domainsConditional: WriterDomain[];
   domainsForbidden: WriterDomain[];
-  basePath: "/ZONE21_DEV/90_GED_PHASE_1";
+  basePath: string;
   pathPattern: string;
 }
