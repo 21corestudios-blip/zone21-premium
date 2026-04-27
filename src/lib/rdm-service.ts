@@ -43,6 +43,11 @@ interface ResolvedPathResult {
   error: string | null;
 }
 
+interface FilePresenceInspection {
+  availability: FileAvailabilityStatus;
+  error: string | null;
+}
+
 let cachedActiveBaseState: ActiveBaseState | null = null;
 
 export function resetActiveBaseStateCache() {
@@ -89,22 +94,61 @@ function getSortableValue(record: RdmRecord, sortKey: RdmSortKey) {
   }
 }
 
-function resolveFilePresence(virtualPath: string): FileAvailabilityStatus {
+function inspectFilePresence(virtualPath: string): FilePresenceInspection {
   const resolvedPath = resolveSystemPath(virtualPath);
 
   if (!resolvedPath.systemPath) {
+    return {
+      availability: "à vérifier",
+      error: resolvedPath.error,
+    };
+  }
+
+  return {
+    availability: existsSync(resolvedPath.systemPath) ? "présent" : "manquant",
+    error: null,
+  };
+}
+
+export function deriveGovernanceSyncStatus(record: RdmRecord): GovernanceSyncStatus {
+  if (record.status === "Archivé") {
+    return "archivé";
+  }
+
+  const docxPresence = inspectFilePresence(record.docxPath);
+  const pdfPresence = inspectFilePresence(record.pdfPath);
+
+  if (docxPresence.error || pdfPresence.error) {
+    return "bloqué";
+  }
+
+  if (
+    docxPresence.availability === "manquant" ||
+    pdfPresence.availability === "manquant"
+  ) {
     return "à vérifier";
   }
 
-  return existsSync(resolvedPath.systemPath) ? "présent" : "manquant";
+  if (
+    docxPresence.availability === "présent" &&
+    pdfPresence.availability === "présent"
+  ) {
+    return "à jour";
+  }
+
+  return "à vérifier";
 }
 
 function hydrateRecord(record: RdmRecord): RdmRecord {
+  const docxPresence = inspectFilePresence(record.docxPath);
+  const pdfPresence = inspectFilePresence(record.pdfPath);
+
   return {
     ...record,
+    governanceSyncStatus: deriveGovernanceSyncStatus(record),
     fileAvailability: {
-      docx: resolveFilePresence(record.docxPath),
-      pdf: resolveFilePresence(record.pdfPath),
+      docx: docxPresence.availability,
+      pdf: pdfPresence.availability,
     },
   };
 }

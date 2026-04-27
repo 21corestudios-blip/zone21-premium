@@ -1,4 +1,8 @@
 import { getWriterRuntimeConfig } from "@/config/env.config";
+import {
+  resetActiveBaseStateCache,
+  resolveSystemPath,
+} from "@/lib/rdm-service";
 import { logGedAuditEvent } from "@/services/ged/audit/logger";
 import {
   assertWriterActivationAllowed,
@@ -368,6 +372,37 @@ export async function executeRealWriter(
       scope: writerScope.label,
     });
     steps.push("copie_pdf_zone21_dev");
+
+    resetActiveBaseStateCache();
+    const resolvedDocxPath = resolveSystemPath(paths.docx);
+    const resolvedPdfPath = resolveSystemPath(paths.pdf);
+
+    if (!resolvedDocxPath.systemPath || !resolvedPdfPath.systemPath) {
+      throw new Error(
+        "La relecture RDM n'a pas pu résoudre les chemins physiques après écriture.",
+      );
+    }
+
+    if (
+      resolvedDocxPath.systemPath !== docxSystemPath ||
+      resolvedPdfPath.systemPath !== pdfSystemPath
+    ) {
+      throw new Error(
+        "Incohérence détectée entre les chemins logiques RDM et les fichiers réellement écrits dans ZONE21_DEV.",
+      );
+    }
+
+    logGedAuditEvent({
+      level: "step",
+      user: input.validatedBy,
+      action: "coherence_rdm_zone21_dev",
+      file: input.reference,
+      version: input.versionTarget,
+      status: "ok",
+      errors: [],
+      scope: writerScope.label,
+    });
+    steps.push("coherence_rdm_zone21_dev");
 
     const rereadDocx = await dependencies.verifyZone21DevFile(paths.docx);
     const rereadPdf = await dependencies.verifyZone21DevFile(paths.pdf);

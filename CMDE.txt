@@ -13,5 +13,5 @@ http://localhost:3000/dashboard
 Sauvegarde GIT :
 git status
 git add .
-git commit -m "test: validate-zone21-writer-phase2-real-usage"
+git commit -m "feat: enforce-zone21-rdm-real-sync-consistency"
 git push
