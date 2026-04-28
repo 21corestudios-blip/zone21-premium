@@ -34,7 +34,7 @@ export const homeData: HomeData = {
   hero: {
     title: "L'Exigence pour Signature",
     imageDesktop: {
-      src: "/images/home/hero/z21-home-hero-01.webp",
+      src: "/images/home/hero/z21-home-hero-main-01-desktop-2.webp",
       alt: "Campagne institutionnelle Zone 21",
     },
     imageMobile: {
@@ -44,9 +44,9 @@ export const homeData: HomeData = {
   },
 
   manifesto: {
-    tagline: "Hors tendance. Dans la bonne direction.",
+    tagline: "Jamais dans la tendance. Toujours dans la bonne direction.",
     image: {
-      src: "/images/editorial/manifesto-vision.jpg",
+      src: "/images/editorial/z21-home-section-univers-01-2.webp",
       alt: "Vision éditoriale de Zone 21",
     },
     paragraphs: [
