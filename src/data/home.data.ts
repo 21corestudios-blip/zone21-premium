@@ -34,7 +34,7 @@ export const homeData: HomeData = {
   hero: {
     title: "L'Exigence pour Signature",
     imageDesktop: {
-      src: "/images/home/hero/campaign-spring-26-hero.jpg",
+      src: "/images/home/hero/z21-home-hero-01.webp",
       alt: "Campagne institutionnelle Zone 21",
     },
     imageMobile: {
