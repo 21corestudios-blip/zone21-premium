@@ -4,15 +4,14 @@ export default function MaisonGrid() {
   return (
     <SplitShowcaseSection
       eyebrow="Les Maisons Zone 21"
-      title="Notre Écosystème."
+      title="Des signatures distinctes. Une même culture."
       paragraphs={[
-        "Zone 21 n’est pas une entité figée. C’est un écosystème vivant, pensé comme un territoire d’expression, de création et d’influence.",
-        "Chaque Maison y déploie sa vision, son langage, son rythme. Mode, expérience, culture et présence physique prolongent une même ambition.",
-        "Au cœur de cet ensemble, une ligne demeure invariable : l’exigence absolue, la maîtrise du détail, et le refus de tout compromis.",
-        "Zone 21 réunit des univers distincts, mais guidés par une même volonté : concevoir avec justesse, élever les standards, et inscrire chaque geste dans une vision plus large.",
+        "ZONE 21 rassemble des maisons qui ne racontent pas la même chose, mais parlent depuis les mêmes racines : la rue, l’image, le son, le vêtement, le geste juste.",
+        "21 WEAR travaille la silhouette. 21 CORE STUDIOS façonne les identités. 21 PRODUCTION porte le son et les artistes. 21 TALENTS AGENCY donne corps aux présences qui incarnent l’époque.",
+        "Chaque maison avance avec son langage, son rythme et son territoire. Ensemble, elles composent une marque-monde : culturelle, urbaine, précise, pensée pour durer sans perdre sa tension.",
       ]}
       imageSrc="/images/editorial/Ecosysteme.jpg"
-      imageAlt="L'Écosystème Zone 21"
+      imageAlt="Les Maisons Zone 21"
       imagePosition="left"
       theme="light"
       sectionClassName="bg-white"

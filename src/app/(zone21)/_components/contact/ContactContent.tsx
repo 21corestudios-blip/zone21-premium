@@ -20,15 +20,25 @@ export default function ContactContent() {
 
             <div className="flex flex-col gap-6">
               <p className="font-sans text-[0.98rem] font-light leading-[1.95] tracking-[0.01em] text-[#121110]/72 md:text-[1.05rem]">
-                Pour une collaboration, une demande de création sur mesure ou
-                toute question concernant nos univers, Zone 21 vous invite à
-                prendre contact. Chaque demande est considérée avec exigence,
-                discrétion et attention.
+                Pour une collaboration, une création sur mesure ou une demande
+                liée à nos maisons, ZONE 21 vous invite à prendre contact.
+                Chaque message est reçu comme un point d’entrée sérieux : une
+                intention à comprendre, un univers à cadrer, une présence à
+                construire avec justesse.
               </p>
 
               <p className="font-sans text-[0.98rem] font-light leading-[1.95] tracking-[0.01em] text-[#121110]/72 md:text-[1.05rem]">
-                Nous privilégions les échanges clairs, précis et alignés avec la
-                qualité d’exécution que nous portons dans chacun de nos projets.
+                Direction artistique, image, vêtement, musique, talents ou
+                stratégie de marque : chaque échange ouvre un espace de travail
+                où la vision, le détail et l’exécution doivent avancer avec la
+                même précision.
+              </p>
+
+              <p className="font-sans text-[0.98rem] font-light leading-[1.95] tracking-[0.01em] text-[#121110]/72 md:text-[1.05rem]">
+                Nous privilégions les échanges clairs, discrets et alignés avec
+                la qualité que ZONE 21 porte dans chacun de ses projets. Entrer
+                dans la Zone, c’est ouvrir une conversation avec une maison qui
+                prend le fond autant au sérieux que la forme.
               </p>
             </div>
 

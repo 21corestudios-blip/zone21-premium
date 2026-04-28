@@ -44,15 +44,15 @@ export const homeData: HomeData = {
   },
 
   manifesto: {
-    tagline:
-      "Une architecture créative dédiée à l'émergence des maisons de demain.",
+    tagline: "Hors tendance. Dans la bonne direction.",
     image: {
       src: "/images/editorial/manifesto-vision.jpg",
-      alt: "Vision de la Maison Zone 21",
+      alt: "Vision éditoriale de Zone 21",
     },
     paragraphs: [
-      "Zone 21 donne forme aux marques avec une vision fondée sur l’exigence, la précision et la durée. Chaque projet naît d’une attention profonde portée aux matières, à la justesse du positionnement et à la construction d’un héritage pensé pour s’inscrire au-delà de l’instant.",
-      "Ici, il ne s’agit pas simplement de structurer un écosystème, mais de faire émerger des univers désirables, cohérents et durables, capables de traverser le temps avec une présence calme, une force maîtrisée et une autorité naturelle.",
+      "ZONE 21 ne court pas après la tendance. Le projet avance autrement : avec une direction, une exigence et une identité qui ne changent pas au premier mouvement du moment.",
+      "Ici, chaque marque, chaque image, chaque son et chaque récit doivent tenir debout. Pas pour plaire vite. Pas pour disparaître vite. Mais pour construire des codes reconnaissables, durables et cohérents.",
+      "ZONE 21 avance entre culture street, héritage musical, vêtement, production, image et narration. Un territoire créatif où chaque univers garde sa personnalité, mais partage la même base : caractère, précision, cohérence et vision.",
     ],
   },
 
@@ -60,7 +60,7 @@ export const homeData: HomeData = {
     {
       id: "wear",
       name: "21 WEAR",
-      category: "Mode & Prêt-à-porter",
+      category: "Vêtement, culture street & silhouettes premium",
       image: {
         src: "/images/brands/21-wear/campaign-1.webp",
         alt: "Campagne 21 Wear",
@@ -71,7 +71,7 @@ export const homeData: HomeData = {
     {
       id: "core",
       name: "21 CORE STUDIOS",
-      category: "Agence Créative",
+      category: "Image, direction créative & systèmes de marque",
       image: {
         src: "/images/brands/21-core/studio-1.webp",
         alt: "21 Core Studios",
@@ -82,7 +82,7 @@ export const homeData: HomeData = {
     {
       id: "prod",
       name: "21 PRODUCTION",
-      category: "Promotion d'Artistes",
+      category: "Son, artistes & héritage musical",
       image: {
         src: "/images/brands/21-production/prod-1.jpg",
         alt: "21 Production",
@@ -93,7 +93,7 @@ export const homeData: HomeData = {
     {
       id: "talents",
       name: "21 TALENTS AGENCY",
-      category: "Promotion de Talents",
+      category: "Talents, visages & présences éditoriales",
       image: {
         src: "/images/brands/21-core/studio-1.webp",
         alt: "Agence créative 21 Talents Agency",

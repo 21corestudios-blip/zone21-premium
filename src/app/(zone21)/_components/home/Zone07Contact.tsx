@@ -6,16 +6,17 @@ export default function Zone07Contact() {
       eyebrow="Contact"
       title="Entrer dans la Zone."
       paragraphs={[
-        "Pour une collaboration, une demande de création sur mesure ou toute question concernant nos univers, Zone 21 reçoit chaque prise de contact avec exigence, discrétion et attention.",
-        "Chaque échange ouvre un espace de travail où la direction artistique, la stratégie et la production avancent avec une même précision.",
+        "Une collaboration commence rarement par un formulaire. Elle commence par une intention claire, une idée à cadrer, une présence à construire ou un univers à faire exister avec justesse.",
+        "ZONE 21 reçoit chaque prise de contact avec exigence, discrétion et attention. Demande de création sur mesure, projet éditorial, direction artistique, image, musique, talent ou développement de marque : chaque échange est traité comme un point d’entrée sérieux.",
+        "Entrer dans la Zone, c’est ouvrir un espace de travail où la vision, la stratégie et la production avancent ensemble. Avec précision, avec tenue, et avec le souci de créer quelque chose qui garde sa force dans le temps.",
       ]}
       imageSrc="/images/contact/contact 2.jpg"
-      imageAlt="Studio Zone 21"
+      imageAlt="Entrer dans la Zone 21"
       imagePosition="left"
       theme="light"
       sectionClassName="bg-white"
       ctaHref="/contact"
-      ctaLabel="Nous Contacter"
+      ctaLabel="Entrer en contact"
       imageClassName="object-cover"
     />
   );

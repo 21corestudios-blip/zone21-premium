@@ -5,11 +5,11 @@ import HomePageSections from "./_components/home/HomePageSections";
 export const metadata: Metadata = {
   title: "Accueil",
   description:
-    "Découvrez Zone 21 : l'architecture créative dédiée à l'émergence des maisons de demain. Explorez 21 Wear, 21 Core Studios et 21 Production.",
+    "ZONE 21 construit des univers hors tendance, mais dans la bonne direction : vêtement, image, musique, production et récits autour d’une même exigence créative.",
   openGraph: {
-    title: "ZONE 21 | L'Exigence pour Signature",
+    title: "ZONE 21 | Hors tendance. Dans la bonne direction.",
     description:
-      "Découvrez Zone 21 : l'architecture créative dédiée à l'émergence des maisons de demain. Explorez 21 Wear, 21 Core Studios et 21 Production.",
+      "ZONE 21 construit des univers créatifs entre culture street, image, vêtement, musique, production et narration.",
     url: "/",
     siteName: "ZONE 21",
     locale: "fr_FR",
@@ -17,9 +17,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "ZONE 21 | L'Exigence pour Signature",
+    title: "ZONE 21 | Hors tendance. Dans la bonne direction.",
     description:
-      "Découvrez Zone 21 : l'architecture créative dédiée à l'émergence des maisons de demain. Explorez 21 Wear, 21 Core Studios et 21 Production.",
+      "Un territoire créatif entre culture street, image, vêtement, musique, production et narration.",
   },
   alternates: {
     canonical: "/",

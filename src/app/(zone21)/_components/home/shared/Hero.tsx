@@ -13,7 +13,7 @@ export default function Hero() {
           alt={imageDesktop.alt}
           fill
           priority
-          quality={100}
+          quality={85}
           sizes="100vw"
           className="animate-image-reveal object-cover object-center"
         />

@@ -6,16 +6,17 @@ export default function Zone05About() {
       eyebrow="À Propos"
       title="Les Origines."
       paragraphs={[
-        "Zone 21 est née d’une conviction profonde : les forces les plus puissantes émergent souvent dans des lieux que l’on raconte trop vite, alors qu’ils portent déjà une discipline, une intensité et une vision rares.",
-        "Pensée comme une entité tournée vers la conception, la vision et la construction d’univers durables, Zone 21 transforme ces influences premières en langage, en esthétique et en structure.",
+        "ZONE 21 prend forme autour de figures fondatrices. Elena Davalon, Naya Delmare et Heka ne sont pas de simples personnages : ils incarnent les premières forces de la maison. L’image, la silhouette, le son, la présence et le récit.",
+        "À travers eux, ZONE 21 installe ses racines : une culture urbaine assumée, un héritage hip-hop et RnB, une attention au vêtement, au rythme, au détail et aux signes capables de durer.",
+        "De cette base naît un territoire créatif plus large. Une maison pensée pour relier les univers sans les confondre, construire des lignes fortes et donner à chaque projet une présence reconnaissable.",
       ]}
       imageSrc="/images/a_propos/photo_texte.jpg"
-      imageAlt="L'exigence Zone 21"
+      imageAlt="Figures fondatrices de ZONE 21"
       imagePosition="right"
       theme="light"
       sectionClassName="bg-white"
       ctaHref="/a-propos"
-      ctaLabel="Découvrir la Vision"
+      ctaLabel="Découvrir les origines"
       imageClassName="object-cover"
     />
   );
