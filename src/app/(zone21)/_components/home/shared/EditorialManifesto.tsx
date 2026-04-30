@@ -14,7 +14,7 @@ export default function EditorialManifesto() {
       imagePosition="right"
       theme="light"
       sectionClassName="bg-white"
-      imageClassName="object-contain bg-white p-8"
+      imageClassName="object-cover object-center"
     />
   );
 }
