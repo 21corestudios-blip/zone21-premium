@@ -46,7 +46,7 @@ export const homeData: HomeData = {
   manifesto: {
     tagline: "Jamais dans la tendance. Toujours dans la bonne direction.",
     image: {
-      src: "/images/editorial/z21-home-section-univers-01-3.webp",
+      src: "/images/editorial/z21-home-section-univers-01-2.webp",
       alt: "Vision éditoriale de Zone 21",
     },
     paragraphs: [
