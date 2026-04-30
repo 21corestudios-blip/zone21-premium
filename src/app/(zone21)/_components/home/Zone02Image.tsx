@@ -5,7 +5,7 @@ export default function Zone02Image() {
     <ImmersiveImageSection
       src="/images/editorial/z21-home-univers-02-4.webp"
       alt=""
-      imageClassName="object-cover object-center"
+      imageClassName="object-cover object-[center_90%]"
       backgroundClassName="bg-white"
     />
   );
