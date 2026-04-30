@@ -3,7 +3,7 @@ import ImmersiveImageSection from "./shared/ImmersiveImageSection";
 export default function Zone04Image() {
   return (
     <ImmersiveImageSection
-      src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop"
+      src="/images/home/z21-home-zone-4.webp"
       alt=""
       backgroundClassName="bg-white"
       imageClassName="object-cover object-center"
