@@ -46,12 +46,12 @@ export default function HeaderCore() {
               className="flex-shrink-0 drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-opacity duration-500 hover:opacity-80"
             >
               <Image
-                src="/images/ui/logo-zone21-light.svg"
-                alt="ZONE 21"
+                src="/images/ui/core_studios_blanc-1.svg"
+                alt="CORE STUDIOS"
                 width={140}
                 height={40}
                 priority
-                className="h-5 w-auto md:h-6"
+                className="h-16 w-auto md:h-18"
               />
             </Link>
 

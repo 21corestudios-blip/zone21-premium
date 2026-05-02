@@ -14,7 +14,7 @@ export const coreData: CoreData = {
     title: "21 Core Studios",
     subtitle:
       "L'agence design et développement de Zone 21 pour les identités, les interfaces et les objets de marque.",
-    image: "/images/brands/21-core/studio-1.webp",
+    image: "/images/brands/21-core/z21-21-core-studios-hero.webp",
   },
   manifesto: [
     "21 Core Studios conçoit des systèmes visuels et digitaux pour les marques qui veulent une présence forte, précise et durable. Direction artistique, design web, codage et graphisme y sont pensés comme un seul langage.",

@@ -20,7 +20,7 @@ export default function FooterCore() {
               className="inline-block transition-opacity duration-500 hover:opacity-80"
             >
               <Image
-                src="/images/ui/logo-zone21-light.svg"
+                src="/images/ui/core_studios_blanc-1.svg"
                 alt="ZONE 21"
                 width={140}
                 height={40}
@@ -69,13 +69,22 @@ export default function FooterCore() {
               21 Core Studios
             </span>
 
-            <Link href="/core-studios/brand-design" className={footerLinkClassName}>
+            <Link
+              href="/core-studios/brand-design"
+              className={footerLinkClassName}
+            >
               Brand Design
             </Link>
-            <Link href="/core-studios/web-experience" className={footerLinkClassName}>
+            <Link
+              href="/core-studios/web-experience"
+              className={footerLinkClassName}
+            >
               Web Experience
             </Link>
-            <Link href="/core-studios/marketing-objects" className={footerLinkClassName}>
+            <Link
+              href="/core-studios/marketing-objects"
+              className={footerLinkClassName}
+            >
               Marketing Objects
             </Link>
             <Link href="/contact" className={footerLinkClassName}>
