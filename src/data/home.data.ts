@@ -62,7 +62,7 @@ export const homeData: HomeData = {
       name: "21 WEAR",
       category: "Vêtement, culture street & silhouettes premium",
       image: {
-        src: "/images/brands/21-wear/campaign-1.webp",
+        src: "/images/ecosysteme/z21-ecosysteme-grid-21-wear-2.webp",
         alt: "Campagne 21 Wear",
       },
       href: "/wear",
