@@ -73,7 +73,7 @@ export const homeData: HomeData = {
       name: "21 CORE STUDIOS",
       category: "Image, direction créative & systèmes de marque",
       image: {
-        src: "/images/brands/21-core/studio-1.webp",
+        src: "/images/ecosysteme/z21-ecosysteme-grid-21-core studios-1.webp",
         alt: "21 Core Studios",
       },
       href: "/core-studios",
@@ -84,7 +84,7 @@ export const homeData: HomeData = {
       name: "21 PRODUCTION",
       category: "Son, artistes & héritage musical",
       image: {
-        src: "/images/brands/21-production/prod-1.jpg",
+        src: "/images/ecosysteme/z21-ecosysteme-grid-21-production-1.webp",
         alt: "21 Production",
       },
       href: "/prod",
@@ -95,7 +95,7 @@ export const homeData: HomeData = {
       name: "21 TALENTS AGENCY",
       category: "Talents, visages & présences éditoriales",
       image: {
-        src: "/images/brands/21-core/studio-1.webp",
+        src: "/images/ecosysteme/z21-ecosysteme-grid-21-talents-agency-2.webp",
         alt: "Agence créative 21 Talents Agency",
       },
       href: "/talents-agency",

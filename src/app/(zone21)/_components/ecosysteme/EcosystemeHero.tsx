@@ -5,7 +5,7 @@ export default function EcosystemeHero() {
     <section className="relative h-[100dvh] min-h-screen w-full overflow-hidden bg-[#121110]">
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/ecosysteme/z21-ecosysteme-hero-1.webp"
+          src="/images/ecosysteme/z21-ecosysteme-hero-3.webp"
           alt="Écosystème Zone 21"
           fill
           priority
