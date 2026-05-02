@@ -81,6 +81,9 @@ export default function FooterProduction() {
             <Link href="/contact" className={footerLinkClassName}>
               Contact prive
             </Link>
+            <Link href="/collaborateurs" className={footerLinkClassName}>
+              Accès collaborateurs
+            </Link>
           </div>
         </div>
 

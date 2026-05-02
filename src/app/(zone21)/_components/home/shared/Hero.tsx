@@ -15,7 +15,7 @@ export default function Hero() {
           priority
           quality={85}
           sizes="100vw"
-          className="animate-image-reveal object-cover object-[center_38%]"
+          className="animate-image-reveal object-cover object-center"
         />
       </div>
 

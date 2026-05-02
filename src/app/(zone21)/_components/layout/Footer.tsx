@@ -77,6 +77,10 @@ export default function Footer() {
               Contact
             </Link>
 
+            <Link href="/collaborateurs" className={footerLinkClassName}>
+              Accès collaborateurs
+            </Link>
+
             <Link
               href="/mentions-legales"
               className={`${footerLinkClassName} mt-4 md:mt-0`}

@@ -84,6 +84,9 @@ export default function FooterTalents() {
             <Link href="/talents-agency/culture-digital" className={footerLinkClassName}>
               Culture & Digital
             </Link>
+            <Link href="/collaborateurs" className={footerLinkClassName}>
+              Accès collaborateurs
+            </Link>
           </div>
         </div>
 

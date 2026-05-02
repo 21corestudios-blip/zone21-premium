@@ -4,14 +4,18 @@ import localFont from "next/font/local";
 import "./globals.css";
 
 const texteFont = localFont({
-  src: "./fonts/texte.woff2",
+  src: "../../public/fonts/Satoshi-Regular.otf",
   variable: "--font-texte",
+  weight: "400",
+  style: "normal",
   display: "swap",
 });
 
 const titreFont = localFont({
-  src: "./fonts/titre.woff2",
+  src: "../../public/fonts/Coolvetica Rg Cond.otf",
   variable: "--font-titre",
+  weight: "400",
+  style: "normal",
   display: "swap",
 });
 

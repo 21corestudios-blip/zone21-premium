@@ -83,6 +83,10 @@ export default function FooterWear() {
             <Link href="/wear/studio" className={footerLinkClassName}>
               Studio Collection
             </Link>
+
+            <Link href="/collaborateurs" className={footerLinkClassName}>
+              Accès collaborateurs
+            </Link>
           </div>
         </div>
 

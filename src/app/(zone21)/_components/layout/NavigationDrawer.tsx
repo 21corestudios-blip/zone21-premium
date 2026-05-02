@@ -13,7 +13,6 @@ interface NavigationDrawerProps {
 
 const primaryLinks = [
   { name: "Accueil", href: "/" },
-  { name: "Collaborateurs", href: "/collaborateurs" },
   { name: "Contact", href: "/contact" },
   { name: "À propos", href: "/a-propos" },
   { name: "Mentions légales", href: "/mentions-legales" },

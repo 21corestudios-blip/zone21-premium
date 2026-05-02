@@ -81,6 +81,9 @@ export default function FooterCore() {
             <Link href="/contact" className={footerLinkClassName}>
               Contact studio
             </Link>
+            <Link href="/collaborateurs" className={footerLinkClassName}>
+              Accès collaborateurs
+            </Link>
           </div>
         </div>
 

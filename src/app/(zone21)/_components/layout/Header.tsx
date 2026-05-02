@@ -68,10 +68,6 @@ export default function Header() {
               className="hidden items-center gap-6 md:flex lg:gap-8"
               aria-label="Navigation secondaire"
             >
-              <Link href="/collaborateurs" className={desktopLinkClassName}>
-                Collaborateurs
-              </Link>
-
               <Link href="/contact" className={desktopLinkClassName}>
                 Contact
               </Link>
