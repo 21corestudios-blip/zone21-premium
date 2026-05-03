@@ -20,11 +20,11 @@ export default function FooterProduction() {
               className="inline-block transition-opacity duration-500 hover:opacity-80"
             >
               <Image
-                src="/images/ui/logo-zone21-light.svg"
+                src="/images/ui/21-prod-logo-blanc-1.png"
                 alt="ZONE 21"
                 width={140}
                 height={40}
-                className="h-6 w-auto md:h-7"
+                className="h-20 w-auto md:h-22"
               />
             </Link>
 

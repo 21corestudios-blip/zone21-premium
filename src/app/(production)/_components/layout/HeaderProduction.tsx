@@ -46,12 +46,12 @@ export default function HeaderProduction() {
               className="flex-shrink-0 drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-opacity duration-500 hover:opacity-80"
             >
               <Image
-                src="/images/ui/logo-zone21-light.svg"
+                src="/images/ui/21-prod-logo-blanc-1.png"
                 alt="ZONE 21"
                 width={140}
                 height={40}
                 priority
-                className="h-5 w-auto md:h-6"
+                className="h-34 w-auto md:h-36"
               />
             </Link>
 
@@ -59,14 +59,14 @@ export default function HeaderProduction() {
               className="hidden items-center gap-5 lg:flex"
               aria-label="Artistes 21 Production"
             >
+              <Link href="/prod/heka" className={artistLinkClassName}>
+                Heka
+              </Link>
+              <Link href="/prod/axion" className={artistLinkClassName}>
+                Axion
+              </Link>
               <Link href="/prod/nova" className={artistLinkClassName}>
                 Nova
-              </Link>
-              <Link href="/prod/elya" className={artistLinkClassName}>
-                Elya
-              </Link>
-              <Link href="/prod/kael" className={artistLinkClassName}>
-                Kael
               </Link>
             </nav>
           </div>

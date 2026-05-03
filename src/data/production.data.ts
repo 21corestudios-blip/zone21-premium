@@ -14,7 +14,7 @@ export const productionData: ProductionData = {
     title: "21 Production",
     subtitle:
       "Le label et studio de ressources de Zone 21 pour beatmakers, DJs et artistes en mouvement.",
-    image: "/images/brands/21-production/prod-1.jpg",
+    image: "/images/brands/21-production/z21-21-production-hero.webp",
   },
   manifesto: [
     "21 Production accompagne les artistes avec une direction sonore exigeante, une mise en valeur editoriale et des outils pensés pour accélérer la création sans banaliser la signature.",
