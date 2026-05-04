@@ -23,7 +23,7 @@ const siteUrl = "https://zone21.com";
 const siteName = "ZONE 21";
 const defaultTitle = "ZONE 21 | L'Exigence pour Signature";
 const defaultDescription =
-  "Une architecture créative dédiée à l'émergence des maisons de demain.";
+  "ZONE 21 est une maison créative indépendante dédiée aux univers premium entre vêtement, image, musique, production, talents et culture street.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -35,11 +35,24 @@ export const metadata: Metadata = {
   applicationName: siteName,
   keywords: [
     "Zone 21",
+    "maison créative",
+    "maison créative indépendante",
+    "studio créatif",
+    "direction artistique",
+    "culture street",
+    "vêtement premium",
+    "image de marque",
+    "production musicale",
+    "talents créatifs",
+    "univers créatif",
+    "narration de marque",
     "21 Wear",
     "21 Core Studios",
     "21 Production",
     "creative house",
+    "creative studio",
     "fashion",
+    "premium clothing",
     "music production",
     "talents",
     "branding",

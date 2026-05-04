@@ -13,11 +13,11 @@ export const coreData: CoreData = {
   hero: {
     title: "21 Core Studios",
     subtitle:
-      "L'agence design et développement de Zone 21 pour les identités, les interfaces et les objets de marque.",
+      "Le studio créatif de ZONE 21 pour les identités, les interfaces, la direction artistique et les systèmes de marque.",
     image: "/images/brands/21-core/z21-21-core-studios-hero.webp",
   },
   manifesto: [
-    "21 Core Studios conçoit des systèmes visuels et digitaux pour les marques qui veulent une présence forte, précise et durable. Direction artistique, design web, codage et graphisme y sont pensés comme un seul langage.",
-    "Le studio intervient autant sur des prestations sur mesure que sur des objets prêts à activer: cadres, assets, kits marketing, templates et dispositifs pensés pour accélérer l'exécution sans dégrader le niveau de finition.",
+    "21 Core Studios conçoit des identités visuelles, des interfaces et des systèmes digitaux pour les marques qui veulent une présence forte, précise et durable. Direction artistique, design web, code et graphisme y parlent le même langage.",
+    "Le studio produit des cadres, des assets, des kits activables, des templates et des dispositifs de marque prêts à tenir. Chaque objet sert une direction claire, sans dégrader le niveau de finition.",
   ],
 };

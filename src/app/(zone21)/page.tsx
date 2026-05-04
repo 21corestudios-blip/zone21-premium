@@ -5,11 +5,11 @@ import HomePageSections from "./_components/home/HomePageSections";
 export const metadata: Metadata = {
   title: "Accueil",
   description:
-    "ZONE 21 construit des univers hors tendance, mais dans la bonne direction : vêtement, image, musique, production et récits autour d’une même exigence créative.",
+    "ZONE 21 trace une direction hors tendance, entre maison créative, vêtement premium, image, musique, production, talents et narration.",
   openGraph: {
     title: "ZONE 21 | Hors tendance. Dans la bonne direction.",
     description:
-      "ZONE 21 construit des univers créatifs entre culture street, image, vêtement, musique, production et narration.",
+      "Une maison créative indépendante pour des univers cohérents entre culture street, image, vêtement, musique, production et narration.",
     url: "/",
     siteName: "ZONE 21",
     locale: "fr_FR",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "ZONE 21 | Hors tendance. Dans la bonne direction.",
     description:
-      "Un territoire créatif entre culture street, image, vêtement, musique, production et narration.",
+      "Un territoire hors tendance, dans la bonne direction, entre culture street, image, vêtement, musique, production et narration.",
   },
   alternates: {
     canonical: "/",
