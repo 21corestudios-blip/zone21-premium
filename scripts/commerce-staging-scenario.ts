@@ -1,3 +1,7 @@
+import { loadCommerceScriptEnv } from "./lib/load-commerce-env";
+
+loadCommerceScriptEnv();
+
 const requiredEnvironment = [
   "DATABASE_URL",
   "STRIPE_SECRET_KEY",

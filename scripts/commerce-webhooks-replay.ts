@@ -6,6 +6,9 @@ import type {
   StoredWebhookEvent,
   WebhookProcessingStatus,
 } from "@/lib/commerce/persistence/types";
+import { loadCommerceScriptEnv } from "./lib/load-commerce-env";
+
+loadCommerceScriptEnv();
 
 const args = new Map(
   process.argv.slice(2).map((arg) => {

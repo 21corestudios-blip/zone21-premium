@@ -3,6 +3,10 @@ import path from "node:path";
 
 import mysql from "mysql2/promise";
 
+import { loadCommerceScriptEnv } from "./lib/load-commerce-env";
+
+loadCommerceScriptEnv();
+
 type SeedMapping = {
   id: string;
   brand: string;

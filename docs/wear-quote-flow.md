@@ -42,6 +42,44 @@ Si Printify ne fournit pas une quote exploitable pour un produit, la ligne passe
 `WEAR_ALLOW_ESTIMATED_QUOTES=true` autorise une estimation de secours en local.
 Cette variable doit rester `false` en production.
 
+En staging, elle doit aussi rester `false`.
+
+## Vérification Lot 6
+
+Commande :
+
+```bash
+npm run commerce:wear:quote-check
+```
+
+La commande teste deux destinations :
+
+- EU : priorité Gelato ;
+- US : priorité Printify.
+
+Résultat attendu :
+
+- provider choisi ;
+- mapping actif ;
+- montant shipping réel ;
+- total checkout ;
+- `quoteId` si retourné par le provider.
+
+Statut actuel : bloqué.
+
+Commande exécutée :
+
+```bash
+npm run commerce:wear:quote-check
+```
+
+Résultat :
+
+- EU/Gelato : `WEAR_REAL_QUOTE_UNAVAILABLE:gelato:mapping_missing,printify:mapping_missing`
+- US/Printify : `WEAR_REAL_QUOTE_UNAVAILABLE:printify:mapping_missing,gelato:mapping_missing`
+
+Raison : aucun mapping Wear actif réel n'est disponible dans `db/seeds/wear-provider-mappings.json` ni dans la DB locale accessible. Les placeholders restent inactifs, et c'est volontaire.
+
 ## Erreurs métier
 
 - `WEAR_PRODUCT_NOT_FOUND`

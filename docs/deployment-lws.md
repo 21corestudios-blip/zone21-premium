@@ -117,3 +117,25 @@ Blockers :
 - variables cPanel/Node a renseigner ;
 - webhook Stripe test a pointer vers l'URL publique ;
 - mappings Wear actifs requis avant scenario complet.
+
+## Preflight Lot 6
+
+Commande :
+
+```bash
+npm run commerce:staging:check
+```
+
+Avec verification publique :
+
+```bash
+COMMERCE_STAGING_PUBLIC_CHECK=true npm run commerce:staging:check
+```
+
+La cible LWS ne sera consideree validee que si :
+
+- `NEXT_PUBLIC_SITE_URL` est une URL HTTPS publique ;
+- `/`, `/a-propos`, `/ecosysteme` et `/contact` repondent ;
+- `/api/commerce/webhooks/stripe` est joignable publiquement ;
+- le webhook Stripe test signe un vrai `checkout.session.completed` ;
+- la DB staging conserve orders/webhooks/provider orders apres redemarrage Node.

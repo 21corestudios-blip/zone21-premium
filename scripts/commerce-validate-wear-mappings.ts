@@ -1,6 +1,10 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 
+import { loadCommerceScriptEnv } from "./lib/load-commerce-env";
+
+loadCommerceScriptEnv();
+
 type SeedMapping = {
   id: string;
   internalProductId: string;

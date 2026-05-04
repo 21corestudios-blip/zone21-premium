@@ -72,4 +72,31 @@ Resultat attendu :
 
 ## Statut actuel
 
-Le scenario n'a pas ete execute dans ce lot faute de secrets, comptes connectes et mappings provider reels disponibles dans l'environnement local.
+Le scénario n'a pas été exécuté dans le lot 6 local faute de secrets, comptes connectés, URL publique staging et mappings provider réels disponibles dans l'environnement de validation.
+
+Commande exécutée :
+
+```bash
+npm run commerce:staging:scenario
+```
+
+Résultat attendu tant que l'environnement n'est pas armé :
+
+- statut `blocked` ;
+- liste des variables manquantes ;
+- aucune Checkout Session créée.
+
+Pour Lot 6 réel, la commande doit être relancée avec :
+
+```bash
+COMMERCE_STAGING_SCENARIO_RUN=true npm run commerce:staging:scenario
+```
+
+Puis documenter :
+
+- `orderId` ;
+- `checkoutSessionId` ;
+- `paymentIntentId` ;
+- `transferGroup` ;
+- `stripeTransferId` par brand ;
+- `providerOrderId` Wear.

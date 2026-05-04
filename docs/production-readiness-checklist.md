@@ -2,6 +2,9 @@
 
 ## Validation code
 
+- `npm run commerce:staging:check`
+- `npm run commerce:validate:wear-mappings`
+- `npm run commerce:wear:quote-check`
 - `npm run typecheck`
 - `npm run lint`
 - `npm run build`
@@ -58,3 +61,12 @@
 
 - Staging avance : possible apres vrais mappings et secrets test.
 - Go-live : bloque tant que le scenario e2e reel n'est pas prouve.
+
+## Lot 6
+
+- Environnement staging reel : non prouve dans ce passage local.
+- Quotes Wear reelles : non prouvees faute de mappings actifs.
+- Checkout Stripe Connect test : non execute.
+- Webhook public reel : non execute.
+- Transferts brand reels : non executes.
+- Provider order Wear reelle : non creee.

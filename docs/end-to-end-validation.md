@@ -11,9 +11,9 @@
 - commande fournisseur Wear
 - refresh statut fournisseur
 
-## Statut d'execution
+## Statut d'exécution Lot 6
 
-Non execute en conditions reelles dans ce passage local.
+Non exécuté en conditions réelles dans ce passage local.
 
 Raison : les donnees operationnelles suivantes ne sont pas presentes dans le repo ni dans l'environnement :
 
@@ -22,6 +22,33 @@ Raison : les donnees operationnelles suivantes ne sont pas presentes dans le rep
 - comptes connectes Stripe test valides
 - endpoint LWS/staging expose en HTTPS
 - secret webhook Stripe staging
+
+## Vérifications exécutées Lot 6
+
+- preflight staging ajouté via `npm run commerce:staging:check` ;
+- validation mappings existante conservée via `npm run commerce:validate:wear-mappings` ;
+- vérification quotes réelles ajoutée via `npm run commerce:wear:quote-check` ;
+- scénario checkout staging conservé via `npm run commerce:staging:scenario` ;
+- replay webhook conservé via `npm run commerce:webhooks:replay` ;
+- refresh provider order conservé via `npm run commerce:provider-orders:refresh`.
+
+Résultats réels :
+
+- `commerce:staging:check` : bloqué, URL locale et variables critiques absentes.
+- `commerce:validate:wear-mappings` : bloqué, aucun mapping actif.
+- `commerce:wear:quote-check` : bloqué, mappings manquants EU/US.
+- `commerce:staging:scenario` : bloqué, variables critiques absentes.
+
+## IDs réels
+
+Aucun ID réel n'a été généré dans ce lot :
+
+- aucun `checkoutSessionId` réel ;
+- aucun `paymentIntentId` réel ;
+- aucun `transferId` réel ;
+- aucun `providerOrderId` réel.
+
+Cette absence est un blocker go-live.
 
 ## Ce qui est validable maintenant
 

@@ -41,9 +41,28 @@ Le tracking sera alimenté par :
 - webhook fournisseur si disponible ;
 - outil admin de refresh.
 
+Commande de refresh :
+
+```bash
+npm run commerce:provider-orders:refresh
+```
+
 ## Garde-fous
 
 - Pas de double commande fournisseur.
 - Pas de commande fournisseur si mapping absent.
 - Pas de commande fournisseur si adresse shipping absente.
 - Pas de déclenchement côté front.
+
+## Validation Lot 6
+
+Statut actuel : provider order réelle non créée.
+
+Raison : aucun paiement Stripe test réel, aucun webhook public réel et aucun mapping Wear actif réel n'ont été validés dans l'environnement disponible.
+
+Preuve attendue avant go-live :
+
+- `providerOrderId` Printify ou Gelato ;
+- raw response persistée ;
+- refresh statut fournisseur exécuté ;
+- replay webhook sans duplication de provider order.

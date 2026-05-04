@@ -69,14 +69,14 @@ export default function FooterProduction() {
               21 Production
             </span>
 
+            <Link href="/prod/heka" className={footerLinkClassName}>
+              Heka
+            </Link>
+            <Link href="/prod/axion" className={footerLinkClassName}>
+              Axion
+            </Link>
             <Link href="/prod/nova" className={footerLinkClassName}>
               Nova
-            </Link>
-            <Link href="/prod/elya" className={footerLinkClassName}>
-              Elya
-            </Link>
-            <Link href="/prod/kael" className={footerLinkClassName}>
-              Kael
             </Link>
             <Link href="/contact" className={footerLinkClassName}>
               Contact prive

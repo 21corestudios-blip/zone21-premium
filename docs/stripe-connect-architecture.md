@@ -61,3 +61,19 @@ Il marque la commande comme payée sur `checkout.session.completed`.
 - remboursements ;
 - retries ;
 - monitoring.
+
+## Validation Lot 6 attendue
+
+Le scénario Stripe Connect test est considéré prouvé uniquement avec :
+
+- `checkoutSessionId` ;
+- `paymentIntentId` ;
+- `transferGroup` ;
+- `stripeTransferId` par brand ;
+- destination account par brand ;
+- montant brut, frais plateforme et net amount persistés ;
+- replay webhook sans nouveau transfert.
+
+Statut actuel : non prouvé.
+
+Raison : comptes connectés test, webhook HTTPS public et vrais mappings Wear non disponibles dans l'environnement de validation local.

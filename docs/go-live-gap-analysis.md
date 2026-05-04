@@ -6,6 +6,8 @@ Statut : valide sous conditions pour staging avance.
 
 Statut go-live : non pret pour go-live.
 
+Lot 6 : les outils de validation reelle sont en place, mais les validations critiques restent non prouvees faute de secrets, mappings actifs et URL publique staging/LWS.
+
 ## Pret
 
 - Separation Storyblok / commerce maintenue.
@@ -39,6 +41,12 @@ Statut go-live : non pret pour go-live.
 4. Validation LWS reelle non executee.
    - Le serveur cible, Passenger, HTTPS et webhook public doivent etre testes.
 
+5. Quotes provider reelles non executees.
+   - `npm run commerce:wear:quote-check` doit passer en staging avec `WEAR_ALLOW_ESTIMATED_QUOTES=false`.
+
+6. Webhook public reel non prouve.
+   - Il faut un endpoint HTTPS staging joignable par Stripe.
+
 ## Blockers importants
 
 - Normalisation tracking provider a affiner apres premieres reponses reelles.
@@ -57,3 +65,16 @@ Statut go-live : non pret pour go-live.
 - Pret pour staging avance : oui, sous conditions.
 - Pret pour preproduction complete : non, tant que les mappings et la recette Stripe/provider ne sont pas prouves.
 - Pret pour go-live : non.
+
+## Prochaine etape
+
+Renseigner les vrais mappings Wear et les secrets staging, exposer l'URL HTTPS, puis executer :
+
+```bash
+npm run commerce:staging:check
+npm run commerce:validate:wear-mappings
+npm run commerce:wear:quote-check
+COMMERCE_STAGING_SCENARIO_RUN=true npm run commerce:staging:scenario
+npm run commerce:webhooks:replay -- --event=evt_xxx --force
+npm run commerce:provider-orders:refresh
+```
