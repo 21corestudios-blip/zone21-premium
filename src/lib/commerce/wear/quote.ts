@@ -23,6 +23,7 @@ export interface WearQuote {
   total: CommerceMoney;
   sourceProductId?: string;
   sourceVariantId?: string;
+  providerMappingId?: string;
   fallbackReason?: string;
   quoteId?: string;
   shipmentMethodUid?: string;
@@ -94,6 +95,7 @@ export async function quoteWearLine(input: WearQuoteInput): Promise<WearQuote> {
         },
         sourceProductId: mapping.productMapping.providerProductId,
         sourceVariantId: mapping.variantMapping.providerVariantId,
+        providerMappingId: mapping.productMapping.id,
         quoteId: providerQuote.quoteId,
         shipmentMethodUid: providerQuote.shipmentMethodUid,
         rawQuote: providerQuote.rawQuote,

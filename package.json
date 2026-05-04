@@ -9,6 +9,11 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "commerce:migrate": "tsx scripts/commerce-migrate.ts",
+    "commerce:seed:wear-mappings": "tsx scripts/commerce-seed-wear-mappings.ts",
+    "commerce:validate:wear-mappings": "tsx scripts/commerce-validate-wear-mappings.ts",
+    "commerce:webhooks:replay": "tsx scripts/commerce-webhooks-replay.ts",
+    "commerce:provider-orders:refresh": "tsx scripts/commerce-provider-orders-refresh.ts",
+    "commerce:staging:scenario": "tsx scripts/commerce-staging-scenario.ts",
     "test:ged-writer": "node --import tsx --test src/tests/ged/writer.dryrun.test.ts src/tests/ged/writer.security.test.ts src/tests/ged/writer.docx.test.ts src/tests/ged/writer.pdf.test.ts src/tests/ged/writer.pdf.linux.test.ts src/tests/ged/writer.real.integration.test.ts src/tests/ged/writer.activation.test.ts src/tests/ged/writer.real.staging.test.ts src/tests/ged/writer.scope.test.ts src/tests/ged/writer.path.security.test.ts src/tests/rdm.sync.test.ts"
   },
   "dependencies": {

@@ -18,6 +18,8 @@ Option B, frontend + backend séparés, reste possible plus tard si LWS limite l
 ```bash
 npm install
 npm run commerce:migrate
+npm run commerce:seed:wear-mappings
+npm run commerce:validate:wear-mappings
 npm run typecheck
 npm run lint
 npm run build
@@ -29,10 +31,12 @@ Ordre recommandé :
 1. configurer les variables LWS ;
 2. lancer `npm install` ;
 3. lancer `npm run commerce:migrate` ;
-4. lancer `npm run typecheck` ;
-5. lancer `npm run lint` ;
-6. lancer `npm run build` ;
-7. démarrer l'app Node avec `npm run start`.
+4. lancer `npm run commerce:seed:wear-mappings` ;
+5. lancer `npm run commerce:validate:wear-mappings` ;
+6. lancer `npm run typecheck` ;
+7. lancer `npm run lint` ;
+8. lancer `npm run build` ;
+9. démarrer l'app Node avec `npm run start`.
 
 ## Variables
 
@@ -56,6 +60,7 @@ Variables bloquantes production :
 - `GELATO_API_KEY`
 - `GELATO_DEFAULT_FILE_URL`
 - `WEAR_ALLOW_ESTIMATED_QUOTES=false`
+- `COMMERCE_ADMIN_REPLAY_ENABLED=false` en production, sauf fenetre de maintenance controlee
 
 ## Webhooks
 
@@ -92,10 +97,23 @@ Désactiver temporairement le checkout global si le ledger ou les webhooks écho
 1. Ouvrir `/` et vérifier la home Storyblok/fallback.
 2. Appeler `/api/storyblok/preview` sans secret et vérifier `401`.
 3. Valider un panier via `/api/commerce/cart/validate`.
-4. Créer une Checkout Session via `/api/commerce/checkout`.
-5. Simuler `checkout.session.completed` via Stripe CLI.
+4. Creer une Checkout Session via `COMMERCE_STAGING_SCENARIO_RUN=true npm run commerce:staging:scenario`.
+5. Payer avec une carte Stripe test.
 6. Vérifier `webhook_events`.
 7. Vérifier `orders` et `order_items`.
 8. Vérifier `stripe_transfers`.
 9. Vérifier `provider_orders` pour les lignes Wear.
-10. Rejouer le même webhook et vérifier qu'aucun doublon n'est créé.
+10. Rejouer le meme webhook avec `npm run commerce:webhooks:replay -- --event=evt_xxx --force`.
+11. Lancer `npm run commerce:provider-orders:refresh`.
+12. Verifier qu'aucun doublon order, transfer ou provider order n'est cree.
+
+## Validation reelle LWS
+
+Statut actuel : non execute sur l'instance cible dans ce lot local.
+
+Blockers :
+
+- URL HTTPS LWS/staging a confirmer ;
+- variables cPanel/Node a renseigner ;
+- webhook Stripe test a pointer vers l'URL publique ;
+- mappings Wear actifs requis avant scenario complet.

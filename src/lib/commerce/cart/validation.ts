@@ -2,9 +2,11 @@ import { getCommerceProductById } from "@/lib/commerce/catalog";
 import type {
   CommerceCartLine,
   CommerceCartValidation,
+  CommerceCustomer,
   CommerceLineInput,
   CommerceMoney,
 } from "@/lib/commerce/types";
+import { quoteWearLine } from "@/lib/commerce/wear/quote";
 
 function lineIdFor(productId: string, variantId: string) {
   return `${productId}:${variantId}`;
@@ -58,10 +60,7 @@ export function validateCommerceCart(
   const brandSubtotals = Array.from(
     lines.reduce((map, line) => {
       const previous = map.get(line.brand) || 0;
-      map.set(
-        line.brand,
-        previous + line.checkoutPrice.amountCents * line.quantity,
-      );
+      map.set(line.brand, previous + lineAmountCents(line));
       return map;
     }, new Map<CommerceCartLine["brand"], number>()),
   ).map(([brand, amountCents]) => ({
@@ -77,14 +76,96 @@ export function validateCommerceCart(
   };
 }
 
+export async function validateCommerceCartForCheckout({
+  items,
+  customer,
+}: {
+  items: CommerceLineInput[];
+  customer?: CommerceCustomer;
+}): Promise<CommerceCartValidation> {
+  const baseValidation = validateCommerceCart(items);
+  const lines = await Promise.all(
+    baseValidation.lines.map(async (line) => {
+      if (
+        line.brand !== "wear" ||
+        (line.fulfillmentProvider !== "printify" &&
+          line.fulfillmentProvider !== "gelato")
+      ) {
+        return line;
+      }
+
+      const destination = customer?.shippingAddress;
+
+      if (!destination?.country) {
+        throw new Error("WEAR_SHIPPING_ADDRESS_REQUIRED");
+      }
+
+      const quote = await quoteWearLine({
+        productId: line.productId,
+        variantId: line.variantId,
+        quantity: line.quantity,
+        destination: {
+          country: destination.country,
+          postalCode: destination.postalCode,
+          city: destination.city,
+        },
+      });
+
+      if (
+        quote.fallbackReason &&
+        process.env.WEAR_ALLOW_ESTIMATED_QUOTES !== "true"
+      ) {
+        throw new Error("WEAR_REAL_QUOTE_REQUIRED");
+      }
+
+      return {
+        ...line,
+        fulfillmentProvider: quote.provider,
+        providerMappingId: quote.providerMappingId,
+        lineTotal: quote.total,
+        shippingAmount: quote.shipping,
+        metadata: {
+          ...line.metadata,
+          providerDecisionReason: quote.providerDecisionReason,
+          providerMappingId: quote.providerMappingId || null,
+          sourceProductId: quote.sourceProductId || null,
+          sourceVariantId: quote.sourceVariantId || null,
+          quoteId: quote.quoteId || null,
+          shipmentMethodUid: quote.shipmentMethodUid || null,
+          shippingAmountCents: quote.shipping.amountCents,
+          checkoutLineTotalCents: quote.total.amountCents,
+        },
+      } satisfies CommerceCartLine;
+    }),
+  );
+  const total = sumLines(lines);
+  const brandSubtotals = Array.from(
+    lines.reduce((map, line) => {
+      const previous = map.get(line.brand) || 0;
+      map.set(line.brand, previous + lineAmountCents(line));
+      return map;
+    }, new Map<CommerceCartLine["brand"], number>()),
+  ).map(([brand, amountCents]) => ({
+    brand,
+    amountCents,
+    currency: total.currency,
+  }));
+
+  return { lines, brandSubtotals, total };
+}
+
 function sumLines(lines: CommerceCartLine[]): CommerceMoney {
   const currency = lines[0]?.currency || "EUR";
 
   return {
     amountCents: lines.reduce(
-      (total, line) => total + line.checkoutPrice.amountCents * line.quantity,
+      (total, line) => total + lineAmountCents(line),
       0,
     ),
     currency,
   };
+}
+
+function lineAmountCents(line: CommerceCartLine) {
+  return line.lineTotal?.amountCents ?? line.checkoutPrice.amountCents * line.quantity;
 }

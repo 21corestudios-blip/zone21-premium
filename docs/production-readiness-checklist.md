@@ -22,6 +22,7 @@
 - Aucun prix ou stock contrôlé par Storyblok.
 - `DATABASE_URL` configurée.
 - Migrations commerce exécutées.
+- Mappings Wear seedés et validés.
 - Commandes persistées après redémarrage.
 
 ## Stripe
@@ -32,6 +33,7 @@
 - Transferts par brand testés.
 - Refunds testés.
 - Replay webhook sans double transfert.
+- `npm run commerce:webhooks:replay -- --event=evt_xxx --force` validé en staging.
 
 ## Fulfillment
 
@@ -41,6 +43,7 @@
 - Fallback fournisseur testé.
 - Tracking et incidents persistés.
 - Replay webhook sans double commande fournisseur.
+- Refresh statut fournisseur testé via `npm run commerce:provider-orders:refresh`.
 - `WEAR_ALLOW_ESTIMATED_QUOTES=false` en production.
 
 ## LWS
@@ -50,3 +53,8 @@
 - Start Node OK.
 - Logs accessibles.
 - Rollback documenté.
+
+## Decision go-live
+
+- Staging avance : possible apres vrais mappings et secrets test.
+- Go-live : bloque tant que le scenario e2e reel n'est pas prouve.

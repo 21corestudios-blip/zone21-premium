@@ -98,8 +98,11 @@ export interface CommerceCartLine {
   quantity: number;
   displayPrice: CommerceMoney;
   checkoutPrice: CommerceMoney;
+  lineTotal?: CommerceMoney;
+  shippingAmount?: CommerceMoney;
   currency: CurrencyCode;
   fulfillmentProvider: FulfillmentProvider;
+  providerMappingId?: string;
   metadata: Record<string, string | number | boolean | null>;
 }
 

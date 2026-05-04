@@ -73,16 +73,19 @@ export async function createGlobalCheckoutSession({
     success_url: successUrl,
     cancel_url: cancelUrl,
     line_items: cart.lines.map((line) => ({
-      quantity: line.quantity,
+      quantity: line.lineTotal ? 1 : line.quantity,
       price_data: {
         currency: line.currency.toLowerCase(),
-        unit_amount: line.checkoutPrice.amountCents,
+        unit_amount: line.lineTotal?.amountCents ?? line.checkoutPrice.amountCents,
         product_data: {
-          name: String(line.metadata.productTitle || line.productId),
+          name: line.lineTotal
+            ? `${String(line.metadata.productTitle || line.productId)} x${line.quantity}`
+            : String(line.metadata.productTitle || line.productId),
           metadata: {
             product_id: line.productId,
             variant_id: line.variantId,
             brand: line.brand,
+            provider_mapping_id: line.providerMappingId || "",
           },
         },
       },

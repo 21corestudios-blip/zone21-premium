@@ -7,6 +7,7 @@ import type {
   PersistWebhookEventInput,
   PersistWebhookEventResult,
   ProviderMappingBundle,
+  ProviderOrderEventRecord,
   ProviderOrderRecord,
   ProviderProductMapping,
   ProviderVariantMapping,
@@ -74,8 +75,29 @@ type VariantMappingRow = RowDataPacket & {
   metadata_json: unknown;
 };
 
-type StripeTransferRow = RowDataPacket & StripeTransferRecord;
-type ProviderOrderRow = RowDataPacket & ProviderOrderRecord;
+type StripeTransferRow = RowDataPacket & {
+  id: string;
+  order_id: string;
+  brand: StripeTransferRecord["brand"];
+  stripe_transfer_id: string | null;
+  destination_account: string | null;
+  amount: number;
+  currency: string;
+  status: StripeTransferRecord["status"];
+  attempt_count: number;
+  failure_reason: string | null;
+  idempotency_key: string;
+};
+type ProviderOrderRow = RowDataPacket & {
+  id: string;
+  order_id: string;
+  provider: ProviderOrderRecord["provider"];
+  provider_order_id: string | null;
+  status: ProviderOrderRecord["status"];
+  tracking_json: unknown;
+  raw_response_json: unknown;
+  idempotency_key: string;
+};
 
 export class MySqlCommerceRepository implements CommerceRepository {
   private get db() {
@@ -242,6 +264,54 @@ export class MySqlCommerceRepository implements CommerceRepository {
     return { event: mapWebhookRow(firstRow(rows)!), duplicate: false };
   }
 
+  async listWebhookEvents({
+    provider,
+    status,
+    limit = 50,
+  }: {
+    provider?: StoredWebhookEvent["provider"];
+    status?: WebhookProcessingStatus;
+    limit?: number;
+  } = {}) {
+    const clauses: string[] = [];
+    const values: Array<string | number> = [];
+
+    if (provider) {
+      clauses.push("provider = ?");
+      values.push(provider);
+    }
+
+    if (status) {
+      clauses.push("processing_status = ?");
+      values.push(status);
+    }
+
+    values.push(limit);
+    const [rows] = await this.db.execute<WebhookRow[]>(
+      `SELECT * FROM webhook_events
+       ${clauses.length ? `WHERE ${clauses.join(" AND ")}` : ""}
+       ORDER BY received_at DESC
+       LIMIT ?`,
+      values,
+    );
+    return rows.map(mapWebhookRow);
+  }
+
+  async getWebhookEvent({
+    provider,
+    eventId,
+  }: {
+    provider: StoredWebhookEvent["provider"];
+    eventId: string;
+  }) {
+    const [rows] = await this.db.execute<WebhookRow[]>(
+      "SELECT * FROM webhook_events WHERE provider = ? AND event_id = ? LIMIT 1",
+      [provider, eventId],
+    );
+    const row = firstRow(rows);
+    return row ? mapWebhookRow(row) : null;
+  }
+
   async markWebhookEventStatus(input: {
     eventId: string;
     provider: StoredWebhookEvent["provider"];
@@ -335,7 +405,8 @@ export class MySqlCommerceRepository implements CommerceRepository {
       "SELECT * FROM stripe_transfers WHERE idempotency_key = ? LIMIT 1",
       [idempotencyKey],
     );
-    return firstRow(rows) || null;
+    const row = firstRow(rows);
+    return row ? mapStripeTransferRow(row) : null;
   }
 
   async recordProviderOrder(record: ProviderOrderRecord) {
@@ -368,7 +439,60 @@ export class MySqlCommerceRepository implements CommerceRepository {
       "SELECT * FROM provider_orders WHERE idempotency_key = ? LIMIT 1",
       [idempotencyKey],
     );
-    return firstRow(rows) || null;
+    const row = firstRow(rows);
+    return row ? mapProviderOrderRow(row) : null;
+  }
+
+  async listProviderOrders({
+    provider,
+    status,
+    limit = 50,
+  }: {
+    provider?: ProviderOrderRecord["provider"];
+    status?: ProviderOrderRecord["status"];
+    limit?: number;
+  } = {}) {
+    const clauses: string[] = [];
+    const values: Array<string | number> = [];
+
+    if (provider) {
+      clauses.push("provider = ?");
+      values.push(provider);
+    }
+
+    if (status) {
+      clauses.push("status = ?");
+      values.push(status);
+    }
+
+    values.push(limit);
+    const [rows] = await this.db.execute<ProviderOrderRow[]>(
+      `SELECT * FROM provider_orders
+       ${clauses.length ? `WHERE ${clauses.join(" AND ")}` : ""}
+       ORDER BY updated_at DESC
+       LIMIT ?`,
+      values,
+    );
+    return rows.map(mapProviderOrderRow);
+  }
+
+  async recordProviderOrderEvent(record: ProviderOrderEventRecord) {
+    await this.db.execute(
+      `INSERT INTO provider_order_events
+        (id, provider_order_id, provider, event_type, payload_json)
+       VALUES (?, ?, ?, ?, ?)
+       ON DUPLICATE KEY UPDATE
+         event_type = VALUES(event_type),
+         payload_json = VALUES(payload_json)`,
+      [
+        record.id,
+        record.providerOrderRecordId,
+        record.provider,
+        record.eventType,
+        toJson(record.payloadJson),
+      ],
+    );
+    return record;
   }
 
   async recordFulfillmentAttempt(record: FulfillmentAttemptRecord) {
@@ -444,5 +568,34 @@ function mapVariantMappingRow(row: VariantMappingRow): ProviderVariantMapping {
     sku: row.sku,
     active: Boolean(row.active),
     metadata: fromJson(row.metadata_json, {}),
+  };
+}
+
+function mapStripeTransferRow(row: StripeTransferRow): StripeTransferRecord {
+  return {
+    id: row.id,
+    orderId: row.order_id,
+    brand: row.brand,
+    stripeTransferId: row.stripe_transfer_id,
+    destinationAccount: row.destination_account,
+    amount: row.amount,
+    currency: row.currency,
+    status: row.status,
+    attemptCount: row.attempt_count,
+    failureReason: row.failure_reason,
+    idempotencyKey: row.idempotency_key,
+  };
+}
+
+function mapProviderOrderRow(row: ProviderOrderRow): ProviderOrderRecord {
+  return {
+    id: row.id,
+    orderId: row.order_id,
+    provider: row.provider,
+    providerOrderId: row.provider_order_id,
+    status: row.status,
+    trackingJson: fromJson(row.tracking_json, null),
+    rawResponseJson: fromJson(row.raw_response_json, null),
+    idempotencyKey: row.idempotency_key,
   };
 }

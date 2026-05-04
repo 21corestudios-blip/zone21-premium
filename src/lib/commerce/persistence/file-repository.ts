@@ -8,6 +8,7 @@ import type {
   PersistWebhookEventInput,
   PersistWebhookEventResult,
   ProviderMappingBundle,
+  ProviderOrderEventRecord,
   ProviderOrderRecord,
   ProviderProductMapping,
   ProviderVariantMapping,
@@ -23,6 +24,7 @@ interface CommerceFileState {
   providerVariantMappings: ProviderVariantMapping[];
   stripeTransfers: StripeTransferRecord[];
   providerOrders: ProviderOrderRecord[];
+  providerOrderEvents: ProviderOrderEventRecord[];
   fulfillmentAttempts: FulfillmentAttemptRecord[];
 }
 
@@ -33,6 +35,7 @@ const emptyState: CommerceFileState = {
   providerVariantMappings: [],
   stripeTransfers: [],
   providerOrders: [],
+  providerOrderEvents: [],
   fulfillmentAttempts: [],
 };
 
@@ -198,6 +201,38 @@ export class FileCommerceRepository implements CommerceRepository {
     return { event, duplicate: false };
   }
 
+  async listWebhookEvents({
+    provider,
+    status,
+    limit = 50,
+  }: {
+    provider?: StoredWebhookEvent["provider"];
+    status?: WebhookProcessingStatus;
+    limit?: number;
+  } = {}) {
+    const state = await this.readState();
+    return state.webhookEvents
+      .filter((event) => !provider || event.provider === provider)
+      .filter((event) => !status || event.processingStatus === status)
+      .slice(-limit)
+      .reverse();
+  }
+
+  async getWebhookEvent({
+    provider,
+    eventId,
+  }: {
+    provider: StoredWebhookEvent["provider"];
+    eventId: string;
+  }) {
+    const state = await this.readState();
+    return (
+      state.webhookEvents.find(
+        (event) => event.provider === provider && event.eventId === eventId,
+      ) || null
+    );
+  }
+
   async markWebhookEventStatus({
     eventId,
     provider,
@@ -306,6 +341,33 @@ export class FileCommerceRepository implements CommerceRepository {
         (entry) => entry.idempotencyKey === idempotencyKey,
       ) || null
     );
+  }
+
+  async listProviderOrders({
+    provider,
+    status,
+    limit = 50,
+  }: {
+    provider?: ProviderOrderRecord["provider"];
+    status?: ProviderOrderRecord["status"];
+    limit?: number;
+  } = {}) {
+    const state = await this.readState();
+    return state.providerOrders
+      .filter((order) => !provider || order.provider === provider)
+      .filter((order) => !status || order.status === status)
+      .slice(-limit)
+      .reverse();
+  }
+
+  async recordProviderOrderEvent(record: ProviderOrderEventRecord) {
+    const state = await this.readState();
+    state.providerOrderEvents = [
+      ...state.providerOrderEvents.filter((event) => event.id !== record.id),
+      record,
+    ];
+    await this.writeState(state);
+    return record;
   }
 
   async recordFulfillmentAttempt(record: FulfillmentAttemptRecord) {

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { validateCommerceCart } from "@/lib/commerce/cart/validation";
+import { validateCommerceCartForCheckout } from "@/lib/commerce/cart/validation";
 import {
   buildTransferGroup,
   createGlobalCheckoutSession,
@@ -41,7 +41,10 @@ export async function POST(request: Request) {
   }
 
   try {
-    const cart = validateCommerceCart(body.items || []);
+    const cart = await validateCommerceCartForCheckout({
+      items: body.items || [],
+      customer: body.customer,
+    });
     const orderId = createOrderId();
     const transferGroup = buildTransferGroup(orderId);
     const order: CommerceOrder = createPendingOrderFromCart({

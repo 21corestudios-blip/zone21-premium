@@ -13,5 +13,5 @@ http://localhost:3000/dashboard
 Sauvegarde GIT :
 git status
 git add .
-git commit -m "feat(commerce): harden persistence webhooks and fulfillment"
+git commit -m "feat(commerce): add staging readiness and replay tooling"
 git push

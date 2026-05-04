@@ -29,6 +29,7 @@ Variables optionnelles :
 - `DATABASE_URL`
 - `COMMERCE_FILE_DB_PATH`
 - `WEAR_ALLOW_ESTIMATED_QUOTES=true` uniquement si les mappings fournisseurs ne sont pas encore activés.
+- `COMMERCE_ADMIN_REPLAY_ENABLED=false` par defaut.
 
 ## Staging
 
@@ -44,6 +45,8 @@ Variables :
 - tokens Printify/Gelato sandbox si disponibles.
 - `DATABASE_URL` staging.
 - `WEAR_ALLOW_ESTIMATED_QUOTES=false` pour valider les quotes réelles.
+- `COMMERCE_ADMIN_REPLAY_ENABLED=true` uniquement pour une fenetre de recette controlee.
+- variables `COMMERCE_STAGING_*` pour le scenario de checkout test.
 
 ## Production
 
@@ -71,6 +74,7 @@ Variables :
 - `DATABASE_URL`
 - `WEAR_ALLOW_ESTIMATED_QUOTES=false`
 - `GELATO_DEFAULT_FILE_URL`
+- `COMMERCE_ADMIN_REPLAY_ENABLED=false`
 
 ## LWS / cPanel Node
 
@@ -79,6 +83,9 @@ Le build attendu reste :
 
 ```bash
 npm install
+npm run commerce:migrate
+npm run commerce:seed:wear-mappings
+npm run commerce:validate:wear-mappings
 npm run typecheck
 npm run lint
 npm run build

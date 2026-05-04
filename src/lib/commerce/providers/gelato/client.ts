@@ -41,6 +41,14 @@ export interface GelatoOrderCreateRequest extends GelatoShippingQuoteRequest {
   shipmentMethodUid?: string;
 }
 
+export interface GelatoOrderStatus {
+  id?: string;
+  orderId?: string;
+  status?: string;
+  trackingInfo?: unknown;
+  shipments?: unknown;
+}
+
 export class GelatoClient {
   private readonly apiKey?: string;
   private readonly storeId?: string;
@@ -168,6 +176,10 @@ export class GelatoClient {
         }),
       },
     );
+  }
+
+  async getOrder(orderId: string) {
+    return this.request<GelatoOrderStatus>(`/v4/orders/${orderId}`);
   }
 }
 

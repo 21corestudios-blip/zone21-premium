@@ -40,7 +40,12 @@ async function createWearProviderOrderForLine(
     idempotencyKey,
   );
 
-  if (existing?.status === "submitted") {
+  if (
+    existing &&
+    ["submitted", "accepted", "in_production", "shipped"].includes(
+      existing.status,
+    )
+  ) {
     return;
   }
 

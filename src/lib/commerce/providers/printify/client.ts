@@ -54,6 +54,16 @@ export interface PrintifyOrderCreateRequest {
   };
 }
 
+export interface PrintifyOrderStatus {
+  id?: string;
+  status?: string;
+  shipments?: Array<{
+    carrier?: string;
+    number?: string;
+    tracking_url?: string;
+  }>;
+}
+
 export class PrintifyClient {
   private readonly token?: string;
   private readonly shopId?: string;
@@ -139,6 +149,16 @@ export class PrintifyClient {
         method: "POST",
         body: JSON.stringify(payload),
       },
+    );
+  }
+
+  async getOrder(orderId: string) {
+    if (!this.shopId) {
+      throw new Error("PRINTIFY_SHOP_ID is not configured.");
+    }
+
+    return this.request<PrintifyOrderStatus>(
+      `/shops/${this.shopId}/orders/${orderId}.json`,
     );
   }
 }

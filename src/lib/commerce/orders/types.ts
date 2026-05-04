@@ -69,7 +69,8 @@ export function createPendingOrderFromCart({
 }): CommerceOrder {
   const now = new Date().toISOString();
   const items = cart.lines.map((line) => {
-    const grossAmountCents = line.checkoutPrice.amountCents * line.quantity;
+    const grossAmountCents =
+      line.lineTotal?.amountCents ?? line.checkoutPrice.amountCents * line.quantity;
     const platformFeeCents = Math.round(
       (grossAmountCents * platformFeeBps) / 10000,
     );
@@ -96,6 +97,7 @@ export function createPendingOrderFromCart({
       refundStatus: "none",
       fulfillmentProvider: line.fulfillmentProvider,
       fulfillmentStatus: "pending",
+      providerMappingId: line.providerMappingId,
     } satisfies CommerceOrderLine;
   });
   const platformFeeTotal = items.reduce(

@@ -87,10 +87,25 @@ export interface ProviderOrderRecord {
   orderId: string;
   provider: Extract<FulfillmentProvider, "printify" | "gelato">;
   providerOrderId?: string | null;
-  status: "pending" | "submitted" | "failed" | "skipped";
+  status:
+    | "pending"
+    | "submitted"
+    | "accepted"
+    | "in_production"
+    | "shipped"
+    | "failed"
+    | "skipped";
   trackingJson?: unknown;
   rawResponseJson?: unknown;
   idempotencyKey: string;
+}
+
+export interface ProviderOrderEventRecord {
+  id: string;
+  providerOrderRecordId: string;
+  provider: Extract<FulfillmentProvider, "printify" | "gelato">;
+  eventType: string;
+  payloadJson: unknown;
 }
 
 export interface FulfillmentAttemptRecord {
@@ -120,6 +135,15 @@ export interface CommerceRepository {
   persistWebhookEvent(
     input: PersistWebhookEventInput,
   ): Promise<PersistWebhookEventResult>;
+  listWebhookEvents(input?: {
+    provider?: StoredWebhookEvent["provider"];
+    status?: WebhookProcessingStatus;
+    limit?: number;
+  }): Promise<StoredWebhookEvent[]>;
+  getWebhookEvent(input: {
+    provider: StoredWebhookEvent["provider"];
+    eventId: string;
+  }): Promise<StoredWebhookEvent | null>;
   markWebhookEventStatus(input: {
     eventId: string;
     provider: StoredWebhookEvent["provider"];
@@ -142,6 +166,14 @@ export interface CommerceRepository {
   getProviderOrderByIdempotencyKey(
     idempotencyKey: string,
   ): Promise<ProviderOrderRecord | null>;
+  listProviderOrders(input?: {
+    provider?: Extract<FulfillmentProvider, "printify" | "gelato">;
+    status?: ProviderOrderRecord["status"];
+    limit?: number;
+  }): Promise<ProviderOrderRecord[]>;
+  recordProviderOrderEvent(
+    record: ProviderOrderEventRecord,
+  ): Promise<ProviderOrderEventRecord>;
   recordFulfillmentAttempt(
     record: FulfillmentAttemptRecord,
   ): Promise<FulfillmentAttemptRecord>;
