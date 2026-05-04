@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 
-import HomePageSections from "./_components/home/HomePageSections";
+import PreviewToolbar from "@/components/storyblok/PreviewToolbar";
+import StoryblokRenderer from "@/components/storyblok/StoryblokRenderer";
+import { homeStoryFallback } from "@/data/storyblok/home.story";
+import { getStoryblokStory } from "@/lib/storyblok/api";
 
 export const metadata: Metadata = {
   title: "Accueil",
@@ -26,10 +29,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const { story, version } = await getStoryblokStory("home", homeStoryFallback);
+
   return (
     <main className="flex min-h-screen w-full flex-col bg-[#F7F5F0] selection:bg-[#121110] selection:text-[#F7F5F0]">
-      <HomePageSections />
+      <PreviewToolbar enabled={version === "draft"} />
+      <StoryblokRenderer story={story} />
     </main>
   );
 }
