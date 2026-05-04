@@ -20,17 +20,17 @@ export default function FooterTalents() {
               className="inline-block transition-opacity duration-500 hover:opacity-80"
             >
               <Image
-                src="/images/ui/logo-zone21-light.svg"
+                src="/images/ui/talents-agency-blanc.png"
                 alt="ZONE 21"
                 width={140}
                 height={40}
-                className="h-6 w-auto md:h-7"
+                className="h-10 w-auto md:h-12"
               />
             </Link>
 
             <p className="max-w-md font-sans text-sm font-light leading-relaxed text-white/60 md:text-base">
-              Agence de promotion de talents, influence, campagnes et activations
-              de visibilité pour l&apos;écosystème Zone 21.
+              Agence de promotion de talents, influence, campagnes et
+              activations de visibilité pour l&apos;écosystème Zone 21.
             </p>
 
             <form
@@ -69,7 +69,10 @@ export default function FooterTalents() {
               21 Talents Agency
             </span>
 
-            <Link href="/talents-agency/fashion-luxury" className={footerLinkClassName}>
+            <Link
+              href="/talents-agency/fashion-luxury"
+              className={footerLinkClassName}
+            >
               Fashion & Luxury
             </Link>
             <Link
@@ -78,10 +81,16 @@ export default function FooterTalents() {
             >
               Lifestyle & Hospitality
             </Link>
-            <Link href="/talents-agency/sport-performance" className={footerLinkClassName}>
+            <Link
+              href="/talents-agency/sport-performance"
+              className={footerLinkClassName}
+            >
               Sport & Performance
             </Link>
-            <Link href="/talents-agency/culture-digital" className={footerLinkClassName}>
+            <Link
+              href="/talents-agency/culture-digital"
+              className={footerLinkClassName}
+            >
               Culture & Digital
             </Link>
             <Link href="/collaborateurs" className={footerLinkClassName}>

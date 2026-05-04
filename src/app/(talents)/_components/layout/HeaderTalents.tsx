@@ -46,12 +46,12 @@ export default function HeaderTalents() {
               className="flex-shrink-0 drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-opacity duration-500 hover:opacity-80"
             >
               <Image
-                src="/images/ui/logo-zone21-light.svg"
+                src="/images/ui/talents-agency-blanc.png"
                 alt="ZONE 21"
                 width={140}
                 height={40}
                 priority
-                className="h-5 w-auto md:h-6"
+                className="h-14 w-auto md:h-16"
               />
             </Link>
 

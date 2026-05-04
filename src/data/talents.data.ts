@@ -14,7 +14,7 @@ export const talentsData: TalentsData = {
     title: "21 Talents Agency",
     subtitle:
       "L'agence de promotion de talents et d'influence de Zone 21, dédiée aux profils qui construisent une présence forte sur les réseaux et au-delà.",
-    image: "/images/contact/contact 2.jpg",
+    image: "/images/brands/21-talents/z21-21-talents-agency-hero-1.webp",
   },
   manifesto: [
     "21 Talents Agency accompagne les talents, influenceurs et personnalités créatives dans la structuration de leur image, de leur présence éditoriale et de leurs opportunités de marque.",
