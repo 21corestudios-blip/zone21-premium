@@ -13,5 +13,5 @@ http://localhost:3000/dashboard
 Sauvegarde GIT :
 git status
 git add .
-git commit -m "feat: add storyblok editorial foundation"
+git commit -m "feat: add commerce infrastructure foundation"
 git push

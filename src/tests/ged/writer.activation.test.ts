@@ -17,6 +17,8 @@ import {
 } from "@/services/ged/writer/writer.guard";
 import type { WriterInput } from "@/services/ged/writer/writer.types";
 
+const mutableEnv = process.env as Record<string, string | undefined>;
+
 function withWriterEnv<T>(
   env: string,
   enabled: string | undefined,
@@ -24,27 +26,27 @@ function withWriterEnv<T>(
   basePath: string | undefined,
   callback: () => T | Promise<T>,
 ) {
-  const previousEnv = process.env.NODE_ENV;
-  const previousWriterEnabled = process.env.WRITER_ENABLED;
-  const previousConfirmed = process.env.WRITER_REAL_EXECUTION_CONFIRMED;
-  const previousBase = process.env.Z21_ACTIVE_BASE_PATH;
+  const previousEnv = mutableEnv.NODE_ENV;
+  const previousWriterEnabled = mutableEnv.WRITER_ENABLED;
+  const previousConfirmed = mutableEnv.WRITER_REAL_EXECUTION_CONFIRMED;
+  const previousBase = mutableEnv.Z21_ACTIVE_BASE_PATH;
 
-  process.env.NODE_ENV = env;
+  mutableEnv.NODE_ENV = env;
 
   if (enabled === undefined) {
-    delete process.env.WRITER_ENABLED;
+    delete mutableEnv.WRITER_ENABLED;
   } else {
-    process.env.WRITER_ENABLED = enabled;
+    mutableEnv.WRITER_ENABLED = enabled;
   }
   if (confirmed === undefined) {
-    delete process.env.WRITER_REAL_EXECUTION_CONFIRMED;
+    delete mutableEnv.WRITER_REAL_EXECUTION_CONFIRMED;
   } else {
-    process.env.WRITER_REAL_EXECUTION_CONFIRMED = confirmed;
+    mutableEnv.WRITER_REAL_EXECUTION_CONFIRMED = confirmed;
   }
   if (basePath === undefined) {
-    delete process.env.Z21_ACTIVE_BASE_PATH;
+    delete mutableEnv.Z21_ACTIVE_BASE_PATH;
   } else {
-    process.env.Z21_ACTIVE_BASE_PATH = basePath;
+    mutableEnv.Z21_ACTIVE_BASE_PATH = basePath;
   }
   resetActiveBaseStateCache();
 
@@ -52,25 +54,25 @@ function withWriterEnv<T>(
 
   return run().finally(() => {
     if (previousEnv === undefined) {
-      delete process.env.NODE_ENV;
+      delete mutableEnv.NODE_ENV;
     } else {
-      process.env.NODE_ENV = previousEnv;
+      mutableEnv.NODE_ENV = previousEnv;
     }
 
     if (previousWriterEnabled === undefined) {
-      delete process.env.WRITER_ENABLED;
+      delete mutableEnv.WRITER_ENABLED;
     } else {
-      process.env.WRITER_ENABLED = previousWriterEnabled;
+      mutableEnv.WRITER_ENABLED = previousWriterEnabled;
     }
     if (previousConfirmed === undefined) {
-      delete process.env.WRITER_REAL_EXECUTION_CONFIRMED;
+      delete mutableEnv.WRITER_REAL_EXECUTION_CONFIRMED;
     } else {
-      process.env.WRITER_REAL_EXECUTION_CONFIRMED = previousConfirmed;
+      mutableEnv.WRITER_REAL_EXECUTION_CONFIRMED = previousConfirmed;
     }
     if (previousBase === undefined) {
-      delete process.env.Z21_ACTIVE_BASE_PATH;
+      delete mutableEnv.Z21_ACTIVE_BASE_PATH;
     } else {
-      process.env.Z21_ACTIVE_BASE_PATH = previousBase;
+      mutableEnv.Z21_ACTIVE_BASE_PATH = previousBase;
     }
     resetActiveBaseStateCache();
   });
@@ -115,6 +117,10 @@ test("activation refusee en DEV", async () => {
     );
 
     const plan = runRealWriter(buildRealWriterInput(buildValidInput()));
+    assert.equal(plan instanceof Promise, false);
+    if (plan instanceof Promise) {
+      throw new Error("runRealWriter should return a plan in development.");
+    }
     assert.equal("mode" in plan, true);
     assert.equal(plan.mode, "real-plan");
   });

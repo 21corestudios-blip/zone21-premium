@@ -10,6 +10,8 @@ import {
 } from "@/services/ged/writer/real/writer.real.service";
 import type { WriterInput } from "@/services/ged/writer/writer.types";
 
+const mutableEnv = process.env as Record<string, string | undefined>;
+
 function buildValidInput(): WriterInput {
   return {
     draftId: "GED-STAGING-REAL-0001",
@@ -30,47 +32,47 @@ function buildValidInput(): WriterInput {
 }
 
 function withWriterExecutionEnv<T>(callback: () => T | Promise<T>) {
-  const previousEnv = process.env.NODE_ENV;
-  const previousWriterEnabled = process.env.WRITER_ENABLED;
-  const previousConfirmed = process.env.WRITER_REAL_EXECUTION_CONFIRMED;
-  const previousBase = process.env.Z21_ACTIVE_BASE_PATH;
-  const previousSandbox = process.env.GED_SANDBOX_PATH;
+  const previousEnv = mutableEnv.NODE_ENV;
+  const previousWriterEnabled = mutableEnv.WRITER_ENABLED;
+  const previousConfirmed = mutableEnv.WRITER_REAL_EXECUTION_CONFIRMED;
+  const previousBase = mutableEnv.Z21_ACTIVE_BASE_PATH;
+  const previousSandbox = mutableEnv.GED_SANDBOX_PATH;
 
   return async (basePath: string, sandboxPath: string) => {
-    process.env.NODE_ENV = "staging";
-    process.env.WRITER_ENABLED = "true";
-    process.env.WRITER_REAL_EXECUTION_CONFIRMED = "true";
-    process.env.Z21_ACTIVE_BASE_PATH = basePath;
-    process.env.GED_SANDBOX_PATH = sandboxPath;
+    mutableEnv.NODE_ENV = "staging";
+    mutableEnv.WRITER_ENABLED = "true";
+    mutableEnv.WRITER_REAL_EXECUTION_CONFIRMED = "true";
+    mutableEnv.Z21_ACTIVE_BASE_PATH = basePath;
+    mutableEnv.GED_SANDBOX_PATH = sandboxPath;
     resetActiveBaseStateCache();
 
     try {
       return await callback();
     } finally {
       if (previousEnv === undefined) {
-        delete process.env.NODE_ENV;
+        delete mutableEnv.NODE_ENV;
       } else {
-        process.env.NODE_ENV = previousEnv;
+        mutableEnv.NODE_ENV = previousEnv;
       }
       if (previousWriterEnabled === undefined) {
-        delete process.env.WRITER_ENABLED;
+        delete mutableEnv.WRITER_ENABLED;
       } else {
-        process.env.WRITER_ENABLED = previousWriterEnabled;
+        mutableEnv.WRITER_ENABLED = previousWriterEnabled;
       }
       if (previousConfirmed === undefined) {
-        delete process.env.WRITER_REAL_EXECUTION_CONFIRMED;
+        delete mutableEnv.WRITER_REAL_EXECUTION_CONFIRMED;
       } else {
-        process.env.WRITER_REAL_EXECUTION_CONFIRMED = previousConfirmed;
+        mutableEnv.WRITER_REAL_EXECUTION_CONFIRMED = previousConfirmed;
       }
       if (previousBase === undefined) {
-        delete process.env.Z21_ACTIVE_BASE_PATH;
+        delete mutableEnv.Z21_ACTIVE_BASE_PATH;
       } else {
-        process.env.Z21_ACTIVE_BASE_PATH = previousBase;
+        mutableEnv.Z21_ACTIVE_BASE_PATH = previousBase;
       }
       if (previousSandbox === undefined) {
-        delete process.env.GED_SANDBOX_PATH;
+        delete mutableEnv.GED_SANDBOX_PATH;
       } else {
-        process.env.GED_SANDBOX_PATH = previousSandbox;
+        mutableEnv.GED_SANDBOX_PATH = previousSandbox;
       }
       resetActiveBaseStateCache();
     }
@@ -310,13 +312,13 @@ test("rollback controle non atteignable sous TEST si le chemin virtuel sort de T
 });
 
 test("refus hors staging", async () => {
-  const previousEnv = process.env.NODE_ENV;
-  const previousWriterEnabled = process.env.WRITER_ENABLED;
-  const previousConfirmed = process.env.WRITER_REAL_EXECUTION_CONFIRMED;
+  const previousEnv = mutableEnv.NODE_ENV;
+  const previousWriterEnabled = mutableEnv.WRITER_ENABLED;
+  const previousConfirmed = mutableEnv.WRITER_REAL_EXECUTION_CONFIRMED;
 
-  process.env.NODE_ENV = "development";
-  process.env.WRITER_ENABLED = "true";
-  process.env.WRITER_REAL_EXECUTION_CONFIRMED = "true";
+  mutableEnv.NODE_ENV = "development";
+  mutableEnv.WRITER_ENABLED = "true";
+  mutableEnv.WRITER_REAL_EXECUTION_CONFIRMED = "true";
 
   try {
     await assert.rejects(
@@ -326,14 +328,14 @@ test("refus hors staging", async () => {
       /staging/,
     );
   } finally {
-    if (previousEnv === undefined) delete process.env.NODE_ENV;
-    else process.env.NODE_ENV = previousEnv;
-    if (previousWriterEnabled === undefined) delete process.env.WRITER_ENABLED;
-    else process.env.WRITER_ENABLED = previousWriterEnabled;
+    if (previousEnv === undefined) delete mutableEnv.NODE_ENV;
+    else mutableEnv.NODE_ENV = previousEnv;
+    if (previousWriterEnabled === undefined) delete mutableEnv.WRITER_ENABLED;
+    else mutableEnv.WRITER_ENABLED = previousWriterEnabled;
     if (previousConfirmed === undefined) {
-      delete process.env.WRITER_REAL_EXECUTION_CONFIRMED;
+      delete mutableEnv.WRITER_REAL_EXECUTION_CONFIRMED;
     } else {
-      process.env.WRITER_REAL_EXECUTION_CONFIRMED = previousConfirmed;
+      mutableEnv.WRITER_REAL_EXECUTION_CONFIRMED = previousConfirmed;
     }
   }
 });
