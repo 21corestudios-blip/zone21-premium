@@ -31,6 +31,29 @@ export interface PrintifyShippingQuoteRequest {
   };
 }
 
+export interface PrintifyOrderCreateRequest {
+  external_id: string;
+  line_items: Array<{
+    product_id: string;
+    variant_id: number;
+    quantity: number;
+  }>;
+  shipping_method?: number;
+  send_shipping_notification?: boolean;
+  address_to: {
+    first_name: string;
+    last_name: string;
+    email?: string;
+    phone?: string;
+    country: string;
+    region?: string;
+    address1: string;
+    address2?: string;
+    city: string;
+    zip?: string;
+  };
+}
+
 export class PrintifyClient {
   private readonly token?: string;
   private readonly shopId?: string;
@@ -98,6 +121,20 @@ export class PrintifyClient {
 
     return this.request<{ standard?: number; express?: number }>(
       `/shops/${this.shopId}/orders/shipping.json`,
+      {
+        method: "POST",
+        body: JSON.stringify(payload),
+      },
+    );
+  }
+
+  async createOrder(payload: PrintifyOrderCreateRequest) {
+    if (!this.shopId) {
+      throw new Error("PRINTIFY_SHOP_ID is not configured.");
+    }
+
+    return this.request<{ id?: string; status?: string }>(
+      `/shops/${this.shopId}/orders.json`,
       {
         method: "POST",
         body: JSON.stringify(payload),

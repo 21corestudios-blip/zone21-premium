@@ -1,4 +1,6 @@
 import { wearProducts, type WearProductSize } from "@/data/wear.products";
+import { getCommerceRepository } from "@/lib/commerce/persistence/repository";
+import type { ProviderMappingBundle } from "@/lib/commerce/persistence/types";
 import type { FulfillmentProvider } from "@/lib/commerce/types";
 
 export interface WearSourceVariantMapping {
@@ -32,4 +34,23 @@ export function getWearSourceMapping(productId: string, variantId: string) {
     (mapping) =>
       mapping.productId === productId && mapping.variantId === variantId,
   );
+}
+
+export async function getPersistedWearProviderMapping({
+  productId,
+  variantId,
+  provider,
+  region,
+}: {
+  productId: string;
+  variantId: string;
+  provider: Extract<FulfillmentProvider, "printify" | "gelato">;
+  region?: string;
+}): Promise<ProviderMappingBundle | null> {
+  return getCommerceRepository().getProviderMapping({
+    productId,
+    variantId,
+    provider,
+    region,
+  });
 }

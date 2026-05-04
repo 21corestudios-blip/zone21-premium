@@ -27,6 +27,8 @@ Variables optionnelles :
 - `GELATO_API_KEY`
 - `GELATO_STORE_ID`
 - `DATABASE_URL`
+- `COMMERCE_FILE_DB_PATH`
+- `WEAR_ALLOW_ESTIMATED_QUOTES=true` uniquement si les mappings fournisseurs ne sont pas encore activés.
 
 ## Staging
 
@@ -41,6 +43,7 @@ Variables :
 - comptes Connect test par brand.
 - tokens Printify/Gelato sandbox si disponibles.
 - `DATABASE_URL` staging.
+- `WEAR_ALLOW_ESTIMATED_QUOTES=false` pour valider les quotes réelles.
 
 ## Production
 
@@ -66,6 +69,8 @@ Variables :
 - `GELATO_API_KEY`
 - `GELATO_STORE_ID`
 - `DATABASE_URL`
+- `WEAR_ALLOW_ESTIMATED_QUOTES=false`
+- `GELATO_DEFAULT_FILE_URL`
 
 ## LWS / cPanel Node
 
@@ -86,3 +91,4 @@ Points sensibles :
 - les webhooks Stripe doivent viser `/api/commerce/webhooks/stripe`.
 - les tokens fournisseurs restent backend-only.
 - `.env.local` ne doit jamais être publié.
+- `DATABASE_URL` doit pointer vers MySQL/MariaDB LWS.

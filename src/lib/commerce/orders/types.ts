@@ -28,6 +28,7 @@ export interface CommerceOrderLine {
   refundStatus: RefundStatus;
   fulfillmentProvider: FulfillmentProvider;
   fulfillmentStatus: FulfillmentStatus;
+  providerMappingId?: string;
   providerOrderId?: string;
 }
 

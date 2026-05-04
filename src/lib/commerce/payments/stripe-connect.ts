@@ -1,5 +1,7 @@
 import Stripe from "stripe";
 
+import type { CommerceOrder } from "@/lib/commerce/orders/types";
+import { getCommerceRepository } from "@/lib/commerce/persistence/repository";
 import type { CommerceCartValidation } from "@/lib/commerce/types";
 
 export const stripeApiVersion = Stripe.API_VERSION;
@@ -32,6 +34,10 @@ export function buildTransferGroup(orderId: string) {
   return `z21_order_${orderId}`;
 }
 
+export function buildStripeIdempotencyKey(parts: string[]) {
+  return ["z21", ...parts].join(":").replace(/[^a-zA-Z0-9:_-]/g, "_");
+}
+
 export function computeBrandShares(cart: CommerceCartValidation) {
   const platformFeeBps = getPlatformFeeBps();
 
@@ -61,7 +67,6 @@ export async function createGlobalCheckoutSession({
 }) {
   const stripe = getStripeServerClient();
   const transferGroup = buildTransferGroup(orderId);
-  const brandShares = computeBrandShares(cart);
 
   return stripe.checkout.sessions.create({
     mode: "payment",
@@ -87,12 +92,112 @@ export async function createGlobalCheckoutSession({
       metadata: {
         order_id: orderId,
         transfer_group: transferGroup,
-        brand_shares: JSON.stringify(brandShares).slice(0, 500),
       },
     },
     metadata: {
       order_id: orderId,
       transfer_group: transferGroup,
     },
+  }, {
+    idempotencyKey: buildStripeIdempotencyKey(["checkout", orderId]),
   });
+}
+
+export async function createBrandTransfersForOrder(order: CommerceOrder) {
+  const stripe = getStripeServerClient();
+  const repository = getCommerceRepository();
+  const grouped = new Map<
+    string,
+    {
+      amount: number;
+      currency: string;
+      brand: CommerceOrder["items"][number]["brand"];
+    }
+  >();
+
+  for (const item of order.items) {
+    const existing = grouped.get(item.brand) || {
+      amount: 0,
+      currency: item.netAmount.currency,
+      brand: item.brand,
+    };
+    existing.amount += item.netAmount.amountCents;
+    grouped.set(item.brand, existing);
+  }
+
+  for (const share of grouped.values()) {
+    const idempotencyKey = buildStripeIdempotencyKey([
+      "transfer",
+      order.orderId,
+      share.brand,
+    ]);
+    const existing = await repository.getStripeTransferByIdempotencyKey(
+      idempotencyKey,
+    );
+
+    if (existing?.status === "transferred") {
+      continue;
+    }
+
+    const destination = getConnectedAccountForBrand(share.brand);
+
+    if (!destination) {
+      await repository.recordStripeTransfer({
+        id: idempotencyKey,
+        orderId: order.orderId,
+        brand: share.brand,
+        destinationAccount: null,
+        amount: share.amount,
+        currency: share.currency,
+        status: "skipped",
+        attemptCount: existing ? existing.attemptCount + 1 : 1,
+        failureReason: "connected account not configured",
+        idempotencyKey,
+      });
+      continue;
+    }
+
+    try {
+      const transfer = await stripe.transfers.create(
+        {
+          amount: share.amount,
+          currency: share.currency.toLowerCase(),
+          destination,
+          transfer_group: order.transferGroup,
+          metadata: {
+            order_id: order.orderId,
+            brand: share.brand,
+          },
+        },
+        { idempotencyKey },
+      );
+
+      await repository.recordStripeTransfer({
+        id: idempotencyKey,
+        orderId: order.orderId,
+        brand: share.brand,
+        stripeTransferId: transfer.id,
+        destinationAccount: destination,
+        amount: share.amount,
+        currency: share.currency,
+        status: "transferred",
+        attemptCount: existing ? existing.attemptCount + 1 : 1,
+        failureReason: null,
+        idempotencyKey,
+      });
+    } catch (error) {
+      await repository.recordStripeTransfer({
+        id: idempotencyKey,
+        orderId: order.orderId,
+        brand: share.brand,
+        destinationAccount: destination,
+        amount: share.amount,
+        currency: share.currency,
+        status: "failed",
+        attemptCount: existing ? existing.attemptCount + 1 : 1,
+        failureReason: error instanceof Error ? error.message : "transfer failed",
+        idempotencyKey,
+      });
+    }
+  }
 }

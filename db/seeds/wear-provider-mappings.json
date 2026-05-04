@@ -1,0 +1,46 @@
+[
+  {
+    "id": "wear-classic-tee-01-gelato-eu",
+    "brand": "wear",
+    "internalProductId": "classic-tee-01",
+    "provider": "gelato",
+    "providerProductId": "TODO_GELATO_PRODUCT_UID",
+    "providerVariantId": null,
+    "providerShopId": null,
+    "providerRegion": "EU",
+    "currency": "EUR",
+    "active": false,
+    "metadata": {
+      "note": "Replace with real Gelato product UID and activate after sample validation."
+    },
+    "variants": [
+      { "internalVariantId": "XS", "providerVariantId": "TODO_GELATO_XS", "sku": "CLASSIC-TEE-01-XS" },
+      { "internalVariantId": "S", "providerVariantId": "TODO_GELATO_S", "sku": "CLASSIC-TEE-01-S" },
+      { "internalVariantId": "M", "providerVariantId": "TODO_GELATO_M", "sku": "CLASSIC-TEE-01-M" },
+      { "internalVariantId": "L", "providerVariantId": "TODO_GELATO_L", "sku": "CLASSIC-TEE-01-L" },
+      { "internalVariantId": "XL", "providerVariantId": "TODO_GELATO_XL", "sku": "CLASSIC-TEE-01-XL" }
+    ]
+  },
+  {
+    "id": "wear-classic-tee-01-printify-us",
+    "brand": "wear",
+    "internalProductId": "classic-tee-01",
+    "provider": "printify",
+    "providerProductId": "TODO_PRINTIFY_PRODUCT_ID",
+    "providerVariantId": null,
+    "providerShopId": null,
+    "providerRegion": "US",
+    "currency": "EUR",
+    "active": false,
+    "metadata": {
+      "note": "Replace with real Printify product and variant ids and activate after sample validation."
+    },
+    "variants": [
+      { "internalVariantId": "XS", "providerVariantId": "TODO_PRINTIFY_XS", "sku": "CLASSIC-TEE-01-XS" },
+      { "internalVariantId": "S", "providerVariantId": "TODO_PRINTIFY_S", "sku": "CLASSIC-TEE-01-S" },
+      { "internalVariantId": "M", "providerVariantId": "TODO_PRINTIFY_M", "sku": "CLASSIC-TEE-01-M" },
+      { "internalVariantId": "L", "providerVariantId": "TODO_PRINTIFY_L", "sku": "CLASSIC-TEE-01-L" },
+      { "internalVariantId": "XL", "providerVariantId": "TODO_PRINTIFY_XL", "sku": "CLASSIC-TEE-01-XL" }
+    ]
+  }
+]

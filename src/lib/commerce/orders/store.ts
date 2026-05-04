@@ -1,45 +1,22 @@
 import type { CommerceOrder } from "@/lib/commerce/orders/types";
-
-const memoryOrders = new Map<string, CommerceOrder>();
+import { getCommerceRepository } from "@/lib/commerce/persistence/repository";
 
 export async function saveOrder(order: CommerceOrder) {
-  memoryOrders.set(order.orderId, order);
-  return order;
+  return getCommerceRepository().saveOrder(order);
 }
 
 export async function getOrder(orderId: string) {
-  return memoryOrders.get(orderId) || null;
+  return getCommerceRepository().getOrder(orderId);
 }
 
-export async function markOrderPaid({
-  orderId,
-  paymentIntentId,
-  checkoutSessionId,
-}: {
+export async function getOrderByCheckoutSessionId(checkoutSessionId: string) {
+  return getCommerceRepository().getOrderByCheckoutSessionId(checkoutSessionId);
+}
+
+export async function markOrderPaid(input: {
   orderId: string;
   paymentIntentId?: string;
   checkoutSessionId?: string;
 }) {
-  const order = memoryOrders.get(orderId);
-
-  if (!order) {
-    return null;
-  }
-
-  const updatedOrder: CommerceOrder = {
-    ...order,
-    paymentIntentId,
-    checkoutSessionId,
-    statuses: {
-      ...order.statuses,
-      payment: "paid",
-    },
-    timestamps: {
-      ...order.timestamps,
-      updatedAt: new Date().toISOString(),
-    },
-  };
-
-  memoryOrders.set(orderId, updatedOrder);
-  return updatedOrder;
+  return getCommerceRepository().markOrderPaid(input);
 }

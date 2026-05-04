@@ -20,14 +20,18 @@
 - Prix checkout recalculés serveur.
 - Produits Wear routés serveur.
 - Aucun prix ou stock contrôlé par Storyblok.
+- `DATABASE_URL` configurée.
+- Migrations commerce exécutées.
+- Commandes persistées après redémarrage.
 
 ## Stripe
 
 - Webhook signé.
-- Event idempotency à persister.
+- Event idempotency persistée.
 - Ledger persisté.
 - Transferts par brand testés.
 - Refunds testés.
+- Replay webhook sans double transfert.
 
 ## Fulfillment
 
@@ -36,6 +40,8 @@
 - Shipping réel testé EU/US.
 - Fallback fournisseur testé.
 - Tracking et incidents persistés.
+- Replay webhook sans double commande fournisseur.
+- `WEAR_ALLOW_ESTIMATED_QUOTES=false` en production.
 
 ## LWS
 

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
+import { createHash } from "node:crypto";
 
 import { getWearProductById, isWearProductSize } from "@/data/wear.products";
 
@@ -44,6 +45,12 @@ function isValidEmail(email: string) {
 function generateOrderReference() {
   const timestamp = Date.now().toString(36).toUpperCase();
   return `Z21W-${timestamp}`;
+}
+
+function hashValidatedItems(items: ValidatedItem[]) {
+  return createHash("sha256")
+    .update(JSON.stringify(items))
+    .digest("hex");
 }
 
 function getStripeClient() {
@@ -169,10 +176,7 @@ export async function POST(request: Request) {
           order_reference: orderReference,
           checkout_source: "zone21-wear-custom",
           item_count: String(itemCount),
-          item_summary: validatedItems
-            .map((item) => `${item.productId}:${item.size}:${item.quantity}`)
-            .join("|")
-            .slice(0, 500),
+          cart_hash: hashValidatedItems(validatedItems),
         },
       });
 
@@ -202,10 +206,7 @@ export async function POST(request: Request) {
           order_reference: orderReference,
           checkout_source: "zone21-wear-custom",
           item_count: String(itemCount),
-          item_summary: validatedItems
-            .map((item) => `${item.productId}:${item.size}:${item.quantity}`)
-            .join("|")
-            .slice(0, 500),
+          cart_hash: hashValidatedItems(validatedItems),
           customer_name: customer.fullName,
           customer_email: customer.email,
           customer_phone: customer.phone,

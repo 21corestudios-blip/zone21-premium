@@ -19,12 +19,26 @@ export interface GelatoProduct {
 }
 
 export interface GelatoShippingQuoteRequest {
-  productId: string;
-  variantId: string;
+  orderReferenceId: string;
+  customerReferenceId: string;
+  productUid: string;
+  itemReferenceId: string;
+  fileUrl: string;
   quantity: number;
+  currency: string;
   country: string;
   postalCode?: string;
   city?: string;
+  state?: string;
+  email?: string;
+  phone?: string;
+  firstName?: string;
+  lastName?: string;
+  addressLine1?: string;
+}
+
+export interface GelatoOrderCreateRequest extends GelatoShippingQuoteRequest {
+  shipmentMethodUid?: string;
 }
 
 export class GelatoClient {
@@ -38,7 +52,7 @@ export class GelatoClient {
     this.baseUrl =
       options.baseUrl ||
       process.env.GELATO_API_BASE_URL ||
-      "https://api.gelato.com";
+      "https://order.gelatoapis.com";
   }
 
   get configured() {
@@ -78,15 +92,80 @@ export class GelatoClient {
   }
 
   async quoteShipping(payload: GelatoShippingQuoteRequest) {
-    if (!this.storeId) {
-      throw new Error("GELATO_STORE_ID is not configured.");
-    }
-
-    return this.request<{ amount?: number; currency?: string }>(
-      `/v4/stores/${this.storeId}/shipping/quote`,
+    return this.request<{
+      quotes?: Array<{
+        id: string;
+        shipmentMethods?: Array<{
+          name: string;
+          shipmentMethodUid: string;
+          price: number;
+          currency: string;
+        }>;
+      }>;
+    }>(
+      "/v4/orders:quote",
       {
         method: "POST",
-        body: JSON.stringify(payload),
+        body: JSON.stringify({
+          orderReferenceId: payload.orderReferenceId,
+          customerReferenceId: payload.customerReferenceId,
+          currency: payload.currency,
+          allowMultipleQuotes: false,
+          recipient: {
+            country: payload.country,
+            firstName: payload.firstName || "ZONE",
+            lastName: payload.lastName || "21",
+            addressLine1: payload.addressLine1 || "Address pending",
+            state: payload.state,
+            city: payload.city || "City pending",
+            postCode: payload.postalCode,
+            email: payload.email,
+            phone: payload.phone,
+          },
+          products: [
+            {
+              itemReferenceId: payload.itemReferenceId,
+              productUid: payload.productUid,
+              fileUrl: payload.fileUrl,
+              quantity: payload.quantity,
+            },
+          ],
+        }),
+      },
+    );
+  }
+
+  async createOrder(payload: GelatoOrderCreateRequest) {
+    return this.request<{ id?: string; orderId?: string; message?: string }>(
+      "/v4/orders",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          orderType: "order",
+          orderReferenceId: payload.orderReferenceId,
+          customerReferenceId: payload.customerReferenceId,
+          currency: payload.currency,
+          shipmentMethodUid: payload.shipmentMethodUid,
+          shippingAddress: {
+            country: payload.country,
+            firstName: payload.firstName || "ZONE",
+            lastName: payload.lastName || "21",
+            addressLine1: payload.addressLine1 || "Address pending",
+            state: payload.state,
+            city: payload.city || "City pending",
+            postCode: payload.postalCode,
+            email: payload.email,
+            phone: payload.phone,
+          },
+          items: [
+            {
+              itemReferenceId: payload.itemReferenceId,
+              productUid: payload.productUid,
+              fileUrl: payload.fileUrl,
+              quantity: payload.quantity,
+            },
+          ],
+        }),
       },
     );
   }
