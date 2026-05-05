@@ -3,20 +3,40 @@ import type { Metadata } from "next";
 import CorePageSections from "../_components/core/CorePageSections";
 
 export const metadata: Metadata = {
-  title: "21 CORE STUDIOS",
+  title: "21 Core Studios - Design, web et objets de marque",
   description:
-    "Découvrez 21 Core Studios, l'agence design, web design, codage et graphisme de l'écosystème Zone 21.",
+    "21 Core Studios crée identités visuelles, sites premium et objets marketing pour marques ambitieuses, avec direction artistique et exécution précise.",
   alternates: {
     canonical: "/core-studios",
   },
   openGraph: {
-    title: "21 CORE STUDIOS | Design, Web & Brand Objects",
+    title: "21 Core Studios | Design, web et objets de marque",
     description:
-      "Prestations créatives, design systems, expériences web et produits marketing signés 21 Core Studios.",
+      "21 Core Studios crée identités visuelles, sites premium et objets marketing pour marques ambitieuses, avec direction artistique et exécution précise.",
     url: "/core-studios",
     siteName: "ZONE 21",
     locale: "fr_FR",
     type: "website",
+    images: [
+      {
+        url: "/images/brands/21-core/z21-21-core-studios-hero.webp",
+        width: 2048,
+        height: 1136,
+        alt: "21 Core Studios - design, web et objets de marque",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "21 Core Studios | Design, web et objets de marque",
+    description:
+      "21 Core Studios crée identités visuelles, sites premium et objets marketing pour marques ambitieuses, avec direction artistique et exécution précise.",
+    images: [
+      {
+        url: "/images/brands/21-core/z21-21-core-studios-hero.webp",
+        alt: "21 Core Studios - design, web et objets de marque",
+      },
+    ],
   },
 };
 

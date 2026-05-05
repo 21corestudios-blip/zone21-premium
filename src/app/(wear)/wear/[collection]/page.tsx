@@ -6,6 +6,17 @@ import WearProductsGrid from "@/app/(wear)/_components/wear/WearProductsGrid";
 import { wearCollections } from "@/data/wear.catalog";
 import { wearProducts } from "@/data/wear.products";
 
+const collectionDescriptions: Record<string, string> = {
+  classic:
+    "Classic Collection par 21 Wear: silhouettes intemporelles, matières maîtrisées et élégance sobre pour un vestiaire premium durable, net et quotidien.",
+  urban:
+    "Urban Collection par 21 Wear: silhouettes confortables, volumes précis et énergie street pour une présence premium au quotidien, mobile et affirmée.",
+  heritage:
+    "Heritage Collection par 21 Wear: mémoire des coupes, matières choisies et direction contemporaine pour un vestiaire premium affirmé, sobre et durable.",
+  studio:
+    "Studio Collection par 21 Wear: textures, geste créatif et pièces expérimentales pour exprimer la signature atelier de 21 Wear avec une présence premium.",
+};
+
 type PageProps = {
   params: Promise<{
     collection: string;
@@ -26,9 +37,49 @@ export async function generateMetadata({
     };
   }
 
+  const title = `${currentCollection.name} - 21 Wear premium`;
+  const description =
+    collectionDescriptions[currentCollection.slug] ||
+    currentCollection.description;
+  const canonical = `/wear/${currentCollection.slug}`;
+
   return {
-    title: currentCollection.name,
-    description: currentCollection.description,
+    title,
+    description,
+    alternates: {
+      canonical,
+    },
+    openGraph: {
+      title: `${currentCollection.name} | 21 Wear`,
+      description,
+      url: canonical,
+      siteName: "ZONE 21",
+      locale: "fr_FR",
+      type: "website",
+      images: [
+        {
+          url: currentCollection.heroImage,
+          width: 2048,
+          height: 1136,
+          alt: `${currentCollection.name} - 21 Wear`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${currentCollection.name} | 21 Wear`,
+      description,
+      images: [
+        {
+          url: currentCollection.heroImage,
+          alt: `${currentCollection.name} - 21 Wear`,
+        },
+      ],
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 

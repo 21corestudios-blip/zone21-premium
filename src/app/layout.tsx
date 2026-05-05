@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 
+import OrganizationJsonLd from "@/components/seo/OrganizationJsonLd";
+
 import "./globals.css";
 
 const texteFont = localFont({
@@ -19,11 +21,18 @@ const titreFont = localFont({
   display: "swap",
 });
 
-const siteUrl = "https://zone21.com";
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://zone21.com")
+  .replace(/\/$/, "");
 const siteName = "ZONE 21";
 const defaultTitle = "ZONE 21 | L'Exigence pour Signature";
 const defaultDescription =
   "ZONE 21 est une maison créative indépendante dédiée aux univers premium entre vêtement, image, musique, production, talents et culture street.";
+const defaultOgImage = {
+  url: "/images/home/hero/z21-home-hero-main-01-desktop-7.webp",
+  width: 2048,
+  height: 1136,
+  alt: "ZONE 21 - maison créative indépendante",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -72,11 +81,18 @@ export const metadata: Metadata = {
     siteName,
     title: defaultTitle,
     description: defaultDescription,
+    images: [defaultOgImage],
   },
   twitter: {
     card: "summary_large_image",
     title: defaultTitle,
     description: defaultDescription,
+    images: [
+      {
+        url: defaultOgImage.url,
+        alt: defaultOgImage.alt,
+      },
+    ],
   },
   robots: {
     index: true,
@@ -106,6 +122,7 @@ export default function RootLayout({
         className="min-h-screen flex flex-col bg-[#121110] font-sans text-[#EAE8E3] selection:bg-[#C5B39B] selection:text-[#121110]"
         suppressHydrationWarning
       >
+        <OrganizationJsonLd siteUrl={siteUrl} />
         <a
           href="#main-content"
           className="sr-only rounded-md font-medium focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-[#EAE8E3] focus:px-3 focus:py-2 focus:text-[#121110]"

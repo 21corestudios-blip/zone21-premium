@@ -6,6 +6,15 @@ import CoreProductsGrid from "@/app/(core)/_components/core/CoreProductsGrid";
 import { coreProducts } from "@/data/core.products";
 import { coreServices } from "@/data/core.services";
 
+const serviceDescriptions: Record<string, string> = {
+  "brand-design":
+    "Brand Design par 21 Core Studios: identités haut de gamme, direction artistique et systèmes visuels pour aligner marque, désirabilité et usage.",
+  "web-experience":
+    "Web Experience par 21 Core Studios: sites premium, UX, web design et front-end précis pour des expériences désirables, lisibles et performantes.",
+  "marketing-objects":
+    "Marketing Objects par 21 Core Studios: supports, cadres, kits et objets de marque prêts à activer lancements, showrooms et campagnes premium.",
+};
+
 type PageProps = {
   params: Promise<{
     service: string;
@@ -24,9 +33,48 @@ export async function generateMetadata({
     };
   }
 
+  const title = `${currentService.name} - 21 Core Studios`;
+  const description =
+    serviceDescriptions[currentService.slug] || currentService.description;
+  const canonical = `/core-studios/${currentService.slug}`;
+
   return {
-    title: currentService.name,
-    description: currentService.description,
+    title,
+    description,
+    alternates: {
+      canonical,
+    },
+    openGraph: {
+      title: `${currentService.name} | 21 Core Studios`,
+      description,
+      url: canonical,
+      siteName: "ZONE 21",
+      locale: "fr_FR",
+      type: "website",
+      images: [
+        {
+          url: currentService.heroImage,
+          width: 2048,
+          height: 1136,
+          alt: `${currentService.name} - 21 Core Studios`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${currentService.name} | 21 Core Studios`,
+      description,
+      images: [
+        {
+          url: currentService.heroImage,
+          alt: `${currentService.name} - 21 Core Studios`,
+        },
+      ],
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 

@@ -3,20 +3,40 @@ import type { Metadata } from "next";
 import ProductionPageSections from "../_components/production/ProductionPageSections";
 
 export const metadata: Metadata = {
-  title: "21 PRODUCTION",
+  title: "21 Production - Label et ressources créatives",
   description:
-    "Découvrez 21 Production, le label et studio de ressources créatives de l'écosystème Zone 21.",
+    "21 Production réunit label, artistes et ressources créatives premium: beats, templates, loops et outils pensés pour produire avec signature.",
   alternates: {
     canonical: "/prod",
   },
   openGraph: {
-    title: "21 PRODUCTION | Label & Artist Stores",
+    title: "21 Production | Label et ressources créatives",
     description:
-      "Roster d'artistes, beats, templates, plug-ins et outils créatifs signés 21 Production.",
+      "21 Production réunit label, artistes et ressources créatives premium: beats, templates, loops et outils pensés pour produire avec signature.",
     url: "/prod",
     siteName: "ZONE 21",
     locale: "fr_FR",
     type: "website",
+    images: [
+      {
+        url: "/images/brands/21-production/z21-21-production-hero.webp",
+        width: 2048,
+        height: 1136,
+        alt: "21 Production - label et ressources créatives",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "21 Production | Label et ressources créatives",
+    description:
+      "21 Production réunit label, artistes et ressources créatives premium: beats, templates, loops et outils pensés pour produire avec signature.",
+    images: [
+      {
+        url: "/images/brands/21-production/z21-21-production-hero.webp",
+        alt: "21 Production - label et ressources créatives",
+      },
+    ],
   },
 };
 
