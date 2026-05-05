@@ -3,7 +3,7 @@ import type { MetadataRoute } from "next";
 import { coreServices } from "@/data/core.services";
 import { wearCollections } from "@/data/wear.catalog";
 
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://zone21.com")
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://zone-21.fr")
   .replace(/\/$/, "");
 
 function buildUrl(path: string) {

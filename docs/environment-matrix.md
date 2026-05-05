@@ -56,7 +56,7 @@ Variables :
 
 - `APP_ENV=production`
 - `NODE_ENV=production`
-- `NEXT_PUBLIC_SITE_URL=https://zone21.com`
+- `NEXT_PUBLIC_SITE_URL=https://zone-21.fr`
 - `STORYBLOK_PUBLIC_TOKEN`
 - `STORYBLOK_PREVIEW_TOKEN`
 - `STORYBLOK_PREVIEW_SECRET`

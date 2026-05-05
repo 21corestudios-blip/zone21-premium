@@ -67,7 +67,7 @@ Variables bloquantes production :
 Stripe :
 
 ```txt
-https://zone21.com/api/commerce/webhooks/stripe
+https://zone-21.fr/api/commerce/webhooks/stripe
 ```
 
 Fournisseurs :

@@ -13,5 +13,5 @@ http://localhost:3000/dashboard
 Sauvegarde GIT :
 git status
 git add .
-git commit -m "seo: add sitemap robots canonical metadata and jsonld"
+git commit -m "modifications fallback domaine"
 git push
