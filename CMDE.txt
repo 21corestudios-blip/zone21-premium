@@ -13,5 +13,5 @@ http://localhost:3000/dashboard
 Sauvegarde GIT :
 git status
 git add .
-git commit -m "modifications fallback domaine"
+git commit -m "seo: polish wear metadata and production env example"
 git push

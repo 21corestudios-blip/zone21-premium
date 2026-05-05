@@ -5,14 +5,14 @@ import WearPageSections from "../_components/wear/WearPageSections";
 export const metadata: Metadata = {
   title: "21 Wear - Vêtement premium et culture street",
   description:
-    "21 Wear signe des vêtements premium entre coupes essentielles, matières maîtrisées et culture street, pensés pour une présence sobre et durable.",
+    "21 Wear signe un vestiaire premium entre coupes essentielles, matières maîtrisées et culture street, pour des silhouettes sobres, durables et affirmées.",
   alternates: {
     canonical: "/wear",
   },
   openGraph: {
     title: "21 Wear | Vêtement premium et culture street",
     description:
-      "21 Wear signe des vêtements premium entre coupes essentielles, matières maîtrisées et culture street, pensés pour une présence sobre et durable.",
+      "21 Wear signe un vestiaire premium entre coupes essentielles, matières maîtrisées et culture street, pour des silhouettes sobres, durables et affirmées.",
     url: "/wear",
     siteName: "ZONE 21",
     locale: "fr_FR",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "21 Wear | Vêtement premium et culture street",
     description:
-      "21 Wear signe des vêtements premium entre coupes essentielles, matières maîtrisées et culture street, pensés pour une présence sobre et durable.",
+      "21 Wear signe un vestiaire premium entre coupes essentielles, matières maîtrisées et culture street, pour des silhouettes sobres, durables et affirmées.",
     images: [
       {
         url: "/images/brands/21-wear/z21-21-wear-hero-1.webp",
