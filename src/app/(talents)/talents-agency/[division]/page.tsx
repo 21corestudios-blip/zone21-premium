@@ -16,7 +16,9 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { division } = await params;
-  const currentDivision = talentDivisions.find((item) => item.slug === division);
+  const currentDivision = talentDivisions.find(
+    (item) => item.slug === division,
+  );
 
   if (!currentDivision) {
     return {
@@ -38,7 +40,9 @@ export async function generateStaticParams() {
 
 export default async function TalentsDivisionPage({ params }: PageProps) {
   const { division } = await params;
-  const currentDivision = talentDivisions.find((item) => item.slug === division);
+  const currentDivision = talentDivisions.find(
+    (item) => item.slug === division,
+  );
 
   if (!currentDivision) {
     notFound();
@@ -57,7 +61,7 @@ export default async function TalentsDivisionPage({ params }: PageProps) {
           fill
           priority
           sizes="100vw"
-          className="object-cover"
+          className="object-cover object-[center_10%]"
         />
 
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-[#121110]/10 to-[#121110]/80 mix-blend-multiply" />
@@ -88,7 +92,10 @@ export default async function TalentsDivisionPage({ params }: PageProps) {
         </p>
       </section>
 
-      <TalentsProductsGrid divisionSlug={division} products={divisionProducts} />
+      <TalentsProductsGrid
+        divisionSlug={division}
+        products={divisionProducts}
+      />
     </main>
   );
 }

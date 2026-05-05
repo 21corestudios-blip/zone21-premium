@@ -13,7 +13,7 @@ export default function TalentsHero() {
           priority
           quality={100}
           sizes="100vw"
-          className="object-cover object-center"
+          className="object-cover object-[center_5%]"
         />
       </div>
 
