@@ -43,15 +43,15 @@ export default function HeaderProduction() {
             <Link
               href="/prod"
               aria-label="Retour à l’accueil 21 Production"
-              className="flex-shrink-0 drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-opacity duration-500 hover:opacity-80"
+              className="flex h-12 w-44 flex-shrink-0 items-center drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-opacity duration-500 hover:opacity-80 md:h-14 md:w-48"
             >
               <Image
-                src="/images/ui/21-prod-logo-blanc-1.png"
+                src="/images/ui/Z21_21_prod_logo.svg"
                 alt="ZONE 21"
-                width={140}
-                height={40}
+                width={250}
+                height={230}
                 priority
-                className="h-34 w-auto md:h-36"
+                className="max-h-full max-w-full object-contain"
               />
             </Link>
 

@@ -11,7 +11,7 @@ export interface TalentsData {
 
 export const talentsData: TalentsData = {
   hero: {
-    title: "21 Talents Agency",
+    title: "L'Art de la Présence",
     subtitle:
       "L'agence de promotion de talents et d'influence de ZONE 21, dédiée aux profils qui construisent une présence forte sur les réseaux et au-delà.",
     image: "/images/brands/21-talents/z21-21-talents-agency-hero-1.webp",

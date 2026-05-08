@@ -43,15 +43,15 @@ export default function HeaderTalents() {
             <Link
               href="/talents-agency"
               aria-label="Retour à l’accueil 21 Talents Agency"
-              className="flex-shrink-0 drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-opacity duration-500 hover:opacity-80"
+              className="flex h-12 w-44 flex-shrink-0 items-center drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-opacity duration-500 hover:opacity-80 md:h-14 md:w-48"
             >
               <Image
-                src="/images/ui/talents-agency-blanc.png"
+                src="/images/ui/Z21_21_talents_agency_logo.svg"
                 alt="ZONE 21"
-                width={140}
-                height={40}
+                width={250}
+                height={405}
                 priority
-                className="h-14 w-auto md:h-16"
+                className="max-h-full max-w-full object-contain"
               />
             </Link>
 

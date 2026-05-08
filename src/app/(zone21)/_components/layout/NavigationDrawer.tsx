@@ -126,9 +126,7 @@ export default function NavigationDrawer({
           aria-label="Navigation principale du menu"
         >
           <div className="border-b border-white/5 pb-10">
-            <p className={`mb-6 ${sectionLabelClassName}`}>
-              Navigation
-            </p>
+            <p className={`mb-6 ${sectionLabelClassName}`}>Navigation</p>
 
             <div className="flex flex-col gap-5">
               {primaryLinks.map((item) => (
@@ -138,9 +136,7 @@ export default function NavigationDrawer({
                   className="group flex w-max items-center"
                   onClick={handleClose}
                 >
-                  <span className={primaryLinkTextClassName}>
-                    {item.name}
-                  </span>
+                  <span className={primaryLinkTextClassName}>{item.name}</span>
                 </Link>
               ))}
             </div>
@@ -149,7 +145,7 @@ export default function NavigationDrawer({
           <div
             className="border-b border-white/5 py-10"
             onMouseEnter={() => setIsEcosystemOpen(true)}
-              onMouseLeave={() => setIsEcosystemOpen(false)}
+            onMouseLeave={() => setIsEcosystemOpen(false)}
           >
             <button
               type="button"
@@ -158,9 +154,7 @@ export default function NavigationDrawer({
               aria-expanded={isEcosystemOpen}
               aria-controls="drawer-ecosystem"
             >
-              <span className={ecosystemTitleClassName}>
-                Écosystème
-              </span>
+              <span className={ecosystemTitleClassName}>Écosystème</span>
             </button>
 
             <div
@@ -188,12 +182,12 @@ export default function NavigationDrawer({
                       onClick={handleClose}
                       className="group block"
                     >
-                      <p className={`whitespace-nowrap ${ecosystemCategoryClassName}`}>
+                      <p
+                        className={`whitespace-nowrap ${ecosystemCategoryClassName}`}
+                      >
                         {item.category}
                       </p>
-                      <p className={ecosystemNameClassName}>
-                        {item.name}
-                      </p>
+                      <p className={ecosystemNameClassName}>{item.name}</p>
                     </Link>
                   ))}
                 </div>

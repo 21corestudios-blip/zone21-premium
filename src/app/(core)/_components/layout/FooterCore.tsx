@@ -17,14 +17,14 @@ export default function FooterCore() {
             <Link
               href="/core-studios"
               aria-label="Retour à l’accueil 21 Core Studios"
-              className="inline-block transition-opacity duration-500 hover:opacity-80"
+              className="inline-flex h-8 w-36 items-center transition-opacity duration-500 hover:opacity-80 md:h-9 md:w-40"
             >
               <Image
-                src="/images/ui/core_studios_blanc-1.svg"
+                src="/images/ui/Z21_21_core_studios_logo.svg"
                 alt="ZONE 21"
-                width={140}
-                height={40}
-                className="h-6 w-auto md:h-7"
+                width={250}
+                height={185}
+                className="max-h-full max-w-full object-contain"
               />
             </Link>
 

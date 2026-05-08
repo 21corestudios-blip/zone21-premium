@@ -5,7 +5,7 @@ export default function EcosystemeHero() {
     <section className="relative h-[100dvh] min-h-screen w-full overflow-hidden bg-[#121110]">
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/ecosysteme/z21-ecosysteme-hero-4.webp"
+          src="/images/ecosysteme/z21-ecosysteme-hero-5.webp"
           alt="Écosystème Zone 21"
           fill
           priority
@@ -19,7 +19,7 @@ export default function EcosystemeHero() {
 
       <div className="absolute bottom-10 left-0 z-30 flex w-full justify-center px-6 md:bottom-16">
         <h1 className="animate-fade-in-up whitespace-nowrap font-serif text-2xl font-light tracking-wide text-white drop-shadow-lg sm:text-3xl md:text-5xl lg:text-6xl">
-          Notre Écosystème.
+          Une Maison, Quatre Territoires.
         </h1>
       </div>
     </section>

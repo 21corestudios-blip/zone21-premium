@@ -43,15 +43,15 @@ export default function HeaderWear() {
             <Link
               href="/wear"
               aria-label="Retour à l’accueil 21 Wear"
-              className="flex-shrink-0 drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-opacity duration-500 hover:opacity-80"
+              className="flex h-12 w-44 flex-shrink-0 items-center drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-opacity duration-500 hover:opacity-80 md:h-14 md:w-48"
             >
               <Image
-                src="/images/ui/21_wear_logo_blanc.svg"
+                src="/images/ui/Z21_21_WEAR_logo.svg"
                 alt="ZONE 21"
-                width={140}
-                height={40}
+                width={250}
+                height={109}
                 priority
-                className="h-16 w-auto md:h-18"
+                className="max-h-full max-w-full object-contain"
               />
             </Link>
 

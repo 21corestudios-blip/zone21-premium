@@ -38,15 +38,15 @@ export default function Header() {
             <Link
               href="/"
               aria-label="Retour à l’accueil Zone 21"
-              className="flex-shrink-0 drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-opacity duration-500 hover:opacity-80"
+              className="flex h-12 w-44 flex-shrink-0 items-center drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-opacity duration-500 hover:opacity-80 md:h-14 md:w-48"
             >
               <Image
-                src="/images/ui/logo-zone21-light.svg"
+                src="/images/ui/Z21_logo-01.svg"
                 alt="ZONE 21"
-                width={140}
-                height={40}
+                width={250}
+                height={35}
                 priority
-                className="h-5 w-auto md:h-6"
+                className="max-h-full max-w-full object-contain"
               />
             </Link>
 

@@ -17,14 +17,14 @@ export default function FooterTalents() {
             <Link
               href="/talents-agency"
               aria-label="Retour à l’accueil 21 Talents Agency"
-              className="inline-block transition-opacity duration-500 hover:opacity-80"
+              className="inline-flex h-8 w-36 items-center transition-opacity duration-500 hover:opacity-80 md:h-9 md:w-40"
             >
               <Image
-                src="/images/ui/talents-agency-blanc.png"
+                src="/images/ui/Z21_21_talents_agency_logo.svg"
                 alt="ZONE 21"
-                width={140}
-                height={40}
-                className="h-10 w-auto md:h-12"
+                width={250}
+                height={405}
+                className="max-h-full max-w-full object-contain"
               />
             </Link>
 

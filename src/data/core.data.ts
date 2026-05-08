@@ -11,7 +11,7 @@ export interface CoreData {
 
 export const coreData: CoreData = {
   hero: {
-    title: "21 Core Studios",
+    title: "La Structure de la Marque",
     subtitle:
       "Le studio créatif de ZONE 21 pour les identités, les interfaces, la direction artistique et les systèmes de marque.",
     image: "/images/brands/21-core/z21-21-core-studios-hero.webp",

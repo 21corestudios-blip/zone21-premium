@@ -11,7 +11,7 @@ export interface ProductionData {
 
 export const productionData: ProductionData = {
   hero: {
-    title: "21 Production",
+    title: "Retour aux Sources",
     subtitle:
       "Le label et studio de ressources de ZONE 21 pour beatmakers, DJs, artistes et signatures sonores en mouvement.",
     image: "/images/brands/21-production/z21-21-production-hero.webp",

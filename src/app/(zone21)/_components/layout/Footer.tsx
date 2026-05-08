@@ -17,14 +17,14 @@ export default function Footer() {
             <Link
               href="/"
               aria-label="Retour à l’accueil Zone 21"
-              className="inline-block transition-opacity duration-500 hover:opacity-80"
+              className="inline-flex h-8 w-36 items-center transition-opacity duration-500 hover:opacity-80 md:h-9 md:w-40"
             >
               <Image
-                src="/images/ui/logo-zone21-light.svg"
+                src="/images/ui/Z21_logo-01.svg"
                 alt="ZONE 21"
-                width={120}
-                height={30}
-                className="h-3 w-auto md:h-4"
+                width={250}
+                height={35}
+                className="max-h-full max-w-full object-contain"
               />
             </Link>
 

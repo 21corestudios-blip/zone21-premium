@@ -17,14 +17,14 @@ export default function FooterProduction() {
             <Link
               href="/prod"
               aria-label="Retour à l’accueil 21 Production"
-              className="inline-block transition-opacity duration-500 hover:opacity-80"
+              className="inline-flex h-8 w-36 items-center transition-opacity duration-500 hover:opacity-80 md:h-9 md:w-40"
             >
               <Image
-                src="/images/ui/21-prod-logo-blanc-1.png"
+                src="/images/ui/Z21_21_prod_logo.svg"
                 alt="ZONE 21"
-                width={140}
-                height={40}
-                className="h-20 w-auto md:h-22"
+                width={250}
+                height={230}
+                className="max-h-full max-w-full object-contain"
               />
             </Link>
 

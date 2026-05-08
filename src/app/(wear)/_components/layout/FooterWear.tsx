@@ -17,14 +17,14 @@ export default function FooterWear() {
             <Link
               href="/wear"
               aria-label="Retour à l’accueil 21 Wear"
-              className="inline-block transition-opacity duration-500 hover:opacity-80"
+              className="inline-flex h-8 w-36 items-center transition-opacity duration-500 hover:opacity-80 md:h-9 md:w-40"
             >
               <Image
-                src="/images/ui/21_wear_logo_blanc.svg"
+                src="/images/ui/Z21_21_WEAR_logo.svg"
                 alt="ZONE 21"
-                width={120}
-                height={30}
-                className="h-14 w-auto md:h-16"
+                width={250}
+                height={109}
+                className="max-h-full max-w-full object-contain"
               />
             </Link>
 
