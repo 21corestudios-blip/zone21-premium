@@ -33,11 +33,11 @@ export default async function CollaboratorsLayout({
               className="transition-opacity duration-500 hover:opacity-80"
             >
               <Image
-                src="/images/ui/logo-zone21-light.svg"
+                src="/images/ui/Z21_logo-01.svg"
                 alt="ZONE 21"
-                width={150}
-                height={40}
-                className="h-5 w-auto"
+                width={500}
+                height={500}
+                className="h-20 w-20 object-contain"
               />
             </Link>
 

@@ -53,22 +53,22 @@ export default function ProductionStorefrontCategoryPageContent({
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-7xl px-6 pb-20 md:px-12 md:pb-28">
+      <section className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-32 lg:px-16">
         {items.length ? (
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {items.map((item) => (
               <Link
                 key={item.id}
                 href={getItemHref(artistSlug, item)}
-                className="group flex flex-col overflow-hidden rounded-[2rem] border border-[#121110]/10 bg-white shadow-[0_24px_80px_rgba(18,17,16,0.06)] transition-transform duration-500 hover:-translate-y-1"
+                className="group flex flex-col overflow-hidden border border-[#121110]/10 bg-white shadow-none transition-colors duration-300 hover:border-[#121110]/24"
               >
-                <div className="relative aspect-square overflow-hidden bg-[#EAE8E3]">
+                <div className="relative aspect-square overflow-hidden bg-[#F4F4F4]">
                   <Image
                     src={item.image}
                     alt={item.name}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1279px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                    className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
                   />
                 </div>
 
@@ -77,7 +77,7 @@ export default function ProductionStorefrontCategoryPageContent({
                     <p className="font-sans text-[0.6rem] uppercase tracking-[0.24em] text-[#121110]/35">
                       {item.kind}
                     </p>
-                    <h2 className="mt-4 font-serif text-3xl leading-none tracking-[-0.03em] text-[#121110]">
+                    <h2 className="mt-4 font-serif text-3xl uppercase leading-none text-[#121110]">
                       {item.name}
                     </h2>
                     <p className="mt-4 font-sans text-sm font-light leading-relaxed text-[#121110]/64">
@@ -98,7 +98,7 @@ export default function ProductionStorefrontCategoryPageContent({
             ))}
           </div>
         ) : (
-          <div className="rounded-[2rem] border border-[#121110]/10 bg-white px-6 py-12 shadow-[0_24px_80px_rgba(18,17,16,0.06)] md:px-8">
+          <div className="border border-[#121110]/10 bg-white px-6 py-12 shadow-none md:px-8">
             <p className="font-sans text-[0.62rem] uppercase tracking-[0.28em] text-[#121110]/38">
               A venir
             </p>

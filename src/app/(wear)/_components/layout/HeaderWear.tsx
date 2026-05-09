@@ -9,10 +9,10 @@ import NavigationDrawer from "@/app/(zone21)/_components/layout/NavigationDrawer
 import { useScrolledHeader } from "@/hooks/useScrolledHeader";
 
 const linkClassName =
-  "text-[0.65rem] uppercase tracking-[0.25em] text-white/78 transition-colors duration-500 hover:text-white";
+  "relative font-sans text-[13px] uppercase tracking-widest text-white/82 transition-colors duration-300 hover:text-white after:absolute after:-bottom-2 after:left-0 after:h-px after:w-0 after:bg-white/80 after:transition-all after:duration-300 hover:after:w-full";
 
 const collectionLinkClassName =
-  "text-[0.6rem] uppercase tracking-[0.2em] text-white/72 transition-colors duration-500 hover:text-white";
+  "relative font-sans text-[12px] uppercase tracking-[0.22em] text-white/72 transition-colors duration-300 hover:text-white after:absolute after:-bottom-2 after:left-0 after:h-px after:w-0 after:bg-white/65 after:transition-all after:duration-300 hover:after:w-full";
 
 export default function HeaderWear() {
   const isScrolled = useScrolledHeader();
@@ -27,31 +27,31 @@ export default function HeaderWear() {
       <header
         className={`fixed left-0 top-0 z-50 w-full transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${
           isScrolled
-            ? "border-b border-white/5 bg-[#121110]/90 py-4 shadow-sm backdrop-blur-md"
-            : "border-transparent bg-transparent py-8"
+            ? "h-24 border-b border-white/10 bg-[#121110]/92 backdrop-blur-md"
+            : "h-24 border-b border-transparent bg-transparent"
         }`}
       >
         {!isScrolled ? (
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/58 via-black/24 to-transparent"
+            className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/58 via-black/24 to-transparent"
           />
         ) : null}
 
-        <div className="relative flex w-full items-center justify-between px-6 lg:px-12">
+        <div className="relative flex h-full w-full items-center justify-between px-6 md:px-10 lg:px-16">
           <div className="flex items-center gap-10 lg:gap-14">
             <Link
               href="/wear"
               aria-label="Retour à l’accueil 21 Wear"
-              className="flex h-12 w-44 flex-shrink-0 items-center drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-opacity duration-500 hover:opacity-80 md:h-14 md:w-48"
+              className="flex h-20 w-20 flex-shrink-0 items-center justify-center drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-opacity duration-500 hover:opacity-80"
             >
               <Image
-                src="/images/ui/Z21_21_WEAR_logo.svg"
+                src="/images/ui/Z21_21_WEAR_logo-01.svg"
                 alt="ZONE 21"
-                width={250}
-                height={109}
+                width={500}
+                height={500}
                 priority
-                className="max-h-full max-w-full object-contain"
+                className="h-20 w-20 object-contain"
               />
             </Link>
 
@@ -105,11 +105,11 @@ export default function HeaderWear() {
 
             <Link
               href="/wear/panier"
-              className="inline-flex items-center gap-3 border border-white/16 px-4 py-2 text-[0.6rem] uppercase tracking-[0.25em] text-white/88 drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-colors duration-500 hover:border-white/30 hover:text-white"
+              className="inline-flex h-11 min-w-11 items-center justify-center border border-white/18 px-3 font-serif text-[0.68rem] uppercase tracking-[0.18em] text-white/90 drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-colors duration-300 hover:border-white/35 hover:bg-white hover:text-[#121110] sm:gap-3 sm:px-4 sm:py-2"
               aria-label="Voir le panier 21 Wear"
             >
-              <span>Panier</span>
-              <span className="inline-flex min-w-6 items-center justify-center rounded-full border border-white/18 px-2 py-1 text-[0.58rem] tracking-[0.18em] text-white/72">
+              <span className="hidden sm:inline">Panier</span>
+              <span className="inline-flex min-w-6 items-center justify-center border-l border-current/20 px-2 py-1 font-sans text-[0.58rem] tracking-[0.18em]">
                 {isHydrated ? itemCount : 0}
               </span>
             </Link>

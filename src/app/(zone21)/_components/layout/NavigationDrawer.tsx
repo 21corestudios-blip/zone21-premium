@@ -103,11 +103,11 @@ export default function NavigationDrawer({
             className="transition-opacity duration-500 hover:opacity-80"
           >
             <Image
-              src="/images/ui/logo-zone21-light.svg"
+              src="/images/ui/Z21_logo-01.svg"
               alt="ZONE 21"
-              width={200}
-              height={60}
-              className="h-4 w-auto md:h-5"
+              width={500}
+              height={500}
+              className="h-[50px] w-[50px] object-contain"
             />
           </Link>
 

@@ -4,27 +4,27 @@ import Image from "next/image";
 import Link from "next/link";
 
 const footerLinkClassName =
-  "font-sans text-sm text-white/70 transition-colors duration-300 hover:text-white";
+  "font-sans text-xs uppercase tracking-[0.16em] text-white/55 transition-colors duration-300 hover:text-white";
 
 export default function FooterCore() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-white/5 bg-[#121110] px-6 pb-12 pt-24 text-[#EAE8E3] md:px-12">
+    <footer className="border-t border-white/10 bg-[#121110] px-6 pb-12 pt-24 text-[#EAE8E3] md:px-10 lg:px-16">
       <div className="mx-auto flex max-w-7xl flex-col gap-20">
         <div className="grid grid-cols-1 gap-16 md:grid-cols-12 md:gap-8">
           <div className="flex flex-col gap-8 md:col-span-8">
             <Link
               href="/core-studios"
               aria-label="Retour à l’accueil 21 Core Studios"
-              className="inline-flex h-8 w-36 items-center transition-opacity duration-500 hover:opacity-80 md:h-9 md:w-40"
+              className="inline-flex h-[120px] w-[120px] items-center justify-center transition-opacity duration-500 hover:opacity-80"
             >
               <Image
-                src="/images/ui/Z21_21_core_studios_logo.svg"
+                src="/images/ui/Z21_21_core_studios_logo-01.svg"
                 alt="ZONE 21"
-                width={250}
-                height={185}
-                className="max-h-full max-w-full object-contain"
+                width={500}
+                height={500}
+                className="h-[120px] w-[120px] object-contain"
               />
             </Link>
 
@@ -39,7 +39,7 @@ export default function FooterCore() {
             >
               <label
                 htmlFor="footer-core-email"
-                className="font-sans text-[0.65rem] uppercase tracking-[0.2em] text-white/40"
+                className="font-sans text-[13px] font-bold uppercase tracking-[0.2em] text-white/48"
               >
                 Recevoir les nouveautés studio
               </label>
@@ -56,7 +56,7 @@ export default function FooterCore() {
 
                 <button
                   type="submit"
-                  className="text-[0.65rem] uppercase tracking-[0.2em] text-white/70 transition-colors duration-300 hover:text-white"
+                  className="font-serif text-[0.75rem] uppercase tracking-[0.16em] text-white/76 transition-colors duration-300 hover:text-white"
                 >
                   S&apos;inscrire
                 </button>
@@ -65,7 +65,7 @@ export default function FooterCore() {
           </div>
 
           <div className="flex flex-col gap-6 md:col-span-4 md:pl-12">
-            <span className="mb-2 font-sans text-[0.65rem] uppercase tracking-[0.2em] text-white/40">
+            <span className="mb-2 font-sans text-[13px] font-bold uppercase tracking-[0.2em] text-white/48">
               21 Core Studios
             </span>
 

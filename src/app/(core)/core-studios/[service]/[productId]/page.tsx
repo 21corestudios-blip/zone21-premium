@@ -55,9 +55,9 @@ export default async function CoreProductPage({ params }: PageProps) {
 
   return (
     <main className="flex min-h-screen flex-col bg-[#F7F5F0]">
-      <section className="mx-auto w-full max-w-7xl px-6 pb-20 pt-28 md:px-12 md:pb-28 md:pt-36">
+      <section className="mx-auto w-full max-w-7xl px-6 pb-24 pt-32 md:px-10 md:pb-32 md:pt-40 lg:px-16">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-[minmax(0,1.1fr)_minmax(360px,0.9fr)] lg:gap-20">
-          <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#EAE8E3]">
+          <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#F4F4F4]">
             <Image
               src={currentProduct.image}
               alt={currentProduct.name}
@@ -143,9 +143,9 @@ export default async function CoreProductPage({ params }: PageProps) {
               <CoreAddToCartForm product={currentProduct} />
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center border border-[#121110]/15 px-8 py-4 text-[#121110] transition-colors duration-500 hover:border-[#121110]/35 sm:w-fit"
+                className="inline-flex items-center justify-center rounded-none border border-[#121110]/15 px-8 py-4 text-[#121110] transition-colors duration-300 hover:border-[#121110] hover:bg-[#121110] hover:text-[#F7F5F0] sm:w-fit"
               >
-                <span className="font-sans text-[0.65rem] font-bold uppercase tracking-[0.25em]">
+                <span className="font-serif text-[0.75rem] uppercase tracking-[0.18em]">
                   Demande Privée
                 </span>
               </Link>

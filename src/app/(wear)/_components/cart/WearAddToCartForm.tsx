@@ -82,9 +82,9 @@ export default function WearAddToCartForm({
       <button
         type="button"
         onClick={handleAddToCart}
-        className="inline-flex items-center justify-center bg-[#121110] px-8 py-4 text-[#F7F5F0] transition-colors duration-500 hover:bg-[#2A2826]"
+        className="inline-flex items-center justify-center rounded-none bg-[#121110] px-8 py-4 text-[#F7F5F0] transition-colors duration-300 hover:bg-black"
       >
-        <span className="font-sans text-[0.65rem] font-bold uppercase tracking-[0.25em]">
+        <span className="font-serif text-[0.75rem] uppercase tracking-[0.18em]">
           Ajouter au panier
         </span>
       </button>

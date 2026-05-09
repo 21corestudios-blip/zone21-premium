@@ -5,8 +5,8 @@ import { wearData } from "@/data/wear.data";
 
 export default function WearCollectionsGrid() {
   return (
-    <section className="mx-auto w-full max-w-7xl px-6 py-24 md:px-12 md:py-32">
-      <div className="grid grid-cols-1 gap-x-12 gap-y-20 md:grid-cols-2 md:gap-y-28 xl:grid-cols-4">
+    <section className="mx-auto w-full max-w-7xl px-6 py-28 md:px-10 md:py-36 lg:px-16">
+      <div className="grid grid-cols-1 gap-x-10 gap-y-20 sm:grid-cols-2 lg:grid-cols-4">
         {wearData.collections.map((collection) => (
           <Link
             key={collection.id}
@@ -14,19 +14,19 @@ export default function WearCollectionsGrid() {
             aria-label={`Découvrir la collection ${collection.name}`}
             className="group flex cursor-pointer flex-col"
           >
-            <div className="relative mb-8 aspect-[4/5] w-full overflow-hidden bg-[#EAE8E3]">
+            <div className="relative mb-7 aspect-[4/5] w-full overflow-hidden bg-[#F4F4F4]">
               <Image
                 src={collection.image}
                 alt={collection.name}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1279px) 50vw, 25vw"
-                className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
               />
               <div className="pointer-events-none absolute inset-0 bg-black/0 transition-colors duration-700 group-hover:bg-black/10" />
             </div>
 
             <div className="flex flex-col items-center justify-center px-2 text-center">
-              <h2 className="font-sans text-sm uppercase tracking-[0.2em] text-[#121110] transition-colors duration-500 group-hover:text-[#121110]/70 md:text-base">
+              <h2 className="font-sans text-sm uppercase tracking-[0.16em] text-[#121110] transition-colors duration-300 group-hover:text-[#121110]/70">
                 {collection.name}
               </h2>
               <p className="mt-3 font-sans text-[0.62rem] uppercase tracking-[0.24em] text-[#121110]/40">

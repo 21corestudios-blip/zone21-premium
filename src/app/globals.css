@@ -6,6 +6,8 @@
     --color-text: #eae8e3;
     --color-accent: #c5b39b;
     --color-muted: #8a8886;
+    --color-commerce-surface: #f4f4f4;
+    --color-heritage: #004526;
 
     --font-sans: var(--font-texte), sans-serif;
     --font-serif: var(--font-titre), serif;

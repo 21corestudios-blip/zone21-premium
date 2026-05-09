@@ -8,7 +8,7 @@ import { useScrolledHeader } from "@/hooks/useScrolledHeader";
 import NavigationDrawer from "./NavigationDrawer";
 
 const desktopLinkClassName =
-  "text-[0.65rem] uppercase tracking-[0.25em] text-white/78 transition-colors duration-500 hover:text-white";
+  "relative font-sans text-[13px] uppercase tracking-widest text-white/82 transition-colors duration-300 hover:text-white after:absolute after:-bottom-2 after:left-0 after:h-px after:w-0 after:bg-white/80 after:transition-all after:duration-300 hover:after:w-full";
 
 export default function Header() {
   const isScrolled = useScrolledHeader();
@@ -22,31 +22,31 @@ export default function Header() {
       <header
         className={`fixed left-0 top-0 z-50 w-full transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${
           isScrolled
-            ? "border-b border-white/5 bg-[#121110]/90 py-4 shadow-sm backdrop-blur-md"
-            : "border-transparent bg-transparent py-8"
+            ? "h-24 border-b border-white/10 bg-[#121110]/92 backdrop-blur-md"
+            : "h-24 border-b border-transparent bg-transparent"
         }`}
       >
         {!isScrolled ? (
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/58 via-black/24 to-transparent"
+            className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/58 via-black/24 to-transparent"
           />
         ) : null}
 
-        <div className="relative flex w-full items-center justify-between px-6 lg:px-12">
+        <div className="relative flex h-full w-full items-center justify-between px-6 md:px-10 lg:px-16">
           <div className="flex items-center gap-12 lg:gap-16">
             <Link
               href="/"
               aria-label="Retour à l’accueil Zone 21"
-              className="flex h-12 w-44 flex-shrink-0 items-center drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-opacity duration-500 hover:opacity-80 md:h-14 md:w-48"
+              className="flex h-20 w-20 flex-shrink-0 items-center justify-center drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-opacity duration-500 hover:opacity-80"
             >
               <Image
                 src="/images/ui/Z21_logo-01.svg"
                 alt="ZONE 21"
-                width={250}
-                height={35}
+                width={500}
+                height={500}
                 priority
-                className="max-h-full max-w-full object-contain"
+                className="h-20 w-20 object-contain"
               />
             </Link>
 

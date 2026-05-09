@@ -26,7 +26,7 @@ export default function OrganizationJsonLd({
             "@id": organizationId,
             name: "ZONE 21",
             url: normalizedSiteUrl,
-            logo: `${normalizedSiteUrl}/images/ui/logo_signature_or.png`,
+            logo: `${normalizedSiteUrl}/images/ui/Z21_logo-01.svg`,
             description:
               "Maison créative indépendante dédiée aux univers premium entre vêtement, image, musique, production, talents et culture street.",
           },

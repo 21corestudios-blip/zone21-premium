@@ -28,7 +28,7 @@ function getVariantClass(variant: ButtonVariant) {
       return "border-white/12 bg-transparent text-white hover:border-white/25 hover:text-white";
     case "gold":
     default:
-      return "border-[#C5B39B]/55 bg-[#C5B39B]/12 text-[#F7F5F0] hover:bg-[#C5B39B]/20";
+      return "border-[#C5B39B]/55 bg-[#121110] text-[#F7F5F0] hover:border-[#C5B39B] hover:bg-[#F7F5F0] hover:text-[#121110]";
   }
 }
 
@@ -48,7 +48,7 @@ function getButtonClass({
   className = "",
 }: SharedButtonProps) {
   return [
-    "inline-flex items-center justify-center rounded-full border font-sans uppercase tracking-[0.22em] transition-colors duration-500",
+    "inline-flex items-center justify-center rounded-none border font-serif uppercase tracking-[0.18em] transition-colors duration-300",
     getVariantClass(variant),
     getSizeClass(size),
     className,
