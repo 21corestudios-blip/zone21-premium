@@ -5,16 +5,16 @@ import AboutPageSections from "../_components/about/AboutPageSections";
 export const metadata: Metadata = {
   title: "À Propos",
   description:
-    "Découvrez la vision fondatrice de Zone 21, son origine, ses influences et les valeurs qui structurent son écosystème créatif.",
+    "Découvrez la vision fondatrice de ARCANE, son origine, ses influences et les valeurs qui structurent son écosystème créatif.",
   alternates: {
     canonical: "/a-propos",
   },
   openGraph: {
-    title: "À Propos | ZONE 21",
+    title: "À Propos | ARCANE",
     description:
-      "Découvrez la vision fondatrice de Zone 21, son origine, ses influences et les valeurs qui structurent son écosystème créatif.",
+      "Découvrez la vision fondatrice de ARCANE, son origine, ses influences et les valeurs qui structurent son écosystème créatif.",
     url: "/a-propos",
-    siteName: "ZONE 21",
+    siteName: "ARCANE",
     locale: "fr_FR",
     type: "website",
   },

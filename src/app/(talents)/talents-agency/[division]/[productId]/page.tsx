@@ -117,7 +117,7 @@ export default async function TalentsProductPage({ params }: PageProps) {
               </p>
 
               <p className="font-sans text-base font-light leading-relaxed text-[#121110]/72 md:text-lg">
-                Chaque offre 21 Talents Agency est pensée pour renforcer la
+                Chaque offre EKKO est pensée pour renforcer la
                 lecture du profil, la qualité des activations et la cohérence de
                 visibilité du talent dans la durée.
               </p>

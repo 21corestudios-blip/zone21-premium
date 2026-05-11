@@ -2,7 +2,7 @@
 
 ## Objectif
 
-21 Wear doit pouvoir router chaque ligne vers Printify ou Gelato côté serveur.
+M33 doit pouvoir router chaque ligne vers Printify ou Gelato côté serveur.
 Le front ne voit jamais la logique fournisseur.
 
 ## Priorités

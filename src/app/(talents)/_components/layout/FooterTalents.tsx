@@ -16,12 +16,12 @@ export default function FooterTalents() {
           <div className="flex flex-col gap-8 md:col-span-8">
             <Link
               href="/talents-agency"
-              aria-label="Retour à l’accueil 21 Talents Agency"
+              aria-label="Retour à l’accueil EKKO"
               className="inline-flex h-[120px] w-[120px] items-center justify-center transition-opacity duration-500 hover:opacity-80"
             >
               <Image
-                src="/images/ui/Z21_21_talents_agency_logo-01.svg"
-                alt="ZONE 21"
+                src="/images/ui/EKKO_blanc_500px.svg"
+                alt="ARCANE"
                 width={500}
                 height={500}
                 className="h-[120px] w-[120px] object-contain"
@@ -30,7 +30,7 @@ export default function FooterTalents() {
 
             <p className="max-w-md font-sans text-sm font-light leading-relaxed text-white/60 md:text-base">
               Agence de promotion de talents, influence, campagnes et
-              activations de visibilité pour l&apos;écosystème Zone 21.
+              activations de visibilité pour l&apos;écosystème ARCANE.
             </p>
 
             <form
@@ -66,7 +66,7 @@ export default function FooterTalents() {
 
           <div className="flex flex-col gap-6 md:col-span-4 md:pl-12">
             <span className="mb-2 font-sans text-[13px] font-bold uppercase tracking-[0.2em] text-white/48">
-              21 Talents Agency
+              EKKO
             </span>
 
             <Link
@@ -101,7 +101,7 @@ export default function FooterTalents() {
 
         <div className="flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 text-center md:flex-row md:text-left">
           <span className="font-sans text-[0.65rem] uppercase tracking-[0.1em] text-white/30">
-            © {currentYear} 21 Talents Agency. Tous droits reserves.
+            © {currentYear} EKKO. Tous droits reserves.
           </span>
 
           <span className="font-sans text-[0.65rem] uppercase tracking-[0.1em] text-white/30">
@@ -110,7 +110,7 @@ export default function FooterTalents() {
               href="/"
               className="text-white/50 transition-colors hover:text-white"
             >
-              Zone 21
+              ARCANE
             </Link>
           </span>
         </div>

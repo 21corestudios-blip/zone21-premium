@@ -24,7 +24,7 @@ export default function OrganizationJsonLd({
           {
             "@type": "Organization",
             "@id": organizationId,
-            name: "ZONE 21",
+            name: "ARCANE",
             url: normalizedSiteUrl,
             logo: `${normalizedSiteUrl}/images/ui/Z21_logo-01.svg`,
             description:
@@ -34,7 +34,7 @@ export default function OrganizationJsonLd({
             "@type": "WebSite",
             "@id": websiteId,
             url: normalizedSiteUrl,
-            name: "ZONE 21",
+            name: "ARCANE",
             inLanguage: "fr-FR",
             publisher: {
               "@id": organizationId,

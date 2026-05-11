@@ -99,12 +99,12 @@ export default function NavigationDrawer({
           <Link
             href="/"
             onClick={handleClose}
-            aria-label="Retour à l’accueil Zone 21"
+            aria-label="Retour à l’accueil ARCANE"
             className="transition-opacity duration-500 hover:opacity-80"
           >
             <Image
               src="/images/ui/Z21_logo-01.svg"
-              alt="ZONE 21"
+              alt="ARCANE"
               width={500}
               height={500}
               className="h-[50px] w-[50px] object-contain"

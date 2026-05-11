@@ -8,7 +8,7 @@ export default function CoreHero() {
       <div className="absolute inset-0 z-0">
         <Image
           src={coreData.hero.image}
-          alt="Campagne 21 Core Studios"
+          alt="Campagne CS73"
           fill
           priority
           quality={100}

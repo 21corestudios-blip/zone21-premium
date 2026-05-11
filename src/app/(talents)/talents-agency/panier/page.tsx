@@ -5,7 +5,7 @@ import TalentsCartPage from "@/app/(talents)/_components/cart/TalentsCartPage";
 export const metadata: Metadata = {
   title: "Panier",
   description:
-    "Retrouvez votre sélection 21 Talents Agency avant cadrage et validation.",
+    "Retrouvez votre sélection EKKO avant cadrage et validation.",
   alternates: {
     canonical: "/talents-agency/panier",
   },

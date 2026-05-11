@@ -3,18 +3,18 @@ import type { Metadata } from "next";
 import TalentsPageSections from "../_components/talents/TalentsPageSections";
 
 export const metadata: Metadata = {
-  title: "21 Talents Agency - Influence et talents premium",
+  title: "EKKO - Influence et talents premium",
   description:
-    "21 Talents Agency accompagne talents, profils créatifs et campagnes d’influence avec stratégie, visibilité, représentation et activation premium.",
+    "EKKO accompagne talents, profils créatifs et campagnes d’influence avec stratégie, visibilité, représentation et activation premium.",
   alternates: {
     canonical: "/talents-agency",
   },
   openGraph: {
-    title: "21 Talents Agency | Influence et talents premium",
+    title: "EKKO | Influence et talents premium",
     description:
-      "21 Talents Agency accompagne talents, profils créatifs et campagnes d’influence avec stratégie, visibilité, représentation et activation premium.",
+      "EKKO accompagne talents, profils créatifs et campagnes d’influence avec stratégie, visibilité, représentation et activation premium.",
     url: "/talents-agency",
-    siteName: "ZONE 21",
+    siteName: "ARCANE",
     locale: "fr_FR",
     type: "website",
     images: [
@@ -22,19 +22,19 @@ export const metadata: Metadata = {
         url: "/images/brands/21-talents/z21-21-talents-agency-hero-1.webp",
         width: 2048,
         height: 1136,
-        alt: "21 Talents Agency - influence et talents premium",
+        alt: "EKKO - influence et talents premium",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "21 Talents Agency | Influence et talents premium",
+    title: "EKKO | Influence et talents premium",
     description:
-      "21 Talents Agency accompagne talents, profils créatifs et campagnes d’influence avec stratégie, visibilité, représentation et activation premium.",
+      "EKKO accompagne talents, profils créatifs et campagnes d’influence avec stratégie, visibilité, représentation et activation premium.",
     images: [
       {
         url: "/images/brands/21-talents/z21-21-talents-agency-hero-1.webp",
-        alt: "21 Talents Agency - influence et talents premium",
+        alt: "EKKO - influence et talents premium",
       },
     ],
   },

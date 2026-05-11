@@ -6,7 +6,7 @@ export default function ProductionIntro() {
       <div className="grid gap-10 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
         <div>
           <p className="font-sans text-[0.65rem] uppercase tracking-[0.3em] text-[#121110]/42">
-            21 Production
+            BACKSPIN
           </p>
         </div>
 

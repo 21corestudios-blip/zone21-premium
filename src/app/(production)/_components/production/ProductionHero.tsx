@@ -7,7 +7,7 @@ export default function ProductionHero() {
       <div className="absolute inset-0 z-0">
         <Image
           src={productionData.hero.image}
-          alt="Campagne 21 Production"
+          alt="Campagne BACKSPIN"
           fill
           priority
           quality={100}

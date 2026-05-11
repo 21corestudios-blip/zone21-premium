@@ -2,7 +2,7 @@
 
 ## Statut du document
 
-Document de spécification fonctionnelle du futur writer documentaire unique ZONE 21.
+Document de spécification fonctionnelle du futur writer documentaire unique ARCANE.
 
 Ce document ne déclenche aucune écriture documentaire, n'active aucun workflow technique et ne modifie aucun comportement applicatif. Il définit le futur composant serveur autorisé à écrire dans `ZONE21_DEV`.
 

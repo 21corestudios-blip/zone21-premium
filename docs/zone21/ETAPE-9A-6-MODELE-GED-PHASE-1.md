@@ -2,7 +2,7 @@
 
 ## Statut du document
 
-Document de normalisation rédactionnelle et fonctionnelle pour la GED ZONE 21 phase 1.
+Document de normalisation rédactionnelle et fonctionnelle pour la GED ARCANE phase 1.
 
 Ce document ne déclenche aucune écriture documentaire, n'active aucun workflow technique et ne modifie aucun comportement applicatif. Il stabilise les termes, les champs minimaux et les règles de blocage à respecter avant toute implémentation.
 

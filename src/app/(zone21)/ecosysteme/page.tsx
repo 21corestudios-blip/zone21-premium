@@ -5,16 +5,16 @@ import EcosystemePageSections from "../_components/ecosysteme/EcosystemePageSect
 export const metadata: Metadata = {
   title: "Écosystème",
   description:
-    "Découvrez l'écosystème Zone 21 à travers ses maisons, ses univers et ses expressions créatives.",
+    "Découvrez l'écosystème ARCANE à travers ses maisons, ses univers et ses expressions créatives.",
   alternates: {
     canonical: "/ecosysteme",
   },
   openGraph: {
-    title: "Écosystème | ZONE 21",
+    title: "Écosystème | ARCANE",
     description:
-      "Découvrez l'écosystème Zone 21 à travers ses maisons, ses univers et ses expressions créatives.",
+      "Découvrez l'écosystème ARCANE à travers ses maisons, ses univers et ses expressions créatives.",
     url: "/ecosysteme",
-    siteName: "ZONE 21",
+    siteName: "ARCANE",
     locale: "fr_FR",
     type: "website",
   },

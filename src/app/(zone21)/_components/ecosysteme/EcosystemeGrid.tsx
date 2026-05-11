@@ -3,6 +3,13 @@ import Link from "next/link";
 
 import { homeData } from "@/data/home.data";
 
+const maisonLogos: Record<string, string> = {
+  wear: "/images/ui/M33_header_blanc_500px.svg",
+  core: "/images/ui/CS73_header_blanc_500px.svg",
+  prod: "/images/ui/BACKSPIN_header_blanc_500px_01.svg",
+  talents: "/images/ui/EKKO_header_blanc_500px.svg",
+};
+
 export default function EcosystemeGrid() {
   const { maisons } = homeData;
 
@@ -30,8 +37,14 @@ export default function EcosystemeGrid() {
               <span className="mb-2 font-sans text-[0.55rem] uppercase tracking-[0.3em] text-white/60">
                 {maison.category}
               </span>
-              <h2 className="font-serif text-2xl tracking-wide text-white md:text-[2rem]">
-                {maison.name}
+              <h2 aria-label={maison.name}>
+                <Image
+                  src={maisonLogos[maison.id]}
+                  alt=""
+                  width={500}
+                  height={500}
+                  className="h-20 w-20 object-contain sm:h-24 sm:w-24 md:h-28 md:w-28"
+                />
               </h2>
             </div>
           </Link>

@@ -16,12 +16,12 @@ export default function Footer() {
           <div className="flex flex-col gap-8 md:col-span-8">
             <Link
               href="/"
-              aria-label="Retour à l’accueil Zone 21"
+              aria-label="Retour à l’accueil ARCANE"
               className="inline-flex h-[120px] w-[120px] items-center justify-center transition-opacity duration-500 hover:opacity-80"
             >
               <Image
-                src="/images/ui/Z21_logo-01.svg"
-                alt="ZONE 21"
+                src="/images/ui/ARCANE_blanc_500px.svg"
+                alt="ARCANE"
                 width={500}
                 height={500}
                 className="h-[120px] w-[120px] object-contain"
@@ -92,7 +92,7 @@ export default function Footer() {
 
         <div className="flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 text-center md:flex-row md:text-left">
           <span className="font-sans text-[0.65rem] uppercase tracking-[0.1em] text-white/30">
-            © {currentYear} Zone 21. Tous droits réservés.
+            © {currentYear} ARCANE. Tous droits réservés.
           </span>
 
           <span className="font-sans text-[0.65rem] uppercase tracking-[0.1em] text-white/30">
@@ -101,7 +101,7 @@ export default function Footer() {
               href="/core-studios"
               className="text-white/50 transition-colors hover:text-white"
             >
-              21 Core Studios
+              CS73
             </Link>
           </span>
         </div>

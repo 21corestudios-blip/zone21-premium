@@ -76,7 +76,7 @@ async function main() {
       customer: {
         email:
           process.env.COMMERCE_STAGING_CUSTOMER_EMAIL || "staging@zone21.test",
-        fullName: "ZONE 21 Staging",
+        fullName: "ARCANE Staging",
         shippingAddress: {
           line1: process.env.COMMERCE_STAGING_ADDRESS_LINE1 || "1 rue de test",
           postalCode: process.env.COMMERCE_STAGING_POSTAL_CODE || "75001",

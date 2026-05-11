@@ -2,7 +2,7 @@
 
 ## Intention
 
-Storyblok devient la source éditoriale progressive de ZONE 21.
+Storyblok devient la source éditoriale progressive de ARCANE.
 Le code reste le socle du rendu, des routes et du commerce.
 La migration doit préserver le ton premium, la direction visuelle et les chemins d'images.
 
@@ -17,7 +17,7 @@ La migration doit préserver le ton premium, la direction visuelle et les chemin
 ## Contenus à migrer plus tard
 
 - Pages `a-propos`, `ecosysteme`, `contact` et `mentions-legales`.
-- Introductions éditoriales de `21 Wear`, `21 Core Studios`, `21 Production` et `21 Talents Agency`.
+- Introductions éditoriales de `M33`, `CS73`, `BACKSPIN` et `EKKO`.
 - Storytelling de collections Wear.
 - Pages éditoriales de campagnes et lancements.
 - Pages artistes, talents et univers de marque, hors prix et achat.

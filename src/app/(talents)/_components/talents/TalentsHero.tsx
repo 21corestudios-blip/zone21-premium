@@ -8,7 +8,7 @@ export default function TalentsHero() {
       <div className="absolute inset-0 z-0">
         <Image
           src={talentsData.hero.image}
-          alt="Campagne 21 Talents Agency"
+          alt="Campagne EKKO"
           fill
           priority
           quality={100}

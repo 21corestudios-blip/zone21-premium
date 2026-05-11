@@ -30,7 +30,7 @@ export default function WearCollectionsGrid() {
                 {collection.name}
               </h2>
               <p className="mt-3 font-sans text-[0.62rem] uppercase tracking-[0.24em] text-[#121110]/40">
-                21 Wear
+                M33
               </p>
             </div>
           </Link>

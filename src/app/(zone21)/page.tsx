@@ -8,13 +8,13 @@ import { getStoryblokStory } from "@/lib/storyblok/api";
 export const metadata: Metadata = {
   title: "Maison créative indépendante premium",
   description:
-    "ZONE 21, maison créative indépendante, relie vêtement premium, image, musique, production et talents dans un écosystème culturel exigeant et cohérent.",
+    "ARCANE, maison créative indépendante, relie vêtement premium, image, musique, production et talents dans un écosystème culturel exigeant et cohérent.",
   openGraph: {
-    title: "ZONE 21 | Maison créative indépendante premium",
+    title: "ARCANE | Maison créative indépendante premium",
     description:
-      "ZONE 21, maison créative indépendante, relie vêtement premium, image, musique, production et talents dans un écosystème culturel exigeant et cohérent.",
+      "ARCANE, maison créative indépendante, relie vêtement premium, image, musique, production et talents dans un écosystème culturel exigeant et cohérent.",
     url: "/",
-    siteName: "ZONE 21",
+    siteName: "ARCANE",
     locale: "fr_FR",
     type: "website",
     images: [
@@ -22,19 +22,19 @@ export const metadata: Metadata = {
         url: "/images/home/hero/z21-home-hero-main-01-desktop-7.webp",
         width: 2048,
         height: 1136,
-        alt: "ZONE 21 - maison créative indépendante premium",
+        alt: "ARCANE - maison créative indépendante premium",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "ZONE 21 | Maison créative indépendante premium",
+    title: "ARCANE | Maison créative indépendante premium",
     description:
-      "ZONE 21, maison créative indépendante, relie vêtement premium, image, musique, production et talents dans un écosystème culturel exigeant et cohérent.",
+      "ARCANE, maison créative indépendante, relie vêtement premium, image, musique, production et talents dans un écosystème culturel exigeant et cohérent.",
     images: [
       {
         url: "/images/home/hero/z21-home-hero-main-01-desktop-7.webp",
-        alt: "ZONE 21 - maison créative indépendante premium",
+        alt: "ARCANE - maison créative indépendante premium",
       },
     ],
   },

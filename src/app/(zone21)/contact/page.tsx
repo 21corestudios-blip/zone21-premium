@@ -5,16 +5,16 @@ import ContactPageSections from "../_components/contact/ContactPageSections";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Contactez Zone 21 pour une collaboration, une demande sur mesure ou toute question liée à l'écosystème de la maison.",
+    "Contactez ARCANE pour une collaboration, une demande sur mesure ou toute question liée à l'écosystème de la maison.",
   alternates: {
     canonical: "/contact",
   },
   openGraph: {
-    title: "Contact | ZONE 21",
+    title: "Contact | ARCANE",
     description:
-      "Contactez Zone 21 pour une collaboration, une demande sur mesure ou toute question liée à l'écosystème de la maison.",
+      "Contactez ARCANE pour une collaboration, une demande sur mesure ou toute question liée à l'écosystème de la maison.",
     url: "/contact",
-    siteName: "ZONE 21",
+    siteName: "ARCANE",
     locale: "fr_FR",
     type: "website",
   },

@@ -6,7 +6,7 @@ export default function AboutHero() {
       <div className="absolute inset-0 z-0">
         <Image
           src="/images/a_propos/en-tete.jpg"
-          alt="Architecture Zone 21"
+          alt="Architecture ARCANE"
           fill
           priority
           quality={100}

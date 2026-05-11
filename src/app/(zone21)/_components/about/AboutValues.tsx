@@ -2,17 +2,17 @@ const values = [
   {
     number: "01",
     title: "L’Exigence",
-    text: "Rien n’entre dans ZONE 21 par hasard. Une matière, une image, une voix, un mot ou une silhouette doivent porter une intention claire. La sélection est stricte, non pour fermer les portes, mais pour construire des univers solides, précis et capables de traverser le temps.",
+    text: "Rien n’entre dans ARCANE par hasard. Une matière, une image, une voix, un mot ou une silhouette doivent porter une intention claire. La sélection est stricte, non pour fermer les portes, mais pour construire des univers solides, précis et capables de traverser le temps.",
   },
   {
     number: "02",
     title: "La Vision",
-    text: "ZONE 21 regarde devant sans effacer ce qui l’a fondée. Chaque projet avance avec son époque, mais reste attaché à des codes profonds : la culture, le rythme, la présence, le détail, la mémoire urbaine et le sens du récit.",
+    text: "ARCANE regarde devant sans effacer ce qui l’a fondée. Chaque projet avance avec son époque, mais reste attaché à des codes profonds : la culture, le rythme, la présence, le détail, la mémoire urbaine et le sens du récit.",
   },
   {
     number: "03",
     title: "L’Autorité",
-    text: "La force d’une maison ne se mesure pas au bruit qu’elle produit. Elle se reconnaît à sa cohérence, à sa tenue, à sa capacité à imposer une présence sans forcer. ZONE 21 construit des signes durables, des univers lisibles et une identité qui tient.",
+    text: "La force d’une maison ne se mesure pas au bruit qu’elle produit. Elle se reconnaît à sa cohérence, à sa tenue, à sa capacité à imposer une présence sans forcer. ARCANE construit des signes durables, des univers lisibles et une identité qui tient.",
   },
 ];
 
@@ -34,7 +34,7 @@ export default function AboutValues() {
           </div>
 
           <p className="max-w-2xl font-sans text-[0.98rem] font-light leading-[1.85] tracking-[0.01em] text-white/62 md:text-[1.05rem]">
-            ZONE 21 repose sur une méthode simple : choisir avec précision,
+            ARCANE repose sur une méthode simple : choisir avec précision,
             construire avec cohérence, tenir une signature sans la diluer. Les
             maisons du groupe peuvent parler des langages différents, mais elles
             avancent depuis le même socle.

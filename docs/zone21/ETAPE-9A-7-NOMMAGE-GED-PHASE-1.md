@@ -2,7 +2,7 @@
 
 ## Statut du document
 
-Document de formalisation des règles de nommage GED ZONE 21 pour la phase 1.
+Document de formalisation des règles de nommage GED ARCANE pour la phase 1.
 
 Ce document ne déclenche aucune écriture documentaire, n'active aucun workflow technique et ne modifie aucun comportement applicatif. Il précise les conventions attendues avant toute implémentation.
 

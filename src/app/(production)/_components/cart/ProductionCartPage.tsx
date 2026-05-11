@@ -90,14 +90,14 @@ export default function ProductionCartPage() {
     return (
       <section className="mx-auto flex min-h-[60vh] w-full max-w-4xl flex-col items-center justify-center px-6 py-24 text-center md:px-12">
         <p className="font-sans text-[0.68rem] uppercase tracking-[0.3em] text-[#121110]/45">
-          21 Production Panier
+          BACKSPIN Panier
         </p>
         <h1 className="mt-6 font-serif text-4xl leading-none text-[#121110] md:text-5xl">
           Ton panier est vide
         </h1>
         <p className="mt-6 max-w-2xl font-sans text-base font-light leading-relaxed text-[#121110]/68 md:text-lg">
           Sélectionne tes beats, templates et ressources dans les boutiques
-          artistes de 21 Production.
+          artistes de BACKSPIN.
         </p>
         <Link
           href="/prod"
@@ -116,7 +116,7 @@ export default function ProductionCartPage() {
       <div className="border-b border-[#121110]/10 pb-8">
         <nav className="flex items-center gap-3 font-sans text-[0.62rem] uppercase tracking-[0.24em] text-[#121110]/42">
           <Link href="/prod" className="transition-colors duration-300 hover:text-[#121110]">
-            21 Production
+            BACKSPIN
           </Link>
           <span>/</span>
           <span className="text-[#121110]/70">Panier</span>
@@ -350,7 +350,7 @@ export default function ProductionCartPage() {
             </div>
 
             <p className="mt-5 font-sans text-[0.72rem] font-light leading-relaxed text-[#121110]/58">
-              Validation et conditions d’accès finalisées avec l’équipe 21 Production.
+              Validation et conditions d’accès finalisées avec l’équipe BACKSPIN.
             </p>
 
             <div className="mt-8 flex flex-col gap-3">

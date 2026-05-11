@@ -42,12 +42,12 @@ export default function HeaderTalents() {
           <div className="flex items-center gap-10 lg:gap-14">
             <Link
               href="/talents-agency"
-              aria-label="Retour à l’accueil 21 Talents Agency"
+              aria-label="Retour à l’accueil EKKO"
               className="flex h-20 w-20 flex-shrink-0 items-center justify-center drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-opacity duration-500 hover:opacity-80"
             >
               <Image
-                src="/images/ui/Z21_21_talents_agency_logo-01.svg"
-                alt="ZONE 21"
+                src="/images/ui/EKKO_header_blanc_500px.svg"
+                alt="ARCANE"
                 width={500}
                 height={500}
                 priority
@@ -57,7 +57,7 @@ export default function HeaderTalents() {
 
             <nav
               className="hidden items-center gap-5 lg:flex"
-              aria-label="Divisions 21 Talents Agency"
+              aria-label="Divisions EKKO"
             >
               <Link
                 href="/talents-agency/fashion-luxury"
@@ -89,10 +89,10 @@ export default function HeaderTalents() {
           <div className="flex items-center gap-4 md:gap-6 lg:gap-8">
             <nav
               className="hidden items-center gap-6 md:flex lg:gap-8"
-              aria-label="Navigation 21 Talents Agency"
+              aria-label="Navigation EKKO"
             >
               <Link href="/" className={linkClassName}>
-                Zone 21
+                ARCANE
               </Link>
               <Link href="/ecosysteme" className={linkClassName}>
                 Écosystème
@@ -118,7 +118,7 @@ export default function HeaderTalents() {
             <Link
               href="/talents-agency/panier"
               className="inline-flex h-11 min-w-11 items-center justify-center border border-white/18 px-3 font-serif text-[0.68rem] uppercase tracking-[0.18em] text-white/90 drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-colors duration-300 hover:border-white/35 hover:bg-white hover:text-[#121110] sm:gap-3 sm:px-4 sm:py-2"
-              aria-label="Voir le panier 21 Talents Agency"
+              aria-label="Voir le panier EKKO"
             >
               <span className="hidden sm:inline">Panier</span>
               <span className="inline-flex min-w-6 items-center justify-center border-l border-current/20 px-2 py-1 font-sans text-[0.58rem] tracking-[0.18em]">

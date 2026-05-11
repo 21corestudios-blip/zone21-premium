@@ -2,7 +2,7 @@
 
 ## Statut du document
 
-Document de cadrage des domaines, objets documentaires et préfixes autorisés pour la GED ZONE 21 phase 1.
+Document de cadrage des domaines, objets documentaires et préfixes autorisés pour la GED ARCANE phase 1.
 
 Ce document ne déclenche aucune écriture documentaire, n'active aucun workflow technique et ne modifie aucun comportement applicatif. Il transforme les règles de nommage de l'étape 9A-7 en listes contrôlées utilisables avant implémentation.
 

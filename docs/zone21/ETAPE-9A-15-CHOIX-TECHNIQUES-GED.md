@@ -2,7 +2,7 @@
 
 ## Statut du document
 
-Document d'analyse et d'arbitrage des technologies nécessaires au futur writer réel GED ZONE 21.
+Document d'analyse et d'arbitrage des technologies nécessaires au futur writer réel GED ARCANE.
 
 Cette étape ne déclenche aucune écriture documentaire réelle, aucune génération réelle `DOCX` ou `PDF`, n'active pas le writer et ne modifie aucun service applicatif existant.
 
@@ -50,7 +50,7 @@ Très bonne.
 
 #### Compatibilité ZONE21
 
-Bonne pour des documents très structurés et fortement contrôlés. Moins idéale si ZONE 21 veut déléguer l'évolution fine des modèles à des profils documentaires non techniques.
+Bonne pour des documents très structurés et fortement contrôlés. Moins idéale si ARCANE veut déléguer l'évolution fine des modèles à des profils documentaires non techniques.
 
 ### B. `docxtemplater`
 
@@ -81,7 +81,7 @@ Très bonne.
 
 #### Compatibilité ZONE21
 
-Très bonne. C'est aujourd'hui l'option la plus cohérente si ZONE 21 veut piloter des modèles documentaires Word maîtrisés par la gouvernance et remplir ces modèles à partir de données applicatives.
+Très bonne. C'est aujourd'hui l'option la plus cohérente si ARCANE veut piloter des modèles documentaires Word maîtrisés par la gouvernance et remplir ces modèles à partir de données applicatives.
 
 ### C. `python-docx` via microservice
 
@@ -152,7 +152,7 @@ Source officielle consultée :
 - cohérence forte avec un document Word maître
 - rendu PDF généralement plus fidèle qu'une reconstruction HTML
 - logique simple : le `DOCX` officiel sert de base au `PDF` officiel
-- compatible avec la doctrine ZONE 21 d'une source documentaire unique
+- compatible avec la doctrine ARCANE d'une source documentaire unique
 
 #### Limites
 
@@ -208,7 +208,7 @@ Conversion `DOCX -> PDF` via `LibreOffice headless`
 
 ### Justification
 
-Cette combinaison est la plus cohérente avec ZONE 21 car elle permet :
+Cette combinaison est la plus cohérente avec ARCANE car elle permet :
 
 - un modèle Word gouverné par la documentation
 - un remplissage fiable depuis des données structurées
@@ -218,7 +218,7 @@ Cette combinaison est la plus cohérente avec ZONE 21 car elle permet :
 
 ### Recommandation secondaire
 
-`docx` (npm) reste une bonne option de secours ou de complément si ZONE 21 doit produire certains documents très structurés directement en TypeScript, sans dépendre d'un template Word éditable.
+`docx` (npm) reste une bonne option de secours ou de complément si ARCANE doit produire certains documents très structurés directement en TypeScript, sans dépendre d'un template Word éditable.
 
 ## 5. Stratégie de lock et de concurrence
 
@@ -360,7 +360,7 @@ Un document ne doit être exposé comme `Validé` que si :
 
 ## 11. Conclusion
 
-La stratégie technique recommandée pour ZONE 21 est :
+La stratégie technique recommandée pour ARCANE est :
 
 - `docxtemplater` pour la génération `DOCX`
 - `LibreOffice headless` pour la conversion `PDF`
@@ -369,4 +369,4 @@ La stratégie technique recommandée pour ZONE 21 est :
 - détection bloquante des conflits de version
 - maintien de `/90_GED_PHASE_1/` comme espace pilote sous réserve de validation documentaire finale
 
-Cette combinaison offre aujourd'hui le meilleur compromis entre cohérence documentaire, maintenabilité, contrôle métier et compatibilité avec l'architecture ZONE 21.
+Cette combinaison offre aujourd'hui le meilleur compromis entre cohérence documentaire, maintenabilité, contrôle métier et compatibilité avec l'architecture ARCANE.

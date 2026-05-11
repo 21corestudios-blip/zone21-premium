@@ -12,7 +12,7 @@ export default function AboutOrigins() {
 
             <div className="flex flex-col gap-5">
               <p className="font-sans text-[0.95rem] font-light leading-[1.82] tracking-[0.01em] text-[#121110]/72 md:text-[1rem]">
-                ZONE 21 ne naît pas d’un simple projet de marque. Son origine
+                ARCANE ne naît pas d’un simple projet de marque. Son origine
                 vient d’un monde à construire, d’une culture à organiser et de
                 figures capables d’en porter les premières lignes. Avant les
                 maisons, avant les collections, avant les images, il y a une
@@ -24,7 +24,7 @@ export default function AboutOrigins() {
                 Les personnages fondateurs donnent corps à cette vision. Elena
                 Davalon incarne l’image, la tenue, la précision du regard et la
                 construction d’une identité forte. Elle représente cette part de
-                ZONE 21 qui observe, cadre, compose et transforme une intuition
+                ARCANE qui observe, cadre, compose et transforme une intuition
                 en présence visuelle durable.
               </p>
 
@@ -32,7 +32,7 @@ export default function AboutOrigins() {
                 Naya Delmare porte une autre énergie : celle de la silhouette,
                 de l’allure, de la voix et du mouvement. Elle relie la mode, la
                 culture urbaine et l’élégance contemporaine. À travers elle,
-                ZONE 21 affirme que le style n’est pas seulement une apparence,
+                ARCANE affirme que le style n’est pas seulement une apparence,
                 mais une manière d’entrer dans le monde, de tenir sa place et de
                 laisser une trace.
               </p>
@@ -48,7 +48,7 @@ export default function AboutOrigins() {
 
               <p className="font-sans text-[0.95rem] font-light leading-[1.82] tracking-[0.01em] text-[#121110]/72 md:text-[1rem]">
                 Ensemble, ces figures ne forment pas une fiction décorative.
-                Elles installent les fondations de ZONE 21 : l’image, le
+                Elles installent les fondations de ARCANE : l’image, le
                 vêtement, la musique, les talents, les récits et les codes
                 culturels qui traversent les générations. Elles donnent à la
                 maison une mémoire, une attitude et une façon de créer sans se
@@ -69,7 +69,7 @@ export default function AboutOrigins() {
         <div className="relative h-full min-h-[50vh] overflow-hidden">
           <Image
             src="/images/a_propos/photo_texte.jpg"
-            alt="Figures fondatrices de ZONE 21"
+            alt="Figures fondatrices de ARCANE"
             fill
             sizes="(max-width: 1024px) 100vw, 50vw"
             className="object-cover"

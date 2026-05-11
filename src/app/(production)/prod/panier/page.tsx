@@ -5,7 +5,7 @@ import ProductionCartPage from "@/app/(production)/_components/cart/ProductionCa
 export const metadata: Metadata = {
   title: "Panier",
   description:
-    "Retrouvez votre sélection 21 Production avant validation de l'accès.",
+    "Retrouvez votre sélection BACKSPIN avant validation de l'accès.",
   alternates: {
     canonical: "/prod/panier",
   },

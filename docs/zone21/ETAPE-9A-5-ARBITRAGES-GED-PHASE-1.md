@@ -2,7 +2,7 @@
 
 ## Statut du document
 
-Document de cadrage décisionnel pour la phase 1 GED ZONE 21.
+Document de cadrage décisionnel pour la phase 1 GED ARCANE.
 
 Ce document ne déclenche aucune écriture documentaire et n'active aucun workflow technique. Il formalise uniquement les arbitrages fonctionnels retenus avant développement.
 

@@ -8,11 +8,11 @@ import { coreServices } from "@/data/core.services";
 
 const serviceDescriptions: Record<string, string> = {
   "brand-design":
-    "Brand Design par 21 Core Studios: identités haut de gamme, direction artistique et systèmes visuels pour aligner marque, désirabilité et usage.",
+    "Brand Design par CS73: identités haut de gamme, direction artistique et systèmes visuels pour aligner marque, désirabilité et usage.",
   "web-experience":
-    "Web Experience par 21 Core Studios: sites premium, UX, web design et front-end précis pour des expériences désirables, lisibles et performantes.",
+    "Web Experience par CS73: sites premium, UX, web design et front-end précis pour des expériences désirables, lisibles et performantes.",
   "marketing-objects":
-    "Marketing Objects par 21 Core Studios: supports, cadres, kits et objets de marque prêts à activer lancements, showrooms et campagnes premium.",
+    "Marketing Objects par CS73: supports, cadres, kits et objets de marque prêts à activer lancements, showrooms et campagnes premium.",
 };
 
 type PageProps = {
@@ -33,7 +33,7 @@ export async function generateMetadata({
     };
   }
 
-  const title = `${currentService.name} - 21 Core Studios`;
+  const title = `${currentService.name} - CS73`;
   const description =
     serviceDescriptions[currentService.slug] || currentService.description;
   const canonical = `/core-studios/${currentService.slug}`;
@@ -45,10 +45,10 @@ export async function generateMetadata({
       canonical,
     },
     openGraph: {
-      title: `${currentService.name} | 21 Core Studios`,
+      title: `${currentService.name} | CS73`,
       description,
       url: canonical,
-      siteName: "ZONE 21",
+      siteName: "ARCANE",
       locale: "fr_FR",
       type: "website",
       images: [
@@ -56,18 +56,18 @@ export async function generateMetadata({
           url: currentService.heroImage,
           width: 2048,
           height: 1136,
-          alt: `${currentService.name} - 21 Core Studios`,
+          alt: `${currentService.name} - CS73`,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${currentService.name} | 21 Core Studios`,
+      title: `${currentService.name} | CS73`,
       description,
       images: [
         {
           url: currentService.heroImage,
-          alt: `${currentService.name} - 21 Core Studios`,
+          alt: `${currentService.name} - CS73`,
         },
       ],
     },
@@ -124,7 +124,7 @@ export default async function CoreServicePage({ params }: PageProps) {
 
       <section className="mx-auto w-full max-w-4xl px-6 py-20 text-center md:px-12 md:py-24">
         <span className="font-sans text-[0.65rem] uppercase tracking-[0.3em] text-[#121110]/40">
-          21 Core Studios
+          CS73
         </span>
 
         <p className="mt-8 font-sans text-base font-light leading-relaxed text-[#121110]/70 md:text-lg">

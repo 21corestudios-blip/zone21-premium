@@ -1,4 +1,4 @@
-# ETAPE 9A-4 — Cadrage fonctionnel GED ZONE 21
+# ETAPE 9A-4 — Cadrage fonctionnel GED ARCANE
 
 ## A. Rappel du principe de vérité
 
@@ -263,7 +263,7 @@ Arbitrages nécessaires :
 
 ## Synthèse de cadrage
 
-Le cadrage fonctionnel GED ZONE 21 doit rester aligné sur trois principes non négociables :
+Le cadrage fonctionnel GED ARCANE doit rester aligné sur trois principes non négociables :
 
 1. ZONE21_DEV reste seule source documentaire officielle ;
 2. la base applicative reste un espace transitoire de pilotage et d'audit ;

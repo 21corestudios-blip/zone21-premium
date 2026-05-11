@@ -21,7 +21,7 @@ export default function ContactContent() {
             <div className="flex flex-col gap-6">
               <p className="font-sans text-[0.98rem] font-light leading-[1.95] tracking-[0.01em] text-[#121110]/72 md:text-[1.05rem]">
                 Pour une collaboration, une création sur mesure ou une demande
-                liée à nos maisons, ZONE 21 vous invite à prendre contact.
+                liée à nos maisons, ARCANE vous invite à prendre contact.
                 Chaque message est reçu comme un point d’entrée sérieux : une
                 intention à comprendre, un univers à cadrer, une présence à
                 construire avec justesse.
@@ -36,7 +36,7 @@ export default function ContactContent() {
 
               <p className="font-sans text-[0.98rem] font-light leading-[1.95] tracking-[0.01em] text-[#121110]/72 md:text-[1.05rem]">
                 Nous privilégions les échanges clairs, discrets et alignés avec
-                la qualité que ZONE 21 porte dans chacun de ses projets. Entrer
+                la qualité que ARCANE porte dans chacun de ses projets. Entrer
                 dans la Zone, c’est ouvrir une conversation avec une maison qui
                 prend le fond autant au sérieux que la forme.
               </p>
@@ -49,7 +49,7 @@ export default function ContactContent() {
                 </span>
 
                 <address className="not-italic font-sans text-sm leading-relaxed text-[#121110] md:text-base">
-                  ZONE 21
+                  ARCANE
                   <br />
                   Avenue de l&apos;Exigence
                   <br />
@@ -84,7 +84,7 @@ export default function ContactContent() {
           <div className="relative hidden overflow-hidden lg:block">
             <Image
               src="/images/contact/contact 2.jpg"
-              alt="Studio Zone 21"
+              alt="Studio ARCANE"
               fill
               sizes="50vw"
               className="object-cover"

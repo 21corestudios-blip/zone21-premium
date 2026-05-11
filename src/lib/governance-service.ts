@@ -100,7 +100,7 @@ function buildValidationChecks(record: RdmRecord): GovernanceValidationCheck[] {
       label: "Référence conforme",
       blocking: true,
       passed: /^[A-Z]+-Z21-[A-Z0-9-]+-v\d+\.\d+$/.test(record.reference),
-      detail: "La référence doit suivre la codification ZONE 21.",
+      detail: "La référence doit suivre la codification ARCANE.",
     },
     {
       id: "version_conforms",

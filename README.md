@@ -1,6 +1,6 @@
-## Zone 21 Premium
+## ARCANE Premium
 
-Portail Next.js de consultation et d'exploitation pour l'écosystème ZONE 21.
+Portail Next.js de consultation et d'exploitation pour l'écosystème ARCANE.
 
 ## Démarrage
 
@@ -32,7 +32,7 @@ Règles :
 - le message `BASE ACTIVE À VÉRIFIER` est normal si la variable est absente ;
 - ce message disparaît dès que `Z21_ACTIVE_BASE_PATH` est correctement renseignée dans `.env.local`.
 
-## GED ZONE 21 — statut actuel
+## GED ARCANE — statut actuel
 
 - la GED est en phase de cadrage ;
 - aucune écriture documentaire n'est active ;

@@ -1,5 +1,5 @@
 export const legalInfo = {
-  siteName: "ZONE 21",
+  siteName: "ARCANE",
   contactEmail: "contact@zone21.com",
 
   companyName: "[Nom de la société]",

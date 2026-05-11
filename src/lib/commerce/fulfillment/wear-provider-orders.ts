@@ -165,7 +165,7 @@ async function createGelatoOrder(
     email: order.customer?.email,
     phone: order.customer?.phone,
     firstName: order.customer?.fullName?.split(" ")[0],
-    lastName: order.customer?.fullName?.split(" ").slice(1).join(" ") || "ZONE 21",
+    lastName: order.customer?.fullName?.split(" ").slice(1).join(" ") || "ARCANE",
   });
 }
 

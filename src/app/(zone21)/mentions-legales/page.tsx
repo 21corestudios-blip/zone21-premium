@@ -5,16 +5,16 @@ import LegalContent from "../_components/legal/LegalContent";
 export const metadata: Metadata = {
   title: "Mentions Légales",
   description:
-    "Consultez les mentions légales de la plateforme Zone 21 : éditeur, hébergement, propriété intellectuelle, données personnelles et responsabilité.",
+    "Consultez les mentions légales de la plateforme ARCANE : éditeur, hébergement, propriété intellectuelle, données personnelles et responsabilité.",
   alternates: {
     canonical: "/mentions-legales",
   },
   openGraph: {
-    title: "Mentions Légales | ZONE 21",
+    title: "Mentions Légales | ARCANE",
     description:
-      "Consultez les mentions légales de la plateforme Zone 21 : éditeur, hébergement, propriété intellectuelle, données personnelles et responsabilité.",
+      "Consultez les mentions légales de la plateforme ARCANE : éditeur, hébergement, propriété intellectuelle, données personnelles et responsabilité.",
     url: "/mentions-legales",
-    siteName: "ZONE 21",
+    siteName: "ARCANE",
     locale: "fr_FR",
     type: "website",
   },

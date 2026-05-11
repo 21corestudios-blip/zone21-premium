@@ -5,7 +5,7 @@ import WearCartPage from "@/app/(wear)/_components/cart/WearCartPage";
 export const metadata: Metadata = {
   title: "Panier",
   description:
-    "Retrouvez votre sélection 21 Wear avant de passer au checkout.",
+    "Retrouvez votre sélection M33 avant de passer au checkout.",
   alternates: {
     canonical: "/wear/panier",
   },

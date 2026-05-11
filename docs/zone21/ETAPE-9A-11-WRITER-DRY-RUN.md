@@ -2,7 +2,7 @@
 
 ## Statut du document
 
-Document de description du writer GED ZONE 21 implémenté en mode `dry-run`.
+Document de description du writer GED ARCANE implémenté en mode `dry-run`.
 
 Cette étape n'active aucune écriture documentaire réelle. Le composant code ne fait que simuler les contrôles, les chemins théoriques, l'archivage théorique et l'aperçu de journal d'audit.
 

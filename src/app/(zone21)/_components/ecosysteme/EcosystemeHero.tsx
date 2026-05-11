@@ -6,7 +6,7 @@ export default function EcosystemeHero() {
       <div className="absolute inset-0 z-0">
         <Image
           src="/images/ecosysteme/z21-ecosysteme-hero-7.webp"
-          alt="Écosystème Zone 21"
+          alt="Écosystème ARCANE"
           fill
           priority
           quality={100}

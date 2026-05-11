@@ -37,12 +37,12 @@ export default function Header() {
           <div className="flex items-center gap-12 lg:gap-16">
             <Link
               href="/"
-              aria-label="Retour à l’accueil Zone 21"
+              aria-label="Retour à l’accueil ARCANE"
               className="flex h-20 w-20 flex-shrink-0 items-center justify-center drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-opacity duration-500 hover:opacity-80"
             >
               <Image
-                src="/images/ui/Z21_logo-01.svg"
-                alt="ZONE 21"
+                src="/images/ui/ARCANE_header_blanc_500px.svg"
+                alt="ARCANE"
                 width={500}
                 height={500}
                 priority

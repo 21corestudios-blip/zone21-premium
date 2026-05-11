@@ -2,7 +2,7 @@
 
 ## Statut du document
 
-Document de sécurisation du writer GED ZONE 21 en mode `dry-run`.
+Document de sécurisation du writer GED ARCANE en mode `dry-run`.
 
 Cette étape renforce les garde-fous techniques pour empêcher toute activation accidentelle d'un writer réel. Elle ne déclenche aucune écriture documentaire, aucune génération réelle et n'ouvre aucune route d'écriture.
 

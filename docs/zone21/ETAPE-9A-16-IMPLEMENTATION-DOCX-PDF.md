@@ -2,7 +2,7 @@
 
 ## Statut du document
 
-Document de description de l'intégration technique `DOCX` et `PDF` dans le writer réel ZONE 21 en mode non exécuté.
+Document de description de l'intégration technique `DOCX` et `PDF` dans le writer réel ARCANE en mode non exécuté.
 
 Cette étape n'active aucune écriture documentaire réelle, n'écrit aucun fichier sur disque, n'exécute aucune conversion PDF réelle et n'active pas `WRITER_ENABLED`.
 
@@ -66,7 +66,7 @@ Les limites de cette étape sont volontairement strictes :
 Avant toute activation réelle, il faudra encore :
 
 - valider les vrais templates documentaires
-- tester la compatibilité `docxtemplater` sur les modèles ZONE 21
+- tester la compatibilité `docxtemplater` sur les modèles ARCANE
 - valider le binaire `LibreOffice` sur l'environnement cible
 - fiabiliser les locks et la concurrence
 - fiabiliser la reprise après échec

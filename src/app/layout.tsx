@@ -23,27 +23,27 @@ const titreFont = localFont({
 
 const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://zone-21.fr")
   .replace(/\/$/, "");
-const siteName = "ZONE 21";
-const defaultTitle = "ZONE 21 | L'Exigence pour Signature";
+const siteName = "ARCANE";
+const defaultTitle = "ARCANE | L'Exigence pour Signature";
 const defaultDescription =
-  "ZONE 21 est une maison créative indépendante dédiée aux univers premium entre vêtement, image, musique, production, talents et culture street.";
+  "ARCANE est une maison créative indépendante dédiée aux univers premium entre vêtement, image, musique, production, talents et culture street.";
 const defaultOgImage = {
   url: "/images/home/hero/z21-home-hero-main-01-desktop-7.webp",
   width: 2048,
   height: 1136,
-  alt: "ZONE 21 - maison créative indépendante",
+  alt: "ARCANE - maison créative indépendante",
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: defaultTitle,
-    template: "%s | ZONE 21",
+    template: "%s | ARCANE",
   },
   description: defaultDescription,
   applicationName: siteName,
   keywords: [
-    "Zone 21",
+    "ARCANE",
     "maison créative",
     "maison créative indépendante",
     "studio créatif",
@@ -55,9 +55,9 @@ export const metadata: Metadata = {
     "talents créatifs",
     "univers créatif",
     "narration de marque",
-    "21 Wear",
-    "21 Core Studios",
-    "21 Production",
+    "M33",
+    "CS73",
+    "BACKSPIN",
     "creative house",
     "creative studio",
     "fashion",
@@ -67,9 +67,9 @@ export const metadata: Metadata = {
     "branding",
     "premium lifestyle",
   ],
-  authors: [{ name: "ZONE 21" }],
-  creator: "ZONE 21",
-  publisher: "ZONE 21",
+  authors: [{ name: "ARCANE" }],
+  creator: "ARCANE",
+  publisher: "ARCANE",
   category: "creative business",
   alternates: {
     canonical: "/",

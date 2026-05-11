@@ -90,14 +90,14 @@ export default function TalentsCartPage() {
     return (
       <section className="mx-auto flex min-h-[60vh] w-full max-w-4xl flex-col items-center justify-center px-6 py-24 text-center md:px-12">
         <p className="font-sans text-[0.68rem] uppercase tracking-[0.3em] text-[#121110]/45">
-          21 Talents Agency Panier
+          EKKO Panier
         </p>
         <h1 className="mt-6 font-serif text-4xl leading-none text-[#121110] md:text-5xl">
           Ton panier est vide
         </h1>
         <p className="mt-6 max-w-2xl font-sans text-base font-light leading-relaxed text-[#121110]/68 md:text-lg">
           Sélectionne une offre de représentation, de campagne ou de cadrage dans
-          la boutique 21 Talents Agency.
+          la boutique EKKO.
         </p>
         <Link
           href="/talents-agency"
@@ -119,7 +119,7 @@ export default function TalentsCartPage() {
             href="/talents-agency"
             className="transition-colors duration-300 hover:text-[#121110]"
           >
-            21 Talents Agency
+            EKKO
           </Link>
           <span>/</span>
           <span className="text-[#121110]/70">Panier</span>
@@ -340,7 +340,7 @@ export default function TalentsCartPage() {
 
             <p className="mt-5 font-sans text-[0.72rem] font-light leading-relaxed text-[#121110]/58">
               Validation, sélection finale et conditions d&apos;activation finalisées
-              avec l&apos;équipe 21 Talents Agency.
+              avec l&apos;équipe EKKO.
             </p>
 
             <div className="mt-8 flex flex-col gap-3">

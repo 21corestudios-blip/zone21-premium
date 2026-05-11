@@ -2,7 +2,7 @@
 
 ## Statut du document
 
-Document de validation fonctionnelle du writer GED ZONE 21 en mode `dry-run`.
+Document de validation fonctionnelle du writer GED ARCANE en mode `dry-run`.
 
 Cette étape ne déclenche aucune écriture documentaire réelle. Elle vérifie le comportement du writer simulé sur les cas métier critiques définis pour la phase 1.
 

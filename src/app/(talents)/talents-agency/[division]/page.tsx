@@ -80,7 +80,7 @@ export default async function TalentsDivisionPage({ params }: PageProps) {
 
       <section className="mx-auto w-full max-w-4xl px-6 py-20 text-center md:px-12 md:py-24">
         <span className="font-sans text-[0.65rem] uppercase tracking-[0.3em] text-[#121110]/40">
-          21 Talents Agency
+          EKKO
         </span>
 
         <p className="mt-8 font-sans text-base font-light leading-relaxed text-[#121110]/70 md:text-lg">

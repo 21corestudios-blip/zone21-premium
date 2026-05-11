@@ -6,7 +6,7 @@ export default function ContactHero() {
       <div className="absolute inset-0 z-0">
         <Image
           src="/images/contact/contact.jpg"
-          alt="Bureau Zone 21"
+          alt="Bureau ARCANE"
           fill
           priority
           quality={100}

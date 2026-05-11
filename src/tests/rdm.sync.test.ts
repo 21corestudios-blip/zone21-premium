@@ -29,7 +29,7 @@ function createSyncRecord(): RdmRecord {
       "/ZONE21_DEV/90_GED_PHASE_1/TEST/NOTE-Z21/MEDIA/01_DOCX/NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-v1.1.docx",
     pdfPath:
       "/ZONE21_DEV/90_GED_PHASE_1/TEST/NOTE-Z21/MEDIA/02_PDF/NOTE-Z21-MEDIA-BRIEF-CAMPAGNE-v1.1.pdf",
-    ownerEntity: "ZONE 21",
+    ownerEntity: "ARCANE",
     category: "GED phase 1 test",
     createdAt: "27/04/2026",
     updatedAt: "27/04/2026",

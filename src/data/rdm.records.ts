@@ -20,7 +20,7 @@ export const rdmRecords: RdmRecord[] = [
     id: "RDM-Z21-0001",
     reference: "DOC-Z21-MASTER-SOURCES-PROJET-v1.0",
     title:
-      "Sources Projet - Cadre officiel des sources, directives et règles de cohérence de ZONE 21",
+      "Sources Projet - Cadre officiel des sources, directives et règles de cohérence de ARCANE",
     type: "DOC",
     status: "Validé",
     version: "v1.0",
@@ -28,7 +28,7 @@ export const rdmRecords: RdmRecord[] = [
       "/ZONE21_DEV/00_MASTER_SYSTEM/01_SOURCES_ET_DIRECTIVES/01_DOCX/DOC-Z21-MASTER-SOURCES-PROJET-v1.0.docx",
     pdfPath:
       "/ZONE21_DEV/00_MASTER_SYSTEM/01_SOURCES_ET_DIRECTIVES/02_PDF/DOC-Z21-MASTER-SOURCES-PROJET-v1.0.pdf",
-    ownerEntity: "ZONE 21",
+    ownerEntity: "ARCANE",
     category: "Sources et directives",
     createdAt: "20/04/2026",
     updatedAt: "20/04/2026",
@@ -55,7 +55,7 @@ export const rdmRecords: RdmRecord[] = [
   {
     id: "RDM-Z21-0002",
     reference: "DOC-Z21-REGISTRE-CENTRAL-v1.0",
-    title: "Registre Central - ZONE 21",
+    title: "Registre Central - ARCANE",
     type: "RDM",
     status: "Validé",
     version: "v1.0",
@@ -63,7 +63,7 @@ export const rdmRecords: RdmRecord[] = [
       "/ZONE21_DEV/00_MASTER_SYSTEM/01_SOURCES_ET_DIRECTIVES/01_DOCX/DOC-Z21-REGISTRE-CENTRAL-v1.0.docx",
     pdfPath:
       "/ZONE21_DEV/00_MASTER_SYSTEM/01_SOURCES_ET_DIRECTIVES/02_PDF/DOC-Z21-REGISTRE-CENTRAL-v1.0.pdf",
-    ownerEntity: "ZONE 21",
+    ownerEntity: "ARCANE",
     category: "Registre central",
     createdAt: "20/04/2026",
     updatedAt: "24/04/2026",
@@ -90,7 +90,7 @@ export const rdmRecords: RdmRecord[] = [
   {
     id: "RDM-Z21-0003",
     reference: "DIR-Z21-IA-SOURCES-ACTIVES-v1.0",
-    title: "Directive opérationnelle de référence IA - Sources actives ZONE 21",
+    title: "Directive opérationnelle de référence IA - Sources actives ARCANE",
     type: "DIR",
     status: "Validé",
     version: "v1.0",
@@ -98,7 +98,7 @@ export const rdmRecords: RdmRecord[] = [
       "/ZONE21_DEV/00_MASTER_SYSTEM/01_SOURCES_ET_DIRECTIVES/01_DOCX/DIR-Z21-IA-SOURCES-ACTIVES-v1.0.docx",
     pdfPath:
       "/ZONE21_DEV/00_MASTER_SYSTEM/01_SOURCES_ET_DIRECTIVES/02_PDF/DIR-Z21-IA-SOURCES-ACTIVES-v1.0.pdf",
-    ownerEntity: "ZONE 21",
+    ownerEntity: "ARCANE",
     category: "Sources et directives",
     createdAt: "21/04/2026",
     updatedAt: "24/04/2026",
@@ -137,7 +137,7 @@ export const rdmRecords: RdmRecord[] = [
       "/ZONE21_DEV/00_MASTER_SYSTEM/03_REFERENTIEL_ENTITES/01_DOCX/DOC-Z21-REFERENTIEL-ENTITES-v1.0.docx",
     pdfPath:
       "/ZONE21_DEV/00_MASTER_SYSTEM/03_REFERENTIEL_ENTITES/02_PDF/DOC-Z21-REFERENTIEL-ENTITES-v1.0.pdf",
-    ownerEntity: "ZONE 21",
+    ownerEntity: "ARCANE",
     category: "Référentiel",
     createdAt: "21/04/2026",
     updatedAt: "21/04/2026",
@@ -166,7 +166,7 @@ export const rdmRecords: RdmRecord[] = [
   {
     id: "RDM-Z21-0005",
     reference: "DOC-Z21-CHARTE-CODIFICATION-v1.0",
-    title: "Charte de codification documentaire ZONE 21",
+    title: "Charte de codification documentaire ARCANE",
     type: "DOC",
     status: "Validé",
     version: "v1.0",
@@ -174,7 +174,7 @@ export const rdmRecords: RdmRecord[] = [
       "/ZONE21_DEV/00_MASTER_SYSTEM/05_CHARTE_CODIFICATION/01_DOCX/DOC-Z21-CHARTE-CODIFICATION-v1.0.docx",
     pdfPath:
       "/ZONE21_DEV/00_MASTER_SYSTEM/05_CHARTE_CODIFICATION/02_PDF/DOC-Z21-CHARTE-CODIFICATION-v1.0.pdf",
-    ownerEntity: "ZONE 21",
+    ownerEntity: "ARCANE",
     category: "Gouvernance documentaire",
     createdAt: "24/04/2026",
     updatedAt: "24/04/2026",
@@ -205,7 +205,7 @@ export const rdmRecords: RdmRecord[] = [
   {
     id: "RDM-Z21-0006",
     reference: "DOC-Z21-RDM-CENTRAL-v1.0",
-    title: "RDM central ZONE 21",
+    title: "RDM central ARCANE",
     type: "RDM",
     status: "Validé",
     version: "v1.0",
@@ -213,7 +213,7 @@ export const rdmRecords: RdmRecord[] = [
       "/ZONE21_DEV/00_MASTER_SYSTEM/00_RDM_CENTRAL/01_DOCX/DOC-Z21-RDM-CENTRAL-v1.0.docx",
     pdfPath:
       "/ZONE21_DEV/00_MASTER_SYSTEM/00_RDM_CENTRAL/02_PDF/DOC-Z21-RDM-CENTRAL-v1.0.pdf",
-    ownerEntity: "ZONE 21",
+    ownerEntity: "ARCANE",
     category: "RDM central",
     createdAt: "21/04/2026",
     updatedAt: "25/04/2026",
@@ -246,7 +246,7 @@ export const rdmRecords: RdmRecord[] = [
   {
     id: "RDM-Z21-0007",
     reference: "DOC-Z21-ENT-HOLD-ZONE21HOLDING-v1.0",
-    title: "Fiche entité officielle - ZONE 21 HOLDING",
+    title: "Fiche entité officielle - ARCANE HOLDING",
     type: "DOC",
     status: "Document de travail",
     version: "v1.0",
@@ -254,7 +254,7 @@ export const rdmRecords: RdmRecord[] = [
       "/ZONE21_DEV/01_HOLDING/00_GOUVERNANCE_ENTITE/01_DOCX/DOC-Z21-ENT-HOLD-ZONE21HOLDING-v1.0.docx",
     pdfPath:
       "/ZONE21_DEV/01_HOLDING/00_GOUVERNANCE_ENTITE/02_PDF/DOC-Z21-ENT-HOLD-ZONE21HOLDING-v1.0.pdf",
-    ownerEntity: "ZONE 21 HOLDING",
+    ownerEntity: "ARCANE HOLDING",
     category: "Gouvernance",
     createdAt: "21/04/2026",
     updatedAt: "21/04/2026",
@@ -285,7 +285,7 @@ export const rdmRecords: RdmRecord[] = [
   {
     id: "RDM-Z21-0008",
     reference: "DOC-Z21-ENT-IP-ZONE21IP-v1.0",
-    title: "Fiche entité officielle - ZONE 21 IP",
+    title: "Fiche entité officielle - ARCANE IP",
     type: "DOC",
     status: "Document de travail",
     version: "v1.0",
@@ -293,7 +293,7 @@ export const rdmRecords: RdmRecord[] = [
       "/ZONE21_DEV/02_IP/00_GOUVERNANCE_ENTITE/01_DOCX/DOC-Z21-ENT-IP-ZONE21IP-v1.0.docx",
     pdfPath:
       "/ZONE21_DEV/02_IP/00_GOUVERNANCE_ENTITE/02_PDF/DOC-Z21-ENT-IP-ZONE21IP-v1.0.pdf",
-    ownerEntity: "ZONE 21 IP",
+    ownerEntity: "ARCANE IP",
     category: "Gouvernance",
     createdAt: "20/04/2026",
     updatedAt: "20/04/2026",
@@ -326,7 +326,7 @@ export const rdmRecords: RdmRecord[] = [
   {
     id: "RDM-Z21-0009",
     reference: "DOC-Z21-ENT-MED-ZONE21MEDIA-v1.0",
-    title: "Fiche entité officielle - ZONE 21 MEDIA",
+    title: "Fiche entité officielle - ARCANE MEDIA",
     type: "DOC",
     status: "Document de travail",
     version: "v1.0",
@@ -334,7 +334,7 @@ export const rdmRecords: RdmRecord[] = [
       "/ZONE21_DEV/03_MEDIA/00_GOUVERNANCE_ENTITE/01_DOCX/DOC-Z21-ENT-MED-ZONE21MEDIA-v1.0.docx",
     pdfPath:
       "/ZONE21_DEV/03_MEDIA/00_GOUVERNANCE_ENTITE/02_PDF/DOC-Z21-ENT-MED-ZONE21MEDIA-v1.0.pdf",
-    ownerEntity: "ZONE 21 MEDIA",
+    ownerEntity: "ARCANE MEDIA",
     category: "Gouvernance",
     createdAt: "20/04/2026",
     updatedAt: "20/04/2026",

@@ -98,7 +98,7 @@ export default async function WearProductPage({ params }: PageProps) {
               </p>
 
               <p className="font-sans text-base font-light leading-relaxed text-[#121110]/72 md:text-lg">
-                Chaque pièce 21 Wear s’inscrit dans une approche de construction
+                Chaque pièce M33 s’inscrit dans une approche de construction
                 lente, de précision des volumes et d’exigence textile. Cette
                 base intègre désormais la sélection de taille et le panier, en
                 préparation de l’étape checkout.

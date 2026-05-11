@@ -2,7 +2,7 @@
 
 ## Choix d'architecture
 
-ZONE 21 fonctionne comme plateforme.
+ARCANE fonctionne comme plateforme.
 Chaque brand dispose d'un compte connecté Stripe.
 
 Modèle retenu :

@@ -88,13 +88,13 @@ export default function WearCartPage() {
     return (
       <section className="mx-auto flex min-h-[60vh] w-full max-w-4xl flex-col items-center justify-center px-6 py-24 text-center md:px-12">
         <p className="font-sans text-[0.68rem] uppercase tracking-[0.3em] text-[#121110]/45">
-          21 Wear Panier
+          M33 Panier
         </p>
         <h1 className="mt-6 font-serif text-4xl leading-none text-[#121110] md:text-5xl">
           Ton panier est vide
         </h1>
         <p className="mt-6 max-w-2xl font-sans text-base font-light leading-relaxed text-[#121110]/68 md:text-lg">
-          Sélectionne tes pièces dans les collections 21 Wear pour préparer ton
+          Sélectionne tes pièces dans les collections M33 pour préparer ton
           checkout.
         </p>
         <Link
@@ -114,7 +114,7 @@ export default function WearCartPage() {
       <div className="border-b border-[#121110]/10 pb-8">
         <nav className="flex items-center gap-3 font-sans text-[0.62rem] uppercase tracking-[0.24em] text-[#121110]/42">
           <Link href="/wear" className="transition-colors duration-300 hover:text-[#121110]">
-            21 Wear
+            M33
           </Link>
           <span>/</span>
           <span className="text-[#121110]/70">Panier</span>
@@ -390,7 +390,7 @@ export default function WearCartPage() {
                 </p>
                 <p className="mt-2 font-sans text-sm font-light leading-relaxed text-[#121110]/66">
                   Paiement sécurisé via Stripe au checkout, directement dans
-                  l’environnement 21 Wear.
+                  l’environnement M33.
                 </p>
               </div>
             </div>

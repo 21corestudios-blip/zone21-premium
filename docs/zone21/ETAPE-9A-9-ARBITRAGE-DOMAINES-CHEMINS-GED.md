@@ -2,7 +2,7 @@
 
 ## Statut du document
 
-Document d'arbitrage final des domaines, préfixes, sous-domaines à surveiller et chemins théoriques GED ZONE 21 pour la phase 1.
+Document d'arbitrage final des domaines, préfixes, sous-domaines à surveiller et chemins théoriques GED ARCANE pour la phase 1.
 
 Ce document ne déclenche aucune écriture documentaire, n'active aucun workflow technique et ne modifie aucun comportement applicatif. Il transforme les listes théoriques de l'étape 9A-8 en décisions fonctionnelles stabilisées pour la phase 1.
 

@@ -2,7 +2,7 @@
 
 ## Statut du document
 
-Document de préparation technique du futur writer GED réel ZONE 21.
+Document de préparation technique du futur writer GED réel ARCANE.
 
 Cette étape ne déclenche aucune écriture documentaire réelle. Elle prépare uniquement l'infrastructure de planification nécessaire à une future publication contrôlée.
 

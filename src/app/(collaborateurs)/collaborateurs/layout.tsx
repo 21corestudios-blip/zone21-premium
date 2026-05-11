@@ -7,7 +7,7 @@ import { getSession } from "@/lib/auth";
 export const metadata: Metadata = {
   title: "Collaborateurs",
   description:
-    "Portail collaborateurs ZONE 21 pour consultation structurée du registre documentaire et des accès par rôle.",
+    "Portail collaborateurs ARCANE pour consultation structurée du registre documentaire et des accès par rôle.",
   robots: {
     index: false,
     follow: false,
@@ -29,12 +29,12 @@ export default async function CollaboratorsLayout({
           <div className="flex items-center gap-5">
             <Link
               href="/"
-              aria-label="Retour au site ZONE 21"
+              aria-label="Retour au site ARCANE"
               className="transition-opacity duration-500 hover:opacity-80"
             >
               <Image
                 src="/images/ui/Z21_logo-01.svg"
-                alt="ZONE 21"
+                alt="ARCANE"
                 width={500}
                 height={500}
                 className="h-20 w-20 object-contain"
