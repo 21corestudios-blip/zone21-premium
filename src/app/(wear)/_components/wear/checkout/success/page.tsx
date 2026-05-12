@@ -4,8 +4,8 @@ import Link from 'next/link';
 import ClearCartOnSuccess from '@/app/(wear)/_components/checkout/ClearCartOnSuccess';
 
 export const metadata: Metadata = {
-  title: 'Commande confirmée | M33',
-  description: 'Votre commande M33 a bien été confirmée.',
+  title: 'Commande confirmée | 21 Wear',
+  description: 'Votre commande 21 Wear a bien été confirmée.',
   robots: {
     index: false,
     follow: false,

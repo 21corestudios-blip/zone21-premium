@@ -101,7 +101,7 @@ export default function Footer() {
               href="/core-studios"
               className="text-white/50 transition-colors hover:text-white"
             >
-              CS73
+              Core Studios
             </Link>
           </span>
         </div>

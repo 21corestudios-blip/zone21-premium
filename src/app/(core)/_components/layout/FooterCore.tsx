@@ -16,11 +16,11 @@ export default function FooterCore() {
           <div className="flex flex-col gap-8 md:col-span-8">
             <Link
               href="/core-studios"
-              aria-label="Retour à l’accueil CS73"
+              aria-label="Retour à l’accueil Core Studios"
               className="inline-flex h-[120px] w-[120px] items-center justify-center transition-opacity duration-500 hover:opacity-80"
             >
               <Image
-                src="/images/ui/CS73_blanc_500px.svg"
+                src="/images/ui/Z21_21_core_studios_logo-01.svg"
                 alt="ARCANE"
                 width={500}
                 height={500}
@@ -66,7 +66,7 @@ export default function FooterCore() {
 
           <div className="flex flex-col gap-6 md:col-span-4 md:pl-12">
             <span className="mb-2 font-sans text-[13px] font-bold uppercase tracking-[0.2em] text-white/48">
-              CS73
+              Core Studios
             </span>
 
             <Link
@@ -98,7 +98,7 @@ export default function FooterCore() {
 
         <div className="flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 text-center md:flex-row md:text-left">
           <span className="font-sans text-[0.65rem] uppercase tracking-[0.1em] text-white/30">
-            © {currentYear} CS73. Tous droits reserves.
+            © {currentYear} Core Studios. Tous droits reserves.
           </span>
 
           <span className="font-sans text-[0.65rem] uppercase tracking-[0.1em] text-white/30">

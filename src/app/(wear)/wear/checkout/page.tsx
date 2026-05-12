@@ -5,7 +5,7 @@ import WearCheckoutClient from "@/app/(wear)/_components/checkout/WearCheckoutCl
 export const metadata: Metadata = {
   title: "Checkout",
   description:
-    "Finalisez votre sélection M33 avant le paiement et vérifiez vos informations client.",
+    "Finalisez votre sélection 21 Wear avant le paiement et vérifiez vos informations client.",
   alternates: {
     canonical: "/wear/checkout",
   },

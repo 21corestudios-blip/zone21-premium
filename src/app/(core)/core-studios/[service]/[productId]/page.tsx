@@ -117,7 +117,7 @@ export default async function CoreProductPage({ params }: PageProps) {
               </p>
 
               <p className="font-sans text-base font-light leading-relaxed text-[#121110]/72 md:text-lg">
-                Chaque offre CS73 est pensée pour être activable,
+                Chaque offre Core Studios est pensée pour être activable,
                 désirable et claire dans son exécution, que l&apos;on parle d&apos;une
                 prestation sur mesure, d&apos;un template premium ou d&apos;un objet de marque.
               </p>

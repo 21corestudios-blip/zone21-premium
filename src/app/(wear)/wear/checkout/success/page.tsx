@@ -6,7 +6,7 @@ import WearCheckoutStatus from "@/app/(wear)/_components/checkout/WearCheckoutSt
 export const metadata: Metadata = {
   title: "Paiement",
   description:
-    "Consultez le statut réel du paiement M33 après le retour Stripe.",
+    "Consultez le statut réel du paiement 21 Wear après le retour Stripe.",
   alternates: {
     canonical: "/wear/checkout/success",
   },

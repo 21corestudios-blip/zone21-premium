@@ -42,12 +42,12 @@ export default function HeaderCore() {
           <div className="flex items-center gap-10 lg:gap-14">
             <Link
               href="/core-studios"
-              aria-label="Retour à l’accueil CS73"
+              aria-label="Retour à l’accueil Core Studios"
               className="flex h-20 w-20 flex-shrink-0 items-center justify-center drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-opacity duration-500 hover:opacity-80"
             >
               <Image
-                src="/images/ui/CS73_header_blanc_500px.svg"
-                alt="CS73"
+                src="/images/ui/Z21_21_core_studios_logo-01.svg"
+                alt="Core Studios"
                 width={500}
                 height={500}
                 priority
@@ -57,7 +57,7 @@ export default function HeaderCore() {
 
             <nav
               className="hidden items-center gap-5 lg:flex"
-              aria-label="Pôles CS73"
+              aria-label="Pôles Core Studios"
             >
               <Link
                 href="/core-studios/brand-design"
@@ -83,7 +83,7 @@ export default function HeaderCore() {
           <div className="flex items-center gap-4 md:gap-6 lg:gap-8">
             <nav
               className="hidden items-center gap-6 md:flex lg:gap-8"
-              aria-label="Navigation CS73"
+              aria-label="Navigation Core Studios"
             >
               <Link href="/" className={linkClassName}>
                 ARCANE
@@ -112,7 +112,7 @@ export default function HeaderCore() {
             <Link
               href="/core-studios/panier"
               className="inline-flex h-11 min-w-11 items-center justify-center border border-white/18 px-3 font-serif text-[0.68rem] uppercase tracking-[0.18em] text-white/90 drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-colors duration-300 hover:border-white/35 hover:bg-white hover:text-[#121110] sm:gap-3 sm:px-4 sm:py-2"
-              aria-label="Voir le panier CS73"
+              aria-label="Voir le panier Core Studios"
             >
               <span className="hidden sm:inline">Panier</span>
               <span className="inline-flex min-w-6 items-center justify-center border-l border-current/20 px-2 py-1 font-sans text-[0.58rem] tracking-[0.18em]">

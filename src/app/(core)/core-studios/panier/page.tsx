@@ -5,7 +5,7 @@ import CoreCartPage from "@/app/(core)/_components/cart/CoreCartPage";
 export const metadata: Metadata = {
   title: "Panier",
   description:
-    "Retrouvez votre sélection CS73 avant cadrage et validation.",
+    "Retrouvez votre sélection Core Studios avant cadrage et validation.",
   alternates: {
     canonical: "/core-studios/panier",
   },

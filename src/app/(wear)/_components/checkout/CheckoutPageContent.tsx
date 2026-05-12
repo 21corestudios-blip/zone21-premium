@@ -93,7 +93,7 @@ export default function CheckoutPageContent() {
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-10">
         <header className="flex max-w-3xl flex-col gap-5">
           <span className="font-sans text-[0.65rem] uppercase tracking-[0.3em] text-white/40">
-            M33
+            21 Wear
           </span>
 
           <div className="flex flex-col gap-4">

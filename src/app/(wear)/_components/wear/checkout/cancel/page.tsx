@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Paiement annulé | M33",
-  description: "Le paiement a été annulé. Votre panier M33 a été conservé.",
+  title: "Paiement annulé | 21 Wear",
+  description: "Le paiement a été annulé. Votre panier 21 Wear a été conservé.",
   robots: {
     index: false,
     follow: false,

@@ -90,14 +90,14 @@ export default function CoreCartPage() {
     return (
       <section className="mx-auto flex min-h-[60vh] w-full max-w-4xl flex-col items-center justify-center px-6 py-24 text-center md:px-12">
         <p className="font-sans text-[0.68rem] uppercase tracking-[0.3em] text-[#121110]/45">
-          CS73 Panier
+          Core Studios Panier
         </p>
         <h1 className="mt-6 font-serif text-4xl leading-none text-[#121110] md:text-5xl">
           Ton panier est vide
         </h1>
         <p className="mt-6 max-w-2xl font-sans text-base font-light leading-relaxed text-[#121110]/68 md:text-lg">
           Sélectionne une prestation, un template ou un objet de marque dans la
-          boutique CS73.
+          boutique Core Studios.
         </p>
         <Link
           href="/core-studios"
@@ -119,7 +119,7 @@ export default function CoreCartPage() {
             href="/core-studios"
             className="transition-colors duration-300 hover:text-[#121110]"
           >
-            CS73
+            Core Studios
           </Link>
           <span>/</span>
           <span className="text-[#121110]/70">Panier</span>
@@ -339,7 +339,7 @@ export default function CoreCartPage() {
 
             <p className="mt-5 font-sans text-[0.72rem] font-light leading-relaxed text-[#121110]/58">
               Validation, cadrage final et conditions de production finalisés avec
-              l&apos;équipe CS73.
+              l&apos;équipe Core Studios.
             </p>
 
             <div className="mt-8 flex flex-col gap-3">

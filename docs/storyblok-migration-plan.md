@@ -17,7 +17,7 @@ La migration doit préserver le ton premium, la direction visuelle et les chemin
 ## Contenus à migrer plus tard
 
 - Pages `a-propos`, `ecosysteme`, `contact` et `mentions-legales`.
-- Introductions éditoriales de `M33`, `CS73`, `BACKSPIN` et `EKKO`.
+- Introductions éditoriales de `21 Wear`, `Core Studios`, `BACKSPIN` et `EKKO`.
 - Storytelling de collections Wear.
 - Pages éditoriales de campagnes et lancements.
 - Pages artistes, talents et univers de marque, hors prix et achat.

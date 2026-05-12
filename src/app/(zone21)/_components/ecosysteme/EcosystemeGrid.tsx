@@ -4,8 +4,8 @@ import Link from "next/link";
 import { homeData } from "@/data/home.data";
 
 const maisonLogos: Record<string, string> = {
-  wear: "/images/ui/M33_header_blanc_500px.svg",
-  core: "/images/ui/CS73_header_blanc_500px.svg",
+  wear: "/images/ui/Z21_21_WEAR_logo-01.svg",
+  core: "/images/ui/Z21_21_core_studios_logo-01.svg",
   prod: "/images/ui/BACKSPIN_header_blanc_500px_01.svg",
   talents: "/images/ui/EKKO_header_blanc_500px.svg",
 };

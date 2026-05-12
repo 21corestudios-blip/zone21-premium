@@ -32,12 +32,12 @@ export default function CartDrawer() {
         }`}
         role="dialog"
         aria-modal="true"
-        aria-label="Panier M33"
+        aria-label="Panier 21 Wear"
       >
         <div className="flex items-center justify-between border-b border-white/5 p-6 md:p-8">
           <div>
             <p className="font-sans text-[0.65rem] uppercase tracking-[0.2em] text-white/40">
-              M33
+              21 Wear
             </p>
             <h2 className="mt-2 font-serif text-2xl tracking-tight text-white">
               Panier

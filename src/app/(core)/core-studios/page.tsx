@@ -3,16 +3,16 @@ import type { Metadata } from "next";
 import CorePageSections from "../_components/core/CorePageSections";
 
 export const metadata: Metadata = {
-  title: "CS73 - Design, web et objets de marque",
+  title: "Core Studios - Design, web et objets de marque",
   description:
-    "CS73 crée identités visuelles, sites premium et objets marketing pour marques ambitieuses, avec direction artistique et exécution précise.",
+    "Core Studios crée identités visuelles, sites premium et objets marketing pour marques ambitieuses, avec direction artistique et exécution précise.",
   alternates: {
     canonical: "/core-studios",
   },
   openGraph: {
-    title: "CS73 | Design, web et objets de marque",
+    title: "Core Studios | Design, web et objets de marque",
     description:
-      "CS73 crée identités visuelles, sites premium et objets marketing pour marques ambitieuses, avec direction artistique et exécution précise.",
+      "Core Studios crée identités visuelles, sites premium et objets marketing pour marques ambitieuses, avec direction artistique et exécution précise.",
     url: "/core-studios",
     siteName: "ARCANE",
     locale: "fr_FR",
@@ -22,19 +22,19 @@ export const metadata: Metadata = {
         url: "/images/brands/21-core/z21-21-core-studios-hero.webp",
         width: 2048,
         height: 1136,
-        alt: "CS73 - design, web et objets de marque",
+        alt: "Core Studios - design, web et objets de marque",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "CS73 | Design, web et objets de marque",
+    title: "Core Studios | Design, web et objets de marque",
     description:
-      "CS73 crée identités visuelles, sites premium et objets marketing pour marques ambitieuses, avec direction artistique et exécution précise.",
+      "Core Studios crée identités visuelles, sites premium et objets marketing pour marques ambitieuses, avec direction artistique et exécution précise.",
     images: [
       {
         url: "/images/brands/21-core/z21-21-core-studios-hero.webp",
-        alt: "CS73 - design, web et objets de marque",
+        alt: "Core Studios - design, web et objets de marque",
       },
     ],
   },

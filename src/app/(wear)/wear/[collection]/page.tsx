@@ -8,13 +8,13 @@ import { wearProducts } from "@/data/wear.products";
 
 const collectionDescriptions: Record<string, string> = {
   classic:
-    "Classic Collection par M33: silhouettes intemporelles, matières maîtrisées et élégance sobre pour un vestiaire premium durable, net et quotidien.",
+    "Classic Collection par 21 Wear: silhouettes intemporelles, matières maîtrisées et élégance sobre pour un vestiaire premium durable, net et quotidien.",
   urban:
-    "Urban Collection par M33: silhouettes confortables, volumes précis et énergie street pour une présence premium au quotidien, mobile et affirmée.",
+    "Urban Collection par 21 Wear: silhouettes confortables, volumes précis et énergie street pour une présence premium au quotidien, mobile et affirmée.",
   heritage:
-    "Heritage Collection par M33: mémoire des coupes, matières choisies et direction contemporaine pour un vestiaire premium affirmé, sobre et durable.",
+    "Heritage Collection par 21 Wear: mémoire des coupes, matières choisies et direction contemporaine pour un vestiaire premium affirmé, sobre et durable.",
   studio:
-    "Studio Collection par M33: textures, geste créatif et pièces expérimentales pour exprimer la signature atelier de M33 avec une présence premium.",
+    "Studio Collection par 21 Wear: textures, geste créatif et pièces expérimentales pour exprimer la signature atelier de 21 Wear avec une présence premium.",
 };
 
 type PageProps = {
@@ -37,7 +37,7 @@ export async function generateMetadata({
     };
   }
 
-  const title = `${currentCollection.name} - M33 premium`;
+  const title = `${currentCollection.name} - 21 Wear premium`;
   const description =
     collectionDescriptions[currentCollection.slug] ||
     currentCollection.description;
@@ -50,7 +50,7 @@ export async function generateMetadata({
       canonical,
     },
     openGraph: {
-      title: `${currentCollection.name} | M33`,
+      title: `${currentCollection.name} | 21 Wear`,
       description,
       url: canonical,
       siteName: "ARCANE",
@@ -61,18 +61,18 @@ export async function generateMetadata({
           url: currentCollection.heroImage,
           width: 2048,
           height: 1136,
-          alt: `${currentCollection.name} - M33`,
+          alt: `${currentCollection.name} - 21 Wear`,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${currentCollection.name} | M33`,
+      title: `${currentCollection.name} | 21 Wear`,
       description,
       images: [
         {
           url: currentCollection.heroImage,
-          alt: `${currentCollection.name} - M33`,
+          alt: `${currentCollection.name} - 21 Wear`,
         },
       ],
     },
@@ -126,7 +126,7 @@ export default async function WearCollectionPage({ params }: PageProps) {
 
       <section className="mx-auto w-full max-w-4xl px-6 py-20 text-center md:px-12 md:py-24">
         <span className="font-sans text-[0.65rem] uppercase tracking-[0.3em] text-[#121110]/40">
-          M33
+          21 Wear
         </span>
 
         <p className="mt-8 font-sans text-base font-light leading-relaxed text-[#121110]/70 md:text-lg">
