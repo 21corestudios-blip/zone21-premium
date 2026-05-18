@@ -79,7 +79,7 @@ export default function CoreCartPage() {
   if (!isHydrated) {
     return (
       <section className="mx-auto flex min-h-[60vh] w-full max-w-6xl items-center justify-center px-6 py-24 md:px-12">
-        <p className="font-sans text-[0.68rem] uppercase tracking-[0.3em] text-[#121110]/45">
+        <p className="font-sans text-[0.68rem] uppercase tracking-[0.3em] text-bg/45">
           Préparation du panier...
         </p>
       </section>
@@ -89,19 +89,19 @@ export default function CoreCartPage() {
   if (!items.length) {
     return (
       <section className="mx-auto flex min-h-[60vh] w-full max-w-4xl flex-col items-center justify-center px-6 py-24 text-center md:px-12">
-        <p className="font-sans text-[0.68rem] uppercase tracking-[0.3em] text-[#121110]/45">
+        <p className="font-sans text-[0.68rem] uppercase tracking-[0.3em] text-bg/45">
           Core Studios Panier
         </p>
-        <h1 className="mt-6 font-serif text-4xl leading-none text-[#121110] md:text-5xl">
+        <h1 className="mt-6 font-serif text-4xl leading-none text-bg md:text-5xl">
           Ton panier est vide
         </h1>
-        <p className="mt-6 max-w-2xl font-sans text-base font-light leading-relaxed text-[#121110]/68 md:text-lg">
+        <p className="mt-6 max-w-2xl font-sans text-base font-light leading-relaxed text-bg/68 md:text-lg">
           Sélectionne une prestation, un template ou un objet de marque dans la
           boutique Core Studios.
         </p>
         <Link
           href="/core-studios"
-          className="mt-10 inline-flex items-center justify-center bg-[#121110] px-8 py-4 text-[#F7F5F0] transition-colors duration-300 hover:bg-[#2A2826]"
+          className="mt-10 inline-flex items-center justify-center bg-bg px-8 py-4 text-paper transition-colors duration-300 hover:bg-surface-hover"
         >
           <span className="font-sans text-[0.65rem] font-bold uppercase tracking-[0.24em]">
             Retour à la boutique
@@ -113,33 +113,33 @@ export default function CoreCartPage() {
 
   return (
     <section className="mx-auto w-full max-w-[1480px] bg-white px-6 pb-20 pt-28 md:px-12 md:pb-28 md:pt-36">
-      <div className="border-b border-[#121110]/10 pb-8">
-        <nav className="flex items-center gap-3 font-sans text-[0.62rem] uppercase tracking-[0.24em] text-[#121110]/42">
+      <div className="border-b border-bg/10 pb-8">
+        <nav className="flex items-center gap-3 font-sans text-[0.62rem] uppercase tracking-[0.24em] text-bg/42">
           <Link
             href="/core-studios"
-            className="transition-colors duration-300 hover:text-[#121110]"
+            className="transition-colors duration-300 hover:text-bg"
           >
             Core Studios
           </Link>
           <span>/</span>
-          <span className="text-[#121110]/70">Panier</span>
+          <span className="text-bg/70">Panier</span>
         </nav>
 
         <div className="mt-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="font-sans text-[0.68rem] uppercase tracking-[0.32em] text-[#121110]/42">
+            <p className="font-sans text-[0.68rem] uppercase tracking-[0.32em] text-bg/42">
               Shopping Bag
             </p>
-            <h1 className="mt-4 font-serif text-4xl leading-none text-[#121110] md:text-6xl">
+            <h1 className="mt-4 font-serif text-4xl leading-none text-bg md:text-6xl">
               Panier
             </h1>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 font-sans text-[0.65rem] uppercase tracking-[0.22em] text-[#121110]/48">
+          <div className="flex flex-wrap items-center gap-4 font-sans text-[0.65rem] uppercase tracking-[0.22em] text-bg/48">
             <span>{itemCount} article{itemCount > 1 ? "s" : ""}</span>
-            <span className="h-3 w-px bg-[#121110]/12" />
+            <span className="h-3 w-px bg-bg/12" />
             <span>Studio services & assets</span>
-            <span className="h-3 w-px bg-[#121110]/12" />
+            <span className="h-3 w-px bg-bg/12" />
             <span>Cadrage premium</span>
           </div>
         </div>
@@ -147,12 +147,12 @@ export default function CoreCartPage() {
 
       <div className="grid gap-12 pt-10 lg:grid-cols-[minmax(0,1.2fr)_380px] lg:items-start">
         <div className="bg-white">
-          <div className="mb-8 flex items-end justify-between gap-4 border-b border-[#121110]/10 pb-6">
+          <div className="mb-8 flex items-end justify-between gap-4 border-b border-bg/10 pb-6">
             <div>
-              <p className="font-sans text-[0.65rem] uppercase tracking-[0.26em] text-[#121110]/42">
+              <p className="font-sans text-[0.65rem] uppercase tracking-[0.26em] text-bg/42">
                 Sélection
               </p>
-              <h2 className="mt-4 font-serif text-3xl text-[#121110]">
+              <h2 className="mt-4 font-serif text-3xl text-bg">
                 {itemCount} article{itemCount > 1 ? "s" : ""}
               </h2>
             </div>
@@ -161,7 +161,7 @@ export default function CoreCartPage() {
               <button
                 type="button"
                 onClick={toggleSelectAll}
-                className="text-[0.62rem] uppercase tracking-[0.24em] text-[#121110]/45 transition-colors duration-300 hover:text-[#121110]"
+                className="text-[0.62rem] uppercase tracking-[0.24em] text-bg/45 transition-colors duration-300 hover:text-bg"
               >
                 {allSelected ? "Tout désélectionner" : "Tout sélectionner"}
               </button>
@@ -169,15 +169,15 @@ export default function CoreCartPage() {
               <button
                 type="button"
                 onClick={clearCart}
-                className="text-[0.62rem] uppercase tracking-[0.24em] text-[#121110]/45 transition-colors duration-300 hover:text-[#121110]"
+                className="text-[0.62rem] uppercase tracking-[0.24em] text-bg/45 transition-colors duration-300 hover:text-bg"
               >
                 Vider
               </button>
             </div>
           </div>
 
-          <div className="mb-6 flex items-center justify-between gap-4 border-b border-[#121110]/8 pb-5">
-            <p className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-[#121110]/38">
+          <div className="mb-6 flex items-center justify-between gap-4 border-b border-bg/8 pb-5">
+            <p className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-bg/38">
               {selectedCount > 0
                 ? `${selectedCount} produit${selectedCount > 1 ? "s" : ""} sélectionné${selectedCount > 1 ? "s" : ""}`
                 : "Sélectionne un ou plusieurs produits pour les retirer"}
@@ -187,7 +187,7 @@ export default function CoreCartPage() {
               type="button"
               onClick={removeSelectedItems}
               disabled={selectedCount === 0}
-              className="inline-flex items-center justify-center border border-[#121110]/12 px-4 py-3 text-[0.62rem] uppercase tracking-[0.24em] text-[#121110] transition-colors duration-300 hover:border-[#121110]/24 disabled:cursor-not-allowed disabled:opacity-35"
+              className="inline-flex items-center justify-center border border-bg/12 px-4 py-3 text-[0.62rem] uppercase tracking-[0.24em] text-bg transition-colors duration-300 hover:border-bg/24 disabled:cursor-not-allowed disabled:opacity-35"
             >
               Supprimer la sélection
             </button>
@@ -200,13 +200,13 @@ export default function CoreCartPage() {
                 serviceLabels.get(item.product.service) ?? item.product.service;
 
               return (
-                <article key={item.productId} className="border-b border-[#121110]/8 py-6">
+                <article key={item.productId} className="border-b border-bg/8 py-6">
                   <div className="flex items-start gap-4">
                     <input
                       type="checkbox"
                       checked={isSelected}
                       onChange={() => toggleItemSelection(item.productId)}
-                      className="mt-1 h-4 w-4 accent-[#121110]"
+                      className="mt-1 h-4 w-4 accent-bg"
                       aria-label={`Sélectionner ${item.product.name}`}
                     />
 
@@ -214,7 +214,7 @@ export default function CoreCartPage() {
                       <div className="grid grid-cols-[72px_minmax(0,1fr)] gap-4 sm:grid-cols-[88px_minmax(0,1fr)] sm:gap-5">
                         <Link
                           href={`/core-studios/${item.product.service}/${item.product.id}`}
-                          className="relative aspect-[4/5] overflow-hidden border border-[#121110]/8 bg-white"
+                          className="relative aspect-[4/5] overflow-hidden border border-bg/8 bg-white"
                         >
                           <Image
                             src={item.product.image}
@@ -229,7 +229,7 @@ export default function CoreCartPage() {
                           <div className="flex items-start justify-between gap-4">
                             <Link
                               href={`/core-studios/${item.product.service}/${item.product.id}`}
-                              className="block font-sans text-sm uppercase tracking-[0.18em] text-[#121110] transition-colors duration-300 hover:text-[#121110]/70"
+                              className="block font-sans text-sm uppercase tracking-[0.18em] text-bg transition-colors duration-300 hover:text-bg/70"
                             >
                               {item.product.name}
                             </Link>
@@ -237,18 +237,18 @@ export default function CoreCartPage() {
                             <button
                               type="button"
                               onClick={() => removeItem(item.productId)}
-                              className="text-[0.58rem] uppercase tracking-[0.24em] text-[#121110]/35 transition-colors duration-300 hover:text-[#121110]"
+                              className="text-[0.58rem] uppercase tracking-[0.24em] text-bg/35 transition-colors duration-300 hover:text-bg"
                               aria-label={`Retirer ${item.product.name} du panier`}
                             >
                               Retirer
                             </button>
                           </div>
 
-                          <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 font-sans text-[0.62rem] uppercase tracking-[0.22em] text-[#121110]/48">
+                          <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 font-sans text-[0.62rem] uppercase tracking-[0.22em] text-bg/48">
                             <span>{serviceName}</span>
-                            <span className="hidden h-3 w-px bg-[#121110]/10 sm:block" />
+                            <span className="hidden h-3 w-px bg-bg/10 sm:block" />
                             <span>{item.product.kind}</span>
-                            <span className="hidden h-3 w-px bg-[#121110]/10 sm:block" />
+                            <span className="hidden h-3 w-px bg-bg/10 sm:block" />
                             <span>
                               Prix unitaire{" "}
                               {formatCorePrice(
@@ -258,33 +258,33 @@ export default function CoreCartPage() {
                             </span>
                           </div>
 
-                          <p className="mt-3 max-w-xl font-sans text-sm font-light leading-relaxed text-[#121110]/62">
+                          <p className="mt-3 max-w-xl font-sans text-sm font-light leading-relaxed text-bg/62">
                             {item.product.shortDescription}
                           </p>
                         </div>
                       </div>
 
-                      <div className="mt-5 flex flex-wrap items-center justify-between gap-4 border-t border-[#121110]/8 pt-4">
+                      <div className="mt-5 flex flex-wrap items-center justify-between gap-4 border-t border-bg/8 pt-4">
                         <div className="flex items-center gap-3">
-                          <span className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-[#121110]/38">
+                          <span className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-bg/38">
                             Quantité
                           </span>
-                          <div className="inline-flex items-center border border-[#121110]/12">
+                          <div className="inline-flex items-center border border-bg/12">
                             <button
                               type="button"
                               onClick={() => decrementItem(item.productId)}
-                              className="px-4 py-3 text-sm text-[#121110]/75 transition-colors duration-300 hover:text-[#121110]"
+                              className="px-4 py-3 text-sm text-bg/75 transition-colors duration-300 hover:text-bg"
                               aria-label={`Diminuer la quantité de ${item.product.name}`}
                             >
                               -
                             </button>
-                            <span className="min-w-12 px-2 text-center font-sans text-[0.72rem] uppercase tracking-[0.18em] text-[#121110]/70">
+                            <span className="min-w-12 px-2 text-center font-sans text-[0.72rem] uppercase tracking-[0.18em] text-bg/70">
                               {item.quantity}
                             </span>
                             <button
                               type="button"
                               onClick={() => incrementItem(item.productId)}
-                              className="px-4 py-3 text-sm text-[#121110]/75 transition-colors duration-300 hover:text-[#121110]"
+                              className="px-4 py-3 text-sm text-bg/75 transition-colors duration-300 hover:text-bg"
                               aria-label={`Augmenter la quantité de ${item.product.name}`}
                             >
                               +
@@ -293,10 +293,10 @@ export default function CoreCartPage() {
                         </div>
 
                         <div className="flex items-center gap-4">
-                          <span className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-[#121110]/38">
+                          <span className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-bg/38">
                             Total ligne
                           </span>
-                          <p className="font-serif text-xl text-[#121110]">
+                          <p className="font-serif text-xl text-bg">
                             {item.lineTotalFormatted}
                           </p>
                         </div>
@@ -310,34 +310,34 @@ export default function CoreCartPage() {
         </div>
 
         <aside className="space-y-4 lg:sticky lg:top-28">
-          <div className="border border-[#121110]/10 bg-white p-6 md:p-8">
-            <p className="font-sans text-[0.65rem] uppercase tracking-[0.28em] text-[#121110]/42">
+          <div className="border border-bg/10 bg-white p-6 md:p-8">
+            <p className="font-sans text-[0.65rem] uppercase tracking-[0.28em] text-bg/42">
               Order Summary
             </p>
-            <h2 className="mt-4 font-serif text-3xl text-[#121110]">
+            <h2 className="mt-4 font-serif text-3xl text-bg">
               Résumé du panier
             </h2>
 
-            <div className="mt-8 space-y-4 border-t border-[#121110]/10 pt-6">
-              <div className="flex items-center justify-between gap-4 font-sans text-sm text-[#121110]/72">
+            <div className="mt-8 space-y-4 border-t border-bg/10 pt-6">
+              <div className="flex items-center justify-between gap-4 font-sans text-sm text-bg/72">
                 <span>Sous-total</span>
                 <span>{subtotalFormatted}</span>
               </div>
-              <div className="flex items-center justify-between gap-4 font-sans text-sm text-[#121110]/72">
+              <div className="flex items-center justify-between gap-4 font-sans text-sm text-bg/72">
                 <span>Préparation studio</span>
                 <span>Incluse</span>
               </div>
-              <div className="flex items-center justify-between gap-4 border-t border-[#121110]/10 pt-4">
-                <span className="font-sans text-[0.68rem] uppercase tracking-[0.24em] text-[#121110]/52">
+              <div className="flex items-center justify-between gap-4 border-t border-bg/10 pt-4">
+                <span className="font-sans text-[0.68rem] uppercase tracking-[0.24em] text-bg/52">
                   Total estimé
                 </span>
-                <span className="font-serif text-2xl text-[#121110]">
+                <span className="font-serif text-2xl text-bg">
                   {subtotalFormatted}
                 </span>
               </div>
             </div>
 
-            <p className="mt-5 font-sans text-[0.72rem] font-light leading-relaxed text-[#121110]/58">
+            <p className="mt-5 font-sans text-[0.72rem] font-light leading-relaxed text-bg/58">
               Validation, cadrage final et conditions de production finalisés avec
               l&apos;équipe Core Studios.
             </p>
@@ -345,7 +345,7 @@ export default function CoreCartPage() {
             <div className="mt-8 flex flex-col gap-3">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center bg-[#121110] px-6 py-4 text-[#F7F5F0] transition-colors duration-300 hover:bg-[#2A2826]"
+                className="inline-flex items-center justify-center bg-bg px-6 py-4 text-paper transition-colors duration-300 hover:bg-surface-hover"
               >
                 <span className="font-sans text-[0.65rem] font-bold uppercase tracking-[0.24em]">
                   Cadrer la demande
@@ -354,7 +354,7 @@ export default function CoreCartPage() {
 
               <Link
                 href="/core-studios"
-                className="inline-flex items-center justify-center border border-[#121110]/12 px-6 py-4 text-[#121110]/75 transition-colors duration-300 hover:border-[#121110]/24 hover:text-[#121110]"
+                className="inline-flex items-center justify-center border border-bg/12 px-6 py-4 text-bg/75 transition-colors duration-300 hover:border-bg/24 hover:text-bg"
               >
                 <span className="font-sans text-[0.65rem] font-bold uppercase tracking-[0.24em]">
                   Continuer les achats

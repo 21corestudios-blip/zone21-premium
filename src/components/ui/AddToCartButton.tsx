@@ -31,9 +31,9 @@ export default function AddToCartButton({
           collection,
         })
       }
-      className="inline-flex items-center justify-center rounded-none bg-[#121110] px-8 py-4 text-[#F7F5F0] transition-colors duration-300 hover:bg-black"
+      className="inline-flex items-center justify-center rounded-none bg-bg px-8 py-4 text-paper transition-colors duration-300 hover:bg-black"
     >
-      <span className="font-serif text-[0.75rem] uppercase tracking-[0.18em]">
+      <span className="font-serif text-xs uppercase tracking-[0.18em]">
         Ajouter au panier
       </span>
     </button>

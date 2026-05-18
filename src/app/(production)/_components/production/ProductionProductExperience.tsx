@@ -67,9 +67,9 @@ function PurchaseButton({
       className={
         subtle
           ? inverted
-            ? "inline-flex items-center justify-center rounded-full border border-[#EAE8E3]/14 bg-[#EAE8E3]/[0.06] px-5 py-3 text-[#EAE8E3] transition-colors duration-300 hover:bg-[#EAE8E3]/[0.12]"
-            : "inline-flex items-center justify-center rounded-full border border-[#121110]/12 px-5 py-3 text-[#121110] transition-colors duration-300 hover:border-[#121110]/28"
-          : "inline-flex items-center justify-center rounded-full bg-[#121110] px-5 py-3 text-[#F7F5F0] transition-colors duration-300 hover:bg-[#2A2826]"
+            ? "inline-flex items-center justify-center rounded-full border border-text/14 bg-text/6 px-5 py-3 text-text transition-colors duration-300 hover:bg-text/12"
+            : "inline-flex items-center justify-center rounded-full border border-bg/12 px-5 py-3 text-bg transition-colors duration-300 hover:border-bg/28"
+          : "inline-flex items-center justify-center rounded-full bg-bg px-5 py-3 text-paper transition-colors duration-300 hover:bg-surface-hover"
       }
     >
       <span className="font-sans text-[0.62rem] font-bold uppercase tracking-[0.24em]">
@@ -181,12 +181,12 @@ export default function ProductionProductExperience({
 
   return (
     <>
-      <section className="relative overflow-hidden bg-[#121110] text-[#EAE8E3]">
+      <section className="relative overflow-hidden bg-bg text-text">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(197,179,155,0.22),_transparent_34%),radial-gradient(circle_at_80%_0%,_rgba(234,232,227,0.14),_transparent_26%),linear-gradient(180deg,_rgba(255,255,255,0.03),_rgba(255,255,255,0))]" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-[#171615]" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-panel-deep" />
 
         <div className="relative mx-auto grid w-full max-w-7xl gap-10 px-6 pb-12 pt-28 md:px-12 md:pb-16 md:pt-36 lg:grid-cols-[300px_minmax(0,1fr)] lg:items-end">
-          <div className="relative aspect-square w-full max-w-[300px] overflow-hidden bg-[#1B1A19] shadow-[0_26px_80px_rgba(0,0,0,0.35)]">
+          <div className="relative aspect-square w-full max-w-[300px] overflow-hidden bg-panel-raised shadow-[0_26px_80px_rgba(0,0,0,0.35)]">
             <Image
               src={product.image}
               alt={product.name}
@@ -195,49 +195,49 @@ export default function ProductionProductExperience({
               sizes="(max-width: 1024px) 300px, 300px"
               className="object-cover"
             />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#121110]/32 to-transparent" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-bg/32 to-transparent" />
           </div>
 
           <div className="flex flex-col gap-5">
             <Link
               href={`/prod/${artistSlug}`}
-              className="w-fit font-sans text-[0.65rem] uppercase tracking-[0.24em] text-[#EAE8E3]/46 transition-colors duration-300 hover:text-[#EAE8E3]"
+              className="w-fit font-sans text-[0.65rem] uppercase tracking-[0.24em] text-text/46 transition-colors duration-300 hover:text-text"
             >
               {artistName}
             </Link>
 
             <div>
-              <p className="font-sans text-[0.68rem] uppercase tracking-[0.3em] text-[#C5B39B]">
+              <p className="font-sans text-[0.68rem] uppercase tracking-[0.3em] text-accent">
                 {product.kind}
               </p>
-              <h1 className="mt-4 font-serif text-5xl leading-none tracking-[-0.04em] text-[#EAE8E3] md:text-7xl lg:text-[5.8rem]">
+              <h1 className="mt-4 font-serif text-5xl leading-none tracking-[-0.04em] text-text md:text-7xl lg:text-[5.8rem]">
                 {product.name}
               </h1>
             </div>
 
-            <p className="max-w-3xl font-sans text-base font-light leading-relaxed text-[#EAE8E3]/68 md:text-lg">
+            <p className="max-w-3xl font-sans text-base font-light leading-relaxed text-text/68 md:text-lg">
               {product.shortDescription}
             </p>
 
-            <div className="flex flex-wrap items-center gap-3 font-sans text-[0.7rem] uppercase tracking-[0.2em] text-[#EAE8E3]/52">
+            <div className="flex flex-wrap items-center gap-3 font-sans text-[0.7rem] uppercase tracking-[0.2em] text-text/52">
               <span>{tracks.length || 1} pistes</span>
-              <span className="h-3 w-px bg-[#EAE8E3]/12" />
+              <span className="h-3 w-px bg-text/12" />
               <span>{durationLabel}</span>
-              <span className="h-3 w-px bg-[#EAE8E3]/12" />
+              <span className="h-3 w-px bg-text/12" />
               <span>{formatProductionPrice(product.priceCents, product.currency)}</span>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="border-t border-[#EAE8E3]/8 bg-[#171615] text-[#EAE8E3]">
+      <section className="border-t border-text/8 bg-panel-deep text-text">
         <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center gap-4 px-6 py-6 md:px-12">
           <button
             type="button"
             onClick={handleTogglePlayback}
             disabled={!hasPreview}
             aria-label={isPlaying ? "Mettre en pause" : "Lire le preview"}
-            className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-[#C5B39B] text-[#121110] transition-transform duration-300 hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-35"
+            className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-accent text-bg transition-transform duration-300 hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-35"
           >
             {isPlaying ? <PauseIcon /> : <PlayIcon />}
           </button>
@@ -246,7 +246,7 @@ export default function ProductionProductExperience({
 
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center rounded-full border border-[#EAE8E3]/10 px-7 py-4 text-[#EAE8E3]/74 transition-colors duration-300 hover:border-[#EAE8E3]/22 hover:text-[#EAE8E3]"
+            className="inline-flex items-center justify-center rounded-full border border-text/10 px-7 py-4 text-text/74 transition-colors duration-300 hover:border-text/22 hover:text-text"
           >
             <span className="font-sans text-[0.66rem] font-bold uppercase tracking-[0.24em]">
               Demande privée
@@ -254,32 +254,32 @@ export default function ProductionProductExperience({
           </Link>
 
           {feedbackMessage ? (
-            <p className="font-sans text-sm font-light leading-relaxed text-[#C5B39B]">
+            <p className="font-sans text-sm font-light leading-relaxed text-accent">
               {feedbackMessage}
             </p>
           ) : null}
         </div>
       </section>
 
-      <section className="bg-[#F7F5F0]">
+      <section className="bg-paper">
         <div className="mx-auto grid w-full max-w-7xl gap-10 px-6 py-12 md:px-12 md:py-16 lg:grid-cols-[minmax(0,1.2fr)_360px]">
-          <div className="rounded-[2rem] bg-[#121110] p-5 text-[#EAE8E3] shadow-[0_24px_80px_rgba(18,17,16,0.12)] md:p-7">
-            <div className="flex items-end justify-between gap-4 border-b border-[#EAE8E3]/10 pb-5">
+          <div className="rounded-[2rem] bg-bg p-5 text-text shadow-[0_24px_80px_rgba(18,17,16,0.12)] md:p-7">
+            <div className="flex items-end justify-between gap-4 border-b border-text/10 pb-5">
               <div>
-                <p className="font-sans text-[0.62rem] uppercase tracking-[0.22em] text-[#EAE8E3]/36">
+                <p className="font-sans text-[0.62rem] uppercase tracking-[0.22em] text-text/36">
                   Album Tracklist
                 </p>
-                <h2 className="mt-3 font-serif text-3xl text-[#EAE8E3]">
+                <h2 className="mt-3 font-serif text-3xl text-text">
                   Titres disponibles
                 </h2>
               </div>
 
-              <div className="font-sans text-[0.66rem] uppercase tracking-[0.18em] text-[#C5B39B]">
+              <div className="font-sans text-[0.66rem] uppercase tracking-[0.18em] text-accent">
                 Acheter chaque piste
               </div>
             </div>
 
-            <div className="mt-4 rounded-[1.3rem] border border-[#EAE8E3]/8 bg-[#EAE8E3]/[0.03] p-4">
+            <div className="mt-4 rounded-[1.3rem] border border-text/8 bg-text/3 p-4">
               <label htmlFor={rangeId} className="sr-only">
                 Progression du preview de {product.name}
               </label>
@@ -292,10 +292,10 @@ export default function ProductionProductExperience({
                 value={Math.min(currentTime, duration || 1)}
                 onChange={(event) => handleSeek(event.target.value)}
                 disabled={!hasPreview}
-                className="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-[#EAE8E3]/12 accent-[#C5B39B] disabled:cursor-not-allowed disabled:opacity-35"
+                className="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-text/12 accent-accent disabled:cursor-not-allowed disabled:opacity-35"
               />
 
-              <div className="mt-3 flex items-center justify-between font-sans text-[0.62rem] uppercase tracking-[0.18em] text-[#EAE8E3]/38">
+              <div className="mt-3 flex items-center justify-between font-sans text-[0.62rem] uppercase tracking-[0.18em] text-text/38">
                 <span>{formatTime(currentTime)}</span>
                 <span>{hasPreview ? formatTime(duration) : durationLabel}</span>
               </div>
@@ -305,36 +305,36 @@ export default function ProductionProductExperience({
               {tracks.map((track) => (
                 <div
                   key={track.id}
-                  className="grid gap-4 rounded-[1.4rem] border border-[#EAE8E3]/8 px-4 py-5 md:grid-cols-[68px_minmax(0,1fr)_110px_120px_170px] md:items-center"
+                  className="grid gap-4 rounded-[1.4rem] border border-text/8 px-4 py-5 md:grid-cols-[68px_minmax(0,1fr)_110px_120px_170px] md:items-center"
                 >
                   <div className="flex items-center gap-3">
                     <button
                       type="button"
                       onClick={handleTogglePlayback}
                       disabled={!hasPreview}
-                      className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#EAE8E3]/[0.06] text-[#EAE8E3] transition-colors duration-300 hover:bg-[#EAE8E3]/[0.1] disabled:cursor-default disabled:opacity-40"
+                      className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-text/6 text-text transition-colors duration-300 hover:bg-text/10 disabled:cursor-default disabled:opacity-40"
                     >
                       {isPlaying ? <PauseIcon /> : <PlayIcon />}
                     </button>
-                    <span className="font-sans text-[0.66rem] uppercase tracking-[0.2em] text-[#EAE8E3]/46">
+                    <span className="font-sans text-[0.66rem] uppercase tracking-[0.2em] text-text/46">
                       {track.trackNumber.toString().padStart(2, "0")}
                     </span>
                   </div>
 
                   <div className="min-w-0">
-                    <p className="truncate font-serif text-2xl tracking-[-0.03em] text-[#EAE8E3]">
+                    <p className="truncate font-serif text-2xl tracking-[-0.03em] text-text">
                       {track.name}
                     </p>
-                    <p className="mt-2 truncate font-sans text-sm font-light leading-relaxed text-[#EAE8E3]/54">
+                    <p className="mt-2 truncate font-sans text-sm font-light leading-relaxed text-text/54">
                       {track.shortDescription}
                     </p>
                   </div>
 
-                  <div className="font-sans text-[0.64rem] uppercase tracking-[0.18em] text-[#EAE8E3]/46">
+                  <div className="font-sans text-[0.64rem] uppercase tracking-[0.18em] text-text/46">
                     {track.kind}
                   </div>
 
-                  <div className="font-sans text-[0.64rem] uppercase tracking-[0.18em] text-[#C5B39B]">
+                  <div className="font-sans text-[0.64rem] uppercase tracking-[0.18em] text-accent">
                     {formatProductionPrice(track.priceCents, track.currency)}
                   </div>
 
@@ -352,22 +352,22 @@ export default function ProductionProductExperience({
           </div>
 
           <div className="grid gap-5">
-            <div className="rounded-[2rem] border border-[#121110]/10 bg-white px-6 py-6">
-              <p className="font-sans text-[0.62rem] uppercase tracking-[0.26em] text-[#121110]/38">
+            <div className="rounded-[2rem] border border-bg/10 bg-white px-6 py-6">
+              <p className="font-sans text-[0.62rem] uppercase tracking-[0.26em] text-bg/38">
                 Album complet
               </p>
-              <h3 className="mt-4 font-serif text-3xl text-[#121110]">
+              <h3 className="mt-4 font-serif text-3xl text-bg">
                 {product.name}
               </h3>
-              <p className="mt-4 font-sans text-base font-light leading-relaxed text-[#121110]/66">
+              <p className="mt-4 font-sans text-base font-light leading-relaxed text-bg/66">
                 {product.description}
               </p>
 
-              <div className="mt-6 flex items-center justify-between gap-4 border-t border-[#121110]/8 pt-5">
-                <span className="font-sans text-[0.66rem] uppercase tracking-[0.18em] text-[#121110]/42">
+              <div className="mt-6 flex items-center justify-between gap-4 border-t border-bg/8 pt-5">
+                <span className="font-sans text-[0.66rem] uppercase tracking-[0.18em] text-bg/42">
                   Prix album
                 </span>
-                <span className="font-sans text-[0.68rem] uppercase tracking-[0.18em] text-[#121110]">
+                <span className="font-sans text-[0.68rem] uppercase tracking-[0.18em] text-bg">
                   {formatProductionPrice(product.priceCents, product.currency)}
                 </span>
               </div>
@@ -380,15 +380,15 @@ export default function ProductionProductExperience({
               </div>
             </div>
 
-            <div className="rounded-[2rem] border border-[#121110]/10 bg-white px-6 py-6">
-              <p className="font-sans text-[0.62rem] uppercase tracking-[0.26em] text-[#121110]/38">
+            <div className="rounded-[2rem] border border-bg/10 bg-white px-6 py-6">
+              <p className="font-sans text-[0.62rem] uppercase tracking-[0.26em] text-bg/38">
                 Inclus
               </p>
               <div className="mt-5 grid gap-3">
                 {product.includes.map((item) => (
                   <div
                     key={item}
-                    className="border border-[#121110]/8 px-4 py-4 font-sans text-[0.68rem] uppercase tracking-[0.18em] text-[#121110]/68"
+                    className="border border-bg/8 px-4 py-4 font-sans text-[0.68rem] uppercase tracking-[0.18em] text-bg/68"
                   >
                     {item}
                   </div>
@@ -397,8 +397,8 @@ export default function ProductionProductExperience({
             </div>
 
             {editions.length ? (
-              <div className="rounded-[2rem] border border-[#121110]/10 bg-white px-6 py-6">
-                <p className="font-sans text-[0.62rem] uppercase tracking-[0.26em] text-[#121110]/38">
+              <div className="rounded-[2rem] border border-bg/10 bg-white px-6 py-6">
+                <p className="font-sans text-[0.62rem] uppercase tracking-[0.26em] text-bg/38">
                   Précommandes
                 </p>
 
@@ -406,19 +406,19 @@ export default function ProductionProductExperience({
                   {editions.map((edition) => (
                     <div
                       key={edition.id}
-                      className="rounded-[1.4rem] border border-[#121110]/8 px-4 py-4"
+                      className="rounded-[1.4rem] border border-bg/8 px-4 py-4"
                     >
                       <div className="flex items-start justify-between gap-4">
                         <div>
-                          <p className="font-serif text-2xl text-[#121110]">
+                          <p className="font-serif text-2xl text-bg">
                             {edition.name}
                           </p>
-                          <p className="mt-2 font-sans text-[0.66rem] uppercase tracking-[0.18em] text-[#121110]/46">
+                          <p className="mt-2 font-sans text-[0.66rem] uppercase tracking-[0.18em] text-bg/46">
                             Précommande
                           </p>
                         </div>
 
-                        <span className="font-sans text-[0.66rem] uppercase tracking-[0.18em] text-[#121110]">
+                        <span className="font-sans text-[0.66rem] uppercase tracking-[0.18em] text-bg">
                           {formatProductionPrice(
                             edition.priceCents,
                             edition.currency,
@@ -426,7 +426,7 @@ export default function ProductionProductExperience({
                         </span>
                       </div>
 
-                      <p className="mt-4 font-sans text-sm font-light leading-relaxed text-[#121110]/64">
+                      <p className="mt-4 font-sans text-sm font-light leading-relaxed text-bg/64">
                         {edition.releaseLabel}
                       </p>
 

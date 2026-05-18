@@ -33,27 +33,27 @@ export const roleDetails: Record<
   direction: {
     label: "Direction",
     summary: "Vue stratégique complète et arbitrages sensibles.",
-    accent: "text-[#D5C1A1]",
+    accent: "text-accent-soft",
   },
   admin_documentaire: {
     label: "Admin documentaire",
     summary: "Pilotage du registre, gouvernance documentaire et accès.",
-    accent: "text-[#D5C1A1]",
+    accent: "text-accent-soft",
   },
   validateur: {
     label: "Validateur",
     summary: "Contrôle, validation et suivi des documents clés.",
-    accent: "text-[#EAE8E3]",
+    accent: "text-text",
   },
   editeur: {
     label: "Éditeur",
     summary: "Production, mise à jour et préparation des contenus.",
-    accent: "text-[#EAE8E3]",
+    accent: "text-text",
   },
   contributeur: {
     label: "Contributeur",
     summary: "Contribution encadrée et soumission des évolutions.",
-    accent: "text-[#EAE8E3]",
+    accent: "text-text",
   },
   lecteur: {
     label: "Lecteur",

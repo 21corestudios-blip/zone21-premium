@@ -22,7 +22,7 @@ export default function Hero({ blok }: { blok: HeroBlok }) {
 
   return (
     <section
-      className="relative h-[100dvh] min-h-screen w-full overflow-hidden bg-[#121110]"
+      className="relative h-dvh min-h-screen w-full overflow-hidden bg-bg"
       {...storyblokEditable(blok)}
     >
       <div className="absolute inset-0 z-0 hidden md:block">
@@ -49,7 +49,7 @@ export default function Hero({ blok }: { blok: HeroBlok }) {
         />
       </div>
 
-      <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-b from-transparent via-[#121110]/10 to-[#121110]/80 mix-blend-multiply" />
+      <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-b from-transparent via-bg/10 to-bg/80 mix-blend-multiply" />
 
       {blok.title ? (
         <div className="absolute bottom-10 left-0 z-30 flex w-full justify-center px-6 md:bottom-16">

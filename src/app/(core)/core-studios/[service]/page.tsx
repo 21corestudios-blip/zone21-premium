@@ -97,8 +97,8 @@ export default async function CoreServicePage({ params }: PageProps) {
   );
 
   return (
-    <main className="flex min-h-screen flex-col bg-[#F7F5F0]">
-      <section className="relative h-[100dvh] min-h-screen w-full overflow-hidden bg-[#121110]">
+    <main className="flex min-h-screen flex-col bg-paper">
+      <section className="relative h-dvh min-h-screen w-full overflow-hidden bg-bg">
         <Image
           src={currentService.heroImage}
           alt={currentService.name}
@@ -108,7 +108,7 @@ export default async function CoreServicePage({ params }: PageProps) {
           className="object-cover"
         />
 
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-[#121110]/10 to-[#121110]/80 mix-blend-multiply" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-bg/10 to-bg/80 mix-blend-multiply" />
 
         <div className="absolute bottom-10 left-0 z-10 flex w-full justify-center px-6 md:bottom-16">
           <div className="text-center">
@@ -123,15 +123,15 @@ export default async function CoreServicePage({ params }: PageProps) {
       </section>
 
       <section className="mx-auto w-full max-w-4xl px-6 py-20 text-center md:px-12 md:py-24">
-        <span className="font-sans text-[0.65rem] uppercase tracking-[0.3em] text-[#121110]/40">
+        <span className="font-sans text-[0.65rem] uppercase tracking-[0.3em] text-bg/40">
           Core Studios
         </span>
 
-        <p className="mt-8 font-sans text-base font-light leading-relaxed text-[#121110]/70 md:text-lg">
+        <p className="mt-8 font-sans text-base font-light leading-relaxed text-bg/70 md:text-lg">
           {currentService.description}
         </p>
 
-        <p className="mt-6 font-sans text-base font-light leading-relaxed text-[#121110]/70 md:text-lg">
+        <p className="mt-6 font-sans text-base font-light leading-relaxed text-bg/70 md:text-lg">
           {currentService.tagline}
         </p>
       </section>

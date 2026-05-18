@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 
 export default function LegalPage() {
   return (
-    <main className="min-h-screen bg-[#121110] text-white">
+    <main className="min-h-screen bg-bg text-white">
       <LegalContent />
     </main>
   );

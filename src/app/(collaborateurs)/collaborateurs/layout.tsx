@@ -23,8 +23,8 @@ export default async function CollaboratorsLayout({
   const showGlobalFooter = Boolean(session);
 
   return (
-    <div className="flex min-h-screen flex-col overflow-x-clip bg-[#121110] text-[#EAE8E3]">
-      <header className="border-b border-white/8 bg-[#121110]/92 backdrop-blur-md">
+    <div className="flex min-h-screen flex-col overflow-x-clip bg-bg text-text">
+      <header className="border-b border-white/8 bg-bg/92 backdrop-blur-md">
         <div className="flex w-full items-center justify-between gap-6 px-6 py-5 lg:px-10 2xl:px-14">
           <div className="flex items-center gap-5">
             <Link
@@ -60,7 +60,7 @@ export default async function CollaboratorsLayout({
                   <p className="text-[0.6rem] uppercase tracking-[0.28em] text-white/35">
                     Session
                   </p>
-                  <p className="mt-1 text-sm text-[#F7F5F0]">
+                  <p className="mt-1 text-sm text-paper">
                     {session.roleLabel}
                   </p>
                 </div>
@@ -92,10 +92,10 @@ export default async function CollaboratorsLayout({
       </div>
 
       {showGlobalFooter ? (
-        <footer className="mt-12 border-t border-white/8 bg-[#0A0A09]">
+        <footer className="mt-12 border-t border-white/8 bg-void">
           <div className="grid w-full gap-8 px-6 py-10 lg:grid-cols-[minmax(0,1.1fr)_0.9fr_auto] lg:px-10 2xl:px-14">
             <div>
-              <p className="text-[0.62rem] uppercase tracking-[0.28em] text-[#C5B39B]">
+              <p className="text-[0.62rem] uppercase tracking-[0.28em] text-accent">
                 Portail collaborateurs
               </p>
               <p className="mt-3 max-w-2xl text-sm leading-7 text-white/60">

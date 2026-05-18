@@ -119,13 +119,13 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body
-        className="min-h-screen flex flex-col bg-[#121110] font-sans text-[#EAE8E3] selection:bg-[#C5B39B] selection:text-[#121110]"
+        className="min-h-screen flex flex-col bg-bg font-sans text-text selection:bg-accent selection:text-bg"
         suppressHydrationWarning
       >
         <OrganizationJsonLd siteUrl={siteUrl} />
         <a
           href="#main-content"
-          className="sr-only rounded-md font-medium focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-[#EAE8E3] focus:px-3 focus:py-2 focus:text-[#121110]"
+          className="sr-only rounded-md font-medium focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-text focus:px-3 focus:py-2 focus:text-bg"
         >
           Aller au contenu principal
         </a>

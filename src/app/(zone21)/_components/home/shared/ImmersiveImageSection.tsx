@@ -17,7 +17,7 @@ export default function ImmersiveImageSection({
 }: ImmersiveImageSectionProps) {
   return (
     <section
-      className={`relative h-[100dvh] min-h-screen w-full overflow-hidden ${backgroundClassName}`}
+      className={`relative h-dvh min-h-screen w-full overflow-hidden ${backgroundClassName}`}
       aria-hidden={alt === "" ? "true" : undefined}
     >
       <Image

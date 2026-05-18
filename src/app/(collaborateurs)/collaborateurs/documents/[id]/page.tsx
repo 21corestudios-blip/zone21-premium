@@ -54,7 +54,7 @@ export default async function CollaboratorDocumentPage({
         </Link>
         <a
           href={`/api/documents/${record.id}/download?format=pdf`}
-          className="rounded-full border border-[#C5B39B]/35 px-4 py-2 text-[0.62rem] uppercase tracking-[0.24em] text-[#D5C1A1] transition-colors duration-500 hover:border-[#C5B39B]/55 hover:text-[#F7F5F0]"
+          className="rounded-full border border-accent/35 px-4 py-2 text-[0.62rem] uppercase tracking-[0.24em] text-accent-soft transition-colors duration-500 hover:border-accent/55 hover:text-paper"
         >
           Télécharger le PDF
         </a>
@@ -68,7 +68,7 @@ export default async function CollaboratorDocumentPage({
         </a>
         <a
           href={`/api/documents/${record.id}/download?format=docx`}
-          className="rounded-full border border-[#C5B39B]/35 px-4 py-2 text-[0.62rem] uppercase tracking-[0.24em] text-[#D5C1A1] transition-colors duration-500 hover:border-[#C5B39B]/55 hover:text-[#F7F5F0]"
+          className="rounded-full border border-accent/35 px-4 py-2 text-[0.62rem] uppercase tracking-[0.24em] text-accent-soft transition-colors duration-500 hover:border-accent/55 hover:text-paper"
         >
           Télécharger le DOCX
         </a>
@@ -76,10 +76,10 @@ export default async function CollaboratorDocumentPage({
 
       <section className="grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_24rem]">
         <div>
-          <p className="text-[0.68rem] uppercase tracking-[0.28em] text-[#C5B39B]">
+          <p className="text-[0.68rem] uppercase tracking-[0.28em] text-accent">
             {record.reference}
           </p>
-          <h1 className="mt-4 font-serif text-4xl text-[#F7F5F0] md:text-5xl">
+          <h1 className="mt-4 font-serif text-4xl text-paper md:text-5xl">
             {record.title}
           </h1>
           <p className="mt-5 max-w-4xl text-sm leading-7 text-white/68 md:text-base">
@@ -106,18 +106,18 @@ export default async function CollaboratorDocumentPage({
           </div>
         </div>
 
-        <div className="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.28)]">
+        <div className="rounded-[1.75rem] border border-white/10 bg-white/3 p-6 shadow-[0_24px_80px_rgba(0,0,0,0.28)]">
           <p className="text-[0.62rem] uppercase tracking-[0.28em] text-white/35">
             Profil actif
           </p>
-          <h2 className="mt-3 text-lg uppercase tracking-[0.18em] text-[#F7F5F0]">
+          <h2 className="mt-3 text-lg uppercase tracking-[0.18em] text-paper">
             {roleDetails[session.role].label}
           </h2>
           <p className="mt-3 text-sm leading-6 text-white/62">
             {roleDetails[session.role].summary}
           </p>
           {canManageAccess ? (
-            <div className="mt-6 rounded-[1.25rem] border border-[#C5B39B]/20 bg-[#C5B39B]/8 p-4 text-sm leading-6 text-white/70">
+            <div className="mt-6 rounded-[1.25rem] border border-accent/20 bg-accent/8 p-4 text-sm leading-6 text-white/70">
               Ce profil voit aussi la matrice de rôles autorisés pour ce
               document et pourra piloter les droits lors de la phase RBAC
               avancée.
@@ -136,7 +136,7 @@ export default async function CollaboratorDocumentPage({
       ) : null}
 
       <section className="grid gap-5 lg:grid-cols-[minmax(0,1.2fr)_0.8fr]">
-        <article className="rounded-[1.75rem] border border-white/10 bg-[#161513] p-6 shadow-[0_20px_70px_rgba(0,0,0,0.24)]">
+        <article className="rounded-[1.75rem] border border-white/10 bg-panel p-6 shadow-[0_20px_70px_rgba(0,0,0,0.24)]">
           <h2 className="text-[0.7rem] uppercase tracking-[0.28em] text-white/35">
             Métadonnées documentaires
           </h2>
@@ -226,7 +226,7 @@ export default async function CollaboratorDocumentPage({
         </article>
 
         <aside className="space-y-5">
-          <article className="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-6 shadow-[0_20px_70px_rgba(0,0,0,0.2)]">
+          <article className="rounded-[1.75rem] border border-white/10 bg-white/3 p-6 shadow-[0_20px_70px_rgba(0,0,0,0.2)]">
             <h2 className="text-[0.7rem] uppercase tracking-[0.28em] text-white/35">
               Référence système
             </h2>
@@ -244,7 +244,7 @@ export default async function CollaboratorDocumentPage({
             </div>
           </article>
 
-          <article className="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-6 shadow-[0_20px_70px_rgba(0,0,0,0.2)]">
+          <article className="rounded-[1.75rem] border border-white/10 bg-white/3 p-6 shadow-[0_20px_70px_rgba(0,0,0,0.2)]">
             <h2 className="text-[0.7rem] uppercase tracking-[0.28em] text-white/35">
               Chemins actifs
             </h2>
@@ -270,7 +270,7 @@ export default async function CollaboratorDocumentPage({
             </div>
           </article>
 
-          <article className="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-6 shadow-[0_20px_70px_rgba(0,0,0,0.2)]">
+          <article className="rounded-[1.75rem] border border-white/10 bg-white/3 p-6 shadow-[0_20px_70px_rgba(0,0,0,0.2)]">
             <h2 className="text-[0.7rem] uppercase tracking-[0.28em] text-white/35">
               Gouvernance web
             </h2>
@@ -295,13 +295,13 @@ export default async function CollaboratorDocumentPage({
         </aside>
       </section>
 
-      <section className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#161513] shadow-[0_20px_70px_rgba(0,0,0,0.24)]">
+      <section className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-panel shadow-[0_20px_70px_rgba(0,0,0,0.24)]">
         <div className="flex items-center justify-between gap-4 border-b border-white/8 px-6 py-5">
           <div>
             <p className="text-[0.62rem] uppercase tracking-[0.28em] text-white/35">
               Aperçu intégré
             </p>
-            <h2 className="mt-2 font-serif text-2xl text-[#F7F5F0]">
+            <h2 className="mt-2 font-serif text-2xl text-paper">
               Visualisation PDF
             </h2>
           </div>
@@ -310,14 +310,14 @@ export default async function CollaboratorDocumentPage({
             href={pdfPreviewUrl}
             target="_blank"
             rel="noreferrer"
-            className="rounded-full border border-[#C5B39B]/35 px-4 py-2 text-[0.62rem] uppercase tracking-[0.24em] text-[#D5C1A1] transition-colors duration-500 hover:border-[#C5B39B]/55 hover:text-[#F7F5F0]"
+            className="rounded-full border border-accent/35 px-4 py-2 text-[0.62rem] uppercase tracking-[0.24em] text-accent-soft transition-colors duration-500 hover:border-accent/55 hover:text-paper"
           >
             Plein écran
           </a>
         </div>
 
         <div className="p-4 md:p-6">
-          <div className="overflow-hidden rounded-[1.25rem] border border-white/8 bg-[#121110]">
+          <div className="overflow-hidden rounded-[1.25rem] border border-white/8 bg-bg">
             <object
               data={pdfPreviewUrl}
               type="application/pdf"
@@ -339,7 +339,7 @@ export default async function CollaboratorDocumentPage({
                   </a>
                   <a
                     href={`/api/documents/${record.id}/download?format=pdf`}
-                    className="rounded-full border border-[#C5B39B]/35 px-4 py-2 text-[0.62rem] uppercase tracking-[0.24em] text-[#D5C1A1] transition-colors duration-500 hover:border-[#C5B39B]/55 hover:text-[#F7F5F0]"
+                    className="rounded-full border border-accent/35 px-4 py-2 text-[0.62rem] uppercase tracking-[0.24em] text-accent-soft transition-colors duration-500 hover:border-accent/55 hover:text-paper"
                   >
                     Télécharger le PDF
                   </a>

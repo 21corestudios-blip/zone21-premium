@@ -3,11 +3,25 @@
 @theme {
     --color-bg: #121110;
     --color-surface: #1a1918;
+    --color-surface-hover: #2a2826;
     --color-text: #eae8e3;
+    --color-paper: #f7f5f0;
     --color-accent: #c5b39b;
+    --color-accent-soft: #d5c1a1;
+    --color-accent-muted: #d5c4ae;
+    --color-accent-light: #e7d8be;
     --color-muted: #8a8886;
     --color-commerce-surface: #f4f4f4;
     --color-heritage: #004526;
+    --color-panel: #161513;
+    --color-panel-alt: #171614;
+    --color-panel-deep: #171615;
+    --color-panel-soft: #181715;
+    --color-panel-raised: #1b1a19;
+    --color-void: #0a0a09;
+    --color-danger: #a43c2a;
+    --color-danger-text: #7f2214;
+    --color-danger-soft: #c98d8d;
 
     --font-sans: var(--font-texte), sans-serif;
     --font-serif: var(--font-titre), serif;

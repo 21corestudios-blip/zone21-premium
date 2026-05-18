@@ -15,10 +15,10 @@ export default function ProductionStorefrontCategories({
   return (
     <section className="mx-auto w-full max-w-7xl px-6 pb-12 md:px-10 md:pb-16 lg:px-16">
       <div className="mb-8">
-        <p className="font-sans text-[0.62rem] uppercase tracking-[0.3em] text-[#121110]/38">
+        <p className="font-sans text-[0.62rem] uppercase tracking-[0.3em] text-bg/38">
           Storefront
         </p>
-        <h2 className="mt-4 font-serif text-4xl uppercase leading-none text-[#121110] md:text-5xl">
+        <h2 className="mt-4 font-serif text-4xl uppercase leading-none text-bg md:text-5xl">
           Explorer par categorie
         </h2>
       </div>
@@ -34,28 +34,28 @@ export default function ProductionStorefrontCategories({
             <Link
               key={category.slug}
               href={`/prod/${artistSlug}/${category.slug}`}
-              className="group relative overflow-hidden border border-[#121110]/10 bg-white p-6 shadow-none transition-colors duration-300 hover:border-[#121110]/24"
+              className="group relative overflow-hidden border border-bg/10 bg-white p-6 shadow-none transition-colors duration-300 hover:border-bg/24"
             >
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-[#004526] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-heritage opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
               <div className="relative flex min-h-[220px] flex-col justify-between">
                 <div>
-                  <p className="font-sans text-[0.6rem] uppercase tracking-[0.28em] text-[#121110]/35">
+                  <p className="font-sans text-[0.6rem] uppercase tracking-[0.28em] text-bg/35">
                     {category.eyebrow}
                   </p>
-                  <h3 className="mt-4 font-serif text-4xl uppercase leading-none text-[#121110]">
+                  <h3 className="mt-4 font-serif text-4xl uppercase leading-none text-bg">
                     {category.name}
                   </h3>
-                  <p className="mt-5 max-w-sm font-sans text-sm font-light leading-relaxed text-[#121110]/64">
+                  <p className="mt-5 max-w-sm font-sans text-sm font-light leading-relaxed text-bg/64">
                     {category.description}
                   </p>
                 </div>
 
-                <div className="flex items-center justify-between gap-4 border-t border-[#121110]/8 pt-5">
-                  <span className="font-sans text-[0.62rem] uppercase tracking-[0.22em] text-[#121110]/42">
+                <div className="flex items-center justify-between gap-4 border-t border-bg/8 pt-5">
+                  <span className="font-sans text-[0.62rem] uppercase tracking-[0.22em] text-bg/42">
                     {count} item{count > 1 ? "s" : ""}
                   </span>
-                  <span className="font-sans text-[0.62rem] uppercase tracking-[0.22em] text-[#121110] transition-transform duration-300 group-hover:translate-x-1">
+                  <span className="font-sans text-[0.62rem] uppercase tracking-[0.22em] text-bg transition-transform duration-300 group-hover:translate-x-1">
                     Ouvrir
                   </span>
                 </div>

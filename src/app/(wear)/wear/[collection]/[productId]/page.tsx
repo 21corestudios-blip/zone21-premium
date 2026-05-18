@@ -57,10 +57,10 @@ export default async function WearProductPage({ params }: PageProps) {
   }
 
   return (
-    <main className="flex min-h-screen flex-col bg-[#F7F5F0]">
+    <main className="flex min-h-screen flex-col bg-paper">
       <section className="mx-auto w-full max-w-7xl px-6 pb-24 pt-32 md:px-10 md:pb-32 md:pt-40 lg:px-16">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-[minmax(0,1.1fr)_minmax(360px,0.9fr)] lg:gap-20">
-          <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#F4F4F4]">
+          <div className="relative aspect-[4/5] w-full overflow-hidden bg-commerce-surface">
             <Image
               src={currentProduct.image}
               alt={currentProduct.name}
@@ -75,16 +75,16 @@ export default async function WearProductPage({ params }: PageProps) {
             <div className="flex flex-col gap-4">
               <Link
                 href={`/wear/${collection}`}
-                className="font-sans text-[0.65rem] uppercase tracking-[0.2em] text-[#121110]/45 transition-colors duration-300 hover:text-[#121110]"
+                className="font-sans text-[0.65rem] uppercase tracking-[0.2em] text-bg/45 transition-colors duration-300 hover:text-bg"
               >
                 {currentCollection.name}
               </Link>
 
-              <h1 className="font-serif text-4xl leading-[1.02] tracking-[-0.02em] text-[#121110] md:text-5xl lg:text-[4.25rem]">
+              <h1 className="font-serif text-4xl leading-[1.02] tracking-[-0.02em] text-bg md:text-5xl lg:text-[4.25rem]">
                 {currentProduct.name}
               </h1>
 
-              <p className="font-sans text-sm uppercase tracking-[0.15em] text-[#121110]/55 md:text-base">
+              <p className="font-sans text-sm uppercase tracking-[0.15em] text-bg/55 md:text-base">
                 {formatWearPrice(
                   currentProduct.priceCents,
                   currentProduct.currency,
@@ -93,11 +93,11 @@ export default async function WearProductPage({ params }: PageProps) {
             </div>
 
             <div className="flex flex-col gap-6">
-              <p className="font-sans text-base font-light leading-relaxed text-[#121110]/72 md:text-lg">
+              <p className="font-sans text-base font-light leading-relaxed text-bg/72 md:text-lg">
                 {currentProduct.description}
               </p>
 
-              <p className="font-sans text-base font-light leading-relaxed text-[#121110]/72 md:text-lg">
+              <p className="font-sans text-base font-light leading-relaxed text-bg/72 md:text-lg">
                 Chaque pièce 21 Wear s’inscrit dans une approche de construction
                 lente, de précision des volumes et d’exigence textile. Cette
                 base intègre désormais la sélection de taille et le panier, en
@@ -109,9 +109,9 @@ export default async function WearProductPage({ params }: PageProps) {
               <WearAddToCartForm product={currentProduct} />
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center rounded-none border border-[#121110]/15 px-8 py-4 text-[#121110] transition-colors duration-300 hover:border-[#121110] hover:bg-[#121110] hover:text-[#F7F5F0] sm:w-fit"
+                className="inline-flex items-center justify-center rounded-none border border-bg/15 px-8 py-4 text-bg transition-colors duration-300 hover:border-bg hover:bg-bg hover:text-paper sm:w-fit"
               >
-                <span className="font-serif text-[0.75rem] uppercase tracking-[0.18em]">
+                <span className="font-serif text-xs uppercase tracking-[0.18em]">
                   Demande Privée
                 </span>
               </Link>

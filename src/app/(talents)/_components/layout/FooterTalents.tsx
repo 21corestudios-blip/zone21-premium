@@ -10,21 +10,21 @@ export default function FooterTalents() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-white/10 bg-[#121110] px-6 pb-12 pt-24 text-[#EAE8E3] md:px-10 lg:px-16">
+    <footer className="border-t border-white/10 bg-bg px-6 pb-12 pt-24 text-text md:px-10 lg:px-16">
       <div className="mx-auto flex max-w-7xl flex-col gap-20">
         <div className="grid grid-cols-1 gap-16 md:grid-cols-12 md:gap-8">
           <div className="flex flex-col gap-8 md:col-span-8">
             <Link
               href="/talents-agency"
               aria-label="Retour à l’accueil EKKO"
-              className="inline-flex h-[120px] w-[120px] items-center justify-center transition-opacity duration-500 hover:opacity-80"
+              className="inline-flex h-30 w-30 items-center justify-center transition-opacity duration-500 hover:opacity-80"
             >
               <Image
                 src="/images/ui/EKKO_blanc_500px.svg"
                 alt="ARCANE"
                 width={500}
                 height={500}
-                className="h-[120px] w-[120px] object-contain"
+                className="h-30 w-30 object-contain"
               />
             </Link>
 
@@ -56,7 +56,7 @@ export default function FooterTalents() {
 
                 <button
                   type="submit"
-                  className="font-serif text-[0.75rem] uppercase tracking-[0.16em] text-white/76 transition-colors duration-300 hover:text-white"
+                  className="font-serif text-xs uppercase tracking-[0.16em] text-white/76 transition-colors duration-300 hover:text-white"
                 >
                   S&apos;inscrire
                 </button>
@@ -100,11 +100,11 @@ export default function FooterTalents() {
         </div>
 
         <div className="flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 text-center md:flex-row md:text-left">
-          <span className="font-sans text-[0.65rem] uppercase tracking-[0.1em] text-white/30">
+          <span className="font-sans text-[0.65rem] uppercase tracking-widest text-white/30">
             © {currentYear} EKKO. Tous droits reserves.
           </span>
 
-          <span className="font-sans text-[0.65rem] uppercase tracking-[0.1em] text-white/30">
+          <span className="font-sans text-[0.65rem] uppercase tracking-widest text-white/30">
             Une maison de{" "}
             <Link
               href="/"

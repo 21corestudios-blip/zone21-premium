@@ -24,10 +24,10 @@ export default function ProductionAddToCartForm({
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between gap-4">
-        <p className="font-sans text-[0.65rem] uppercase tracking-[0.24em] text-[#121110]/45">
+        <p className="font-sans text-[0.65rem] uppercase tracking-[0.24em] text-bg/45">
           Format
         </p>
-        <p className="font-sans text-[0.65rem] uppercase tracking-[0.18em] text-[#121110]/55">
+        <p className="font-sans text-[0.65rem] uppercase tracking-[0.18em] text-bg/55">
           Ressource digitale
         </p>
       </div>
@@ -36,7 +36,7 @@ export default function ProductionAddToCartForm({
         {currentBenefits.map((benefit) => (
           <div
             key={benefit}
-            className="border border-[#121110]/10 px-4 py-4 font-sans text-[0.68rem] uppercase tracking-[0.18em] text-[#121110]/68"
+            className="border border-bg/10 px-4 py-4 font-sans text-[0.68rem] uppercase tracking-[0.18em] text-bg/68"
           >
             {benefit}
           </div>
@@ -44,8 +44,8 @@ export default function ProductionAddToCartForm({
       </div>
 
       {feedbackMessage ? (
-        <div className="border border-[#121110]/10 bg-[#121110]/[0.03] px-4 py-4">
-          <p className="font-sans text-sm font-light leading-relaxed text-[#121110]/70">
+        <div className="border border-bg/10 bg-bg/3 px-4 py-4">
+          <p className="font-sans text-sm font-light leading-relaxed text-bg/70">
             {feedbackMessage}
           </p>
         </div>
@@ -54,9 +54,9 @@ export default function ProductionAddToCartForm({
       <button
         type="button"
         onClick={handleAddToCart}
-        className="inline-flex items-center justify-center rounded-none bg-[#121110] px-8 py-4 text-[#F7F5F0] transition-colors duration-300 hover:bg-black"
+        className="inline-flex items-center justify-center rounded-none bg-bg px-8 py-4 text-paper transition-colors duration-300 hover:bg-black"
       >
-        <span className="font-serif text-[0.75rem] uppercase tracking-[0.18em]">
+        <span className="font-serif text-xs uppercase tracking-[0.18em]">
           Ajouter au panier
         </span>
       </button>

@@ -28,7 +28,7 @@ function getVariantClass(variant: ButtonVariant) {
       return "border-white/12 bg-transparent text-white hover:border-white/25 hover:text-white";
     case "gold":
     default:
-      return "border-[#C5B39B]/55 bg-[#121110] text-[#F7F5F0] hover:border-[#C5B39B] hover:bg-[#F7F5F0] hover:text-[#121110]";
+      return "border-accent/55 bg-bg text-paper hover:border-accent hover:bg-paper hover:text-bg";
   }
 }
 

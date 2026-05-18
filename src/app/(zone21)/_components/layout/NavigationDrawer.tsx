@@ -22,10 +22,10 @@ const sectionLabelClassName =
   "font-sans text-[0.62rem] uppercase tracking-[0.26em] text-white/35";
 
 const primaryLinkTextClassName =
-  "font-sans text-[0.92rem] uppercase tracking-[0.24em] text-white/88 transition-all duration-500 ease-out group-hover:translate-x-2 group-hover:text-white md:text-[1rem]";
+  "font-sans text-[0.92rem] uppercase tracking-[0.24em] text-white/88 transition-all duration-500 ease-out group-hover:translate-x-2 group-hover:text-white md:text-base";
 
 const ecosystemTitleClassName =
-  "font-sans text-[0.92rem] uppercase tracking-[0.24em] text-white/88 transition-all duration-500 ease-out group-hover:translate-x-2 group-hover:text-white md:text-[1rem]";
+  "font-sans text-[0.92rem] uppercase tracking-[0.24em] text-white/88 transition-all duration-500 ease-out group-hover:translate-x-2 group-hover:text-white md:text-base";
 
 const ecosystemCategoryClassName =
   "font-sans text-[0.54rem] uppercase tracking-[0.2em] text-white/30 transition-colors duration-500 group-hover:text-white/48";
@@ -79,7 +79,7 @@ export default function NavigationDrawer({
   return (
     <>
       <div
-        className={`fixed inset-0 z-[60] bg-[#121110]/40 backdrop-blur-sm transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${
+        className={`fixed inset-0 z-[60] bg-bg/40 backdrop-blur-sm transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${
           isOpen ? "visible opacity-100" : "invisible opacity-0"
         }`}
         onClick={handleClose}
@@ -88,7 +88,7 @@ export default function NavigationDrawer({
 
       <div
         id="navigation-drawer"
-        className={`fixed right-0 top-0 z-[70] flex h-full w-full transform flex-col border-l border-white/5 bg-[#121110] transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] md:w-[450px] ${
+        className={`fixed right-0 top-0 z-[70] flex h-full w-full transform flex-col border-l border-white/5 bg-bg transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] md:w-[450px] ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
         role="dialog"

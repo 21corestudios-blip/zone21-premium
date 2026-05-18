@@ -29,9 +29,9 @@ export function getGovernanceSyncClasses(status: GovernanceSyncStatus) {
     case "bloqué":
       return "border-rose-500/25 bg-rose-500/10 text-rose-200";
     case "archivé":
-      return "border-white/10 bg-white/[0.06] text-white/65";
+      return "border-white/10 bg-white/6 text-white/65";
     default:
-      return "border-white/10 bg-white/[0.06] text-white/65";
+      return "border-white/10 bg-white/6 text-white/65";
   }
 }
 

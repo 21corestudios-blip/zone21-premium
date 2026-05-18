@@ -15,10 +15,10 @@ export const metadata: Metadata = {
 
 export default function CancelPage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-[#121110] px-6 text-center text-[#EAE8E3]">
+    <main className="flex min-h-screen flex-col items-center justify-center bg-bg px-6 text-center text-text">
       <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-full bg-white/5">
         <svg
-          className="h-10 w-10 text-[#C5B39B]"
+          className="h-10 w-10 text-accent"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -42,7 +42,7 @@ export default function CancelPage() {
 
       <Link
         href="/wear"
-        className="text-[0.7rem] uppercase tracking-widest text-[#C5B39B] underline underline-offset-8 transition-colors hover:text-[#EAE8E3]"
+        className="text-[0.7rem] uppercase tracking-widest text-accent underline underline-offset-8 transition-colors hover:text-text"
       >
         Retourner au catalogue
       </Link>

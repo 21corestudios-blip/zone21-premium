@@ -72,7 +72,7 @@ function WaveBars({ isPlaying }: { isPlaying: boolean }) {
       {bars.map((height, index) => (
         <span
           key={`${height}-${index}`}
-          className={`rounded-full bg-[#C5B39B]/70 transition-all duration-500 ${
+          className={`rounded-full bg-accent/70 transition-all duration-500 ${
             isPlaying ? "opacity-100" : "opacity-50"
           }`}
           style={{ height: `${height}%` }}
@@ -93,7 +93,7 @@ function ControlButton({
     <button
       type="button"
       disabled={disabled}
-      className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-[#C5B39B]/18 bg-[#EAE8E3]/[0.05] text-[#EAE8E3] transition-colors duration-300 hover:bg-[#EAE8E3]/[0.09] disabled:cursor-not-allowed disabled:opacity-35"
+      className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-accent/18 bg-text/5 text-text transition-colors duration-300 hover:bg-text/9 disabled:cursor-not-allowed disabled:opacity-35"
     >
       {children}
     </button>
@@ -190,12 +190,12 @@ function ProductionMiniPlayerCard({
   }
 
   return (
-    <article className="relative overflow-hidden rounded-[2rem] border border-[#C5B39B]/18 bg-[#121110] p-5 shadow-[0_40px_120px_rgba(18,17,16,0.28)] md:p-6">
+    <article className="relative overflow-hidden rounded-[2rem] border border-accent/18 bg-bg p-5 shadow-[0_40px_120px_rgba(18,17,16,0.28)] md:p-6">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(197,179,155,0.18),_transparent_38%),radial-gradient(circle_at_85%_15%,_rgba(234,232,227,0.12),_transparent_28%),linear-gradient(135deg,_rgba(255,255,255,0.05),_rgba(255,255,255,0))]" />
-      <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-[#C5B39B]/70 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-accent/70 to-transparent" />
 
       <div className="relative grid gap-5 lg:grid-cols-[180px_minmax(0,1fr)] lg:items-center">
-        <div className="relative aspect-square w-full max-w-[160px] overflow-hidden border border-[#C5B39B]/16 bg-[#1A1918] shadow-[0_0_0_1px_rgba(234,232,227,0.04)] lg:max-w-[180px]">
+        <div className="relative aspect-square w-full max-w-40 overflow-hidden border border-accent/16 bg-surface shadow-[0_0_0_1px_rgba(234,232,227,0.04)] lg:max-w-45">
           <Image
             src={product.image}
             alt={product.name}
@@ -203,11 +203,11 @@ function ProductionMiniPlayerCard({
             sizes="(max-width: 1024px) 160px, 180px"
             className="object-cover"
           />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#121110]/40 to-transparent" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-bg/40 to-transparent" />
         </div>
 
         <div className="grid gap-5">
-          <div className="grid gap-4 rounded-[1.75rem] border border-[#C5B39B]/14 bg-[#EAE8E3]/[0.04] p-4 shadow-[inset_0_1px_0_rgba(234,232,227,0.05)]">
+          <div className="grid gap-4 rounded-[1.75rem] border border-accent/14 bg-text/4 p-4 shadow-[inset_0_1px_0_rgba(234,232,227,0.05)]">
             <div className="flex items-center justify-center gap-3 md:gap-5">
               <ControlButton disabled={!hasPreview}>
                 <SkipBackIcon />
@@ -218,9 +218,9 @@ function ProductionMiniPlayerCard({
                 onClick={handleTogglePlayback}
                 disabled={!hasPreview}
                 aria-label={isPlaying ? "Mettre en pause" : "Lire le preview"}
-                className="relative inline-flex h-24 w-24 items-center justify-center rounded-full border border-[#C5B39B]/65 bg-[#EAE8E3]/[0.07] text-[#F7F5F0] shadow-[0_0_0_1px_rgba(234,232,227,0.08),0_0_40px_rgba(197,179,155,0.18)] transition-transform duration-300 hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-40"
+                className="relative inline-flex h-24 w-24 items-center justify-center rounded-full border border-accent/65 bg-text/7 text-paper shadow-[0_0_0_1px_rgba(234,232,227,0.08),0_0_40px_rgba(197,179,155,0.18)] transition-transform duration-300 hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-40"
               >
-                <span className="pointer-events-none absolute inset-2 rounded-full border border-[#C5B39B]/25" />
+                <span className="pointer-events-none absolute inset-2 rounded-full border border-accent/25" />
                 {isPlaying ? <PauseIcon /> : <PlayIcon />}
               </button>
 
@@ -233,9 +233,9 @@ function ProductionMiniPlayerCard({
               </ControlButton>
             </div>
 
-            <div className="grid gap-3 rounded-[1.35rem] border border-[#C5B39B]/10 bg-[#121110]/52 p-4">
+            <div className="grid gap-3 rounded-[1.35rem] border border-accent/10 bg-bg/52 p-4">
               <div className="flex items-end justify-between gap-4">
-                <p className="font-serif text-2xl tracking-[-0.03em] text-[#EAE8E3] md:text-3xl">
+                <p className="font-serif text-2xl tracking-[-0.03em] text-text md:text-3xl">
                   {product.name}
                 </p>
               </div>
@@ -257,10 +257,10 @@ function ProductionMiniPlayerCard({
                   value={Math.min(currentTime, duration || 1)}
                   onChange={(event) => handleSeek(event.target.value)}
                   disabled={!hasPreview}
-                  className="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-[#EAE8E3]/12 accent-[#C5B39B] disabled:cursor-not-allowed disabled:opacity-35"
+                  className="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-text/12 accent-accent disabled:cursor-not-allowed disabled:opacity-35"
                 />
 
-                <div className="mt-3 flex items-center justify-between font-sans text-[0.62rem] uppercase tracking-[0.18em] text-[#EAE8E3]/38">
+                <div className="mt-3 flex items-center justify-between font-sans text-[0.62rem] uppercase tracking-[0.18em] text-text/38">
                   <span>{formatTime(currentTime)}</span>
                   <span>{hasPreview ? formatTime(duration) : durationLabel}</span>
                 </div>
@@ -268,7 +268,7 @@ function ProductionMiniPlayerCard({
             </div>
 
             {hasError ? (
-              <p className="font-sans text-sm font-light leading-relaxed text-[#C98D8D]">
+              <p className="font-sans text-sm font-light leading-relaxed text-danger-soft">
                 Lecture impossible.
               </p>
             ) : null}
@@ -313,10 +313,10 @@ export default function ProductionMiniPlayer({
   return (
     <section className="mx-auto w-full max-w-7xl px-6 pb-8 md:px-12 md:pb-12">
       <div className="mb-8">
-        <p className="font-sans text-[0.62rem] uppercase tracking-[0.3em] text-[#121110]/38">
+        <p className="font-sans text-[0.62rem] uppercase tracking-[0.3em] text-bg/38">
           A decouvrir
         </p>
-        <h2 className="mt-4 font-serif text-3xl leading-none tracking-[-0.03em] text-[#121110] md:text-5xl">
+        <h2 className="mt-4 font-serif text-3xl leading-none tracking-[-0.03em] text-bg md:text-5xl">
           Titre en lumiere
         </h2>
       </div>

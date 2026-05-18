@@ -140,10 +140,10 @@ export default function WearCheckoutStatus() {
 
   return (
     <section className="mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center px-6 py-24 text-center md:px-12">
-      <p className="font-sans text-[0.68rem] uppercase tracking-[0.32em] text-[#121110]/42">
+      <p className="font-sans text-[0.68rem] uppercase tracking-[0.32em] text-bg/42">
         21 Wear Payment
       </p>
-      <h1 className="mt-6 font-serif text-4xl leading-[0.96] text-[#121110] md:text-6xl">
+      <h1 className="mt-6 font-serif text-4xl leading-[0.96] text-bg md:text-6xl">
         {displayedState.status === "succeeded"
           ? "Paiement confirmé"
           : displayedState.status === "processing"
@@ -152,24 +152,24 @@ export default function WearCheckoutStatus() {
               ? "Vérification en cours"
               : "Paiement à reprendre"}
       </h1>
-      <p className="mt-6 max-w-2xl font-sans text-base font-light leading-relaxed text-[#121110]/68 md:text-lg">
+      <p className="mt-6 max-w-2xl font-sans text-base font-light leading-relaxed text-bg/68 md:text-lg">
         {displayedState.message}
       </p>
 
-      <div className="mt-12 grid w-full gap-4 border border-[#121110]/10 bg-white/60 p-6 text-left md:grid-cols-2 md:p-8">
+      <div className="mt-12 grid w-full gap-4 border border-bg/10 bg-white/60 p-6 text-left md:grid-cols-2 md:p-8">
         <div>
-          <p className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-[#121110]/42">
+          <p className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-bg/42">
             Référence
           </p>
-          <p className="mt-3 font-serif text-2xl text-[#121110]">
+          <p className="mt-3 font-serif text-2xl text-bg">
             {orderReference}
           </p>
         </div>
         <div>
-          <p className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-[#121110]/42">
+          <p className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-bg/42">
             Montant
           </p>
-          <p className="mt-3 font-serif text-2xl text-[#121110]">
+          <p className="mt-3 font-serif text-2xl text-bg">
             {displayedState.amount}
           </p>
         </div>
@@ -185,7 +185,7 @@ export default function WearCheckoutStatus() {
                 : "/wear",
             )
           }
-          className="inline-flex items-center justify-center bg-[#121110] px-8 py-4 text-[#F7F5F0] transition-colors duration-300 hover:bg-[#2A2826]"
+          className="inline-flex items-center justify-center bg-bg px-8 py-4 text-paper transition-colors duration-300 hover:bg-surface-hover"
         >
           <span className="font-sans text-[0.65rem] font-bold uppercase tracking-[0.24em]">
             {displayedState.status === "requires_payment_method"
@@ -195,7 +195,7 @@ export default function WearCheckoutStatus() {
         </button>
         <Link
           href="/contact"
-          className="inline-flex items-center justify-center border border-[#121110]/15 px-8 py-4 text-[#121110] transition-colors duration-300 hover:border-[#121110]/35"
+          className="inline-flex items-center justify-center border border-bg/15 px-8 py-4 text-bg transition-colors duration-300 hover:border-bg/35"
         >
           <span className="font-sans text-[0.65rem] font-bold uppercase tracking-[0.24em]">
             Contact privé

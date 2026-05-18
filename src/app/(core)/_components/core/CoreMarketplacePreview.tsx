@@ -8,7 +8,7 @@ export default function CoreMarketplacePreview() {
   return (
     <section
       id="marketplace"
-      className="bg-[#121110] px-6 py-20 text-[#EAE8E3] md:px-12 md:py-28"
+      className="bg-bg px-6 py-20 text-text md:px-12 md:py-28"
     >
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 flex flex-col gap-4 md:mb-16 md:flex-row md:items-end md:justify-between">
@@ -41,7 +41,7 @@ export default function CoreMarketplacePreview() {
               <Link
                 key={product.id}
                 href={`/core-studios/${service.slug}/${product.id}`}
-                className="group block border border-white/10 bg-white/[0.03] p-4 transition-colors duration-300 hover:border-white/20 hover:bg-white/[0.05]"
+                className="group block border border-white/10 bg-white/3 p-4 transition-colors duration-300 hover:border-white/20 hover:bg-white/5"
                 aria-label={`Découvrir ${product.name}`}
               >
                 <div className="relative aspect-[4/5] overflow-hidden bg-white/5">
@@ -64,7 +64,7 @@ export default function CoreMarketplacePreview() {
                         {product.name}
                       </h3>
                     </div>
-                    <span className="font-sans text-[0.68rem] uppercase tracking-[0.16em] text-[#D5C4AE]">
+                    <span className="font-sans text-[0.68rem] uppercase tracking-[0.16em] text-accent-muted">
                       {formatCorePrice(product.priceCents, product.currency)}
                     </span>
                   </div>

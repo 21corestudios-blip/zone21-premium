@@ -28,7 +28,7 @@ export default function Gallery({ blok }: { blok: GalleryBlok }) {
 
           return (
             <div
-              className="relative aspect-[4/5] overflow-hidden bg-[#121110]"
+              className="relative aspect-[4/5] overflow-hidden bg-bg"
               key={image.src}
             >
               <Image

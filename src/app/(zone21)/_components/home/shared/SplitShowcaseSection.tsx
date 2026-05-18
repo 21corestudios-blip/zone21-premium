@@ -17,18 +17,18 @@ interface SplitShowcaseSectionProps {
 
 const themeClasses = {
   dark: {
-    section: "bg-[#121110] text-[#EAE8E3]",
+    section: "bg-bg text-text",
     eyebrow: "text-white/38",
     heading: "text-white",
     paragraph: "text-white/68",
-    button: "bg-[#EAE8E3] text-[#121110] hover:bg-white",
+    button: "bg-text text-bg hover:bg-white",
   },
   light: {
-    section: "bg-white text-[#121110]",
-    eyebrow: "text-[#121110]/38",
-    heading: "text-[#121110]",
-    paragraph: "text-[#121110]/72",
-    button: "bg-[#121110] text-[#F7F5F0] hover:bg-[#2A2826]",
+    section: "bg-white text-bg",
+    eyebrow: "text-bg/38",
+    heading: "text-bg",
+    paragraph: "text-bg/72",
+    button: "bg-bg text-paper hover:bg-surface-hover",
   },
 } as const;
 

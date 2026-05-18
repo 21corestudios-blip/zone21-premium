@@ -89,7 +89,7 @@ function renderSortableHeader(
     <th className={desktopHeaderClass}>
       <Link
         href={href}
-        className="inline-flex items-center gap-2 transition-colors duration-500 hover:text-[#F7F5F0]"
+        className="inline-flex items-center gap-2 transition-colors duration-500 hover:text-paper"
       >
         <span>{label}</span>
         <span>{getSortArrow(sort, dir, column)}</span>
@@ -109,9 +109,9 @@ function getTypeBadgeClass(type: string) {
     case "PROC":
       return "border-orange-500/25 bg-orange-500/10 text-orange-200";
     case "NOTE":
-      return "border-white/15 bg-white/[0.06] text-white/72";
+      return "border-white/15 bg-white/6 text-white/72";
     default:
-      return "border-[#C5B39B]/25 bg-[#C5B39B]/10 text-[#E7D8BE]";
+      return "border-accent/25 bg-accent/10 text-accent-light";
   }
 }
 
@@ -120,7 +120,7 @@ function getStatusBadgeClass(status: string) {
     case "Validé":
       return "border-emerald-500/25 bg-emerald-500/10 text-emerald-200";
     case "Archivé":
-      return "border-white/15 bg-white/[0.06] text-white/68";
+      return "border-white/15 bg-white/6 text-white/68";
     default:
       return "border-amber-500/25 bg-amber-500/10 text-amber-200";
   }
@@ -131,7 +131,7 @@ function getBinaryBadgeClass(value: string) {
     case "Oui":
       return "border-emerald-500/25 bg-emerald-500/10 text-emerald-200";
     case "Non":
-      return "border-white/15 bg-white/[0.06] text-white/68";
+      return "border-white/15 bg-white/6 text-white/68";
     default:
       return "border-amber-500/25 bg-amber-500/10 text-amber-200";
   }
@@ -150,10 +150,10 @@ function getConfidentialityBadgeClass(value: string) {
 
 function getDecisionBadgeClass(value: string | null) {
   if (!value) {
-    return "border-white/15 bg-white/[0.06] text-white/68";
+    return "border-white/15 bg-white/6 text-white/68";
   }
 
-  return "border-[#C5B39B]/25 bg-[#C5B39B]/10 text-[#E7D8BE]";
+  return "border-accent/25 bg-accent/10 text-accent-light";
 }
 
 function getGovernanceCountBadgeClass(status: string) {
@@ -165,9 +165,9 @@ function getGovernanceCountBadgeClass(status: string) {
     case "bloqué":
       return "border-rose-500/25 bg-rose-500/10 text-rose-200";
     case "archivé":
-      return "border-white/15 bg-white/[0.06] text-white/68";
+      return "border-white/15 bg-white/6 text-white/68";
     default:
-      return "border-white/15 bg-white/[0.06] text-white/68";
+      return "border-white/15 bg-white/6 text-white/68";
   }
 }
 
@@ -261,10 +261,10 @@ export default async function CollaboratorsPage({
     <main className="flex w-full flex-col gap-10 px-6 py-12 lg:px-10 2xl:px-14">
       <section className="grid gap-8 lg:grid-cols-[minmax(0,1.35fr)_24rem]">
         <div>
-          <p className="text-[0.68rem] uppercase tracking-[0.28em] text-[#C5B39B]">
+          <p className="text-[0.68rem] uppercase tracking-[0.28em] text-accent">
             RDM web
           </p>
-          <h1 className="mt-4 font-serif text-4xl text-[#F7F5F0] md:text-5xl">
+          <h1 className="mt-4 font-serif text-4xl text-paper md:text-5xl">
             Accès collaborateurs au registre documentaire central
           </h1>
           <p className="mt-4 max-w-4xl text-sm leading-7 text-white/68 md:text-base">
@@ -291,11 +291,11 @@ export default async function CollaboratorsPage({
           </div>
         </div>
 
-        <div className="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.28)]">
+        <div className="rounded-[1.75rem] border border-white/10 bg-white/3 p-6 shadow-[0_24px_80px_rgba(0,0,0,0.28)]">
           <p className="text-[0.62rem] uppercase tracking-[0.28em] text-white/35">
             Session active
           </p>
-          <h2 className="mt-3 text-lg uppercase tracking-[0.18em] text-[#F7F5F0]">
+          <h2 className="mt-3 text-lg uppercase tracking-[0.18em] text-paper">
             {session.roleLabel}
           </h2>
           <p className="mt-3 text-sm leading-6 text-white/62">
@@ -330,34 +330,34 @@ export default async function CollaboratorsPage({
       ) : null}
 
       <section className="grid gap-4 md:grid-cols-4">
-        <div className="rounded-[1.6rem] border border-white/8 bg-[#171614] p-5">
+        <div className="rounded-[1.6rem] border border-white/8 bg-panel-alt p-5">
           <p className="text-[0.62rem] uppercase tracking-[0.24em] text-white/35">
             Documents visibles
           </p>
-          <p className="mt-3 font-serif text-4xl text-[#F7F5F0]">
+          <p className="mt-3 font-serif text-4xl text-paper">
             {records.length}
           </p>
         </div>
 
-        <div className="rounded-[1.6rem] border border-white/8 bg-[#171614] p-5">
+        <div className="rounded-[1.6rem] border border-white/8 bg-panel-alt p-5">
           <p className="text-[0.62rem] uppercase tracking-[0.24em] text-white/35">
             Catégories actives
           </p>
-          <p className="mt-3 font-serif text-4xl text-[#F7F5F0]">
+          <p className="mt-3 font-serif text-4xl text-paper">
             {categories.length}
           </p>
         </div>
 
-        <div className="rounded-[1.6rem] border border-white/8 bg-[#171614] p-5">
+        <div className="rounded-[1.6rem] border border-white/8 bg-panel-alt p-5">
           <p className="text-[0.62rem] uppercase tracking-[0.24em] text-white/35">
             Téléchargements disponibles
           </p>
-          <p className="mt-3 font-serif text-4xl text-[#F7F5F0]">
+          <p className="mt-3 font-serif text-4xl text-paper">
             {downloadableCount}
           </p>
         </div>
 
-        <div className="rounded-[1.6rem] border border-white/8 bg-[#171614] p-5">
+        <div className="rounded-[1.6rem] border border-white/8 bg-panel-alt p-5">
           <p className="text-[0.62rem] uppercase tracking-[0.24em] text-white/35">
             Gouvernance
           </p>
@@ -403,7 +403,7 @@ export default async function CollaboratorsPage({
         </div>
       </section>
 
-      <section className="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.22)]">
+      <section className="rounded-[1.75rem] border border-white/10 bg-white/3 p-6 shadow-[0_24px_80px_rgba(0,0,0,0.22)]">
         <form className="grid gap-4 lg:grid-cols-[minmax(0,1.4fr)_0.8fr_0.8fr_0.7fr_auto]">
           <label className="flex flex-col gap-2 text-[0.62rem] uppercase tracking-[0.22em] text-white/42">
             Recherche
@@ -412,7 +412,7 @@ export default async function CollaboratorsPage({
               name="q"
               defaultValue={query}
               placeholder="Référence, titre, entité, gouvernance..."
-              className="rounded-full border border-white/10 bg-[#121110] px-4 py-3 text-sm normal-case tracking-normal text-[#F7F5F0] outline-none transition-colors focus:border-[#C5B39B]/55"
+              className="rounded-full border border-white/10 bg-bg px-4 py-3 text-sm normal-case tracking-normal text-paper outline-none transition-colors focus:border-accent/55"
             />
           </label>
 
@@ -421,7 +421,7 @@ export default async function CollaboratorsPage({
             <select
               name="category"
               defaultValue={category}
-              className="rounded-full border border-white/10 bg-[#121110] px-4 py-3 text-sm normal-case tracking-normal text-[#F7F5F0] outline-none transition-colors focus:border-[#C5B39B]/55"
+              className="rounded-full border border-white/10 bg-bg px-4 py-3 text-sm normal-case tracking-normal text-paper outline-none transition-colors focus:border-accent/55"
             >
               <option value="all">Toutes</option>
               {categories.map((item) => (
@@ -437,7 +437,7 @@ export default async function CollaboratorsPage({
             <select
               name="status"
               defaultValue={status}
-              className="rounded-full border border-white/10 bg-[#121110] px-4 py-3 text-sm normal-case tracking-normal text-[#F7F5F0] outline-none transition-colors focus:border-[#C5B39B]/55"
+              className="rounded-full border border-white/10 bg-bg px-4 py-3 text-sm normal-case tracking-normal text-paper outline-none transition-colors focus:border-accent/55"
             >
               <option value="all">Tous</option>
               {statuses.map((item) => (
@@ -453,7 +453,7 @@ export default async function CollaboratorsPage({
             <select
               name="type"
               defaultValue={type}
-              className="rounded-full border border-white/10 bg-[#121110] px-4 py-3 text-sm normal-case tracking-normal text-[#F7F5F0] outline-none transition-colors focus:border-[#C5B39B]/55"
+              className="rounded-full border border-white/10 bg-bg px-4 py-3 text-sm normal-case tracking-normal text-paper outline-none transition-colors focus:border-accent/55"
             >
               <option value="all">Tous</option>
               {types.map((item) => (
@@ -467,7 +467,7 @@ export default async function CollaboratorsPage({
           <div className="flex items-end gap-3">
             <button
               type="submit"
-              className="w-full rounded-full border border-[#C5B39B]/55 bg-[#C5B39B]/12 px-5 py-3 text-[0.64rem] uppercase tracking-[0.24em] text-[#F7F5F0] transition-colors duration-500 hover:bg-[#C5B39B]/20"
+              className="w-full rounded-full border border-accent/55 bg-accent/12 px-5 py-3 text-[0.64rem] uppercase tracking-[0.24em] text-paper transition-colors duration-500 hover:bg-accent/20"
             >
               Filtrer
             </button>
@@ -477,26 +477,26 @@ export default async function CollaboratorsPage({
         <div className="mt-5 flex flex-wrap gap-3">
           <a
             href={exportCsvHref}
-            className="rounded-full border border-[#C5B39B]/35 px-4 py-2 text-[0.62rem] uppercase tracking-[0.24em] text-[#D5C1A1] transition-colors duration-500 hover:border-[#C5B39B]/55 hover:text-[#F7F5F0]"
+            className="rounded-full border border-accent/35 px-4 py-2 text-[0.62rem] uppercase tracking-[0.24em] text-accent-soft transition-colors duration-500 hover:border-accent/55 hover:text-paper"
           >
             Export CSV
           </a>
           <a
             href={exportXlsxHref}
-            className="rounded-full border border-[#C5B39B]/35 px-4 py-2 text-[0.62rem] uppercase tracking-[0.24em] text-[#D5C1A1] transition-colors duration-500 hover:border-[#C5B39B]/55 hover:text-[#F7F5F0]"
+            className="rounded-full border border-accent/35 px-4 py-2 text-[0.62rem] uppercase tracking-[0.24em] text-accent-soft transition-colors duration-500 hover:border-accent/55 hover:text-paper"
           >
             Export XLSX
           </a>
         </div>
       </section>
 
-      <section className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#161513] shadow-[0_20px_70px_rgba(0,0,0,0.24)]">
+      <section className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-panel shadow-[0_20px_70px_rgba(0,0,0,0.24)]">
         <div className="flex items-center justify-between gap-4 border-b border-white/8 px-6 py-5">
           <div>
             <p className="text-[0.62rem] uppercase tracking-[0.28em] text-white/35">
               Tableau RDM
             </p>
-            <h2 className="mt-2 font-serif text-2xl text-[#F7F5F0]">
+            <h2 className="mt-2 font-serif text-2xl text-paper">
               Registre documentaire consultable
             </h2>
           </div>
@@ -539,7 +539,7 @@ export default async function CollaboratorsPage({
                   <col className="w-[7rem]" />
                 </colgroup>
                 <thead>
-                  <tr className="border-b border-white/8 bg-white/[0.02] text-left">
+                  <tr className="border-b border-white/8 bg-white/2 text-left">
                     {renderSortableHeader(
                       "ID RDM",
                       "id",
@@ -639,7 +639,7 @@ export default async function CollaboratorsPage({
                   {records.map((record) => (
                     <tr
                       key={record.id}
-                      className={`border-b border-white/6 align-top transition-colors duration-500 hover:bg-white/[0.02] ${getGovernanceRowClass(
+                      className={`border-b border-white/6 align-top transition-colors duration-500 hover:bg-white/2 ${getGovernanceRowClass(
                         record.governanceSyncStatus,
                       )}`}
                     >
@@ -653,7 +653,7 @@ export default async function CollaboratorsPage({
                         <div className="min-w-[22rem] max-w-[34rem] leading-6">
                           <Link
                             href={`/collaborateurs/documents/${record.id}`}
-                            className="font-serif text-lg text-[#F7F5F0] transition-colors duration-500 hover:text-[#D5C1A1]"
+                            className="font-serif text-lg text-paper transition-colors duration-500 hover:text-accent-soft"
                           >
                             {record.title}
                           </Link>
@@ -754,7 +754,7 @@ export default async function CollaboratorsPage({
                           href={`/api/documents/${record.id}/download?format=pdf&disposition=inline`}
                           target="_blank"
                           rel="noreferrer"
-                          className="inline-flex rounded-full border border-[#C5B39B]/35 px-3 py-1 text-[0.62rem] uppercase tracking-[0.22em] text-[#D5C1A1] transition-colors duration-500 hover:border-[#C5B39B]/55 hover:text-[#F7F5F0]"
+                          className="inline-flex rounded-full border border-accent/35 px-3 py-1 text-[0.62rem] uppercase tracking-[0.22em] text-accent-soft transition-colors duration-500 hover:border-accent/55 hover:text-paper"
                         >
                           Voir
                         </a>
@@ -769,7 +769,7 @@ export default async function CollaboratorsPage({
               {records.map((record) => (
                 <article
                   key={record.id}
-                  className={`rounded-[1.5rem] border border-white/8 bg-white/[0.02] p-5 ${getGovernanceRowClass(
+                  className={`rounded-[1.5rem] border border-white/8 bg-white/2 p-5 ${getGovernanceRowClass(
                     record.governanceSyncStatus,
                   )}`}
                 >
@@ -796,7 +796,7 @@ export default async function CollaboratorsPage({
                   <p className="mt-4 text-[0.62rem] uppercase tracking-[0.24em] text-white/35">
                     {record.reference}
                   </p>
-                  <h3 className="mt-3 font-serif text-xl text-[#F7F5F0]">
+                  <h3 className="mt-3 font-serif text-xl text-paper">
                     {record.title}
                   </h3>
 
@@ -982,13 +982,13 @@ export default async function CollaboratorsPage({
                     </a>
                     <a
                       href={`/api/documents/${record.id}/download?format=pdf`}
-                      className="rounded-full border border-[#C5B39B]/35 px-4 py-2 text-[0.62rem] uppercase tracking-[0.24em] text-[#D5C1A1] transition-colors duration-500 hover:border-[#C5B39B]/55 hover:text-[#F7F5F0]"
+                      className="rounded-full border border-accent/35 px-4 py-2 text-[0.62rem] uppercase tracking-[0.24em] text-accent-soft transition-colors duration-500 hover:border-accent/55 hover:text-paper"
                     >
                       PDF
                     </a>
                     <a
                       href={`/api/documents/${record.id}/download?format=docx`}
-                      className="rounded-full border border-[#C5B39B]/35 px-4 py-2 text-[0.62rem] uppercase tracking-[0.24em] text-[#D5C1A1] transition-colors duration-500 hover:border-[#C5B39B]/55 hover:text-[#F7F5F0]"
+                      className="rounded-full border border-accent/35 px-4 py-2 text-[0.62rem] uppercase tracking-[0.24em] text-accent-soft transition-colors duration-500 hover:border-accent/55 hover:text-paper"
                     >
                       DOCX
                     </a>

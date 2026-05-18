@@ -14,11 +14,11 @@ export const metadata: Metadata = {
 
 export default function WearCheckoutSuccessPage() {
   return (
-    <main className="flex min-h-screen flex-col bg-[#F7F5F0]">
+    <main className="flex min-h-screen flex-col bg-paper">
       <Suspense
         fallback={
           <section className="mx-auto flex min-h-[60vh] w-full max-w-5xl items-center justify-center px-6 py-24 md:px-12">
-            <p className="font-sans text-[0.68rem] uppercase tracking-[0.3em] text-[#121110]/45">
+            <p className="font-sans text-[0.68rem] uppercase tracking-[0.3em] text-bg/45">
               Vérification du paiement...
             </p>
           </section>

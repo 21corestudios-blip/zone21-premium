@@ -19,7 +19,7 @@ export default function CartDrawer() {
   return (
     <>
       <div
-        className={`fixed inset-0 z-[60] bg-[#121110]/40 backdrop-blur-sm transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${
+        className={`fixed inset-0 z-[60] bg-bg/40 backdrop-blur-sm transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${
           isOpen ? "visible opacity-100" : "invisible opacity-0"
         }`}
         onClick={closeCart}
@@ -27,7 +27,7 @@ export default function CartDrawer() {
       />
 
       <div
-        className={`fixed right-0 top-0 z-[70] flex h-full w-full transform flex-col border-l border-white/5 bg-[#121110] transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] md:w-[460px] ${
+        className={`fixed right-0 top-0 z-[70] flex h-full w-full transform flex-col border-l border-white/5 bg-bg transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] md:w-[460px] ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
         role="dialog"

@@ -47,7 +47,7 @@ export default async function HomePage() {
   const { story, version } = await getStoryblokStory("home", homeStoryFallback);
 
   return (
-    <main className="flex min-h-screen w-full flex-col bg-[#F7F5F0] selection:bg-[#121110] selection:text-[#F7F5F0]">
+    <main className="flex min-h-screen w-full flex-col bg-paper selection:bg-bg selection:text-paper">
       <PreviewToolbar enabled={version === "draft"} />
       <StoryblokRenderer story={story} />
     </main>

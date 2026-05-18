@@ -89,7 +89,7 @@ export default function CheckoutPageContent() {
   }
 
   return (
-    <main className="min-h-screen bg-[#121110] px-6 pb-20 pt-32 text-[#EAE8E3] md:px-12 lg:px-24">
+    <main className="min-h-screen bg-bg px-6 pb-20 pt-32 text-text md:px-12 lg:px-24">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-10">
         <header className="flex max-w-3xl flex-col gap-5">
           <span className="font-sans text-[0.65rem] uppercase tracking-[0.3em] text-white/40">
@@ -109,9 +109,9 @@ export default function CheckoutPageContent() {
         </header>
 
         {items.length === 0 ? (
-          <section className="flex min-h-[50vh] flex-col items-center justify-center border border-white/10 bg-white/[0.03] px-8 py-12 text-center">
+          <section className="flex min-h-[50vh] flex-col items-center justify-center border border-white/10 bg-white/3 px-8 py-12 text-center">
             <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-white/5">
-              <Icon size={40} className="text-[#C5B39B]">
+              <Icon size={40} className="text-accent">
                 <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
                 <path d="M3 6h18" />
                 <path d="M16 10a4 4 0 0 1-8 0" />
@@ -132,7 +132,7 @@ export default function CheckoutPageContent() {
           </section>
         ) : (
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1.1fr)_420px]">
-            <section className="border border-white/10 bg-white/[0.03] p-6 md:p-8">
+            <section className="border border-white/10 bg-white/3 p-6 md:p-8">
               <div className="mb-8 flex items-end justify-between gap-6 border-b border-white/10 pb-6">
                 <div>
                   <p className="font-sans text-[0.65rem] uppercase tracking-[0.2em] text-white/40">
@@ -145,7 +145,7 @@ export default function CheckoutPageContent() {
 
                 <Link
                   href="/wear"
-                  className="font-sans text-[0.65rem] uppercase tracking-[0.18em] text-[#C5B39B] transition-colors hover:text-white"
+                  className="font-sans text-[0.65rem] uppercase tracking-[0.18em] text-accent transition-colors hover:text-white"
                 >
                   Continuer les achats
                 </Link>
@@ -166,7 +166,7 @@ export default function CheckoutPageContent() {
                       key={`${item.product.id}-${item.size}`}
                       className="grid grid-cols-[110px_1fr] gap-5 border-b border-white/10 pb-6"
                     >
-                      <div className="aspect-[4/5] overflow-hidden bg-[#1a1918]">
+                      <div className="aspect-[4/5] overflow-hidden bg-surface">
                         <Image
                           src={item.product.image}
                           alt={item.product.name}
@@ -199,7 +199,7 @@ export default function CheckoutPageContent() {
                         <button
                           type="button"
                           onClick={() => removeItem(item.product.id, item.size)}
-                          className="w-fit font-sans text-[0.65rem] uppercase tracking-[0.18em] text-white/40 transition-colors hover:text-[#C5B39B]"
+                          className="w-fit font-sans text-[0.65rem] uppercase tracking-[0.18em] text-white/40 transition-colors hover:text-accent"
                         >
                           Retirer
                         </button>
@@ -210,7 +210,7 @@ export default function CheckoutPageContent() {
               </div>
             </section>
 
-            <aside className="h-fit border border-white/10 bg-[#1a1918] p-6 md:p-8 lg:sticky lg:top-32">
+            <aside className="h-fit border border-white/10 bg-surface p-6 md:p-8 lg:sticky lg:top-32">
               <div className="border-b border-white/10 pb-6">
                 <p className="font-sans text-[0.65rem] uppercase tracking-[0.2em] text-white/40">
                   Récapitulatif
@@ -235,7 +235,7 @@ export default function CheckoutPageContent() {
                     Sous-total
                   </span>
 
-                  <span className="font-serif text-2xl text-[#C5B39B]">{formattedTotal}</span>
+                  <span className="font-serif text-2xl text-accent">{formattedTotal}</span>
                 </div>
               </div>
 
@@ -245,7 +245,7 @@ export default function CheckoutPageContent() {
               </p>
 
               {errorMessage ? (
-                <div className="mb-6 border border-[#C5B39B]/20 bg-[#C5B39B]/5 px-4 py-4">
+                <div className="mb-6 border border-accent/20 bg-accent/5 px-4 py-4">
                   <p className="font-sans text-sm font-light leading-relaxed text-white/80">
                     {errorMessage}
                   </p>

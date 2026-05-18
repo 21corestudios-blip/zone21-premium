@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 
 export default function ProductionPage() {
   return (
-    <main className="flex min-h-screen flex-col bg-[#F7F5F0]">
+    <main className="flex min-h-screen flex-col bg-paper">
       <ProductionPageSections />
     </main>
   );

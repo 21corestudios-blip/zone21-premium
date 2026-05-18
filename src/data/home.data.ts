@@ -34,7 +34,7 @@ export const homeData: HomeData = {
   hero: {
     title: "L'Exigence pour Signature",
     imageDesktop: {
-      src: "/images/home/hero/ARC-hero-accueil.webp",
+      src: "/images/home/hero/ARC-hero-accueil-0002.webp",
       alt: "Campagne ARCANE, maison créative indépendante",
     },
     imageMobile: {
@@ -46,7 +46,7 @@ export const homeData: HomeData = {
   manifesto: {
     tagline: "Jamais dans la tendance. Toujours dans la bonne direction.",
     image: {
-      src: "/images/editorial/ARC-manifeste-accueil.webp",
+      src: "/images/editorial/ARC-manifeste-accueil-0004.webp",
       alt: "Vision éditoriale ARCANE entre image, vêtement et narration",
     },
     paragraphs: [
@@ -59,7 +59,7 @@ export const homeData: HomeData = {
   maisons: [
     {
       id: "wear",
-      name: "21 Wear",
+      name: "21 WEAR",
       category: "Vêtement premium, culture street & silhouettes signature",
       image: {
         src: "/images/ecosysteme/z21-ecosysteme-grid-21-wear-2.webp",
@@ -70,7 +70,7 @@ export const homeData: HomeData = {
     },
     {
       id: "core",
-      name: "Core Studios",
+      name: "CORE STUDIOS",
       category: "Image, direction artistique & systèmes de marque",
       image: {
         src: "/images/ecosysteme/z21-ecosysteme-grid-21-core studios-1.webp",

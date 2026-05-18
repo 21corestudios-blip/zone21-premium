@@ -30,7 +30,7 @@ export default function ImageBlock({ blok }: { blok: ImageBlockBlok }) {
 
   return (
     <section
-      className={`relative h-[100dvh] min-h-screen w-full overflow-hidden ${
+      className={`relative h-dvh min-h-screen w-full overflow-hidden ${
         blok.backgroundClassName || "bg-white"
       }`}
       aria-hidden={alt === "" ? "true" : undefined}

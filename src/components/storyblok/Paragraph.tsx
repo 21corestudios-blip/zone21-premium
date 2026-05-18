@@ -4,16 +4,16 @@ import type { ParagraphBlok } from "@/lib/storyblok/types";
 
 const themeClasses = {
   dark: {
-    section: "bg-[#121110] text-[#EAE8E3]",
+    section: "bg-bg text-text",
     eyebrow: "text-white/38",
     heading: "text-white",
     paragraph: "text-white/68",
   },
   light: {
-    section: "bg-white text-[#121110]",
-    eyebrow: "text-[#121110]/38",
-    heading: "text-[#121110]",
-    paragraph: "text-[#121110]/72",
+    section: "bg-white text-bg",
+    eyebrow: "text-bg/38",
+    heading: "text-bg",
+    paragraph: "text-bg/72",
   },
 } as const;
 

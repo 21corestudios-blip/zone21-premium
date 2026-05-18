@@ -129,7 +129,7 @@ export default function WearPaymentElementForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="border border-[#121110]/10 bg-white px-4 py-5">
+      <div className="border border-bg/10 bg-white px-4 py-5">
         <PaymentElement
           options={{
             layout: {
@@ -143,7 +143,7 @@ export default function WearPaymentElementForm({
       <button
         type="submit"
         disabled={!stripe || !elements || isSubmitting}
-        className="inline-flex items-center justify-center bg-[#121110] px-8 py-4 text-[#F7F5F0] transition-colors duration-300 hover:bg-[#2A2826] disabled:cursor-not-allowed disabled:opacity-55"
+        className="inline-flex items-center justify-center bg-bg px-8 py-4 text-paper transition-colors duration-300 hover:bg-surface-hover disabled:cursor-not-allowed disabled:opacity-55"
       >
         <span className="font-sans text-[0.65rem] font-bold uppercase tracking-[0.24em]">
           {isSubmitting ? "Confirmation..." : "Payer maintenant"}

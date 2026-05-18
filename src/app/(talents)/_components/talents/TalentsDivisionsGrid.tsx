@@ -17,7 +17,7 @@ export default function TalentsDivisionsGrid() {
             className="group flex cursor-pointer flex-col"
             aria-label={`Découvrir ${division.name}`}
           >
-            <div className="relative mb-7 aspect-[4/5] w-full overflow-hidden bg-[#F4F4F4]">
+            <div className="relative mb-7 aspect-[4/5] w-full overflow-hidden bg-commerce-surface">
               <Image
                 src={division.image}
                 alt={division.name}
@@ -29,10 +29,10 @@ export default function TalentsDivisionsGrid() {
             </div>
 
             <div className="flex flex-col items-center justify-center px-2 text-center">
-              <h2 className="font-sans text-sm uppercase tracking-[0.16em] text-[#121110] transition-colors duration-300 group-hover:text-[#121110]/70">
+              <h2 className="font-sans text-sm uppercase tracking-[0.16em] text-bg transition-colors duration-300 group-hover:text-bg/70">
                 {division.name}
               </h2>
-              <p className="mt-3 font-sans text-[0.62rem] uppercase tracking-[0.24em] text-[#121110]/40">
+              <p className="mt-3 font-sans text-[0.62rem] uppercase tracking-[0.24em] text-bg/40">
                 {division.role}
               </p>
             </div>

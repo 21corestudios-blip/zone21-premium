@@ -54,10 +54,10 @@ export default async function TalentsProductPage({ params }: PageProps) {
   }
 
   return (
-    <main className="flex min-h-screen flex-col bg-[#F7F5F0]">
+    <main className="flex min-h-screen flex-col bg-paper">
       <section className="mx-auto w-full max-w-7xl px-6 pb-24 pt-32 md:px-10 md:pb-32 md:pt-40 lg:px-16">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-[minmax(0,1.1fr)_minmax(360px,0.9fr)] lg:gap-20">
-          <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#F4F4F4]">
+          <div className="relative aspect-[4/5] w-full overflow-hidden bg-commerce-surface">
             <Image
               src={currentProduct.image}
               alt={currentProduct.name}
@@ -72,21 +72,21 @@ export default async function TalentsProductPage({ params }: PageProps) {
             <div className="flex flex-col gap-4">
               <Link
                 href={`/talents-agency/${division}`}
-                className="font-sans text-[0.65rem] uppercase tracking-[0.2em] text-[#121110]/45 transition-colors duration-300 hover:text-[#121110]"
+                className="font-sans text-[0.65rem] uppercase tracking-[0.2em] text-bg/45 transition-colors duration-300 hover:text-bg"
               >
                 {currentDivision.name}
               </Link>
 
-              <h1 className="font-serif text-4xl leading-[1.02] tracking-[-0.02em] text-[#121110] md:text-5xl lg:text-[4.25rem]">
+              <h1 className="font-serif text-4xl leading-[1.02] tracking-[-0.02em] text-bg md:text-5xl lg:text-[4.25rem]">
                 {currentProduct.name}
               </h1>
 
               <div className="flex flex-wrap items-center gap-4">
-                <p className="font-sans text-sm uppercase tracking-[0.15em] text-[#121110]/55 md:text-base">
+                <p className="font-sans text-sm uppercase tracking-[0.15em] text-bg/55 md:text-base">
                   {currentProduct.kind}
                 </p>
-                <span className="h-3 w-px bg-[#121110]/12" />
-                <p className="font-sans text-sm uppercase tracking-[0.15em] text-[#121110]/55 md:text-base">
+                <span className="h-3 w-px bg-bg/12" />
+                <p className="font-sans text-sm uppercase tracking-[0.15em] text-bg/55 md:text-base">
                   {formatTalentsPrice(
                     currentProduct.priceCents,
                     currentProduct.currency,
@@ -94,16 +94,16 @@ export default async function TalentsProductPage({ params }: PageProps) {
                 </p>
                 {currentProduct.timeline ? (
                   <>
-                    <span className="h-3 w-px bg-[#121110]/12" />
-                    <p className="font-sans text-sm uppercase tracking-[0.15em] text-[#121110]/55 md:text-base">
+                    <span className="h-3 w-px bg-bg/12" />
+                    <p className="font-sans text-sm uppercase tracking-[0.15em] text-bg/55 md:text-base">
                       {currentProduct.timeline}
                     </p>
                   </>
                 ) : null}
                 {currentProduct.deliveryFormat ? (
                   <>
-                    <span className="h-3 w-px bg-[#121110]/12" />
-                    <p className="font-sans text-sm uppercase tracking-[0.15em] text-[#121110]/55 md:text-base">
+                    <span className="h-3 w-px bg-bg/12" />
+                    <p className="font-sans text-sm uppercase tracking-[0.15em] text-bg/55 md:text-base">
                       {currentProduct.deliveryFormat}
                     </p>
                   </>
@@ -112,25 +112,25 @@ export default async function TalentsProductPage({ params }: PageProps) {
             </div>
 
             <div className="flex flex-col gap-6">
-              <p className="font-sans text-base font-light leading-relaxed text-[#121110]/72 md:text-lg">
+              <p className="font-sans text-base font-light leading-relaxed text-bg/72 md:text-lg">
                 {currentProduct.description}
               </p>
 
-              <p className="font-sans text-base font-light leading-relaxed text-[#121110]/72 md:text-lg">
+              <p className="font-sans text-base font-light leading-relaxed text-bg/72 md:text-lg">
                 Chaque offre EKKO est pensée pour renforcer la
                 lecture du profil, la qualité des activations et la cohérence de
                 visibilité du talent dans la durée.
               </p>
 
               <div className="pt-2">
-                <p className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-[#121110]/40">
+                <p className="font-sans text-[0.62rem] uppercase tracking-[0.24em] text-bg/40">
                   Inclus
                 </p>
                 <div className="mt-5 space-y-3">
                   {currentProduct.includes.map((item) => (
                     <p
                       key={item}
-                      className="font-sans text-sm font-light leading-relaxed text-[#121110]/70 md:text-base"
+                      className="font-sans text-sm font-light leading-relaxed text-bg/70 md:text-base"
                     >
                       {item}
                     </p>
@@ -143,9 +143,9 @@ export default async function TalentsProductPage({ params }: PageProps) {
               <TalentsAddToCartForm product={currentProduct} />
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center rounded-none border border-[#121110]/15 px-8 py-4 text-[#121110] transition-colors duration-300 hover:border-[#121110] hover:bg-[#121110] hover:text-[#F7F5F0] sm:w-fit"
+                className="inline-flex items-center justify-center rounded-none border border-bg/15 px-8 py-4 text-bg transition-colors duration-300 hover:border-bg hover:bg-bg hover:text-paper sm:w-fit"
               >
-                <span className="font-serif text-[0.75rem] uppercase tracking-[0.18em]">
+                <span className="font-serif text-xs uppercase tracking-[0.18em]">
                   Demande Privée
                 </span>
               </Link>

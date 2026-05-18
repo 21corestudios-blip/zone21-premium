@@ -18,7 +18,7 @@ const values = [
 
 export default function AboutValues() {
   return (
-    <section className="w-full bg-[#121110] px-6 py-20 text-white md:px-12 md:py-28 lg:px-16 xl:px-24">
+    <section className="w-full bg-bg px-6 py-20 text-white md:px-12 md:py-28 lg:px-16 xl:px-24">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-16">
         <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
           <div>

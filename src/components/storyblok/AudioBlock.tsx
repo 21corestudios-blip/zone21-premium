@@ -12,7 +12,7 @@ export default function AudioBlock({ blok }: { blok: AudioBlockBlok }) {
 
   return (
     <section
-      className="w-full bg-[#121110] px-6 py-16 text-[#EAE8E3] md:px-12"
+      className="w-full bg-bg px-6 py-16 text-text md:px-12"
       {...storyblokEditable(blok)}
     >
       <div className="mx-auto flex max-w-3xl flex-col gap-6">

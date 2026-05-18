@@ -17,12 +17,12 @@ export const metadata: Metadata = {
 
 export default function SuccessPage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-[#121110] px-6 text-center text-[#EAE8E3]">
+    <main className="flex min-h-screen flex-col items-center justify-center bg-bg px-6 text-center text-text">
       <ClearCartOnSuccess />
 
-      <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-full bg-[#C5B39B]/10">
+      <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-full bg-accent/10">
         <svg
-          className="h-10 w-10 text-[#C5B39B]"
+          className="h-10 w-10 text-accent"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -40,7 +40,7 @@ export default function SuccessPage() {
 
       <Link
         href="/wear"
-        className="border border-[#EAE8E3]/20 px-8 py-4 text-[0.7rem] uppercase tracking-widest transition-all hover:bg-[#EAE8E3] hover:text-[#121110]"
+        className="border border-text/20 px-8 py-4 text-[0.7rem] uppercase tracking-widest transition-all hover:bg-text hover:text-bg"
       >
         Retourner à la boutique
       </Link>

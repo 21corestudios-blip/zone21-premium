@@ -16,10 +16,10 @@ export default function CollaboratorAccessGate({
     <>
       <section className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-6 py-12 pb-16 lg:px-12 lg:pb-20">
         <div className="max-w-3xl">
-          <p className="text-[0.68rem] uppercase tracking-[0.28em] text-[#C5B39B]">
+          <p className="text-[0.68rem] uppercase tracking-[0.28em] text-accent">
             Portail interne
           </p>
-          <h1 className="mt-4 font-serif text-4xl text-[#F7F5F0] md:text-5xl">
+          <h1 className="mt-4 font-serif text-4xl text-paper md:text-5xl">
             {title}
           </h1>
           <p className="mt-4 max-w-2xl text-sm leading-7 text-white/68 md:text-base">
@@ -36,7 +36,7 @@ export default function CollaboratorAccessGate({
                 key={role}
                 action="/api/auth/session"
                 method="post"
-                className="flex min-h-[22rem] flex-col rounded-[1.75rem] border border-white/10 bg-[#181715] p-6 shadow-[0_14px_34px_rgba(0,0,0,0.16)]"
+                className="flex min-h-[22rem] flex-col rounded-[1.75rem] border border-white/10 bg-panel-soft p-6 shadow-[0_14px_34px_rgba(0,0,0,0.16)]"
               >
                 <div>
                   <p className="text-[0.64rem] uppercase tracking-[0.28em] text-white/35">
@@ -66,7 +66,7 @@ export default function CollaboratorAccessGate({
                 <input type="hidden" name="redirectTo" value={redirectTo} />
                 <button
                     type="submit"
-                    className="w-full rounded-full border border-[#C5B39B]/60 bg-[#C5B39B]/12 px-5 py-3 text-[0.68rem] uppercase tracking-[0.26em] text-[#F7F5F0] transition-colors duration-500 hover:bg-[#C5B39B]/20"
+                    className="w-full rounded-full border border-accent/60 bg-accent/12 px-5 py-3 text-[0.68rem] uppercase tracking-[0.26em] text-paper transition-colors duration-500 hover:bg-accent/20"
                   >
                     Ouvrir la session
                   </button>
@@ -77,10 +77,10 @@ export default function CollaboratorAccessGate({
         </div>
       </section>
 
-      <footer className="border-t border-white/8 bg-[#0A0A09]">
+      <footer className="border-t border-white/8 bg-void">
         <div className="mx-auto grid w-full max-w-7xl gap-8 px-6 py-10 lg:grid-cols-[minmax(0,1.1fr)_0.9fr_auto] lg:px-12">
           <div>
-            <p className="text-[0.62rem] uppercase tracking-[0.28em] text-[#C5B39B]">
+            <p className="text-[0.62rem] uppercase tracking-[0.28em] text-accent">
               Portail collaborateurs
             </p>
             <p className="mt-3 max-w-2xl text-sm leading-7 text-white/60">
