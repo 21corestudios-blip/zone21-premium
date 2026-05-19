@@ -121,7 +121,7 @@ export const homeStoryFallback = {
       {
         _uid: "home-zone-6-image",
         component: "imageBlock",
-        src: "/images/home/ARC-home-zone-4-0003.webp",
+        src: "/images/home/ARC-image-1-accueil-0001.webp",
         alt: "",
         layout: "immersive",
         backgroundClassName: "bg-white",
@@ -139,7 +139,7 @@ export const homeStoryFallback = {
           "ARCANE reçoit chaque prise de contact avec exigence, discrétion et attention. Demande de création sur mesure, projet éditorial, direction artistique, image, musique, talent ou développement de marque : chaque échange est traité comme un point d’entrée sérieux.",
           "Entrer dans la Zone, c’est ouvrir un espace de travail où la vision, la stratégie et la production avancent ensemble. Avec précision, avec tenue, et avec le souci de créer quelque chose qui garde sa force dans le temps.",
         ],
-        imageSrc: "/images/home/ARC-home-zone-7-contact-0001.webp",
+        imageSrc: "/images/home/z21-home-section-univers-01-6.webp",
         imageAlt: "Entrer dans la ARCANE",
         imagePosition: "right",
         theme: "light",
