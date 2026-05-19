@@ -5,13 +5,13 @@ export default function EcosystemeHero() {
     <section className="relative h-dvh min-h-screen w-full overflow-hidden bg-bg">
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/ecosysteme/z21-ecosysteme-hero-7.webp"
+          src="/images/ecosysteme/ARC-ecosysteme-hero-0001.webp"
           alt="Écosystème ARCANE"
           fill
           priority
           quality={100}
           sizes="100vw"
-          className="object-cover object-[center_0%]"
+          className="object-cover object-[center_30%]"
         />
       </div>
 

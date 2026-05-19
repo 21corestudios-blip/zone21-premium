@@ -62,7 +62,7 @@ export const homeData: HomeData = {
       name: "21 WEAR",
       category: "Vêtement premium, culture street & silhouettes signature",
       image: {
-        src: "/images/ecosysteme/z21-ecosysteme-grid-21-wear-2.webp",
+        src: "/images/ecosysteme/ARC-ecosysteme-grid-21-wear-0001.webp",
         alt: "21 Wear, vêtement premium et culture street",
       },
       href: "/wear",
@@ -73,7 +73,7 @@ export const homeData: HomeData = {
       name: "CORE STUDIOS",
       category: "Image, direction artistique & systèmes de marque",
       image: {
-        src: "/images/ecosysteme/z21-ecosysteme-grid-21-core studios-1.webp",
+        src: "/images/ecosysteme/ARC-ecosysteme-grid-21-core studios-0001.webp",
         alt: "Core Studios, direction artistique et image de marque",
       },
       href: "/core-studios",
@@ -84,7 +84,7 @@ export const homeData: HomeData = {
       name: "BACKSPIN",
       category: "Son, artistes & production musicale",
       image: {
-        src: "/images/ecosysteme/z21-ecosysteme-grid-21-production-1.webp",
+        src: "/images/ecosysteme/ARC-ecosysteme-grid-21-production-0001.webp",
         alt: "BACKSPIN, studio sonore et production musicale",
       },
       href: "/prod",
@@ -95,7 +95,7 @@ export const homeData: HomeData = {
       name: "EKKO",
       category: "Talents, visages & présences éditoriales",
       image: {
-        src: "/images/ecosysteme/z21-ecosysteme-grid-21-talents-agency-2.webp",
+        src: "/images/ecosysteme/ARC-ecosysteme-grid-21-talents-agency-0001.webp",
         alt: "EKKO, talents et présences éditoriales",
       },
       href: "/talents-agency",

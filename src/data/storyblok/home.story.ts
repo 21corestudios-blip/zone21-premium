@@ -93,7 +93,7 @@ export const homeStoryFallback = {
       {
         _uid: "home-zone-4-image",
         component: "imageBlock",
-        src: "/images/home/ARC-image-1-accueil-0001.webp",
+        src: "/images/home/ARC-image-1-accueil-0003.webp",
         alt: "",
         layout: "immersive",
         backgroundClassName: "bg-white",
@@ -109,7 +109,7 @@ export const homeStoryFallback = {
           "À travers eux, ARCANE installe ses racines : une culture urbaine assumée, un héritage hip-hop et RnB, une attention au vêtement, au rythme, au détail et aux signes capables de durer.",
           "De cette base naît un territoire créatif plus large. Une maison pensée pour relier les univers sans les confondre, construire des lignes fortes et donner à chaque projet une présence reconnaissable.",
         ],
-        imageSrc: "/images/home/ARC-home-zone-5-about-0004.webp",
+        imageSrc: "/images/home/ARC-home-zone-5-about-0006.webp",
         imageAlt: "Figures fondatrices de ARCANE",
         imagePosition: "left",
         theme: "light",
