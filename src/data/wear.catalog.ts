@@ -1,6 +1,7 @@
 export interface WearCollectionPage {
   slug: string;
   name: string;
+  promise?: string;
   heroImage: string;
   description: string;
 }
@@ -9,10 +10,12 @@ export const wearCollections: WearCollectionPage[] = [
   {
     slug: "classic",
     name: "Classic Collection",
+    promise:
+      "Capsule essentielle CO-KAIN, premium streetwear sobre, testable en POD.",
     heroImage:
       "/images/brands/21-wear/z21-21-wear-classic-collection-hero-2.webp",
     description:
-      "Une ligne essentielle, structurée autour de silhouettes intemporelles, de matières maîtrisées et d’une élégance sobre.",
+      "La Classic Collection pose les bases CO-KAIN avec une capsule lisible, sans visage, pensée pour tester t-shirts, hoodies et casquettes en production à la demande via Gelato. L’offre reste volontairement sobre, commerciale et mesurable avant tout déploiement plus large.",
   },
   {
     slug: "urban",

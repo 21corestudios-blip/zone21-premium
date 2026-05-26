@@ -1,6 +1,11 @@
 export const wearStandardSizes = ["XS", "S", "M", "L", "XL"] as const;
+export const wearAccessorySizes = ["TU"] as const;
 
-export type WearProductSize = (typeof wearStandardSizes)[number];
+export type WearProductSize =
+  | (typeof wearStandardSizes)[number]
+  | (typeof wearAccessorySizes)[number];
+
+export type WearLaunchStatus = "prototype" | "pré-lancement";
 
 export interface WearProduct {
   id: string;
@@ -11,10 +16,19 @@ export interface WearProduct {
   currency: "EUR";
   availableSizes: WearProductSize[];
   description: string;
+  businessUnit?: string;
+  ipOwner?: string;
+  salesChannel?: string;
+  initialSupplier?: string;
+  launchStatus?: WearLaunchStatus;
+  marginHypothesis?: string;
+  kpis?: string[];
 }
 
 export function isWearProductSize(value: string): value is WearProductSize {
-  return wearStandardSizes.includes(value as WearProductSize);
+  return [...wearStandardSizes, ...wearAccessorySizes].includes(
+    value as WearProductSize,
+  );
 }
 
 export function formatWearPrice(
@@ -35,24 +49,74 @@ export const wearProducts: WearProduct[] = [
   {
     id: "classic-tee-01",
     collection: "classic",
-    name: "Classic Tee 01",
+    name: "CO-KAIN Classic Tee",
     image: "/images/brands/21-wear/01_classic_collection.jpg",
-    priceCents: 12000,
+    priceCents: 3900,
     currency: "EUR",
     availableSizes: [...wearStandardSizes],
     description:
-      "T-shirt premium à coupe essentielle, pensé comme une base du vestiaire.",
+      "Prototype de t-shirt CO-KAIN en pré-lancement, pensé comme une base premium streetwear sobre. Prix TTC indicatif pour test POD Gelato, hors promesse de disponibilité commerciale.",
+    businessUnit: "CO-KAIN",
+    ipOwner: "ZONE 21 IP",
+    salesChannel: "site ZONE 21",
+    initialSupplier: "Gelato",
+    launchStatus: "pré-lancement",
+    marginHypothesis:
+      "Hypothèse de marge à vérifier après coût Gelato, frais Stripe, TVA et expédition.",
+    kpis: [
+      "clic page",
+      "ajout panier si disponible",
+      "conversion",
+      "sauvegardes/retours qualitatifs",
+    ],
   },
   {
     id: "classic-hoodie-01",
     collection: "classic",
-    name: "Classic Hoodie 01",
+    name: "CO-KAIN Classic Hoodie",
     image: "/images/brands/21-wear/01_classic_collection.jpg",
-    priceCents: 24000,
+    priceCents: 7900,
     currency: "EUR",
     availableSizes: [...wearStandardSizes],
     description:
-      "Hoodie structuré aux volumes maîtrisés, dans l’esprit fondamental de la ligne.",
+      "Prototype de hoodie CO-KAIN en pré-lancement, cadré pour valider une pièce essentielle premium streetwear sobre en POD Gelato. Prix TTC indicatif, marge à confirmer.",
+    businessUnit: "CO-KAIN",
+    ipOwner: "ZONE 21 IP",
+    salesChannel: "site ZONE 21",
+    initialSupplier: "Gelato",
+    launchStatus: "pré-lancement",
+    marginHypothesis:
+      "Hypothèse de marge à vérifier après coût Gelato, frais Stripe, TVA et expédition.",
+    kpis: [
+      "clic page",
+      "ajout panier si disponible",
+      "conversion",
+      "sauvegardes/retours qualitatifs",
+    ],
+  },
+  {
+    id: "classic-cap-01",
+    collection: "classic",
+    name: "CO-KAIN Classic Cap",
+    image: "/images/brands/21-wear/01_classic_collection.jpg",
+    priceCents: 2900,
+    currency: "EUR",
+    availableSizes: [...wearAccessorySizes],
+    description:
+      "Prototype de casquette CO-KAIN en pré-lancement, retenu comme accessoire d’entrée pour tester la capsule Classic via Gelato. Prix TTC indicatif, sans annonce de stock.",
+    businessUnit: "CO-KAIN",
+    ipOwner: "ZONE 21 IP",
+    salesChannel: "site ZONE 21",
+    initialSupplier: "Gelato",
+    launchStatus: "pré-lancement",
+    marginHypothesis:
+      "Hypothèse de marge à vérifier après coût Gelato, frais Stripe, TVA et expédition.",
+    kpis: [
+      "clic page",
+      "ajout panier si disponible",
+      "conversion",
+      "sauvegardes/retours qualitatifs",
+    ],
   },
   {
     id: "urban-jacket-01",
