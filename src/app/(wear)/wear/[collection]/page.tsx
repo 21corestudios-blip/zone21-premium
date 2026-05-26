@@ -8,7 +8,7 @@ import { wearProducts } from "@/data/wear.products";
 
 const collectionDescriptions: Record<string, string> = {
   classic:
-    "Classic Collection par 21 Wear: silhouettes intemporelles, matières maîtrisées et élégance sobre pour un vestiaire premium durable, net et quotidien.",
+    "CO-KAIN Classic Collection: t-shirts, hoodies et casquettes en premium streetwear sobre, cadrés pour un test POD Gelato sur le site ZONE 21.",
   urban:
     "Urban Collection par 21 Wear: silhouettes confortables, volumes précis et énergie street pour une présence premium au quotidien, mobile et affirmée.",
   heritage:
@@ -16,6 +16,18 @@ const collectionDescriptions: Record<string, string> = {
   studio:
     "Studio Collection par 21 Wear: textures, geste créatif et pièces expérimentales pour exprimer la signature atelier de 21 Wear avec une présence premium.",
 };
+
+function getCollectionBrand(collectionSlug: string) {
+  return collectionSlug === "classic" ? "CO-KAIN" : "21 Wear";
+}
+
+function getCollectionMetadataTitle(collectionSlug: string, name: string) {
+  if (collectionSlug === "classic") {
+    return "CO-KAIN Classic Collection - premium streetwear sobre";
+  }
+
+  return `${name} - 21 Wear premium`;
+}
 
 type PageProps = {
   params: Promise<{
@@ -37,7 +49,11 @@ export async function generateMetadata({
     };
   }
 
-  const title = `${currentCollection.name} - 21 Wear premium`;
+  const brandName = getCollectionBrand(currentCollection.slug);
+  const title = getCollectionMetadataTitle(
+    currentCollection.slug,
+    currentCollection.name,
+  );
   const description =
     collectionDescriptions[currentCollection.slug] ||
     currentCollection.description;
@@ -50,7 +66,7 @@ export async function generateMetadata({
       canonical,
     },
     openGraph: {
-      title: `${currentCollection.name} | 21 Wear`,
+      title: `${currentCollection.name} | ${brandName}`,
       description,
       url: canonical,
       siteName: "ARCANE",
@@ -61,18 +77,18 @@ export async function generateMetadata({
           url: currentCollection.heroImage,
           width: 2048,
           height: 1136,
-          alt: `${currentCollection.name} - 21 Wear`,
+          alt: `${currentCollection.name} - ${brandName}`,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${currentCollection.name} | 21 Wear`,
+      title: `${currentCollection.name} | ${brandName}`,
       description,
       images: [
         {
           url: currentCollection.heroImage,
-          alt: `${currentCollection.name} - 21 Wear`,
+          alt: `${currentCollection.name} - ${brandName}`,
         },
       ],
     },
@@ -102,6 +118,7 @@ export default async function WearCollectionPage({ params }: PageProps) {
   const collectionProducts = wearProducts.filter(
     (product) => product.collection === collection,
   );
+  const brandName = getCollectionBrand(currentCollection.slug);
 
   return (
     <main className="flex min-h-screen flex-col bg-paper">
@@ -126,7 +143,7 @@ export default async function WearCollectionPage({ params }: PageProps) {
 
       <section className="mx-auto w-full max-w-4xl px-6 py-20 text-center md:px-12 md:py-24">
         <span className="font-sans text-[0.65rem] uppercase tracking-[0.3em] text-bg/40">
-          21 Wear
+          {brandName}
         </span>
 
         <p className="mt-8 font-sans text-base font-light leading-relaxed text-bg/70 md:text-lg">
