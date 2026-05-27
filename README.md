@@ -22,7 +22,7 @@ Le portail RDM lit les métadonnées sans configuration supplémentaire.
 Pour activer la vérification réelle des fichiers et les téléchargements DOCX/PDF, créer un fichier `.env.local` avec :
 
 ```bash
-Z21_ACTIVE_BASE_PATH="/Users/gregloupiac/Library/CloudStorage/GoogleDrive-21corestudios@gmail.com/Mon Drive/ZONE21_DEV"
+Z21_ACTIVE_BASE_PATH="/Users/gregloupiac/Library/CloudStorage/GoogleDrive-21corestudios@gmail.com/Mon Drive/ZONE 21 HOLDING"
 ```
 
 Règles :
@@ -31,6 +31,8 @@ Règles :
 - le code doit lire uniquement `process.env.Z21_ACTIVE_BASE_PATH` ;
 - le message `BASE ACTIVE À VÉRIFIER` est normal si la variable est absente ;
 - ce message disparaît dès que `Z21_ACTIVE_BASE_PATH` est correctement renseignée dans `.env.local`.
+- la source de vérité active du RDM applicatif est `ZONE 21 HOLDING`.
+- `ZONE21`, `ZONE21_DEV` et `ZONE 21_PROJET_PAUSED` restent des sources historiques ou d'audit, pas des dossiers actifs.
 
 ## GED ARCANE — statut actuel
 
@@ -38,4 +40,4 @@ Règles :
 - aucune écriture documentaire n'est active ;
 - le portail reste en lecture seule ;
 - les routes de gouvernance exposent uniquement des règles et contrôles ;
-- aucune modification Drive, NAS ou ZONE21_DEV n'est possible à ce stade.
+- aucune modification Drive, NAS ou dossier historique/audit n'est possible à ce stade.

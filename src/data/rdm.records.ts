@@ -25,9 +25,9 @@ export const rdmRecords: RdmRecord[] = [
     status: "Validé",
     version: "v1.0",
     docxPath:
-      "/ZONE21_DEV/00_MASTER_SYSTEM/01_SOURCES_ET_DIRECTIVES/01_DOCX/DOC-Z21-MASTER-SOURCES-PROJET-v1.0.docx",
+      "/ZONE 21 HOLDING/00_MASTER_SYSTEM/01_SOURCES_ET_DIRECTIVES/01_DOCX/DOC-Z21-MASTER-SOURCES-PROJET-v1.0.docx",
     pdfPath:
-      "/ZONE21_DEV/00_MASTER_SYSTEM/01_SOURCES_ET_DIRECTIVES/02_PDF/DOC-Z21-MASTER-SOURCES-PROJET-v1.0.pdf",
+      "/ZONE 21 HOLDING/00_MASTER_SYSTEM/01_SOURCES_ET_DIRECTIVES/02_PDF/DOC-Z21-MASTER-SOURCES-PROJET-v1.0.pdf",
     ownerEntity: "ZONE 21 HOLDING",
     category: "Sources et directives",
     createdAt: "20/04/2026",
@@ -41,7 +41,7 @@ export const rdmRecords: RdmRecord[] = [
     registerDecision: null,
     observations:
       "Document 1 validé, PDF créé manuellement et classement officiel confirmé.",
-    sourceOfTruth: "ZONE21_DEV",
+    sourceOfTruth: "ZONE 21 HOLDING",
     governanceSyncStatus: "à jour",
     fileAvailability: presentAvailability,
     allowedRoles: [
@@ -60,9 +60,9 @@ export const rdmRecords: RdmRecord[] = [
     status: "Validé",
     version: "v1.0",
     docxPath:
-      "/ZONE21_DEV/00_MASTER_SYSTEM/01_SOURCES_ET_DIRECTIVES/01_DOCX/DOC-Z21-REGISTRE-CENTRAL-v1.0.docx",
+      "/ZONE 21 HOLDING/00_MASTER_SYSTEM/01_SOURCES_ET_DIRECTIVES/01_DOCX/DOC-Z21-REGISTRE-CENTRAL-v1.0.docx",
     pdfPath:
-      "/ZONE21_DEV/00_MASTER_SYSTEM/01_SOURCES_ET_DIRECTIVES/02_PDF/DOC-Z21-REGISTRE-CENTRAL-v1.0.pdf",
+      "/ZONE 21 HOLDING/00_MASTER_SYSTEM/01_SOURCES_ET_DIRECTIVES/02_PDF/DOC-Z21-REGISTRE-CENTRAL-v1.0.pdf",
     ownerEntity: "ARCANE",
     category: "Registre central",
     createdAt: "20/04/2026",
@@ -75,7 +75,7 @@ export const rdmRecords: RdmRecord[] = [
     replacedBy: null,
     registerDecision: null,
     observations: "PDF actif à confirmer et synchroniser.",
-    sourceOfTruth: "ZONE21_DEV",
+    sourceOfTruth: "ZONE 21 HOLDING",
     governanceSyncStatus: "à vérifier",
     governanceIssueCode: "PDF_A_CONFIRMER",
     fileAvailability: pdfToVerifyAvailability,
@@ -95,9 +95,9 @@ export const rdmRecords: RdmRecord[] = [
     status: "Validé",
     version: "v1.0",
     docxPath:
-      "/ZONE21_DEV/00_MASTER_SYSTEM/01_SOURCES_ET_DIRECTIVES/01_DOCX/DIR-Z21-IA-SOURCES-ACTIVES-v1.0.docx",
+      "/ZONE 21 HOLDING/00_MASTER_SYSTEM/01_SOURCES_ET_DIRECTIVES/01_DOCX/DIR-Z21-IA-SOURCES-ACTIVES-v1.0.docx",
     pdfPath:
-      "/ZONE21_DEV/00_MASTER_SYSTEM/01_SOURCES_ET_DIRECTIVES/02_PDF/DIR-Z21-IA-SOURCES-ACTIVES-v1.0.pdf",
+      "/ZONE 21 HOLDING/00_MASTER_SYSTEM/01_SOURCES_ET_DIRECTIVES/02_PDF/DIR-Z21-IA-SOURCES-ACTIVES-v1.0.pdf",
     ownerEntity: "ARCANE",
     category: "Sources et directives",
     createdAt: "21/04/2026",
@@ -113,7 +113,7 @@ export const rdmRecords: RdmRecord[] = [
     replacedBy: null,
     registerDecision: null,
     observations: "Statut, version, PDF et classement à confirmer.",
-    sourceOfTruth: "ZONE21_DEV",
+    sourceOfTruth: "ZONE 21 HOLDING",
     governanceSyncStatus: "à vérifier",
     governanceIssueCode: "STATUT_A_CONFIRMER",
     fileAvailability: allToVerifyAvailability,
@@ -134,9 +134,9 @@ export const rdmRecords: RdmRecord[] = [
     status: "Validé",
     version: "v1.0",
     docxPath:
-      "/ZONE21_DEV/00_MASTER_SYSTEM/03_REFERENTIEL_ENTITES/01_DOCX/DOC-Z21-REFERENTIEL-ENTITES-v1.0.docx",
+      "/ZONE 21 HOLDING/00_MASTER_SYSTEM/03_REFERENTIEL_ENTITES/01_DOCX/DOC-Z21-REFERENTIEL-ENTITES-v1.0.docx",
     pdfPath:
-      "/ZONE21_DEV/00_MASTER_SYSTEM/03_REFERENTIEL_ENTITES/02_PDF/DOC-Z21-REFERENTIEL-ENTITES-v1.0.pdf",
+      "/ZONE 21 HOLDING/00_MASTER_SYSTEM/03_REFERENTIEL_ENTITES/02_PDF/DOC-Z21-REFERENTIEL-ENTITES-v1.0.pdf",
     ownerEntity: "ARCANE",
     category: "Référentiel",
     createdAt: "21/04/2026",
@@ -152,7 +152,7 @@ export const rdmRecords: RdmRecord[] = [
     replacedBy: null,
     registerDecision: null,
     observations: "DOCX/PDF actifs confirmés. Aucune anomalie ouverte.",
-    sourceOfTruth: "ZONE21_DEV",
+    sourceOfTruth: "ZONE 21 HOLDING",
     governanceSyncStatus: "à jour",
     fileAvailability: presentAvailability,
     allowedRoles: [
@@ -171,9 +171,9 @@ export const rdmRecords: RdmRecord[] = [
     status: "Validé",
     version: "v1.0",
     docxPath:
-      "/ZONE21_DEV/00_MASTER_SYSTEM/05_CHARTE_CODIFICATION/01_DOCX/DOC-Z21-CHARTE-CODIFICATION-v1.0.docx",
+      "/ZONE 21 HOLDING/00_MASTER_SYSTEM/05_CHARTE_CODIFICATION/01_DOCX/DOC-Z21-CHARTE-CODIFICATION-v1.0.docx",
     pdfPath:
-      "/ZONE21_DEV/00_MASTER_SYSTEM/05_CHARTE_CODIFICATION/02_PDF/DOC-Z21-CHARTE-CODIFICATION-v1.0.pdf",
+      "/ZONE 21 HOLDING/00_MASTER_SYSTEM/05_CHARTE_CODIFICATION/02_PDF/DOC-Z21-CHARTE-CODIFICATION-v1.0.pdf",
     ownerEntity: "ARCANE",
     category: "Gouvernance documentaire",
     createdAt: "24/04/2026",
@@ -189,7 +189,7 @@ export const rdmRecords: RdmRecord[] = [
     replacedBy: null,
     registerDecision: null,
     observations: "Charte active validée en étape 8.",
-    sourceOfTruth: "ZONE21_DEV",
+    sourceOfTruth: "ZONE 21 HOLDING",
     governanceSyncStatus: "à jour",
     fileAvailability: presentAvailability,
     allowedRoles: [
@@ -210,9 +210,9 @@ export const rdmRecords: RdmRecord[] = [
     status: "Validé",
     version: "v1.0",
     docxPath:
-      "/ZONE21_DEV/00_MASTER_SYSTEM/00_RDM_CENTRAL/01_DOCX/DOC-Z21-RDM-CENTRAL-v1.0.docx",
+      "/ZONE 21 HOLDING/00_MASTER_SYSTEM/00_RDM_CENTRAL/01_DOCX/DOC-Z21-RDM-CENTRAL-v1.0.docx",
     pdfPath:
-      "/ZONE21_DEV/00_MASTER_SYSTEM/00_RDM_CENTRAL/02_PDF/DOC-Z21-RDM-CENTRAL-v1.0.pdf",
+      "/ZONE 21 HOLDING/00_MASTER_SYSTEM/00_RDM_CENTRAL/02_PDF/DOC-Z21-RDM-CENTRAL-v1.0.pdf",
     ownerEntity: "ARCANE",
     category: "RDM central",
     createdAt: "21/04/2026",
@@ -229,7 +229,7 @@ export const rdmRecords: RdmRecord[] = [
     replacedBy: null,
     registerDecision: "DS-009A",
     observations: "Synchronisation RDM web / document maître RDM à finaliser.",
-    sourceOfTruth: "ZONE21_DEV",
+    sourceOfTruth: "ZONE 21 HOLDING",
     governanceSyncStatus: "à vérifier",
     governanceIssueCode: "RDM_SYNC_A_FINALISER",
     fileAvailability: presentAvailability,
@@ -251,9 +251,9 @@ export const rdmRecords: RdmRecord[] = [
     status: "Document de travail",
     version: "v1.0",
     docxPath:
-      "/ZONE21_DEV/01_HOLDING/00_GOUVERNANCE_ENTITE/01_DOCX/DOC-Z21-ENT-HOLD-ZONE21HOLDING-v1.0.docx",
+      "/ZONE 21 HOLDING/01_HOLDING/00_GOUVERNANCE_ENTITE/01_DOCX/DOC-Z21-ENT-HOLD-ZONE21HOLDING-v1.0.docx",
     pdfPath:
-      "/ZONE21_DEV/01_HOLDING/00_GOUVERNANCE_ENTITE/02_PDF/DOC-Z21-ENT-HOLD-ZONE21HOLDING-v1.0.pdf",
+      "/ZONE 21 HOLDING/01_HOLDING/00_GOUVERNANCE_ENTITE/02_PDF/DOC-Z21-ENT-HOLD-ZONE21HOLDING-v1.0.pdf",
     ownerEntity: "ARCANE HOLDING",
     category: "Gouvernance",
     createdAt: "21/04/2026",
@@ -270,7 +270,7 @@ export const rdmRecords: RdmRecord[] = [
     registerDecision: null,
     observations:
       "Contradiction active : statut Document de travail dans base active.",
-    sourceOfTruth: "ZONE21_DEV",
+    sourceOfTruth: "ZONE 21 HOLDING",
     governanceSyncStatus: "bloqué",
     governanceIssueCode: "ENTITE_STATUT_BLOQUE",
     fileAvailability: presentAvailability,
@@ -290,9 +290,9 @@ export const rdmRecords: RdmRecord[] = [
     status: "Document de travail",
     version: "v1.0",
     docxPath:
-      "/ZONE21_DEV/02_IP/00_GOUVERNANCE_ENTITE/01_DOCX/DOC-Z21-ENT-IP-ZONE21IP-v1.0.docx",
+      "/ZONE 21 HOLDING/02_IP/00_GOUVERNANCE_ENTITE/01_DOCX/DOC-Z21-ENT-IP-ZONE21IP-v1.0.docx",
     pdfPath:
-      "/ZONE21_DEV/02_IP/00_GOUVERNANCE_ENTITE/02_PDF/DOC-Z21-ENT-IP-ZONE21IP-v1.0.pdf",
+      "/ZONE 21 HOLDING/02_IP/00_GOUVERNANCE_ENTITE/02_PDF/DOC-Z21-ENT-IP-ZONE21IP-v1.0.pdf",
     ownerEntity: "ARCANE IP",
     category: "Gouvernance",
     createdAt: "20/04/2026",
@@ -309,7 +309,7 @@ export const rdmRecords: RdmRecord[] = [
     registerDecision: null,
     observations:
       "Contradiction active : statut Document de travail dans base active.",
-    sourceOfTruth: "ZONE21_DEV",
+    sourceOfTruth: "ZONE 21 HOLDING",
     governanceSyncStatus: "bloqué",
     governanceIssueCode: "ENTITE_STATUT_BLOQUE",
     fileAvailability: presentAvailability,
@@ -331,9 +331,9 @@ export const rdmRecords: RdmRecord[] = [
     status: "Document de travail",
     version: "v1.0",
     docxPath:
-      "/ZONE21_DEV/03_MEDIA/00_GOUVERNANCE_ENTITE/01_DOCX/DOC-Z21-ENT-MED-ZONE21MEDIA-v1.0.docx",
+      "/ZONE 21 HOLDING/03_MEDIA/00_GOUVERNANCE_ENTITE/01_DOCX/DOC-Z21-ENT-MED-ZONE21MEDIA-v1.0.docx",
     pdfPath:
-      "/ZONE21_DEV/03_MEDIA/00_GOUVERNANCE_ENTITE/02_PDF/DOC-Z21-ENT-MED-ZONE21MEDIA-v1.0.pdf",
+      "/ZONE 21 HOLDING/03_MEDIA/00_GOUVERNANCE_ENTITE/02_PDF/DOC-Z21-ENT-MED-ZONE21MEDIA-v1.0.pdf",
     ownerEntity: "ARCANE MEDIA",
     category: "Gouvernance",
     createdAt: "20/04/2026",
@@ -350,7 +350,7 @@ export const rdmRecords: RdmRecord[] = [
     registerDecision: null,
     observations:
       "Contradiction active : statut Document de travail dans base active.",
-    sourceOfTruth: "ZONE21_DEV",
+    sourceOfTruth: "ZONE 21 HOLDING",
     governanceSyncStatus: "bloqué",
     governanceIssueCode: "ENTITE_STATUT_BLOQUE",
     fileAvailability: presentAvailability,
@@ -372,9 +372,9 @@ export const rdmRecords: RdmRecord[] = [
     status: "Validé",
     version: "v1.0",
     docxPath:
-      "/ZONE21_DEV/00_MASTER_SYSTEM/01_SOURCES_ET_DIRECTIVES/01_DOCX/DOC-Z21-SOCLE-PILOTAGE-GLOBAL-v1.0.docx",
+      "/ZONE 21 HOLDING/00_MASTER_SYSTEM/01_SOURCES_ET_DIRECTIVES/01_DOCX/DOC-Z21-SOCLE-PILOTAGE-GLOBAL-v1.0.docx",
     pdfPath:
-      "/ZONE21_DEV/00_MASTER_SYSTEM/01_SOURCES_ET_DIRECTIVES/02_PDF/DOC-Z21-SOCLE-PILOTAGE-GLOBAL-v1.0.pdf",
+      "/ZONE 21 HOLDING/00_MASTER_SYSTEM/01_SOURCES_ET_DIRECTIVES/02_PDF/DOC-Z21-SOCLE-PILOTAGE-GLOBAL-v1.0.pdf",
     ownerEntity: "ZONE 21 HOLDING",
     category: "Document socle stratégique et opérationnel",
     createdAt: "25/05/2026",
@@ -390,7 +390,7 @@ export const rdmRecords: RdmRecord[] = [
     replacedBy: null,
     registerDecision: null,
     observations: "Document socle validé de pilotage global ZONE 21.",
-    sourceOfTruth: "ZONE21_DEV",
+    sourceOfTruth: "ZONE 21 HOLDING",
     governanceSyncStatus: "à jour",
     fileAvailability: presentAvailability,
     allowedRoles: [

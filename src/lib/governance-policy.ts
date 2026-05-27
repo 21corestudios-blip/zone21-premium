@@ -5,6 +5,16 @@ import type {
   GovernanceWorkflowState,
   GovernancePolicySummary,
 } from "./governance-types";
+import type { RdmSourceOfTruth } from "./rdm-types";
+import { RDM_ACTIVE_SOURCE_OF_TRUTH } from "./rdm-service";
+
+type RdmGovernancePolicySummary = Omit<
+  GovernancePolicySummary,
+  "sourceOfTruth"
+> & {
+  sourceOfTruth: RdmSourceOfTruth;
+  historicalAuditSources: Array<Exclude<RdmSourceOfTruth, "ZONE 21 HOLDING">>;
+};
 
 const roleGovernanceActions: Record<CollaboratorRole, GovernanceAction[]> = {
   direction: [
@@ -68,8 +78,13 @@ const workflowStateLabels: Record<GovernanceWorkflowState, string> = {
   rejeté: "Rejeté",
 };
 
-export const governancePolicySummary: GovernancePolicySummary = {
-  sourceOfTruth: "ZONE21_DEV",
+export const governancePolicySummary: RdmGovernancePolicySummary = {
+  sourceOfTruth: RDM_ACTIVE_SOURCE_OF_TRUTH,
+  historicalAuditSources: [
+    "ZONE21",
+    "ZONE21_DEV",
+    "ZONE 21_PROJET_PAUSED",
+  ],
   recommendedStrategy: "A+E",
   writerMode: "writer-server-unique",
   frontWriteAllowed: false,
@@ -78,7 +93,7 @@ export const governancePolicySummary: GovernancePolicySummary = {
   truthChain: [
     "workflow applicatif prépare",
     "service documentaire écrit",
-    "ZONE21_DEV fait foi",
+    "ZONE 21 HOLDING fait foi",
     "RDM web relit et expose",
   ],
   antiDoubleSourceGuardrails: [
@@ -86,7 +101,7 @@ export const governancePolicySummary: GovernancePolicySummary = {
     "writer serveur unique",
     "journal d'audit obligatoire",
     "verrouillage des documents en cours de validation",
-    "relecture physique de ZONE21_DEV après écriture",
+    "relecture physique de ZONE 21 HOLDING après écriture",
     "statut à vérifier ou bloqué en cas de doute",
   ],
 };
