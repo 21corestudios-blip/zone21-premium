@@ -15,7 +15,13 @@ import type {
   GovernanceWorkflowState,
 } from "./governance-types";
 import { canDownloadRecord } from "./rbac";
-import { getActiveBaseState, resolveSystemPath } from "./rdm-service";
+import {
+  getActiveBaseState,
+  RDM_ACTIVE_SOURCE_OF_TRUTH,
+  resolveSystemPath,
+} from "./rdm-service";
+
+const RDM_ACTIVE_VIRTUAL_ROOT = `/${RDM_ACTIVE_SOURCE_OF_TRUTH}/`;
 
 function matchesReferenceVersion(reference: string, version: string) {
   return reference.endsWith(`-${version}`);
@@ -40,11 +46,11 @@ function buildValidationChecks(record: RdmRecord): GovernanceValidationCheck[] {
     ? existsSync(pdfResolved.systemPath)
     : false;
   const docxPathConforms =
-    record.docxPath.startsWith("/ZONE21_DEV/") &&
+    record.docxPath.startsWith(RDM_ACTIVE_VIRTUAL_ROOT) &&
     record.docxPath.includes("/01_DOCX/") &&
     path.posix.basename(record.docxPath) === getExpectedDocxName(record);
   const pdfPathConforms =
-    record.pdfPath.startsWith("/ZONE21_DEV/") &&
+    record.pdfPath.startsWith(RDM_ACTIVE_VIRTUAL_ROOT) &&
     record.pdfPath.includes("/02_PDF/") &&
     path.posix.basename(record.pdfPath) === getExpectedPdfName(record);
 
@@ -55,7 +61,7 @@ function buildValidationChecks(record: RdmRecord): GovernanceValidationCheck[] {
       blocking: true,
       passed: activeBaseState.isAvailable,
       detail: activeBaseState.isAvailable
-        ? "La base active ZONE21_DEV est disponible côté serveur."
+        ? `La base active ${RDM_ACTIVE_SOURCE_OF_TRUTH} est disponible côté serveur.`
         : activeBaseState.error ??
           "La base active n'est pas disponible pour un contrôle physique.",
     },
@@ -65,8 +71,8 @@ function buildValidationChecks(record: RdmRecord): GovernanceValidationCheck[] {
       blocking: true,
       passed: docxExists,
       detail: docxExists
-        ? "Le DOCX officiel a été retrouvé dans ZONE21_DEV."
-        : "Le DOCX officiel n'a pas été confirmé physiquement dans ZONE21_DEV.",
+        ? `Le DOCX officiel a été retrouvé dans ${RDM_ACTIVE_SOURCE_OF_TRUTH}.`
+        : `Le DOCX officiel n'a pas été confirmé physiquement dans ${RDM_ACTIVE_SOURCE_OF_TRUTH}.`,
     },
     {
       id: "pdf_exists_physically",
@@ -74,8 +80,8 @@ function buildValidationChecks(record: RdmRecord): GovernanceValidationCheck[] {
       blocking: true,
       passed: pdfExists,
       detail: pdfExists
-        ? "Le PDF officiel a été retrouvé dans ZONE21_DEV."
-        : "Le PDF officiel requis n'a pas été confirmé physiquement dans ZONE21_DEV.",
+        ? `Le PDF officiel a été retrouvé dans ${RDM_ACTIVE_SOURCE_OF_TRUTH}.`
+        : `Le PDF officiel requis n'a pas été confirmé physiquement dans ${RDM_ACTIVE_SOURCE_OF_TRUTH}.`,
     },
     {
       id: "docx_path_conforms",

@@ -12,8 +12,18 @@ import type {
   DocumentType,
   FileAvailabilityStatus,
   GovernanceSyncStatus,
+  RdmActiveSourceOfTruth,
   RdmRecord,
 } from "./rdm-types";
+
+export const RDM_ACTIVE_SOURCE_OF_TRUTH: RdmActiveSourceOfTruth =
+  "ZONE 21 HOLDING";
+const RDM_ACTIVE_VIRTUAL_ROOT = `/${RDM_ACTIVE_SOURCE_OF_TRUTH}/`;
+const RDM_LEGACY_AUDIT_VIRTUAL_ROOTS = [
+  "/ZONE21/",
+  "/ZONE21_DEV/",
+  "/ZONE 21_PROJET_PAUSED/",
+] as const;
 
 export type RdmSortKey =
   | "id"
@@ -30,7 +40,7 @@ export type RdmTypeFilter = DocumentType | "all";
 export type RdmStatusFilter = DocumentStatus | "all";
 
 export interface ActiveBaseState {
-  sourceOfTruth: "ZONE21_DEV";
+  sourceOfTruth: RdmActiveSourceOfTruth;
   mode: "lecture seule";
   envVarName: "Z21_ACTIVE_BASE_PATH";
   basePath: string | null;
@@ -185,7 +195,7 @@ export function getActiveBaseState(): ActiveBaseState {
 
   if (!basePath) {
     cachedActiveBaseState = {
-      sourceOfTruth: "ZONE21_DEV",
+      sourceOfTruth: RDM_ACTIVE_SOURCE_OF_TRUTH,
       mode: "lecture seule",
       envVarName: "Z21_ACTIVE_BASE_PATH",
       basePath: null,
@@ -199,7 +209,7 @@ export function getActiveBaseState(): ActiveBaseState {
 
   if (!existsSync(basePath)) {
     cachedActiveBaseState = {
-      sourceOfTruth: "ZONE21_DEV",
+      sourceOfTruth: RDM_ACTIVE_SOURCE_OF_TRUTH,
       mode: "lecture seule",
       envVarName: "Z21_ACTIVE_BASE_PATH",
       basePath: null,
@@ -212,7 +222,7 @@ export function getActiveBaseState(): ActiveBaseState {
   }
 
   cachedActiveBaseState = {
-    sourceOfTruth: "ZONE21_DEV",
+    sourceOfTruth: RDM_ACTIVE_SOURCE_OF_TRUTH,
     mode: "lecture seule",
     envVarName: "Z21_ACTIVE_BASE_PATH",
     basePath,
@@ -226,11 +236,16 @@ export function getActiveBaseState(): ActiveBaseState {
 export function resolveSystemPath(virtualPath: string): ResolvedPathResult {
   const activeBaseState = getActiveBaseState();
 
-  if (!virtualPath.startsWith("/ZONE21_DEV/")) {
+  if (!virtualPath.startsWith(RDM_ACTIVE_VIRTUAL_ROOT)) {
+    const legacyRoot = RDM_LEGACY_AUDIT_VIRTUAL_ROOTS.find((root) =>
+      virtualPath.startsWith(root),
+    );
+
     return {
       systemPath: null,
-      error:
-        "Le chemin virtuel demandé ne dépend pas de /ZONE21_DEV/ et ne peut pas être résolu côté serveur.",
+      error: legacyRoot
+        ? `Le chemin virtuel demandé dépend de ${legacyRoot.slice(1, -1)}, source historique/audit non active. Seuls les chemins /${RDM_ACTIVE_SOURCE_OF_TRUTH}/ sont résolus côté serveur.`
+        : `Le chemin virtuel demandé ne dépend pas de /${RDM_ACTIVE_SOURCE_OF_TRUTH}/ et ne peut pas être résolu côté serveur.`,
     };
   }
 
@@ -242,7 +257,7 @@ export function resolveSystemPath(virtualPath: string): ResolvedPathResult {
   }
 
   const virtualRelativePath = virtualPath
-    .replace(/^\/?ZONE21_DEV\/?/, "")
+    .slice(RDM_ACTIVE_VIRTUAL_ROOT.length)
     .replace(/^\/+/, "");
   const baseSegments = path
     .resolve(activeBaseState.basePath)

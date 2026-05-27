@@ -37,6 +37,15 @@ export type ConfidentialityLevel =
   | "Restreint"
   | "Admin";
 
+export type RdmActiveSourceOfTruth = "ZONE 21 HOLDING";
+export type RdmHistoricalAuditSource =
+  | "ZONE21"
+  | "ZONE21_DEV"
+  | "ZONE 21_PROJET_PAUSED";
+export type RdmSourceOfTruth =
+  | RdmActiveSourceOfTruth
+  | RdmHistoricalAuditSource;
+
 export interface FileAvailability {
   docx: FileAvailabilityStatus;
   pdf: FileAvailabilityStatus;
@@ -63,7 +72,7 @@ export interface RdmRecord {
   replacedBy: string | null;
   registerDecision: string | null;
   observations: string;
-  sourceOfTruth: "ZONE21_DEV";
+  sourceOfTruth: RdmSourceOfTruth;
   governanceSyncStatus: GovernanceSyncStatus;
   governanceIssueCode?: GovernanceIssueCode;
   fileAvailability: FileAvailability;

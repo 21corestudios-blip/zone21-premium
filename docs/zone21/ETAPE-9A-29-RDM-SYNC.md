@@ -2,7 +2,7 @@
 
 ## Statut
 
-Étape de stabilisation du RDM réalisée pour réduire le risque de divergence silencieuse entre le portail et la base active `ZONE21_DEV`.
+Étape de stabilisation du RDM réalisée pour réduire le risque de divergence silencieuse entre le portail et la base active `ZONE 21 HOLDING`.
 
 ## Principe retenu
 
@@ -10,7 +10,9 @@ Le RDM web reste une vue applicative.
 
 La source de vérité documentaire reste exclusivement :
 
-- `ZONE21_DEV`
+- `ZONE 21 HOLDING`
+
+Les bases `ZONE21`, `ZONE21_DEV` et `ZONE 21_PROJET_PAUSED` sont conservées comme sources historiques ou d'audit de même niveau. Elles ne sont pas des bases actives et ne doivent pas être présentées comme source supérieure.
 
 Le portail ne doit jamais être considéré comme une source autonome d'état documentaire.
 
@@ -64,3 +66,11 @@ Cette étape ne change pas :
 - la logique GED métier
 
 Elle renforce uniquement la fiabilité de la vue RDM vis-à-vis de la base active.
+
+La séparation reste stricte :
+
+- Drive porte les fichiers documentaires et les sources d'audit.
+- Git porte le RDM applicatif et sa documentation directe.
+- Le RDM web expose une vue en lecture seule.
+
+Toute mission Git de correction RDM doit rester séparée, testée, limitée et validée. Cette étape n'introduit aucune migration automatique Drive.
