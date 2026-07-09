@@ -134,7 +134,7 @@ export class GelatoClient {
             {
               itemReferenceId: payload.itemReferenceId,
               productUid: payload.productUid,
-              fileUrl: payload.fileUrl,
+              files: [{ type: "default", url: payload.fileUrl }],
               quantity: payload.quantity,
             },
           ],

@@ -177,6 +177,10 @@ async function quoteProviderShipping({
       throw new Error("gelato_quote_empty");
     }
 
+    if (typeof shipment.price !== "number") {
+      throw new Error("gelato_shipping_price_missing");
+    }
+
     return {
       shippingCents: Math.round(shipment.price * 100),
       quoteId: quote.quotes?.[0]?.id,
