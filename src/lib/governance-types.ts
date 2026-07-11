@@ -54,10 +54,10 @@ export interface GovernanceRolePolicy {
 }
 
 export interface GovernancePolicySummary {
-  sourceOfTruth: "ZONE21_DEV";
+  sourceOfTruth: "ZONE 21 HOLDING";
   recommendedStrategy: "A+E";
-  writerMode: "writer-server-unique";
-  frontWriteAllowed: false;
+  writerMode: "rdm-drive-store";
+  frontWriteAllowed: true;
   applicationDataRule: string;
   truthChain: string[];
   antiDoubleSourceGuardrails: string[];

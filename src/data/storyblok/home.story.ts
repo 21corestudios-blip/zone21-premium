@@ -30,6 +30,7 @@ export const homeStoryFallback = {
         },
         priority: true,
         variant: "home",
+        imageDesktopClassName: "animate-image-reveal object-cover object-[center_30%]",
       },
       {
         _uid: "home-manifesto-section",
@@ -57,10 +58,10 @@ export const homeStoryFallback = {
       {
         _uid: "home-universe-image",
         component: "imageBlock",
-        src: "/images/editorial/ARC-image-1-accueil-0002.webp",
+        src: "/images/editorial/ChatGPT Image 10 juil. 2026, 07_26_50.webp",
         alt: "",
         layout: "immersive",
-        imageClassName: "object-cover object-center",
+        imageClassName: "object-cover object-[center_10%]",
         backgroundClassName: "bg-white",
       },
       {
@@ -79,7 +80,7 @@ export const homeStoryFallback = {
               "21 WEAR travaille la silhouette. CORE STUDIOS façonne les identités. BACKSPIN porte le son et les artistes. EKKO donne corps aux présences qui incarnent l’époque.",
               "Chaque maison avance avec son langage, son rythme et son territoire. Ensemble, elles composent une marque-monde : culturelle, urbaine, précise, pensée pour durer sans perdre sa tension.",
             ],
-            imageSrc: "/images/editorial/ARC-maisons-accueil-0003.webp",
+            imageSrc: "/images/editorial/ChatGPT Image 10 juil. 2026, 17_57_28.webp",
             imageAlt: "Les Maisons ARCANE",
             imagePosition: "right",
             theme: "light",
@@ -93,7 +94,7 @@ export const homeStoryFallback = {
       {
         _uid: "home-zone-4-image",
         component: "imageBlock",
-        src: "/images/home/ARC-image-1-accueil-0003.webp",
+        src: "/images/home/ChatGPT Image 10 juil. 2026, 18_06_14.webp",
         alt: "",
         layout: "immersive",
         backgroundClassName: "bg-white",

@@ -15,6 +15,13 @@ export default function Hero({ blok }: { blok: HeroBlok }) {
   );
   const desktopAlt = blok.imageDesktopAlt || blok.imageAlt || desktop.alt;
   const mobileAlt = blok.imageMobileAlt || blok.imageAlt || mobile.alt;
+  const desktopClassName =
+    blok.imageDesktopClassName ||
+    `animate-image-reveal object-cover ${
+      blok.variant === "home" ? "object-[center_30%]" : "object-center"
+    }`;
+  const mobileClassName =
+    blok.imageMobileClassName || "animate-image-reveal object-cover object-top";
 
   if (!desktop.src && !mobile.src) {
     return null;
@@ -33,7 +40,7 @@ export default function Hero({ blok }: { blok: HeroBlok }) {
           priority={blok.priority ?? true}
           quality={85}
           sizes="100vw"
-          className="animate-image-reveal object-cover object-center"
+          className={desktopClassName}
         />
       </div>
 
@@ -45,7 +52,7 @@ export default function Hero({ blok }: { blok: HeroBlok }) {
           priority={blok.priority ?? true}
           quality={100}
           sizes="100vw"
-          className="animate-image-reveal object-cover object-top"
+          className={mobileClassName}
         />
       </div>
 

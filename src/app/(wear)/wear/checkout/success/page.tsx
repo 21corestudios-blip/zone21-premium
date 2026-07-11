@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 
 import WearCheckoutStatus from "@/app/(wear)/_components/checkout/WearCheckoutStatus";
+import { noIndexRobots } from "@/lib/seo/createMetadata";
 
 export const metadata: Metadata = {
   title: "Paiement",
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/wear/checkout/success",
   },
+  robots: noIndexRobots,
 };
 
 export default function WearCheckoutSuccessPage() {

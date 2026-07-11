@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import TalentsCartPage from "@/app/(talents)/_components/cart/TalentsCartPage";
+import { noIndexRobots } from "@/lib/seo/createMetadata";
 
 export const metadata: Metadata = {
   title: "Panier",
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/talents-agency/panier",
   },
+  robots: noIndexRobots,
 };
 
 export default function TalentsCartRoutePage() {

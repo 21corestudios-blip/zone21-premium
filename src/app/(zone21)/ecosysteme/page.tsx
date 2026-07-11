@@ -1,24 +1,16 @@
 import type { Metadata } from "next";
 
+import { createMetadata } from "@/lib/seo/createMetadata";
+
 import EcosystemePageSections from "../_components/ecosysteme/EcosystemePageSections";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createMetadata({
   title: "Écosystème",
+  socialTitle: "Écosystème | ARCANE",
   description:
     "Découvrez l'écosystème ARCANE à travers ses maisons, ses univers et ses expressions créatives.",
-  alternates: {
-    canonical: "/ecosysteme",
-  },
-  openGraph: {
-    title: "Écosystème | ARCANE",
-    description:
-      "Découvrez l'écosystème ARCANE à travers ses maisons, ses univers et ses expressions créatives.",
-    url: "/ecosysteme",
-    siteName: "ARCANE",
-    locale: "fr_FR",
-    type: "website",
-  },
-};
+  path: "/ecosysteme",
+});
 
 export default function EcosystemePage() {
   return (

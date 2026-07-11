@@ -1,6 +1,6 @@
 import { storyblokEditable } from "@storyblok/react/rsc";
 
-import SplitShowcaseSection from "@/app/(zone21)/_components/home/shared/SplitShowcaseSection";
+import ManifestoOverlayContent from "@/app/(zone21)/_components/home/shared/ManifestoOverlayContent";
 import { resolveStoryblokAsset, resolveStoryblokLink } from "@/lib/storyblok/asset";
 import type { ManifestoBlockBlok } from "@/lib/storyblok/types";
 
@@ -12,19 +12,18 @@ export default function ManifestoBlock({ blok }: { blok: ManifestoBlockBlok }) {
   }
 
   return (
-    <div {...storyblokEditable(blok)}>
-      <SplitShowcaseSection
-        eyebrow={blok.eyebrow || ""}
+    <div
+      className="w-full overflow-hidden bg-bg"
+      {...storyblokEditable(blok)}
+    >
+      <ManifestoOverlayContent
+        eyebrow={blok.eyebrow || "Le Manifeste"}
         title={blok.title || ""}
         paragraphs={blok.paragraphs || []}
         imageSrc={image.src}
         imageAlt={blok.imageAlt ?? image.alt}
-        imagePosition={blok.imagePosition || "right"}
-        theme={blok.theme || "light"}
-        sectionClassName={blok.sectionClassName || "bg-white"}
         ctaHref={resolveStoryblokLink(blok.cta, blok.ctaHref)}
         ctaLabel={blok.ctaLabel}
-        imageClassName={blok.imageClassName || "object-cover"}
       />
     </div>
   );

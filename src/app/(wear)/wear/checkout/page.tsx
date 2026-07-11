@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import WearCheckoutClient from "@/app/(wear)/_components/checkout/WearCheckoutClient";
+import { noIndexRobots } from "@/lib/seo/createMetadata";
 
 export const metadata: Metadata = {
   title: "Checkout",
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/wear/checkout",
   },
+  robots: noIndexRobots,
 };
 
 export default function WearCheckoutPage() {

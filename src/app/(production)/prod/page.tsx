@@ -1,44 +1,22 @@
 import type { Metadata } from "next";
 
+import { createMetadata } from "@/lib/seo/createMetadata";
+
 import ProductionPageSections from "../_components/production/ProductionPageSections";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createMetadata({
   title: "BACKSPIN - Label et ressources créatives",
+  socialTitle: "BACKSPIN | Label et ressources créatives",
   description:
     "BACKSPIN réunit label, artistes et ressources créatives premium: beats, templates, loops et outils pensés pour produire avec signature.",
-  alternates: {
-    canonical: "/prod",
+  path: "/prod",
+  image: {
+    url: "/images/brands/21-production/z21-21-production-hero.webp",
+    width: 2048,
+    height: 1136,
+    alt: "BACKSPIN - label et ressources créatives",
   },
-  openGraph: {
-    title: "BACKSPIN | Label et ressources créatives",
-    description:
-      "BACKSPIN réunit label, artistes et ressources créatives premium: beats, templates, loops et outils pensés pour produire avec signature.",
-    url: "/prod",
-    siteName: "ARCANE",
-    locale: "fr_FR",
-    type: "website",
-    images: [
-      {
-        url: "/images/brands/21-production/z21-21-production-hero.webp",
-        width: 2048,
-        height: 1136,
-        alt: "BACKSPIN - label et ressources créatives",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "BACKSPIN | Label et ressources créatives",
-    description:
-      "BACKSPIN réunit label, artistes et ressources créatives premium: beats, templates, loops et outils pensés pour produire avec signature.",
-    images: [
-      {
-        url: "/images/brands/21-production/z21-21-production-hero.webp",
-        alt: "BACKSPIN - label et ressources créatives",
-      },
-    ],
-  },
-};
+});
 
 export default function ProductionPage() {
   return (

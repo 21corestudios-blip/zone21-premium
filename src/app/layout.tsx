@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 
 import OrganizationJsonLd from "@/components/seo/OrganizationJsonLd";
+import { siteConfig } from "@/config/site";
 
 import "./globals.css";
 
@@ -21,76 +22,40 @@ const titreFont = localFont({
   display: "swap",
 });
 
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://zone-21.fr")
-  .replace(/\/$/, "");
-const siteName = "ARCANE";
 const defaultTitle = "ARCANE | L'Exigence pour Signature";
-const defaultDescription =
-  "ARCANE est une maison créative indépendante dédiée aux univers premium entre vêtement, image, musique, production, talents et culture street.";
-const defaultOgImage = {
-  url: "/images/home/hero/z21-home-hero-main-01-desktop-7.webp",
-  width: 2048,
-  height: 1136,
-  alt: "ARCANE - maison créative indépendante",
-};
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(siteConfig.url),
   title: {
     default: defaultTitle,
-    template: "%s | ARCANE",
+    template: `%s | ${siteConfig.name}`,
   },
-  description: defaultDescription,
-  applicationName: siteName,
-  keywords: [
-    "ARCANE",
-    "maison créative",
-    "maison créative indépendante",
-    "studio créatif",
-    "direction artistique",
-    "culture street",
-    "vêtement premium",
-    "image de marque",
-    "production musicale",
-    "talents créatifs",
-    "univers créatif",
-    "narration de marque",
-    "21 Wear",
-    "Core Studios",
-    "BACKSPIN",
-    "creative house",
-    "creative studio",
-    "fashion",
-    "premium clothing",
-    "music production",
-    "talents",
-    "branding",
-    "premium lifestyle",
-  ],
-  authors: [{ name: "ARCANE" }],
-  creator: "ARCANE",
-  publisher: "ARCANE",
-  category: "creative business",
+  description: siteConfig.description,
+  applicationName: siteConfig.name,
+  authors: [...siteConfig.authors],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
+  category: siteConfig.category,
   alternates: {
     canonical: "/",
   },
   openGraph: {
     type: "website",
-    locale: "fr_FR",
-    url: siteUrl,
-    siteName,
+    locale: siteConfig.locale,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
     title: defaultTitle,
-    description: defaultDescription,
-    images: [defaultOgImage],
+    description: siteConfig.description,
+    images: [siteConfig.socialImage],
   },
   twitter: {
     card: "summary_large_image",
     title: defaultTitle,
-    description: defaultDescription,
+    description: siteConfig.description,
     images: [
       {
-        url: defaultOgImage.url,
-        alt: defaultOgImage.alt,
+        url: siteConfig.socialImage.url,
+        alt: siteConfig.socialImage.alt,
       },
     ],
   },
@@ -122,7 +87,7 @@ export default function RootLayout({
         className="min-h-screen flex flex-col bg-bg font-sans text-text selection:bg-accent selection:text-bg"
         suppressHydrationWarning
       >
-        <OrganizationJsonLd siteUrl={siteUrl} />
+        <OrganizationJsonLd />
         <a
           href="#main-content"
           className="sr-only rounded-md font-medium focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-text focus:px-3 focus:py-2 focus:text-bg"

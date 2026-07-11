@@ -34,7 +34,7 @@ export const homeData: HomeData = {
   hero: {
     title: "L'Exigence pour Signature",
     imageDesktop: {
-      src: "/images/home/hero/ARC-hero-accueil-0002.webp",
+      src: "/images/home/hero/ChatGPT Image 10 juil. 2026, 10_32_33.webp",
       alt: "Campagne ARCANE, maison créative indépendante",
     },
     imageMobile: {
@@ -46,8 +46,8 @@ export const homeData: HomeData = {
   manifesto: {
     tagline: "Jamais dans la tendance. Toujours dans la bonne direction.",
     image: {
-      src: "/images/editorial/ARC-manifeste-accueil-0004.webp",
-      alt: "Vision éditoriale ARCANE entre image, vêtement et narration",
+      src: "/images/editorial/ARC-image-1-accueil-0002.webp",
+      alt: "Silhouette ARCANE dans une lumière sombre et cinématographique",
     },
     paragraphs: [
       "ARCANE est une maison créative indépendante. Elle avance hors tendance, avec une direction claire, une exigence stable et une identité qui ne cède pas au premier mouvement du moment.",

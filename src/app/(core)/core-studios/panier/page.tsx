@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import CoreCartPage from "@/app/(core)/_components/cart/CoreCartPage";
+import { noIndexRobots } from "@/lib/seo/createMetadata";
 
 export const metadata: Metadata = {
   title: "Panier",
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/core-studios/panier",
   },
+  robots: noIndexRobots,
 };
 
 export default function CoreCartRoutePage() {

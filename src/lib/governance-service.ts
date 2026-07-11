@@ -28,11 +28,11 @@ function matchesReferenceVersion(reference: string, version: string) {
 }
 
 function getExpectedDocxName(record: RdmRecord) {
-  return `${record.reference}.docx`;
+  return record.docxPath ? `${record.reference}.docx` : "";
 }
 
 function getExpectedPdfName(record: RdmRecord) {
-  return `${record.reference}.pdf`;
+  return record.pdfPath ? `${record.reference}.pdf` : "";
 }
 
 function buildValidationChecks(record: RdmRecord): GovernanceValidationCheck[] {
@@ -46,13 +46,15 @@ function buildValidationChecks(record: RdmRecord): GovernanceValidationCheck[] {
     ? existsSync(pdfResolved.systemPath)
     : false;
   const docxPathConforms =
-    record.docxPath.startsWith(RDM_ACTIVE_VIRTUAL_ROOT) &&
+    !record.docxPath ||
+    (record.docxPath.startsWith(RDM_ACTIVE_VIRTUAL_ROOT) &&
     record.docxPath.includes("/01_DOCX/") &&
-    path.posix.basename(record.docxPath) === getExpectedDocxName(record);
+    path.posix.basename(record.docxPath) === getExpectedDocxName(record));
   const pdfPathConforms =
-    record.pdfPath.startsWith(RDM_ACTIVE_VIRTUAL_ROOT) &&
+    !record.pdfPath ||
+    (record.pdfPath.startsWith(RDM_ACTIVE_VIRTUAL_ROOT) &&
     record.pdfPath.includes("/02_PDF/") &&
-    path.posix.basename(record.pdfPath) === getExpectedPdfName(record);
+    path.posix.basename(record.pdfPath) === getExpectedPdfName(record));
 
   return [
     {
@@ -68,8 +70,8 @@ function buildValidationChecks(record: RdmRecord): GovernanceValidationCheck[] {
     {
       id: "docx_exists_physically",
       label: "DOCX officiel présent physiquement",
-      blocking: true,
-      passed: docxExists,
+      blocking: false,
+      passed: !record.docxPath || docxExists,
       detail: docxExists
         ? `Le DOCX officiel a été retrouvé dans ${RDM_ACTIVE_SOURCE_OF_TRUTH}.`
         : `Le DOCX officiel n'a pas été confirmé physiquement dans ${RDM_ACTIVE_SOURCE_OF_TRUTH}.`,
@@ -77,8 +79,8 @@ function buildValidationChecks(record: RdmRecord): GovernanceValidationCheck[] {
     {
       id: "pdf_exists_physically",
       label: "PDF officiel présent physiquement",
-      blocking: true,
-      passed: pdfExists,
+      blocking: false,
+      passed: !record.pdfPath || pdfExists,
       detail: pdfExists
         ? `Le PDF officiel a été retrouvé dans ${RDM_ACTIVE_SOURCE_OF_TRUTH}.`
         : `Le PDF officiel requis n'a pas été confirmé physiquement dans ${RDM_ACTIVE_SOURCE_OF_TRUTH}.`,
@@ -105,8 +107,11 @@ function buildValidationChecks(record: RdmRecord): GovernanceValidationCheck[] {
       id: "reference_conforms",
       label: "Référence conforme",
       blocking: true,
-      passed: /^[A-Z]+-Z21-[A-Z0-9-]+-v\d+\.\d+$/.test(record.reference),
-      detail: "La référence doit suivre la codification ARCANE.",
+      passed:
+        /^(RDM|CH|ENT|GOV|BR|REF|PROC|NOTE|MOD|REG|DEC|AUD)-(Z21H|Z21I|Z21M|ARC|CORE|BACK|CO|CY|EK|Z21V)-[A-Z0-9]+-[A-Z0-9-]+-v\d+\.\d+$/.test(
+          record.reference,
+        ),
+      detail: "La référence doit suivre la grammaire minimale 5G.",
     },
     {
       id: "version_conforms",
@@ -128,9 +133,11 @@ function buildValidationChecks(record: RdmRecord): GovernanceValidationCheck[] {
       label: "Statut de gouvernance aligné",
       blocking: true,
       passed:
-        record.status === "Validé" ? record.governanceSyncStatus === "à jour" : true,
+        record.status === "VALIDE" || record.status === "PUBLIE"
+          ? record.governanceSyncStatus !== "BLOQUE"
+          : true,
       detail:
-        "Un document Validé ne peut être exposé comme tel que si la gouvernance est à jour.",
+        "Un document valide ou publié ne peut pas être exposé si la synchronisation est bloquée.",
     },
   ];
 }
@@ -148,7 +155,8 @@ export function getGovernanceValidationSummary(
 
   return {
     canExposeAsValidated:
-      record.status === "Validé" && failedBlockingCheckIds.length === 0,
+      (record.status === "VALIDE" || record.status === "PUBLIE") &&
+      failedBlockingCheckIds.length === 0,
     checks,
     failedBlockingCheckIds,
     failedNonBlockingCheckIds,
@@ -158,11 +166,11 @@ export function getGovernanceValidationSummary(
 export function inferGovernanceWorkflowState(
   record: RdmRecord,
 ): GovernanceWorkflowState {
-  if (record.status === "Archivé") {
+  if (record.status === "ARCHIVE") {
     return "archivé";
   }
 
-  if (record.status === "Document de travail") {
+  if (record.status === "A_CREER" || record.status === "BROUILLON") {
     return "brouillon";
   }
 

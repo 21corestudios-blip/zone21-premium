@@ -17,7 +17,7 @@ type RdmGovernancePolicySummary = Omit<
 };
 
 const roleGovernanceActions: Record<CollaboratorRole, GovernanceAction[]> = {
-  direction: [
+  admin: [
     "read_record",
     "download_official",
     "create_draft",
@@ -28,25 +28,6 @@ const roleGovernanceActions: Record<CollaboratorRole, GovernanceAction[]> = {
     "reject_submission",
     "archive_document",
     "create_next_version",
-  ],
-  admin_documentaire: [
-    "read_record",
-    "download_official",
-    "create_draft",
-    "edit_draft",
-    "submit_for_review",
-    "resume_validation",
-    "approve_publication",
-    "reject_submission",
-    "archive_document",
-    "create_next_version",
-  ],
-  validateur: [
-    "read_record",
-    "download_official",
-    "resume_validation",
-    "approve_publication",
-    "reject_submission",
   ],
   editeur: [
     "read_record",
@@ -55,13 +36,6 @@ const roleGovernanceActions: Record<CollaboratorRole, GovernanceAction[]> = {
     "edit_draft",
     "submit_for_review",
     "create_next_version",
-  ],
-  contributeur: [
-    "read_record",
-    "download_official",
-    "create_draft",
-    "edit_draft",
-    "submit_for_review",
   ],
   lecteur: [
     "read_record",
@@ -86,23 +60,23 @@ export const governancePolicySummary: RdmGovernancePolicySummary = {
     "ZONE 21_PROJET_PAUSED",
   ],
   recommendedStrategy: "A+E",
-  writerMode: "writer-server-unique",
-  frontWriteAllowed: false,
+  writerMode: "rdm-drive-store",
+  frontWriteAllowed: true,
   applicationDataRule:
-    "La base applicative ne peut contenir que des brouillons, des états transitoires, des métadonnées de workflow et des journaux d'audit.",
+    "La base applicative ne conserve pas de source autonome : elle lit et écrit le registre JSON officiel stocké dans ZONE 21 HOLDING.",
   truthChain: [
-    "workflow applicatif prépare",
-    "service documentaire écrit",
+    "saisie web authentifiée",
+    "archive automatique de la revision Drive precedente",
+    "registre JSON officiel ecrit dans ZONE 21 HOLDING",
     "ZONE 21 HOLDING fait foi",
     "RDM web relit et expose",
   ],
   antiDoubleSourceGuardrails: [
-    "interdiction d'écriture directe par le front",
-    "writer serveur unique",
-    "journal d'audit obligatoire",
-    "verrouillage des documents en cours de validation",
+    "aucune donnée RDM normative stockée uniquement dans Git",
+    "journal d'audit minimal obligatoire",
+    "archivage automatique avant modification",
     "relecture physique de ZONE 21 HOLDING après écriture",
-    "statut à vérifier ou bloqué en cas de doute",
+    "statut A_VERIFIER ou BLOQUE en cas de doute",
   ],
 };
 

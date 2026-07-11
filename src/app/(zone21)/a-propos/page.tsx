@@ -1,24 +1,16 @@
 import type { Metadata } from "next";
 
+import { createMetadata } from "@/lib/seo/createMetadata";
+
 import AboutPageSections from "../_components/about/AboutPageSections";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createMetadata({
   title: "À Propos",
+  socialTitle: "À Propos | ARCANE",
   description:
     "Découvrez la vision fondatrice de ARCANE, son origine, ses influences et les valeurs qui structurent son écosystème créatif.",
-  alternates: {
-    canonical: "/a-propos",
-  },
-  openGraph: {
-    title: "À Propos | ARCANE",
-    description:
-      "Découvrez la vision fondatrice de ARCANE, son origine, ses influences et les valeurs qui structurent son écosystème créatif.",
-    url: "/a-propos",
-    siteName: "ARCANE",
-    locale: "fr_FR",
-    type: "website",
-  },
-};
+  path: "/a-propos",
+});
 
 export default function AboutPage() {
   return (

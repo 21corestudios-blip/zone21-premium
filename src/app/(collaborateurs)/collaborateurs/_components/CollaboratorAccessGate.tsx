@@ -84,15 +84,15 @@ export default function CollaboratorAccessGate({
               Portail collaborateurs
             </p>
             <p className="mt-3 max-w-2xl text-sm leading-7 text-white/60">
-              Interface de consultation, filtrage, export et téléchargement des
-              documents actifs, sans déplacement de l&apos;autorité normative hors
-              de ZONE21_DEV.
+              Interface authentifiée de consultation, écriture contrôlée,
+              export et téléchargement, sans déplacement de l&apos;autorité normative
+              hors de ZONE 21 HOLDING.
             </p>
           </div>
 
           <div className="space-y-3 text-[0.68rem] uppercase tracking-[0.22em] text-white/35">
-            <p>ZONE21_DEV reste la base active unique de référence.</p>
-            <p>Portail lecture seule en phase de structuration.</p>
+            <p>ZONE 21 HOLDING reste la base active unique de référence.</p>
+            <p>Portail en lecture et écriture contrôlée.</p>
           </div>
 
           <div className="flex items-start lg:justify-end">

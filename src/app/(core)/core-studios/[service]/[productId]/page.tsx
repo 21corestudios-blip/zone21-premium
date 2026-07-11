@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import CoreAddToCartForm from "@/app/(core)/_components/cart/CoreAddToCartForm";
 import { coreProducts, formatCorePrice } from "@/data/core.products";
 import { coreServices } from "@/data/core.services";
+import { createMetadata } from "@/lib/seo/createMetadata";
 
 type PageProps = {
   params: Promise<{
@@ -28,10 +29,15 @@ export async function generateMetadata({
     };
   }
 
-  return {
+  return createMetadata({
     title: currentProduct.name,
     description: currentProduct.description,
-  };
+    path: `/core-studios/${service}/${productId}`,
+    image: {
+      url: currentProduct.image,
+      alt: currentProduct.name,
+    },
+  });
 }
 
 export async function generateStaticParams() {

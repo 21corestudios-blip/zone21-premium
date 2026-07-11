@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import ProductionCartPage from "@/app/(production)/_components/cart/ProductionCartPage";
+import { noIndexRobots } from "@/lib/seo/createMetadata";
 
 export const metadata: Metadata = {
   title: "Panier",
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/prod/panier",
   },
+  robots: noIndexRobots,
 };
 
 export default function ProductionCartRoutePage() {

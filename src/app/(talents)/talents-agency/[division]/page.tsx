@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import TalentsProductsGrid from "@/app/(talents)/_components/talents/TalentsProductsGrid";
 import { talentDivisions } from "@/data/talents.divisions";
 import { talentsProducts } from "@/data/talents.products";
+import { createMetadata } from "@/lib/seo/createMetadata";
 
 type PageProps = {
   params: Promise<{
@@ -26,10 +27,15 @@ export async function generateMetadata({
     };
   }
 
-  return {
+  return createMetadata({
     title: currentDivision.name,
     description: currentDivision.description,
-  };
+    path: `/talents-agency/${division}`,
+    image: {
+      url: currentDivision.heroImage,
+      alt: currentDivision.name,
+    },
+  });
 }
 
 export async function generateStaticParams() {

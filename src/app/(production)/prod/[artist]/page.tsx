@@ -7,6 +7,7 @@ import ProductionProductsGrid from "@/app/(production)/_components/production/Pr
 import ProductionStorefrontCategories from "@/app/(production)/_components/production/ProductionStorefrontCategories";
 import { productionArtists } from "@/data/production.artists";
 import { productionProducts } from "@/data/production.products";
+import { createMetadata } from "@/lib/seo/createMetadata";
 
 type PageProps = {
   params: Promise<{
@@ -26,10 +27,15 @@ export async function generateMetadata({
     };
   }
 
-  return {
+  return createMetadata({
     title: currentArtist.name,
     description: currentArtist.description,
-  };
+    path: `/prod/${artist}`,
+    image: {
+      url: currentArtist.heroImage,
+      alt: currentArtist.name,
+    },
+  });
 }
 
 export async function generateStaticParams() {

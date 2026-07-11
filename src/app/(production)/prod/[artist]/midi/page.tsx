@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import ProductionStorefrontCategoryPageContent from "@/app/(production)/_components/production/ProductionStorefrontCategoryPageContent";
 import { getProductionArtistStorefrontContext } from "@/app/(production)/_components/production/productionStorefrontPage";
+import { createMetadata } from "@/lib/seo/createMetadata";
 
 type PageProps = {
   params: Promise<{
@@ -20,10 +21,15 @@ export async function generateMetadata({
     return { title: "Catégorie introuvable" };
   }
 
-  return {
+  return createMetadata({
     title: `${context.category.name} - ${context.artist.name}`,
     description: context.category.description,
-  };
+    path: `/prod/${artist}/midi`,
+    image: {
+      url: context.artist.heroImage,
+      alt: `${context.category.name} - ${context.artist.name}`,
+    },
+  });
 }
 
 export default async function ProductionArtistMidiPage({ params }: PageProps) {

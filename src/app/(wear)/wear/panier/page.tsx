@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import WearCartPage from "@/app/(wear)/_components/cart/WearCartPage";
+import { noIndexRobots } from "@/lib/seo/createMetadata";
 
 export const metadata: Metadata = {
   title: "Panier",
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/wear/panier",
   },
+  robots: noIndexRobots,
 };
 
 export default function WearCartRoutePage() {

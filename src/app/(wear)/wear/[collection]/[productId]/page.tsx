@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import WearAddToCartForm from "@/app/(wear)/_components/cart/WearAddToCartForm";
 import { wearCollections } from "@/data/wear.catalog";
 import { formatWearPrice, wearProducts } from "@/data/wear.products";
+import { createMetadata } from "@/lib/seo/createMetadata";
 
 type PageProps = {
   params: Promise<{
@@ -29,10 +30,15 @@ export async function generateMetadata({
     };
   }
 
-  return {
+  return createMetadata({
     title: currentProduct.name,
     description: currentProduct.description,
-  };
+    path: `/wear/${collection}/${productId}`,
+    image: {
+      url: currentProduct.image,
+      alt: currentProduct.name,
+    },
+  });
 }
 
 export async function generateStaticParams() {

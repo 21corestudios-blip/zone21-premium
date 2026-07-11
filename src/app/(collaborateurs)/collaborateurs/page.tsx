@@ -18,11 +18,13 @@ import {
   getActiveBaseState,
   getGovernanceOverview,
   listRdmRecords,
+  serializeRegistry,
   type RdmSortKey,
   type RdmStatusFilter,
   type RdmTypeFilter,
   type SortDirection,
 } from "@/lib/rdm-service";
+import { hasPermission } from "@/lib/rbac";
 
 const sortableColumns: Array<{ label: string; column: RdmSortKey }> = [
   { label: "ID RDM", column: "id" },
@@ -117,10 +119,13 @@ function getTypeBadgeClass(type: string) {
 
 function getStatusBadgeClass(status: string) {
   switch (status) {
-    case "Validé":
+    case "VALIDE":
+    case "PUBLIE":
       return "border-emerald-500/25 bg-emerald-500/10 text-emerald-200";
-    case "Archivé":
+    case "ARCHIVE":
       return "border-white/15 bg-white/6 text-white/68";
+    case "BLOQUE":
+      return "border-rose-500/25 bg-rose-500/10 text-rose-200";
     default:
       return "border-amber-500/25 bg-amber-500/10 text-amber-200";
   }
@@ -158,14 +163,13 @@ function getDecisionBadgeClass(value: string | null) {
 
 function getGovernanceCountBadgeClass(status: string) {
   switch (status) {
-    case "à jour":
+    case "SYNCHRONISE":
       return "border-emerald-500/25 bg-emerald-500/10 text-emerald-200";
-    case "à vérifier":
+    case "A_SYNCHRONISER":
+    case "A_VERIFIER":
       return "border-amber-500/25 bg-amber-500/10 text-amber-200";
-    case "bloqué":
+    case "BLOQUE":
       return "border-rose-500/25 bg-rose-500/10 text-rose-200";
-    case "archivé":
-      return "border-white/15 bg-white/6 text-white/68";
     default:
       return "border-white/15 bg-white/6 text-white/68";
   }
@@ -173,14 +177,13 @@ function getGovernanceCountBadgeClass(status: string) {
 
 function getGovernanceRowClass(status: string) {
   switch (status) {
-    case "à jour":
+    case "SYNCHRONISE":
       return "bg-[linear-gradient(90deg,rgba(16,185,129,0.08)_0,rgba(16,185,129,0.04)_10px,transparent_10px)]";
-    case "à vérifier":
+    case "A_SYNCHRONISER":
+    case "A_VERIFIER":
       return "bg-[linear-gradient(90deg,rgba(245,158,11,0.08)_0,rgba(245,158,11,0.04)_10px,transparent_10px)]";
-    case "bloqué":
+    case "BLOQUE":
       return "bg-[linear-gradient(90deg,rgba(244,63,94,0.08)_0,rgba(244,63,94,0.04)_10px,transparent_10px)]";
-    case "archivé":
-      return "bg-[linear-gradient(90deg,rgba(255,255,255,0.05)_0,rgba(255,255,255,0.02)_10px,transparent_10px)]";
     default:
       return "";
   }
@@ -233,6 +236,8 @@ export default async function CollaboratorsPage({
   ).length;
   const activeBaseState = getActiveBaseState();
   const governanceOverview = getGovernanceOverview(records);
+  const registry = serializeRegistry();
+  const canWriteRdm = hasPermission(session.role, "create");
 
   const exportCsvHref = `/api/rdm/export?${buildQueryString(currentFilters, {
     format: "csv",
@@ -268,9 +273,9 @@ export default async function CollaboratorsPage({
             Accès collaborateurs au registre documentaire central
           </h1>
           <p className="mt-4 max-w-4xl text-sm leading-7 text-white/68 md:text-base">
-            Ce portail reste une interface de consultation, filtrage, export et
-            téléchargement. Il ne modifie jamais les documents maîtres : la
-            source de vérité demeure strictement ZONE21_DEV.
+            Ce portail lit et écrit le registre officiel minimal stocké dans
+            ZONE 21 HOLDING. Le site reste une interface authentifiée : après
+            chaque écriture, Drive demeure la source de vérité.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
@@ -373,33 +378,58 @@ export default async function CollaboratorsPage({
           <div className="mt-4 flex flex-wrap gap-2 text-[0.62rem] uppercase tracking-[0.18em]">
             <span
               className={`rounded-full border px-3 py-1 ${getGovernanceCountBadgeClass(
-                "à jour",
+                "SYNCHRONISE",
               )}`}
             >
-              {governanceOverview.counts["à jour"]} à jour
+              {governanceOverview.counts.SYNCHRONISE} synchronisés
             </span>
             <span
               className={`rounded-full border px-3 py-1 ${getGovernanceCountBadgeClass(
-                "à vérifier",
+                "A_VERIFIER",
               )}`}
             >
-              {governanceOverview.counts["à vérifier"]} à vérifier
+              {governanceOverview.counts.A_VERIFIER} à vérifier
             </span>
             <span
               className={`rounded-full border px-3 py-1 ${getGovernanceCountBadgeClass(
-                "bloqué",
+                "BLOQUE",
               )}`}
             >
-              {governanceOverview.counts["bloqué"]} bloqués
+              {governanceOverview.counts.BLOQUE} bloqués
             </span>
             <span
               className={`rounded-full border px-3 py-1 ${getGovernanceCountBadgeClass(
-                "archivé",
+                "A_SYNCHRONISER",
               )}`}
             >
-              {governanceOverview.counts["archivé"]} archivés
+              {governanceOverview.counts.A_SYNCHRONISER} à synchroniser
             </span>
           </div>
+        </div>
+      </section>
+
+      <section className="grid gap-4 md:grid-cols-4">
+        <div className="rounded-[1.6rem] border border-white/8 bg-panel-alt p-5 md:col-span-2">
+          <p className="text-[0.62rem] uppercase tracking-[0.24em] text-white/35">
+            Registre Drive
+          </p>
+          <p className="mt-3 text-sm leading-6 text-white/72">
+            {registry.reference}
+          </p>
+        </div>
+        <div className="rounded-[1.6rem] border border-white/8 bg-panel-alt p-5">
+          <p className="text-[0.62rem] uppercase tracking-[0.24em] text-white/35">
+            Révision
+          </p>
+          <p className="mt-3 font-serif text-4xl text-paper">
+            {registry.revision}
+          </p>
+        </div>
+        <div className="rounded-[1.6rem] border border-white/8 bg-panel-alt p-5">
+          <p className="text-[0.62rem] uppercase tracking-[0.24em] text-white/35">
+            Statut RDM
+          </p>
+          <p className="mt-3 text-sm text-white/72">{registry.status}</p>
         </div>
       </section>
 
@@ -489,6 +519,131 @@ export default async function CollaboratorsPage({
           </a>
         </div>
       </section>
+
+      {canWriteRdm ? (
+        <section className="rounded-[1.75rem] border border-white/10 bg-panel p-6 shadow-[0_24px_80px_rgba(0,0,0,0.22)]">
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <div>
+              <p className="text-[0.62rem] uppercase tracking-[0.28em] text-white/35">
+                Écriture Drive
+              </p>
+              <h2 className="mt-2 font-serif text-2xl text-paper">
+                Créer une entrée RDM
+              </h2>
+            </div>
+            <span className="rounded-full border border-white/10 px-3 py-1 text-[0.62rem] uppercase tracking-[0.18em] text-white/62">
+              archive automatique
+            </span>
+          </div>
+
+          <form
+            action="/api/rdm"
+            method="post"
+            encType="multipart/form-data"
+            className="mt-6 grid gap-4 lg:grid-cols-2"
+          >
+            <input
+              type="hidden"
+              name="expectedRegistryRevision"
+              value={registry.revision}
+            />
+            <label className="flex flex-col gap-2 text-[0.62rem] uppercase tracking-[0.22em] text-white/42">
+              Référence
+              <input
+                required
+                name="reference"
+                placeholder="NOTE-Z21H-GOV-EXEMPLE-v1.0"
+                className="rounded-full border border-white/10 bg-bg px-4 py-3 text-sm normal-case tracking-normal text-paper outline-none transition-colors focus:border-accent/55"
+              />
+            </label>
+            <label className="flex flex-col gap-2 text-[0.62rem] uppercase tracking-[0.22em] text-white/42">
+              Titre
+              <input
+                required
+                name="title"
+                className="rounded-full border border-white/10 bg-bg px-4 py-3 text-sm normal-case tracking-normal text-paper outline-none transition-colors focus:border-accent/55"
+              />
+            </label>
+            <label className="flex flex-col gap-2 text-[0.62rem] uppercase tracking-[0.22em] text-white/42">
+              Nature
+              <select
+                name="type"
+                defaultValue="NOTE"
+                className="rounded-full border border-white/10 bg-bg px-4 py-3 text-sm normal-case tracking-normal text-paper outline-none transition-colors focus:border-accent/55"
+              >
+                {["RDM", "CH", "ENT", "GOV", "BR", "REF", "PROC", "NOTE", "MOD", "REG", "DEC", "AUD"].map((item) => (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="flex flex-col gap-2 text-[0.62rem] uppercase tracking-[0.22em] text-white/42">
+              Statut
+              <select
+                name="status"
+                defaultValue="BROUILLON"
+                className="rounded-full border border-white/10 bg-bg px-4 py-3 text-sm normal-case tracking-normal text-paper outline-none transition-colors focus:border-accent/55"
+              >
+                {["A_CREER", "BROUILLON", "VALIDE", "PUBLIE", "ARCHIVE", "A_VERIFIER", "BLOQUE"].map((item) => (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="flex flex-col gap-2 text-[0.62rem] uppercase tracking-[0.22em] text-white/42">
+              Version
+              <input
+                name="version"
+                defaultValue="v1.0"
+                className="rounded-full border border-white/10 bg-bg px-4 py-3 text-sm normal-case tracking-normal text-paper outline-none transition-colors focus:border-accent/55"
+              />
+            </label>
+            <label className="flex flex-col gap-2 text-[0.62rem] uppercase tracking-[0.22em] text-white/42">
+              Entité
+              <input
+                required
+                name="ownerEntity"
+                defaultValue="Z21H"
+                className="rounded-full border border-white/10 bg-bg px-4 py-3 text-sm normal-case tracking-normal text-paper outline-none transition-colors focus:border-accent/55"
+              />
+            </label>
+            <label className="flex flex-col gap-2 text-[0.62rem] uppercase tracking-[0.22em] text-white/42">
+              Chemin DOCX
+              <input
+                name="docxPath"
+                placeholder="/ZONE 21 HOLDING/.../01_DOCX/fichier.docx"
+                className="rounded-full border border-white/10 bg-bg px-4 py-3 text-sm normal-case tracking-normal text-paper outline-none transition-colors focus:border-accent/55"
+              />
+            </label>
+            <label className="flex flex-col gap-2 text-[0.62rem] uppercase tracking-[0.22em] text-white/42">
+              Chemin PDF
+              <input
+                name="pdfPath"
+                placeholder="/ZONE 21 HOLDING/.../02_PDF/fichier.pdf"
+                className="rounded-full border border-white/10 bg-bg px-4 py-3 text-sm normal-case tracking-normal text-paper outline-none transition-colors focus:border-accent/55"
+              />
+            </label>
+            <label className="flex flex-col gap-2 text-[0.62rem] uppercase tracking-[0.22em] text-white/42 lg:col-span-2">
+              Notes
+              <textarea
+                name="observations"
+                rows={3}
+                className="rounded-[1.25rem] border border-white/10 bg-bg px-4 py-3 text-sm normal-case tracking-normal text-paper outline-none transition-colors focus:border-accent/55"
+              />
+            </label>
+            <div className="lg:col-span-2">
+              <button
+                type="submit"
+                className="rounded-full border border-accent/55 bg-accent/12 px-5 py-3 text-[0.64rem] uppercase tracking-[0.24em] text-paper transition-colors duration-500 hover:bg-accent/20"
+              >
+                Créer dans Drive
+              </button>
+            </div>
+          </form>
+        </section>
+      ) : null}
 
       <section className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-panel shadow-[0_20px_70px_rgba(0,0,0,0.24)]">
         <div className="flex items-center justify-between gap-4 border-b border-white/8 px-6 py-5">

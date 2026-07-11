@@ -2,11 +2,8 @@ import { permissions, type CollaboratorRole, type Permission } from "./permissio
 import type { DownloadFormat, RdmRecord } from "./rdm-types";
 
 const rolePermissions: Record<CollaboratorRole, Permission[]> = {
-  direction: [...permissions],
-  admin_documentaire: [...permissions],
-  validateur: ["read", "download", "create", "edit", "submit", "validate"],
-  editeur: ["read", "download", "create", "edit", "submit"],
-  contributeur: ["read", "download", "create", "submit"],
+  admin: [...permissions],
+  editeur: ["read", "download", "create", "edit"],
   lecteur: ["read", "download"],
 };
 

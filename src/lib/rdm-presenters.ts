@@ -22,14 +22,13 @@ export function getGovernanceSyncLabel(record: RdmRecord) {
 
 export function getGovernanceSyncClasses(status: GovernanceSyncStatus) {
   switch (status) {
-    case "à jour":
+    case "SYNCHRONISE":
       return "border-emerald-500/25 bg-emerald-500/10 text-emerald-200";
-    case "à vérifier":
+    case "A_SYNCHRONISER":
+    case "A_VERIFIER":
       return "border-amber-500/25 bg-amber-500/10 text-amber-200";
-    case "bloqué":
+    case "BLOQUE":
       return "border-rose-500/25 bg-rose-500/10 text-rose-200";
-    case "archivé":
-      return "border-white/10 bg-white/6 text-white/65";
     default:
       return "border-white/10 bg-white/6 text-white/65";
   }

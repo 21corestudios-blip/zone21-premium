@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import ProductionProductExperience from "@/app/(production)/_components/production/ProductionProductExperience";
 import { productionArtists } from "@/data/production.artists";
 import { productionProducts } from "@/data/production.products";
+import { createMetadata } from "@/lib/seo/createMetadata";
 
 type PageProps = {
   params: Promise<{
@@ -26,10 +27,15 @@ export async function generateMetadata({
     };
   }
 
-  return {
+  return createMetadata({
     title: currentProduct.name,
     description: currentProduct.description,
-  };
+    path: `/prod/${artist}/${productId}`,
+    image: {
+      url: currentProduct.image,
+      alt: currentProduct.name,
+    },
+  });
 }
 
 export async function generateStaticParams() {

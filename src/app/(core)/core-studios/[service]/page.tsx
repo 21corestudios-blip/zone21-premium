@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import CoreProductsGrid from "@/app/(core)/_components/core/CoreProductsGrid";
 import { coreProducts } from "@/data/core.products";
 import { coreServices } from "@/data/core.services";
+import { createMetadata } from "@/lib/seo/createMetadata";
 
 const serviceDescriptions: Record<string, string> = {
   "brand-design":
@@ -38,44 +39,22 @@ export async function generateMetadata({
     serviceDescriptions[currentService.slug] || currentService.description;
   const canonical = `/core-studios/${currentService.slug}`;
 
-  return {
+  return createMetadata({
     title,
+    socialTitle: `${currentService.name} | Core Studios`,
     description,
-    alternates: {
-      canonical,
-    },
-    openGraph: {
-      title: `${currentService.name} | Core Studios`,
-      description,
-      url: canonical,
-      siteName: "ARCANE",
-      locale: "fr_FR",
-      type: "website",
-      images: [
-        {
-          url: currentService.heroImage,
-          width: 2048,
-          height: 1136,
-          alt: `${currentService.name} - Core Studios`,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: `${currentService.name} | Core Studios`,
-      description,
-      images: [
-        {
-          url: currentService.heroImage,
-          alt: `${currentService.name} - Core Studios`,
-        },
-      ],
+    path: canonical,
+    image: {
+      url: currentService.heroImage,
+      width: 2048,
+      height: 1136,
+      alt: `${currentService.name} - Core Studios`,
     },
     robots: {
       index: true,
       follow: true,
     },
-  };
+  });
 }
 
 export async function generateStaticParams() {

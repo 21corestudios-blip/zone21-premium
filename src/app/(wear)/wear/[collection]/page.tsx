@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import WearProductsGrid from "@/app/(wear)/_components/wear/WearProductsGrid";
 import { wearCollections } from "@/data/wear.catalog";
 import { wearProducts } from "@/data/wear.products";
+import { createMetadata } from "@/lib/seo/createMetadata";
 
 const collectionDescriptions: Record<string, string> = {
   classic:
@@ -59,44 +60,22 @@ export async function generateMetadata({
     currentCollection.description;
   const canonical = `/wear/${currentCollection.slug}`;
 
-  return {
+  return createMetadata({
     title,
+    socialTitle: `${currentCollection.name} | ${brandName}`,
     description,
-    alternates: {
-      canonical,
-    },
-    openGraph: {
-      title: `${currentCollection.name} | ${brandName}`,
-      description,
-      url: canonical,
-      siteName: "ARCANE",
-      locale: "fr_FR",
-      type: "website",
-      images: [
-        {
-          url: currentCollection.heroImage,
-          width: 2048,
-          height: 1136,
-          alt: `${currentCollection.name} - ${brandName}`,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: `${currentCollection.name} | ${brandName}`,
-      description,
-      images: [
-        {
-          url: currentCollection.heroImage,
-          alt: `${currentCollection.name} - ${brandName}`,
-        },
-      ],
+    path: canonical,
+    image: {
+      url: currentCollection.heroImage,
+      width: 2048,
+      height: 1136,
+      alt: `${currentCollection.name} - ${brandName}`,
     },
     robots: {
       index: true,
       follow: true,
     },
-  };
+  });
 }
 
 export async function generateStaticParams() {

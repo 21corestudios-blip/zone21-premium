@@ -1,11 +1,4 @@
-export const collaboratorRoles = [
-  "direction",
-  "admin_documentaire",
-  "validateur",
-  "editeur",
-  "contributeur",
-  "lecteur",
-] as const;
+export const collaboratorRoles = ["lecteur", "editeur", "admin"] as const;
 
 export type CollaboratorRole = (typeof collaboratorRoles)[number];
 
@@ -14,7 +7,6 @@ export const permissions = [
   "download",
   "create",
   "edit",
-  "submit",
   "validate",
   "archive",
   "manage_access",
@@ -30,35 +22,20 @@ export const roleDetails: Record<
     accent: string;
   }
 > = {
-  direction: {
-    label: "Direction",
-    summary: "Vue stratégique complète et arbitrages sensibles.",
-    accent: "text-accent-soft",
-  },
-  admin_documentaire: {
-    label: "Admin documentaire",
-    summary: "Pilotage du registre, gouvernance documentaire et accès.",
-    accent: "text-accent-soft",
-  },
-  validateur: {
-    label: "Validateur",
-    summary: "Contrôle, validation et suivi des documents clés.",
-    accent: "text-text",
+  lecteur: {
+    label: "Lecteur",
+    summary: "Consultation du RDM et ouverture des fichiers autorisés.",
+    accent: "text-white/80",
   },
   editeur: {
     label: "Éditeur",
-    summary: "Production, mise à jour et préparation des contenus.",
+    summary: "Création et modification des entrées RDM avec archivage automatique.",
     accent: "text-text",
   },
-  contributeur: {
-    label: "Contributeur",
-    summary: "Contribution encadrée et soumission des évolutions.",
-    accent: "text-text",
-  },
-  lecteur: {
-    label: "Lecteur",
-    summary: "Consultation et téléchargement sur périmètre autorisé.",
-    accent: "text-white/80",
+  admin: {
+    label: "Admin",
+    summary: "Validation, archivage, droits et résolution des erreurs de synchronisation.",
+    accent: "text-accent-soft",
   },
 };
 
@@ -67,7 +44,6 @@ export const permissionLabels: Record<Permission, string> = {
   download: "Téléchargement",
   create: "Création",
   edit: "Édition",
-  submit: "Soumission",
   validate: "Validation",
   archive: "Archivage",
   manage_access: "Gestion des accès",

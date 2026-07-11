@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import TalentsAddToCartForm from "@/app/(talents)/_components/cart/TalentsAddToCartForm";
 import { talentDivisions } from "@/data/talents.divisions";
 import { formatTalentsPrice, talentsProducts } from "@/data/talents.products";
+import { createMetadata } from "@/lib/seo/createMetadata";
 
 type PageProps = {
   params: Promise<{
@@ -28,10 +29,15 @@ export async function generateMetadata({
     };
   }
 
-  return {
+  return createMetadata({
     title: currentProduct.name,
     description: currentProduct.description,
-  };
+    path: `/talents-agency/${division}/${productId}`,
+    image: {
+      url: currentProduct.image,
+      alt: currentProduct.name,
+    },
+  });
 }
 
 export async function generateStaticParams() {

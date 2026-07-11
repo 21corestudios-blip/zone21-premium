@@ -1,7 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://zone-21.fr")
-  .replace(/\/$/, "");
+import { siteConfig } from "@/config/site";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -10,13 +9,21 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: [
         "/api/",
+        "/admin/",
+        "/preview/",
         "/wear/panier",
         "/wear/checkout",
         "/core-studios/panier",
+        "/prod/panier",
+        "/talents-agency/panier",
+        "/collaborateurs",
         "/ged/",
         "/rdm/",
+        "/account/",
+        "/commande/",
+        "/*?preview=*",
       ],
     },
-    sitemap: `${siteUrl}/sitemap.xml`,
+    sitemap: `${siteConfig.url}/sitemap.xml`,
   };
 }

@@ -16,7 +16,7 @@ export interface WearData {
 export const wearData: WearData = {
   hero: {
     title: "L'Essence de la Matière",
-    image: "/images/brands/21-wear/z21-21-wear-hero-1.webp",
+    image: "/images/brands/21-wear/BLONDE T-SHIRT ROSE 16-9.jpg",
   },
   collections: [
     {

@@ -65,6 +65,8 @@ export type HeroBlok = Z21Blok<
     imageAlt?: string;
     imageDesktopAlt?: string;
     imageMobileAlt?: string;
+    imageDesktopClassName?: string;
+    imageMobileClassName?: string;
     priority?: boolean;
     variant?: "home" | "brand" | "editorial";
   }

@@ -1,41 +1,32 @@
+import { siteConfig } from "@/config/site";
+
 import JsonLd from "./JsonLd";
 
-type OrganizationJsonLdProps = {
-  siteUrl: string;
-};
-
-function withoutTrailingSlash(value: string) {
-  return value.replace(/\/$/, "");
-}
-
-export default function OrganizationJsonLd({
-  siteUrl,
-}: OrganizationJsonLdProps) {
-  const normalizedSiteUrl = withoutTrailingSlash(siteUrl);
-  const organizationId = `${normalizedSiteUrl}/#organization`;
-  const websiteId = `${normalizedSiteUrl}/#website`;
+export default function OrganizationJsonLd() {
+  const organizationId = `${siteConfig.url}/#organization`;
+  const websiteId = `${siteConfig.url}/#website`;
 
   return (
     <JsonLd
-      id="zone21-organization-jsonld"
+      id="arcane-organization-jsonld"
       data={{
         "@context": "https://schema.org",
         "@graph": [
           {
             "@type": "Organization",
             "@id": organizationId,
-            name: "ARCANE",
-            url: normalizedSiteUrl,
-            logo: `${normalizedSiteUrl}/images/ui/Z21_logo-01.svg`,
-            description:
-              "Maison créative indépendante dédiée aux univers premium entre vêtement, image, musique, production, talents et culture street.",
+            name: siteConfig.name,
+            legalName: siteConfig.legalName,
+            url: siteConfig.url,
+            logo: `${siteConfig.url}${siteConfig.logo}`,
+            description: siteConfig.description,
           },
           {
             "@type": "WebSite",
             "@id": websiteId,
-            url: normalizedSiteUrl,
-            name: "ARCANE",
-            inLanguage: "fr-FR",
+            url: siteConfig.url,
+            name: siteConfig.name,
+            inLanguage: siteConfig.language,
             publisher: {
               "@id": organizationId,
             },
