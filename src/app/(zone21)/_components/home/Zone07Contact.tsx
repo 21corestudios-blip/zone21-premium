@@ -10,7 +10,7 @@ export default function Zone07Contact() {
         "ARCANE reçoit chaque prise de contact avec exigence, discrétion et attention. Demande de création sur mesure, projet éditorial, direction artistique, image, musique, talent ou développement de marque : chaque échange est traité comme un point d’entrée sérieux.",
         "Entrer dans la Zone, c’est ouvrir un espace de travail où la vision, la stratégie et la production avancent ensemble. Avec précision, avec tenue, et avec le souci de créer quelque chose qui garde sa force dans le temps.",
       ]}
-      imageSrc="/images/home/z21-home-section-univers-01-6.webp"
+      imageSrc="/images/home/Image_entrez_dans_la_zone_0001_1_1.webp"
       imageAlt="Entrer dans la ARCANE"
       imagePosition="right"
       theme="light"

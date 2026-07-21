@@ -11,7 +11,7 @@ export default function EditorialManifesto() {
       paragraphs={paragraphs}
       imageSrc={image.src}
       imageAlt={image.alt}
-      imagePosition="right"
+      imagePosition="left"
       theme="light"
       sectionClassName="bg-white"
       imageClassName="object-contain object-center"

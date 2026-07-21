@@ -34,7 +34,7 @@ export const homeData: HomeData = {
   hero: {
     title: "L'Exigence pour Signature",
     imageDesktop: {
-      src: "/images/home/hero/ARC-hero-accueil-0002.webp",
+      src: "/images/home/hero/Image_hero_0003_16_9.webp",
       alt: "Campagne ARCANE, maison créative indépendante",
     },
     imageMobile: {
@@ -46,7 +46,7 @@ export const homeData: HomeData = {
   manifesto: {
     tagline: "Jamais dans la tendance. Toujours dans la bonne direction.",
     image: {
-      src: "/images/editorial/ARC-manifeste-accueil-0004.webp",
+      src: "/images/editorial/Image_manifesto_0001_1-1.webp",
       alt: "Vision éditoriale ARCANE entre image, vêtement et narration",
     },
     paragraphs: [

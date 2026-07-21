@@ -3,7 +3,7 @@ import ImmersiveImageSection from "./shared/ImmersiveImageSection";
 export default function Zone06Image() {
   return (
     <ImmersiveImageSection
-      src="/images/home/ARC-image-1-accueil-0001.webp"
+      src="/images/home/Image_zone_06_0002_16_9.webp"
       alt=""
       backgroundClassName="bg-white"
       imageClassName="object-cover object-[center_1%]"
