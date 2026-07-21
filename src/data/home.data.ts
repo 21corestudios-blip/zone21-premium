@@ -249,7 +249,7 @@ export const homeData: HomeData = {
         alt: "BACKSPIN, studio sonore et production musicale",
       },
       logo: {
-        src: "/images/ui/backspin-logo-blanc-noir.svg",
+        src: "/images/ui/BACKSPIN_LOGO_PRINCIPAL_ROUGE-SUR-BLANC_v2.svg",
         alt: "BACKSPIN",
       },
       href: "/prod",

@@ -27,6 +27,7 @@ Les chemins d'images de plusieurs sections existaient a la fois dans le fallback
 - Suppression du doublon `contact 2.jpg` apres remplacement par `contact.jpg`.
 - Suppression de deux images identiques non referencees par hash.
 - Ajout du script `npm run assets:audit`.
+- Remplacement des anciens logos ARCANE par le lot institutionnel V2 valide.
 
 ## Brands prises en compte
 
@@ -35,7 +36,7 @@ Les chemins d'images de plusieurs sections existaient a la fois dans le fallback
 | CO-KAIN | wear | `/wear` | `/images/ui/cokain-logo-blanc.svg` |
 | EKKO | talents | `/talents-agency` | `/images/ui/ekko-logo-couleur-blanc.svg` |
 | CYPHER | events | `/contact` provisoire | `/images/ui/cypher-logo-couleur-blanc.svg` |
-| BACKSPIN | music | `/prod` | `/images/ui/backspin-logo-blanc-noir.svg` |
+| BACKSPIN | music | `/prod` | `/images/ui/BACKSPIN_LOGO_PRINCIPAL_ROUGE-SUR-BLANC_v2.svg` |
 | CORE STUDIOS | design | `/core-studios` | `/images/ui/core-studios-logo-couleur-blanc.svg` |
 
 `CYPHER` est integre dans l'ecosysteme, mais il n'existe pas encore de route locale `/events`. Le lien pointe donc provisoirement vers `/contact` pour eviter une 404.
@@ -52,8 +53,8 @@ Resultat :
 
 - references cassees : 0 ;
 - doublons par hash : 0 ;
-- fichiers publics : 154 ;
-- assets publics references : 61.
+- fichiers publics : 152 ;
+- assets publics references : 59.
 
 ## Reste a arbitrer
 

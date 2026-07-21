@@ -103,11 +103,11 @@ export default function NavigationDrawer({
             className="transition-opacity duration-500 hover:opacity-80"
           >
             <Image
-              src="/images/ui/Z21_logo-01.svg"
+              src="/images/ui/ARCANE_LOGO_PRINCIPAL_BLANC_v2.svg"
               alt="ARCANE"
-              width={500}
-              height={500}
-              className="h-[50px] w-[50px] object-contain"
+              width={6250}
+              height={919}
+              className="h-auto w-40 object-contain"
             />
           </Link>
 
