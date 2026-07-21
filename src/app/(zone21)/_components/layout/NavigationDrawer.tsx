@@ -41,7 +41,7 @@ export default function NavigationDrawer({
   const houses = homeData.maisons.map((house) => ({
     name: house.name,
     href: house.href,
-    category: house.category,
+    category: `${house.section} · ${house.category}`,
   }));
 
   useEffect(() => {

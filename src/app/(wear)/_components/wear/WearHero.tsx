@@ -8,7 +8,7 @@ export default function WearHero() {
       <div className="absolute inset-0 z-0">
         <Image
           src={wearData.hero.image}
-          alt="Campagne 21 Wear"
+          alt="Campagne CO-KAIN"
           fill
           priority
           quality={100}

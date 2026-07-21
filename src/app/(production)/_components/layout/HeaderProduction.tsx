@@ -46,8 +46,8 @@ export default function HeaderProduction() {
               className="flex h-20 w-20 flex-shrink-0 items-center justify-center drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-opacity duration-500 hover:opacity-80"
             >
               <Image
-                src="/images/ui/BACKSPIN_header_blanc_500px_01.svg"
-                alt="ARCANE"
+                src="/images/ui/backspin-logo-blanc-noir.svg"
+                alt="BACKSPIN"
                 width={500}
                 height={500}
                 priority

@@ -20,8 +20,8 @@ export default function FooterTalents() {
               className="inline-flex h-30 w-30 items-center justify-center transition-opacity duration-500 hover:opacity-80"
             >
               <Image
-                src="/images/ui/EKKO_blanc_500px.svg"
-                alt="ARCANE"
+                src="/images/ui/ekko-logo-couleur-blanc.svg"
+                alt="EKKO"
                 width={500}
                 height={500}
                 className="h-30 w-30 object-contain"

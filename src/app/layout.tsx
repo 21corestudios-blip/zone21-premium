@@ -28,7 +28,7 @@ const defaultTitle = "ARCANE | L'Exigence pour Signature";
 const defaultDescription =
   "ARCANE est une maison créative indépendante dédiée aux univers premium entre vêtement, image, musique, production, talents et culture street.";
 const defaultOgImage = {
-  url: "/images/home/hero/z21-home-hero-main-01-desktop-7.webp",
+  url: "/images/home/hero/Image_hero_0003_16_9.webp",
   width: 2048,
   height: 1136,
   alt: "ARCANE - maison créative indépendante",
@@ -55,8 +55,9 @@ export const metadata: Metadata = {
     "talents créatifs",
     "univers créatif",
     "narration de marque",
-    "21 Wear",
-    "Core Studios",
+    "CO-KAIN",
+    "CYPHER",
+    "CORE STUDIOS",
     "BACKSPIN",
     "creative house",
     "creative studio",

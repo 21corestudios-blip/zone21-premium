@@ -46,8 +46,8 @@ export default function HeaderTalents() {
               className="flex h-20 w-20 flex-shrink-0 items-center justify-center drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-opacity duration-500 hover:opacity-80"
             >
               <Image
-                src="/images/ui/EKKO_header_blanc_500px.svg"
-                alt="ARCANE"
+                src="/images/ui/ekko-logo-couleur-blanc.svg"
+                alt="EKKO"
                 width={500}
                 height={500}
                 priority

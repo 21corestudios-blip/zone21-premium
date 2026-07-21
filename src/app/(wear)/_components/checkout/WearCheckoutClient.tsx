@@ -152,7 +152,7 @@ export default function WearCheckoutClient() {
     return (
       <section className="mx-auto flex min-h-[60vh] w-full max-w-4xl flex-col items-center justify-center px-6 py-24 text-center md:px-12">
         <p className="font-sans text-[0.68rem] uppercase tracking-[0.3em] text-bg/45">
-          21 Wear Checkout
+          CO-KAIN Checkout
         </p>
         <h1 className="mt-6 font-serif text-4xl leading-none text-bg md:text-5xl">
           Ton panier est vide
@@ -181,7 +181,7 @@ export default function WearCheckoutClient() {
             href="/wear"
             className="transition-colors duration-300 hover:text-bg"
           >
-            21 Wear
+            CO-KAIN
           </Link>
           <span>/</span>
           <Link
@@ -209,7 +209,7 @@ export default function WearCheckoutClient() {
             <span className="h-3 w-px bg-bg/12" />
             <span>Paiement sécurisé Stripe</span>
             <span className="h-3 w-px bg-bg/12" />
-            <span>Interface 21 Wear</span>
+            <span>Interface CO-KAIN</span>
           </div>
         </div>
       </div>
@@ -447,7 +447,7 @@ export default function WearCheckoutClient() {
                 </p>
                 <p className="mt-2 font-sans text-sm font-light leading-relaxed text-bg/66">
                   Saisie sécurisée de la carte et des moyens de paiement via
-                  Stripe Elements, sans sortir de l’univers 21 Wear.
+                  Stripe Elements, sans sortir de l’univers CO-KAIN.
                 </p>
               </div>
 

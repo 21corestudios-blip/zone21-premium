@@ -64,7 +64,7 @@ export const talentsProducts: TalentsProduct[] = [
     division: "fashion-luxury",
     name: "Brand Match Selection",
     kind: "Brand Matchmaking",
-    image: "/images/brands/21-core/studio-1.webp",
+    image: "/images/brands/21-core/z21-21-core-studios-brand-design-grid.webp",
     priceCents: 72000,
     currency: "EUR",
     shortDescription:
@@ -85,7 +85,7 @@ export const talentsProducts: TalentsProduct[] = [
     division: "lifestyle-hospitality",
     name: "Campaign Story Kit",
     kind: "Campaign Package",
-    image: "/images/editorial/manifesto-vision.jpg",
+    image: "/images/editorial/Image_manifesto_0001_1-1.webp",
     priceCents: 64000,
     currency: "EUR",
     shortDescription:
@@ -106,7 +106,7 @@ export const talentsProducts: TalentsProduct[] = [
     division: "lifestyle-hospitality",
     name: "Hospitality Profile Kit",
     kind: "Talent Kit",
-    image: "/images/contact/contact 2.jpg",
+    image: "/images/contact/contact.jpg",
     priceCents: 29000,
     currency: "EUR",
     shortDescription:
@@ -127,7 +127,7 @@ export const talentsProducts: TalentsProduct[] = [
     division: "sport-performance",
     name: "Endorsement Setup",
     kind: "Consulting",
-    image: "/images/home/hero/campaign-spring-26-hero.jpg",
+    image: "/images/home/hero/Image_hero_0003_16_9.webp",
     priceCents: 56000,
     currency: "EUR",
     shortDescription:
@@ -148,7 +148,7 @@ export const talentsProducts: TalentsProduct[] = [
     division: "culture-digital",
     name: "Digital Growth Sprint",
     kind: "Campaign Package",
-    image: "/images/brands/21-production/prod-1.jpg",
+    image: "/images/brands/21-production/z21-21-production-hero.webp",
     priceCents: 84000,
     currency: "EUR",
     shortDescription:

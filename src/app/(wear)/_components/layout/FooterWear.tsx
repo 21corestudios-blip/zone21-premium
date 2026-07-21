@@ -16,12 +16,12 @@ export default function FooterWear() {
           <div className="flex flex-col gap-8 md:col-span-8">
             <Link
               href="/wear"
-              aria-label="Retour à l’accueil 21 Wear"
+              aria-label="Retour à l’accueil CO-KAIN"
               className="inline-flex h-30 w-30 items-center justify-center transition-opacity duration-500 hover:opacity-80"
             >
               <Image
-                src="/images/ui/Z21_21_WEAR_logo-01.svg"
-                alt="ARCANE"
+                src="/images/ui/cokain-logo-blanc.svg"
+                alt="CO-KAIN"
                 width={500}
                 height={500}
                 className="h-30 w-30 object-contain"
@@ -29,7 +29,7 @@ export default function FooterWear() {
             </Link>
 
             <p className="max-w-sm font-sans text-sm font-light leading-relaxed text-white/60 md:text-base">
-              La maison de prêt-à-porter de l’écosystème ARCANE.
+              La maison wear de l’écosystème ARCANE.
             </p>
 
             <form
@@ -65,7 +65,7 @@ export default function FooterWear() {
 
           <div className="flex flex-col gap-6 md:col-span-4 md:pl-12">
             <span className="mb-2 font-sans text-[13px] font-bold uppercase tracking-[0.2em] text-white/48">
-              21 Wear
+              CO-KAIN
             </span>
 
             <Link href="/wear/classic" className={footerLinkClassName}>
@@ -92,7 +92,7 @@ export default function FooterWear() {
 
         <div className="flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 text-center md:flex-row md:text-left">
           <span className="font-sans text-[0.65rem] uppercase tracking-widest text-white/30">
-            © {currentYear} 21 Wear. Tous droits réservés.
+            © {currentYear} CO-KAIN. Tous droits réservés.
           </span>
 
           <span className="font-sans text-[0.65rem] uppercase tracking-widest text-white/30">

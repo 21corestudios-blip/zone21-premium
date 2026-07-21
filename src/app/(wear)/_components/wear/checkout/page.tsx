@@ -3,8 +3,8 @@ import type { Metadata } from 'next';
 import CheckoutPageContent from '@/app/(wear)/_components/checkout/CheckoutPageContent';
 
 export const metadata: Metadata = {
-  title: 'Checkout | 21 Wear',
-  description: 'Finalisez votre commande 21 Wear avant redirection vers le paiement sécurisé.',
+  title: 'Checkout | CO-KAIN',
+  description: 'Finalisez votre commande CO-KAIN avant redirection vers le paiement sécurisé.',
   robots: {
     index: false,
     follow: false,

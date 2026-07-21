@@ -46,12 +46,12 @@ export default function HeaderCore() {
               className="flex h-20 w-20 flex-shrink-0 items-center justify-center drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-opacity duration-500 hover:opacity-80"
             >
               <Image
-                src="/images/ui/Z21_21_core_studios_logo-01.svg"
+                src="/images/ui/core-studios-logo-couleur-blanc.svg"
                 alt="Core Studios"
                 width={500}
                 height={500}
                 priority
-                className="h-20 w-20 object-contain"
+                className="h-16 w-28 object-contain"
               />
             </Link>
 
