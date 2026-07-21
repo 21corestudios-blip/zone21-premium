@@ -26,7 +26,7 @@ export default function OrganizationJsonLd({
             "@id": organizationId,
             name: "ARCANE",
             url: normalizedSiteUrl,
-            logo: `${normalizedSiteUrl}/images/ui/Z21_logo-01.svg`,
+            logo: `${normalizedSiteUrl}/images/ui/ARCANE_LOGO_PRINCIPAL_BLANC_v2.svg`,
             description:
               "Maison créative indépendante dédiée aux univers premium entre vêtement, image, musique, production, talents et culture street.",
           },

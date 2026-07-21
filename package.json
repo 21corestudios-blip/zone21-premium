@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
+    "assets:audit": "tsx scripts/audit-assets.ts",
     "commerce:migrate": "tsx scripts/commerce-migrate.ts",
     "commerce:staging:check": "tsx scripts/commerce-staging-check.ts",
     "commerce:seed:wear-mappings": "tsx scripts/commerce-seed-wear-mappings.ts",

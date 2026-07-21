@@ -83,7 +83,7 @@ export default function ContactContent() {
         <div className="grid min-h-[52vh] grid-cols-1 lg:min-h-screen lg:grid-rows-[1fr_auto]">
           <div className="relative hidden overflow-hidden lg:block">
             <Image
-              src="/images/contact/contact 2.jpg"
+              src="/images/contact/contact.jpg"
               alt="Studio ARCANE"
               fill
               sizes="50vw"

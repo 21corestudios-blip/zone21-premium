@@ -43,15 +43,15 @@ export default function HeaderProduction() {
             <Link
               href="/prod"
               aria-label="Retour à l’accueil BACKSPIN"
-              className="flex h-20 w-20 flex-shrink-0 items-center justify-center drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-opacity duration-500 hover:opacity-80"
+              className="flex h-20 w-40 flex-shrink-0 items-center justify-center drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-opacity duration-500 hover:opacity-80"
             >
               <Image
-                src="/images/ui/BACKSPIN_header_blanc_500px_01.svg"
-                alt="ARCANE"
-                width={500}
-                height={500}
+                src="/images/ui/BACKSPIN_LOGO_PRINCIPAL_ROUGE-SUR-BLANC_v2.svg"
+                alt="BACKSPIN"
+                width={6250}
+                height={1753}
                 priority
-                className="h-20 w-20 object-contain"
+                className="h-auto w-40 object-contain"
               />
             </Link>
 

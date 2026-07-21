@@ -42,12 +42,12 @@ export default function HeaderWear() {
           <div className="flex items-center gap-10 lg:gap-14">
             <Link
               href="/wear"
-              aria-label="Retour à l’accueil 21 Wear"
+              aria-label="Retour à l’accueil CO-KAIN"
               className="flex h-20 w-20 flex-shrink-0 items-center justify-center drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-opacity duration-500 hover:opacity-80"
             >
               <Image
-                src="/images/ui/Z21_21_WEAR_logo-01.svg"
-                alt="ARCANE"
+                src="/images/ui/cokain-logo-blanc.svg"
+                alt="CO-KAIN"
                 width={500}
                 height={500}
                 priority
@@ -57,7 +57,7 @@ export default function HeaderWear() {
 
             <nav
               className="hidden items-center gap-5 lg:flex"
-              aria-label="Collections 21 Wear"
+              aria-label="Collections CO-KAIN"
             >
               <Link href="/wear/classic" className={collectionLinkClassName}>
                 Classic
@@ -77,7 +77,7 @@ export default function HeaderWear() {
           <div className="flex items-center gap-4 md:gap-6 lg:gap-8">
             <nav
               className="hidden items-center gap-6 md:flex lg:gap-8"
-              aria-label="Navigation 21 Wear"
+              aria-label="Navigation CO-KAIN"
             >
               <Link href="/" className={linkClassName}>
                 ARCANE
@@ -106,7 +106,7 @@ export default function HeaderWear() {
             <Link
               href="/wear/panier"
               className="inline-flex h-11 min-w-11 items-center justify-center border border-white/18 px-3 font-serif text-[0.68rem] uppercase tracking-[0.18em] text-white/90 drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-colors duration-300 hover:border-white/35 hover:bg-white hover:text-bg sm:gap-3 sm:px-4 sm:py-2"
-              aria-label="Voir le panier 21 Wear"
+              aria-label="Voir le panier CO-KAIN"
             >
               <span className="hidden sm:inline">Panier</span>
               <span className="inline-flex min-w-6 items-center justify-center border-l border-current/20 px-2 py-1 font-sans text-[0.58rem] tracking-[0.18em]">

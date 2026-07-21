@@ -20,11 +20,11 @@ export default function FooterCore() {
               className="inline-flex h-30 w-30 items-center justify-center transition-opacity duration-500 hover:opacity-80"
             >
               <Image
-                src="/images/ui/Z21_21_core_studios_logo-01.svg"
-                alt="ARCANE"
+                src="/images/ui/core-studios-logo-couleur-blanc.svg"
+                alt="Core Studios"
                 width={500}
                 height={500}
-                className="h-30 w-30 object-contain"
+                className="h-20 w-40 object-contain"
               />
             </Link>
 

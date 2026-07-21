@@ -10,15 +10,15 @@ const collectionDescriptions: Record<string, string> = {
   classic:
     "CO-KAIN Classic Collection: t-shirts, hoodies et casquettes en premium streetwear sobre, cadrés pour un test POD Gelato sur le site ZONE 21.",
   urban:
-    "Urban Collection par 21 Wear: silhouettes confortables, volumes précis et énergie street pour une présence premium au quotidien, mobile et affirmée.",
+    "Urban Collection par CO-KAIN: silhouettes confortables, volumes précis et énergie street pour une présence premium au quotidien, mobile et affirmée.",
   heritage:
-    "Heritage Collection par 21 Wear: mémoire des coupes, matières choisies et direction contemporaine pour un vestiaire premium affirmé, sobre et durable.",
+    "Heritage Collection par CO-KAIN: mémoire des coupes, matières choisies et direction contemporaine pour un vestiaire premium affirmé, sobre et durable.",
   studio:
-    "Studio Collection par 21 Wear: textures, geste créatif et pièces expérimentales pour exprimer la signature atelier de 21 Wear avec une présence premium.",
+    "Studio Collection par CO-KAIN: textures, geste créatif et pièces expérimentales pour exprimer la signature atelier de CO-KAIN avec une présence premium.",
 };
 
 function getCollectionBrand(collectionSlug: string) {
-  return collectionSlug === "classic" ? "CO-KAIN" : "21 Wear";
+  return collectionSlug === "classic" ? "CO-KAIN" : "CO-KAIN";
 }
 
 function getCollectionMetadataTitle(collectionSlug: string, name: string) {
@@ -26,7 +26,7 @@ function getCollectionMetadataTitle(collectionSlug: string, name: string) {
     return "CO-KAIN Classic Collection - premium streetwear sobre";
   }
 
-  return `${name} - 21 Wear premium`;
+  return `${name} - CO-KAIN premium`;
 }
 
 type PageProps = {

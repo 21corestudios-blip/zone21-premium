@@ -98,7 +98,7 @@ export default function WearCheckoutStatus() {
           setPaymentState({
             status: "succeeded",
             message:
-              "Le paiement a été confirmé. La sélection 21 Wear est maintenant validée.",
+              "Le paiement a été confirmé. La sélection CO-KAIN est maintenant validée.",
             amount,
           });
           return;
@@ -141,7 +141,7 @@ export default function WearCheckoutStatus() {
   return (
     <section className="mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center px-6 py-24 text-center md:px-12">
       <p className="font-sans text-[0.68rem] uppercase tracking-[0.32em] text-bg/42">
-        21 Wear Payment
+        CO-KAIN Payment
       </p>
       <h1 className="mt-6 font-serif text-4xl leading-[0.96] text-bg md:text-6xl">
         {displayedState.status === "succeeded"

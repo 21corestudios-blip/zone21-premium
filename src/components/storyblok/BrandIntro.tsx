@@ -1,6 +1,6 @@
 import { storyblokEditable } from "@storyblok/react/rsc";
 
-import SplitShowcaseSection from "@/app/(zone21)/_components/home/shared/SplitShowcaseSection";
+import SplitShowcaseSection from "@/components/sections/SplitShowcaseSection";
 import { resolveStoryblokAsset, resolveStoryblokLink } from "@/lib/storyblok/asset";
 import type { BrandIntroBlok } from "@/lib/storyblok/types";
 

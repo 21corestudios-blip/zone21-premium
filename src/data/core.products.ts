@@ -43,7 +43,7 @@ export const coreProducts: CoreProduct[] = [
     service: "brand-design",
     name: "Signature System",
     kind: "Direction Package",
-    image: "/images/brands/21-core/studio-1.webp",
+    image: "/images/brands/21-core/z21-21-core-studios-brand-design-grid.webp",
     priceCents: 240000,
     currency: "EUR",
     shortDescription:
@@ -85,7 +85,7 @@ export const coreProducts: CoreProduct[] = [
     service: "web-experience",
     name: "Immersive Showcase Site",
     kind: "Prestation",
-    image: "/images/home/hero/campaign-spring-26-hero.jpg",
+    image: "/images/home/hero/Image_hero_0003_16_9.webp",
     priceCents: 420000,
     currency: "EUR",
     shortDescription:
@@ -106,7 +106,7 @@ export const coreProducts: CoreProduct[] = [
     service: "web-experience",
     name: "Premium Landing Template",
     kind: "Template",
-    image: "/images/editorial/manifesto-vision.jpg",
+    image: "/images/editorial/Image_manifesto_0001_1-1.webp",
     priceCents: 29000,
     currency: "EUR",
     shortDescription:
@@ -127,7 +127,7 @@ export const coreProducts: CoreProduct[] = [
     service: "marketing-objects",
     name: "Gallery Frame Edition 01",
     kind: "Cadre",
-    image: "/images/editorial/Ecosysteme.jpg",
+    image: "/images/ecosysteme/ARC-ecosysteme-hero-0001.webp",
     priceCents: 18000,
     currency: "EUR",
     shortDescription:
@@ -148,7 +148,7 @@ export const coreProducts: CoreProduct[] = [
     service: "marketing-objects",
     name: "Retail Marketing Pack",
     kind: "Marketing Kit",
-    image: "/images/contact/contact 2.jpg",
+    image: "/images/contact/contact.jpg",
     priceCents: 54000,
     currency: "EUR",
     shortDescription:

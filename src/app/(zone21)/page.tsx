@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import PreviewToolbar from "@/components/storyblok/PreviewToolbar";
 import StoryblokRenderer from "@/components/storyblok/StoryblokRenderer";
+import { homeData } from "@/data/home.data";
 import { homeStoryFallback } from "@/data/storyblok/home.story";
 import { getStoryblokStory } from "@/lib/storyblok/api";
 
@@ -19,10 +20,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/home/hero/z21-home-hero-main-01-desktop-7.webp",
+        url: homeData.hero.seoImage.src,
         width: 2048,
         height: 1136,
-        alt: "ARCANE - maison créative indépendante premium",
+        alt: homeData.hero.seoImage.alt,
       },
     ],
   },
@@ -33,8 +34,8 @@ export const metadata: Metadata = {
       "ARCANE, maison créative indépendante, relie vêtement premium, image, musique, production et talents dans un écosystème culturel exigeant et cohérent.",
     images: [
       {
-        url: "/images/home/hero/z21-home-hero-main-01-desktop-7.webp",
-        alt: "ARCANE - maison créative indépendante premium",
+        url: homeData.hero.seoImage.src,
+        alt: homeData.hero.seoImage.alt,
       },
     ],
   },

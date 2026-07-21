@@ -17,14 +17,14 @@ export default function Footer() {
             <Link
               href="/"
               aria-label="Retour à l’accueil ARCANE"
-              className="inline-flex h-30 w-30 items-center justify-center transition-opacity duration-500 hover:opacity-80"
+              className="inline-flex h-16 w-56 items-center justify-center transition-opacity duration-500 hover:opacity-80"
             >
               <Image
-                src="/images/ui/ARCANE_blanc_500px.svg"
+                src="/images/ui/ARCANE_LOGO_PRINCIPAL_BLANC_v2.svg"
                 alt="ARCANE"
-                width={500}
-                height={500}
-                className="h-30 w-30 object-contain"
+                width={6250}
+                height={919}
+                className="h-auto w-56 object-contain"
               />
             </Link>
 

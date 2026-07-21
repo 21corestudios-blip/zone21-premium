@@ -38,15 +38,15 @@ export default function Header() {
             <Link
               href="/"
               aria-label="Retour à l’accueil ARCANE"
-              className="flex h-20 w-20 flex-shrink-0 items-center justify-center drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-opacity duration-500 hover:opacity-80"
+              className="flex h-20 w-40 flex-shrink-0 items-center justify-center drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] transition-opacity duration-500 hover:opacity-80 lg:w-44"
             >
               <Image
-                src="/images/ui/ARCANE_header_blanc_500px.svg"
+                src="/images/ui/ARCANE_LOGO_PRINCIPAL_BLANC_v2.svg"
                 alt="ARCANE"
-                width={500}
-                height={500}
+                width={6250}
+                height={919}
                 priority
-                className="h-20 w-20 object-contain"
+                className="h-auto w-40 object-contain lg:w-44"
               />
             </Link>
 
