@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
 import { useWearCart } from "@/app/(wear)/_components/cart/WearCartProvider";
+import { wearColorLabels } from "@/data/wear.products";
 
 import WearPaymentElementForm from "./WearPaymentElementForm";
 import { isStripeConfigured, stripePromise } from "./stripe";
@@ -54,6 +55,7 @@ export default function WearCheckoutClient() {
             items: items.map((item) => ({
               productId: item.productId,
               size: item.size,
+              color: item.color,
               quantity: item.quantity,
             })),
           }),
@@ -392,7 +394,7 @@ export default function WearCheckoutClient() {
             <div className="mt-8 space-y-5">
             {items.map((item) => (
               <article
-                key={`${item.productId}-${item.size}`}
+                key={`${item.productId}-${item.size}-${item.color}`}
                 className="border-b border-bg/10 pb-5"
               >
                 <div className="flex items-start justify-between gap-4">
@@ -401,7 +403,8 @@ export default function WearCheckoutClient() {
                       {item.product.name}
                     </h3>
                     <p className="mt-2 font-sans text-[0.65rem] uppercase tracking-[0.22em] text-bg/45">
-                      Taille {item.size} · Quantité {item.quantity}
+                      Taille {item.size} · {wearColorLabels[item.color]} · Quantité{" "}
+                      {item.quantity}
                     </p>
                   </div>
                   <p className="font-serif text-lg text-bg">

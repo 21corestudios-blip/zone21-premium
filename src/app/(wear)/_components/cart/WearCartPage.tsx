@@ -6,6 +6,7 @@ import { useMemo, useState } from "react";
 
 import { wearCollections } from "@/data/wear.catalog";
 import { formatWearPrice } from "@/data/wear.products";
+import { wearColorLabels } from "@/data/wear.products";
 
 import { useWearCart } from "./WearCartProvider";
 
@@ -31,7 +32,7 @@ export default function WearCartPage() {
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
   const availableSelectionKeys = useMemo(
-    () => items.map((item) => `${item.productId}-${item.size}`),
+    () => items.map((item) => `${item.productId}-${item.size}-${item.color}`),
     [items],
   );
   const validSelectedItems = useMemo(
@@ -62,13 +63,13 @@ export default function WearCartPage() {
 
   const removeSelectedItems = () => {
     items.forEach((item) => {
-      const selectionKey = `${item.productId}-${item.size}`;
+      const selectionKey = `${item.productId}-${item.size}-${item.color}`;
 
       if (!validSelectedItems.includes(selectionKey)) {
         return;
       }
 
-      removeItem(item.productId, item.size);
+      removeItem(item.productId, item.size, item.color);
     });
 
     setSelectedItems([]);
@@ -190,7 +191,7 @@ export default function WearCartPage() {
 
           <div className="space-y-0">
             {items.map((item) => {
-              const selectionKey = `${item.productId}-${item.size}`;
+              const selectionKey = `${item.productId}-${item.size}-${item.color}`;
               const isSelected = validSelectedItems.includes(selectionKey);
 
               return (
@@ -233,7 +234,9 @@ export default function WearCartPage() {
 
                             <button
                               type="button"
-                              onClick={() => removeItem(item.productId, item.size)}
+                              onClick={() =>
+                                removeItem(item.productId, item.size, item.color)
+                              }
                               className="text-[0.58rem] uppercase tracking-[0.24em] text-bg/35 transition-colors duration-300 hover:text-bg"
                               aria-label={`Retirer ${item.product.name} du panier`}
                             >
@@ -248,6 +251,8 @@ export default function WearCartPage() {
                             </span>
                             <span className="hidden h-3 w-px bg-bg/10 sm:block" />
                             <span>Taille {item.size}</span>
+                            <span className="hidden h-3 w-px bg-bg/10 sm:block" />
+                            <span>{wearColorLabels[item.color]}</span>
                             <span className="hidden h-3 w-px bg-bg/10 sm:block" />
                             <span>
                               Prix unitaire{" "}
@@ -272,7 +277,9 @@ export default function WearCartPage() {
                           <div className="inline-flex items-center border border-bg/12">
                             <button
                               type="button"
-                              onClick={() => decrementItem(item.productId, item.size)}
+                              onClick={() =>
+                                decrementItem(item.productId, item.size, item.color)
+                              }
                               className="px-4 py-3 text-sm text-bg/75 transition-colors duration-300 hover:text-bg"
                               aria-label={`Diminuer la quantité de ${item.product.name}`}
                             >
@@ -283,7 +290,9 @@ export default function WearCartPage() {
                             </span>
                             <button
                               type="button"
-                              onClick={() => incrementItem(item.productId, item.size)}
+                              onClick={() =>
+                                incrementItem(item.productId, item.size, item.color)
+                              }
                               className="px-4 py-3 text-sm text-bg/75 transition-colors duration-300 hover:text-bg"
                               aria-label={`Augmenter la quantité de ${item.product.name}`}
                             >

@@ -1,9 +1,17 @@
 export const wearStandardSizes = ["XS", "S", "M", "L", "XL"] as const;
 export const wearAccessorySizes = ["TU"] as const;
+export const wearLaunchColors = ["black", "white", "heather-grey"] as const;
 
 export type WearProductSize =
   | (typeof wearStandardSizes)[number]
   | (typeof wearAccessorySizes)[number];
+export type WearProductColor = (typeof wearLaunchColors)[number];
+
+export const wearColorLabels: Record<WearProductColor, string> = {
+  black: "Noir",
+  white: "Blanc",
+  "heather-grey": "Gris chiné",
+};
 
 export type WearLaunchStatus = "prototype" | "pré-lancement";
 
@@ -15,6 +23,7 @@ export interface WearProduct {
   priceCents: number;
   currency: "EUR";
   availableSizes: WearProductSize[];
+  availableColors?: WearProductColor[];
   description: string;
   businessUnit?: string;
   ipOwner?: string;
@@ -29,6 +38,31 @@ export function isWearProductSize(value: string): value is WearProductSize {
   return [...wearStandardSizes, ...wearAccessorySizes].includes(
     value as WearProductSize,
   );
+}
+
+export function isWearProductColor(value: string): value is WearProductColor {
+  return wearLaunchColors.includes(value as WearProductColor);
+}
+
+export function buildWearVariantId(
+  size: WearProductSize,
+  color: WearProductColor,
+) {
+  return `${size}:${color}`;
+}
+
+export function parseWearVariantId(value: string) {
+  const [size, color, ...extra] = value.split(":");
+
+  if (
+    extra.length ||
+    !isWearProductSize(size) ||
+    !isWearProductColor(color)
+  ) {
+    return null;
+  }
+
+  return { size, color };
 }
 
 export function formatWearPrice(
@@ -54,6 +88,7 @@ export const wearProducts: WearProduct[] = [
     priceCents: 3900,
     currency: "EUR",
     availableSizes: [...wearStandardSizes],
+    availableColors: [...wearLaunchColors],
     description:
       "Prototype de t-shirt CO-KAIN en pré-lancement, pensé comme une base premium streetwear sobre. Prix TTC indicatif pour test POD Gelato, hors promesse de disponibilité commerciale.",
     businessUnit: "CO-KAIN",
@@ -78,6 +113,7 @@ export const wearProducts: WearProduct[] = [
     priceCents: 7900,
     currency: "EUR",
     availableSizes: [...wearStandardSizes],
+    availableColors: [...wearLaunchColors],
     description:
       "Prototype de hoodie CO-KAIN en pré-lancement, cadré pour valider une pièce essentielle premium streetwear sobre en POD Gelato. Prix TTC indicatif, marge à confirmer.",
     businessUnit: "CO-KAIN",
@@ -93,6 +129,26 @@ export const wearProducts: WearProduct[] = [
       "conversion",
       "sauvegardes/retours qualitatifs",
     ],
+  },
+  {
+    id: "classic-sweatshirt-01",
+    collection: "classic",
+    name: "CO-KAIN Classic Sweatshirt",
+    image: "/images/brands/21-wear/01_classic_collection.jpg",
+    priceCents: 6900,
+    currency: "EUR",
+    availableSizes: [...wearStandardSizes],
+    availableColors: [...wearLaunchColors],
+    description:
+      "Prototype de sweat col rond CO-KAIN en pré-lancement, configuré pour une production Gelato régionale en noir, blanc et gris chiné. Prix TTC indicatif, marge à confirmer.",
+    businessUnit: "CO-KAIN",
+    ipOwner: "ZONE 21 IP",
+    salesChannel: "site ZONE 21",
+    initialSupplier: "Gelato",
+    launchStatus: "pré-lancement",
+    marginHypothesis:
+      "Hypothèse de marge à vérifier après coût Gelato, frais Stripe, TVA et expédition.",
+    kpis: ["clic page", "ajout panier", "conversion", "retours qualité"],
   },
   {
     id: "classic-cap-01",

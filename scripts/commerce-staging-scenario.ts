@@ -62,7 +62,8 @@ async function main() {
         {
           productId:
             process.env.COMMERCE_STAGING_WEAR_PRODUCT_ID || "classic-tee-01",
-          variantId: process.env.COMMERCE_STAGING_WEAR_VARIANT_ID || "M",
+          variantId:
+            process.env.COMMERCE_STAGING_WEAR_VARIANT_ID || "M:black",
           quantity: 1,
         },
         {

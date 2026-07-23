@@ -12,8 +12,11 @@ import {
 import {
   formatWearPrice,
   getWearProductById,
+  isWearProductColor,
   isWearProductSize,
+  wearLaunchColors,
   type WearProduct,
+  type WearProductColor,
   type WearProductSize,
 } from "@/data/wear.products";
 
@@ -23,6 +26,7 @@ const MAX_ITEM_QUANTITY = 10;
 interface WearCartStoredItem {
   productId: string;
   size: WearProductSize;
+  color: WearProductColor;
   quantity: number;
 }
 
@@ -38,10 +42,26 @@ interface WearCartContextValue {
   subtotalCents: number;
   subtotalFormatted: string;
   isHydrated: boolean;
-  addItem: (product: WearProduct, size: WearProductSize) => void;
-  decrementItem: (productId: string, size: WearProductSize) => void;
-  incrementItem: (productId: string, size: WearProductSize) => void;
-  removeItem: (productId: string, size: WearProductSize) => void;
+  addItem: (
+    product: WearProduct,
+    size: WearProductSize,
+    color: WearProductColor,
+  ) => void;
+  decrementItem: (
+    productId: string,
+    size: WearProductSize,
+    color: WearProductColor,
+  ) => void;
+  incrementItem: (
+    productId: string,
+    size: WearProductSize,
+    color: WearProductColor,
+  ) => void;
+  removeItem: (
+    productId: string,
+    size: WearProductSize,
+    color: WearProductColor,
+  ) => void;
   clearCart: () => void;
 }
 
@@ -63,7 +83,19 @@ function sanitizeStoredItems(value: unknown): WearCartStoredItem[] {
       return [];
     }
 
-    if (!isWearProductSize(entry.size) || !getWearProductById(entry.productId)) {
+    const product = getWearProductById(entry.productId);
+    const color =
+      "color" in entry &&
+      typeof entry.color === "string" &&
+      isWearProductColor(entry.color)
+        ? entry.color
+        : wearLaunchColors[0];
+
+    if (
+      !isWearProductSize(entry.size) ||
+      !product ||
+      !(product.availableColors || [wearLaunchColors[0]]).includes(color)
+    ) {
       return [];
     }
 
@@ -73,6 +105,7 @@ function sanitizeStoredItems(value: unknown): WearCartStoredItem[] {
       {
         productId: entry.productId,
         size: entry.size,
+        color,
         quantity,
       },
     ];
@@ -138,14 +171,24 @@ export default function WearCartProvider({ children }: { children: ReactNode }) 
     return items.reduce((total, item) => total + item.lineTotalCents, 0);
   }, [items]);
 
-  const addItem = (product: WearProduct, size: WearProductSize) => {
+  const addItem = (
+    product: WearProduct,
+    size: WearProductSize,
+    color: WearProductColor,
+  ) => {
     setStoredItems((currentItems) => {
       const existingItemIndex = currentItems.findIndex(
-        (item) => item.productId === product.id && item.size === size,
+        (item) =>
+          item.productId === product.id &&
+          item.size === size &&
+          item.color === color,
       );
 
       if (existingItemIndex === -1) {
-        return [...currentItems, { productId: product.id, size, quantity: 1 }];
+        return [
+          ...currentItems,
+          { productId: product.id, size, color, quantity: 1 },
+        ];
       }
 
       return currentItems.map((item, index) =>
@@ -159,10 +202,14 @@ export default function WearCartProvider({ children }: { children: ReactNode }) 
     });
   };
 
-  const incrementItem = (productId: string, size: WearProductSize) => {
+  const incrementItem = (
+    productId: string,
+    size: WearProductSize,
+    color: WearProductColor,
+  ) => {
     setStoredItems((currentItems) =>
       currentItems.map((item) =>
-        item.productId === productId && item.size === size
+        item.productId === productId && item.size === size && item.color === color
           ? {
               ...item,
               quantity: Math.min(item.quantity + 1, MAX_ITEM_QUANTITY),
@@ -172,10 +219,18 @@ export default function WearCartProvider({ children }: { children: ReactNode }) 
     );
   };
 
-  const decrementItem = (productId: string, size: WearProductSize) => {
+  const decrementItem = (
+    productId: string,
+    size: WearProductSize,
+    color: WearProductColor,
+  ) => {
     setStoredItems((currentItems) =>
       currentItems.flatMap((item) => {
-        if (item.productId !== productId || item.size !== size) {
+        if (
+          item.productId !== productId ||
+          item.size !== size ||
+          item.color !== color
+        ) {
           return [item];
         }
 
@@ -188,10 +243,19 @@ export default function WearCartProvider({ children }: { children: ReactNode }) 
     );
   };
 
-  const removeItem = (productId: string, size: WearProductSize) => {
+  const removeItem = (
+    productId: string,
+    size: WearProductSize,
+    color: WearProductColor,
+  ) => {
     setStoredItems((currentItems) =>
       currentItems.filter(
-        (item) => !(item.productId === productId && item.size === size),
+        (item) =>
+          !(
+            item.productId === productId &&
+            item.size === size &&
+            item.color === color
+          ),
       ),
     );
   };

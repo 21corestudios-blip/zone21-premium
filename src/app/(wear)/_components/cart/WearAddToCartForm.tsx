@@ -2,7 +2,13 @@
 
 import { useState } from "react";
 
-import type { WearProduct, WearProductSize } from "@/data/wear.products";
+import {
+  wearColorLabels,
+  wearLaunchColors,
+  type WearProduct,
+  type WearProductColor,
+  type WearProductSize,
+} from "@/data/wear.products";
 
 import { useWearCart } from "./WearCartProvider";
 
@@ -16,6 +22,9 @@ export default function WearAddToCartForm({
   const [selectedSize, setSelectedSize] = useState<WearProductSize | null>(
     product.availableSizes[2] ?? product.availableSizes[0] ?? null,
   );
+  const [selectedColor, setSelectedColor] = useState<WearProductColor>(
+    product.availableColors?.[0] || wearLaunchColors[0],
+  );
   const [feedbackMessage, setFeedbackMessage] = useState<string | null>(null);
 
   const { addItem } = useWearCart();
@@ -26,8 +35,10 @@ export default function WearAddToCartForm({
       return;
     }
 
-    addItem(product, selectedSize);
-    setFeedbackMessage(`${product.name} en taille ${selectedSize} a été ajouté au panier.`);
+    addItem(product, selectedSize, selectedColor);
+    setFeedbackMessage(
+      `${product.name} en taille ${selectedSize}, ${wearColorLabels[selectedColor]}, a été ajouté au panier.`,
+    );
   };
 
   return (
@@ -66,6 +77,45 @@ export default function WearAddToCartForm({
               }`}
             >
               {size}
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="flex items-center justify-between gap-4">
+        <p className="font-sans text-[0.65rem] uppercase tracking-[0.24em] text-bg/45">
+          Couleur
+        </p>
+        <p className="font-sans text-[0.65rem] uppercase tracking-[0.18em] text-bg/55">
+          {wearColorLabels[selectedColor]}
+        </p>
+      </div>
+
+      <div
+        className="grid grid-cols-3 gap-3"
+        role="radiogroup"
+        aria-label="Sélection de la couleur"
+      >
+        {(product.availableColors || [wearLaunchColors[0]]).map((color) => {
+          const isSelected = selectedColor === color;
+
+          return (
+            <button
+              key={color}
+              type="button"
+              role="radio"
+              aria-checked={isSelected}
+              onClick={() => {
+                setSelectedColor(color);
+                setFeedbackMessage(null);
+              }}
+              className={`border px-3 py-3 font-sans text-[0.65rem] uppercase tracking-[0.14em] transition-colors duration-300 ${
+                isSelected
+                  ? "border-bg bg-bg text-paper"
+                  : "border-bg/15 text-bg hover:border-bg/35"
+              }`}
+            >
+              {wearColorLabels[color]}
             </button>
           );
         })}

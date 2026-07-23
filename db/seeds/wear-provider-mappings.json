@@ -4,43 +4,179 @@
     "brand": "wear",
     "internalProductId": "classic-tee-01",
     "provider": "gelato",
-    "providerProductId": "TODO_GELATO_PRODUCT_UID",
-    "providerVariantId": null,
-    "providerShopId": null,
+    "providerProductId": "TODO_GELATO_TEE_EU_PRODUCT_UID",
     "providerRegion": "EU",
     "currency": "EUR",
     "active": false,
     "metadata": {
-      "note": "Replace with real Gelato product UID and activate after sample validation."
+      "pilot": "CO-KAIN",
+      "productType": "t-shirt",
+      "launchColors": ["black", "white", "heather-grey"],
+      "minimumFabricWeightGsm": 180,
+      "allowedPrintMethods": ["dtg"],
+      "sampleValidationRequired": true,
+      "printFiles": []
     },
-    "variants": [
-      { "internalVariantId": "XS", "providerVariantId": "TODO_GELATO_XS", "sku": "CLASSIC-TEE-01-XS" },
-      { "internalVariantId": "S", "providerVariantId": "TODO_GELATO_S", "sku": "CLASSIC-TEE-01-S" },
-      { "internalVariantId": "M", "providerVariantId": "TODO_GELATO_M", "sku": "CLASSIC-TEE-01-M" },
-      { "internalVariantId": "L", "providerVariantId": "TODO_GELATO_L", "sku": "CLASSIC-TEE-01-L" },
-      { "internalVariantId": "XL", "providerVariantId": "TODO_GELATO_XL", "sku": "CLASSIC-TEE-01-XL" }
-    ]
+    "variants": []
   },
   {
-    "id": "wear-classic-tee-01-printify-us",
+    "id": "wear-classic-tee-01-gelato-us-ca",
     "brand": "wear",
     "internalProductId": "classic-tee-01",
-    "provider": "printify",
-    "providerProductId": "TODO_PRINTIFY_PRODUCT_ID",
-    "providerVariantId": null,
-    "providerShopId": null,
-    "providerRegion": "US",
+    "provider": "gelato",
+    "providerProductId": "TODO_GELATO_TEE_US_CA_PRODUCT_UID",
+    "providerRegion": "US-CA",
     "currency": "EUR",
     "active": false,
     "metadata": {
-      "note": "Replace with real Printify product and variant ids and activate after sample validation."
+      "pilot": "CO-KAIN",
+      "productType": "t-shirt",
+      "launchColors": ["black", "white", "heather-grey"],
+      "minimumFabricWeightGsm": 180,
+      "allowedPrintMethods": ["dtg"],
+      "sampleValidationRequired": true,
+      "printFiles": []
     },
-    "variants": [
-      { "internalVariantId": "XS", "providerVariantId": "TODO_PRINTIFY_XS", "sku": "CLASSIC-TEE-01-XS" },
-      { "internalVariantId": "S", "providerVariantId": "TODO_PRINTIFY_S", "sku": "CLASSIC-TEE-01-S" },
-      { "internalVariantId": "M", "providerVariantId": "TODO_PRINTIFY_M", "sku": "CLASSIC-TEE-01-M" },
-      { "internalVariantId": "L", "providerVariantId": "TODO_PRINTIFY_L", "sku": "CLASSIC-TEE-01-L" },
-      { "internalVariantId": "XL", "providerVariantId": "TODO_PRINTIFY_XL", "sku": "CLASSIC-TEE-01-XL" }
-    ]
+    "variants": []
+  },
+  {
+    "id": "wear-classic-tee-01-gelato-oc",
+    "brand": "wear",
+    "internalProductId": "classic-tee-01",
+    "provider": "gelato",
+    "providerProductId": "TODO_GELATO_TEE_OC_PRODUCT_UID",
+    "providerRegion": "OC",
+    "currency": "EUR",
+    "active": false,
+    "metadata": {
+      "pilot": "CO-KAIN",
+      "productType": "t-shirt",
+      "launchColors": ["black", "white", "heather-grey"],
+      "minimumFabricWeightGsm": 180,
+      "allowedPrintMethods": ["dtg"],
+      "sampleValidationRequired": true,
+      "printFiles": []
+    },
+    "variants": []
+  },
+  {
+    "id": "wear-classic-hoodie-01-gelato-eu",
+    "brand": "wear",
+    "internalProductId": "classic-hoodie-01",
+    "provider": "gelato",
+    "providerProductId": "TODO_GELATO_HOODIE_EU_PRODUCT_UID",
+    "providerRegion": "EU",
+    "currency": "EUR",
+    "active": false,
+    "metadata": {
+      "pilot": "CO-KAIN",
+      "productType": "hoodie",
+      "launchColors": ["black", "white", "heather-grey"],
+      "minimumFabricWeightGsm": 280,
+      "allowedPrintMethods": ["dtg", "embroidery"],
+      "sampleValidationRequired": true,
+      "printFiles": []
+    },
+    "variants": []
+  },
+  {
+    "id": "wear-classic-hoodie-01-gelato-us-ca",
+    "brand": "wear",
+    "internalProductId": "classic-hoodie-01",
+    "provider": "gelato",
+    "providerProductId": "TODO_GELATO_HOODIE_US_CA_PRODUCT_UID",
+    "providerRegion": "US-CA",
+    "currency": "EUR",
+    "active": false,
+    "metadata": {
+      "pilot": "CO-KAIN",
+      "productType": "hoodie",
+      "launchColors": ["black", "white", "heather-grey"],
+      "minimumFabricWeightGsm": 280,
+      "allowedPrintMethods": ["dtg", "embroidery"],
+      "sampleValidationRequired": true,
+      "printFiles": []
+    },
+    "variants": []
+  },
+  {
+    "id": "wear-classic-hoodie-01-gelato-oc",
+    "brand": "wear",
+    "internalProductId": "classic-hoodie-01",
+    "provider": "gelato",
+    "providerProductId": "TODO_GELATO_HOODIE_OC_PRODUCT_UID",
+    "providerRegion": "OC",
+    "currency": "EUR",
+    "active": false,
+    "metadata": {
+      "pilot": "CO-KAIN",
+      "productType": "hoodie",
+      "launchColors": ["black", "white", "heather-grey"],
+      "minimumFabricWeightGsm": 280,
+      "allowedPrintMethods": ["dtg", "embroidery"],
+      "sampleValidationRequired": true,
+      "printFiles": []
+    },
+    "variants": []
+  },
+  {
+    "id": "wear-classic-sweatshirt-01-gelato-eu",
+    "brand": "wear",
+    "internalProductId": "classic-sweatshirt-01",
+    "provider": "gelato",
+    "providerProductId": "TODO_GELATO_SWEATSHIRT_EU_PRODUCT_UID",
+    "providerRegion": "EU",
+    "currency": "EUR",
+    "active": false,
+    "metadata": {
+      "pilot": "CO-KAIN",
+      "productType": "sweatshirt",
+      "launchColors": ["black", "white", "heather-grey"],
+      "minimumFabricWeightGsm": 270,
+      "allowedPrintMethods": ["dtg", "embroidery"],
+      "sampleValidationRequired": true,
+      "printFiles": []
+    },
+    "variants": []
+  },
+  {
+    "id": "wear-classic-sweatshirt-01-gelato-us-ca",
+    "brand": "wear",
+    "internalProductId": "classic-sweatshirt-01",
+    "provider": "gelato",
+    "providerProductId": "TODO_GELATO_SWEATSHIRT_US_CA_PRODUCT_UID",
+    "providerRegion": "US-CA",
+    "currency": "EUR",
+    "active": false,
+    "metadata": {
+      "pilot": "CO-KAIN",
+      "productType": "sweatshirt",
+      "launchColors": ["black", "white", "heather-grey"],
+      "minimumFabricWeightGsm": 270,
+      "allowedPrintMethods": ["dtg", "embroidery"],
+      "sampleValidationRequired": true,
+      "printFiles": []
+    },
+    "variants": []
+  },
+  {
+    "id": "wear-classic-sweatshirt-01-gelato-oc",
+    "brand": "wear",
+    "internalProductId": "classic-sweatshirt-01",
+    "provider": "gelato",
+    "providerProductId": "TODO_GELATO_SWEATSHIRT_OC_PRODUCT_UID",
+    "providerRegion": "OC",
+    "currency": "EUR",
+    "active": false,
+    "metadata": {
+      "pilot": "CO-KAIN",
+      "productType": "sweatshirt",
+      "launchColors": ["black", "white", "heather-grey"],
+      "minimumFabricWeightGsm": 270,
+      "allowedPrintMethods": ["dtg", "embroidery"],
+      "sampleValidationRequired": true,
+      "printFiles": []
+    },
+    "variants": []
   }
 ]
