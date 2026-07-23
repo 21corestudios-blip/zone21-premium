@@ -16,13 +16,13 @@ const scenarios: QuoteScenario[] = [
   {
     name: "wear-eu-gelato",
     productId: process.env.COMMERCE_STAGING_WEAR_PRODUCT_ID || "classic-tee-01",
-    variantId: process.env.COMMERCE_STAGING_WEAR_VARIANT_ID || "M",
+    variantId: process.env.COMMERCE_STAGING_WEAR_VARIANT_ID || "M:black",
     country: process.env.COMMERCE_STAGING_EU_COUNTRY || "FR",
     postalCode: process.env.COMMERCE_STAGING_EU_POSTAL_CODE || "75001",
     city: process.env.COMMERCE_STAGING_EU_CITY || "Paris",
   },
   {
-    name: "wear-us-printify",
+    name: "wear-us-ca-gelato",
     productId:
       process.env.COMMERCE_STAGING_WEAR_US_PRODUCT_ID ||
       process.env.COMMERCE_STAGING_WEAR_PRODUCT_ID ||
@@ -30,10 +30,20 @@ const scenarios: QuoteScenario[] = [
     variantId:
       process.env.COMMERCE_STAGING_WEAR_US_VARIANT_ID ||
       process.env.COMMERCE_STAGING_WEAR_VARIANT_ID ||
-      "M",
+      "M:black",
     country: process.env.COMMERCE_STAGING_US_COUNTRY || "US",
     postalCode: process.env.COMMERCE_STAGING_US_POSTAL_CODE || "10001",
     city: process.env.COMMERCE_STAGING_US_CITY || "New York",
+  },
+  {
+    name: "wear-oceania-gelato",
+    productId:
+      process.env.COMMERCE_STAGING_WEAR_OC_PRODUCT_ID || "classic-tee-01",
+    variantId:
+      process.env.COMMERCE_STAGING_WEAR_OC_VARIANT_ID || "M:black",
+    country: process.env.COMMERCE_STAGING_OC_COUNTRY || "AU",
+    postalCode: process.env.COMMERCE_STAGING_OC_POSTAL_CODE || "2000",
+    city: process.env.COMMERCE_STAGING_OC_CITY || "Sydney",
   },
 ];
 

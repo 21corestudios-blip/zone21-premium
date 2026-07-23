@@ -2,7 +2,12 @@ import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import { createHash } from "node:crypto";
 
-import { getWearProductById, isWearProductSize } from "@/data/wear.products";
+import {
+  getWearProductById,
+  isWearProductColor,
+  isWearProductSize,
+  wearLaunchColors,
+} from "@/data/wear.products";
 
 interface CheckoutRequestBody {
   mode?: "create_intent" | "prepare_payment";
@@ -19,6 +24,7 @@ interface CheckoutRequestBody {
   items?: Array<{
     productId?: string;
     size?: string;
+    color?: string;
     quantity?: number;
   }>;
 }
@@ -35,6 +41,7 @@ type ValidatedCustomer = {
 type ValidatedItem = {
   productId: string;
   size: string;
+  color: string;
   quantity: number;
 };
 
@@ -80,6 +87,7 @@ function validateItems(items: CheckoutRequestBody["items"]): {
     if (
       !item.productId ||
       !item.size ||
+      !item.color ||
       typeof item.quantity !== "number" ||
       item.quantity < 1
     ) {
@@ -88,6 +96,10 @@ function validateItems(items: CheckoutRequestBody["items"]): {
 
     if (!isWearProductSize(item.size)) {
       throw new Error("Une taille de produit est invalide.");
+    }
+
+    if (!isWearProductColor(item.color)) {
+      throw new Error("Une couleur de produit est invalide.");
     }
 
     const product = getWearProductById(item.productId);
@@ -100,11 +112,16 @@ function validateItems(items: CheckoutRequestBody["items"]): {
       throw new Error("Une taille n’est plus disponible pour cette pièce.");
     }
 
+    if (!(product.availableColors || [wearLaunchColors[0]]).includes(item.color)) {
+      throw new Error("Une couleur n’est plus disponible pour cette pièce.");
+    }
+
     const quantity = Math.min(Math.floor(item.quantity), 10);
 
     validatedItems.push({
       productId: item.productId,
       size: item.size,
+      color: item.color,
       quantity,
     });
 

@@ -2,6 +2,7 @@ interface GelatoClientOptions {
   apiKey?: string;
   storeId?: string;
   baseUrl?: string;
+  productBaseUrl?: string;
 }
 
 export interface GelatoProductVariant {
@@ -18,12 +19,25 @@ export interface GelatoProduct {
   variants?: GelatoProductVariant[];
 }
 
+export interface GelatoCatalog {
+  catalogUid: string;
+  title: string;
+}
+
+export interface GelatoCatalogProduct {
+  productUid: string;
+  attributes: Record<string, string>;
+  supportedCountries: string[];
+  weight?: { value: number; measureUnit: string };
+  dimensions?: Record<string, { value: number; measureUnit: string }>;
+}
+
 export interface GelatoShippingQuoteRequest {
   orderReferenceId: string;
   customerReferenceId: string;
   productUid: string;
   itemReferenceId: string;
-  fileUrl: string;
+  files: GelatoPrintFile[];
   quantity: number;
   currency: string;
   country: string;
@@ -35,6 +49,11 @@ export interface GelatoShippingQuoteRequest {
   firstName?: string;
   lastName?: string;
   addressLine1?: string;
+}
+
+export interface GelatoPrintFile {
+  type: string;
+  url: string;
 }
 
 export interface GelatoOrderCreateRequest extends GelatoShippingQuoteRequest {
@@ -53,6 +72,7 @@ export class GelatoClient {
   private readonly apiKey?: string;
   private readonly storeId?: string;
   private readonly baseUrl: string;
+  private readonly productBaseUrl: string;
 
   constructor(options: GelatoClientOptions = {}) {
     this.apiKey = options.apiKey || process.env.GELATO_API_KEY;
@@ -61,18 +81,26 @@ export class GelatoClient {
       options.baseUrl ||
       process.env.GELATO_API_BASE_URL ||
       "https://order.gelatoapis.com";
+    this.productBaseUrl =
+      options.productBaseUrl ||
+      process.env.GELATO_PRODUCT_API_BASE_URL ||
+      "https://product.gelatoapis.com";
   }
 
   get configured() {
-    return Boolean(this.apiKey && this.storeId);
+    return Boolean(this.apiKey);
   }
 
-  private async request<T>(path: string, init?: RequestInit): Promise<T> {
+  private async request<T>(
+    path: string,
+    init?: RequestInit,
+    baseUrl = this.baseUrl,
+  ): Promise<T> {
     if (!this.apiKey) {
       throw new Error("GELATO_API_KEY is not configured.");
     }
 
-    const response = await fetch(`${this.baseUrl}${path}`, {
+    const response = await fetch(`${baseUrl}${path}`, {
       ...init,
       headers: {
         "X-API-KEY": this.apiKey,
@@ -83,7 +111,12 @@ export class GelatoClient {
     });
 
     if (!response.ok) {
-      throw new Error(`Gelato request failed with ${response.status}.`);
+      const responseText = await response.text();
+      throw new Error(
+        `Gelato request failed with ${response.status}${
+          responseText ? `: ${responseText.slice(0, 300)}` : ""
+        }.`,
+      );
     }
 
     return (await response.json()) as T;
@@ -95,7 +128,81 @@ export class GelatoClient {
     }
 
     return this.request<{ products?: GelatoProduct[] }>(
-      `/v4/stores/${this.storeId}/products`,
+      `/v1/stores/${this.storeId}/products`,
+      undefined,
+      "https://ecommerce.gelatoapis.com",
+    );
+  }
+
+  async getProduct(productUid: string) {
+    return this.request<{
+      productUid: string;
+      attributes: Record<string, string>;
+      supportedCountries: string[];
+      notSupportedCountries: string[];
+      isStockable: boolean;
+      isPrintable: boolean;
+    }>(
+      `/v3/products/${encodeURIComponent(productUid)}`,
+      undefined,
+      this.productBaseUrl,
+    );
+  }
+
+  async listCatalogs() {
+    return this.request<GelatoCatalog[]>(
+      "/v3/catalogs",
+      undefined,
+      this.productBaseUrl,
+    );
+  }
+
+  async searchCatalogProducts({
+    catalogUid,
+    attributeFilters = {},
+    limit = 100,
+    offset = 0,
+  }: {
+    catalogUid: string;
+    attributeFilters?: Record<string, string[]>;
+    limit?: number;
+    offset?: number;
+  }) {
+    return this.request<{
+      products: GelatoCatalogProduct[];
+      hits?: unknown;
+    }>(
+      `/v3/catalogs/${encodeURIComponent(catalogUid)}/products:search`,
+      {
+        method: "POST",
+        body: JSON.stringify({ attributeFilters, limit, offset }),
+      },
+      this.productBaseUrl,
+    );
+  }
+
+  async getRegionAvailability(productUids: string[]) {
+    return this.request<{
+      productsAvailability: Array<{
+        productUid: string;
+        availability: Array<{
+          stockRegionUid: string;
+          status:
+            | "in-stock"
+            | "out-of-stock-replenishable"
+            | "out-of-stock"
+            | "non-stockable"
+            | "not-supported";
+          replenishmentDate?: string | null;
+        }>;
+      }>;
+    }>(
+      "/v3/stock/region-availability",
+      {
+        method: "POST",
+        body: JSON.stringify({ products: productUids }),
+      },
+      this.productBaseUrl,
     );
   }
 
@@ -134,7 +241,7 @@ export class GelatoClient {
             {
               itemReferenceId: payload.itemReferenceId,
               productUid: payload.productUid,
-              fileUrl: payload.fileUrl,
+              files: payload.files,
               quantity: payload.quantity,
             },
           ],
@@ -169,7 +276,7 @@ export class GelatoClient {
             {
               itemReferenceId: payload.itemReferenceId,
               productUid: payload.productUid,
-              fileUrl: payload.fileUrl,
+              files: payload.files,
               quantity: payload.quantity,
             },
           ],

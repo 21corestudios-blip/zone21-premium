@@ -1,8 +1,10 @@
 import type { CommerceOrder, CommerceOrderLine } from "@/lib/commerce/orders/types";
 import { getCommerceRepository } from "@/lib/commerce/persistence/repository";
 import { createGelatoClient } from "@/lib/commerce/providers/gelato/client";
+import { resolveGelatoPrintFiles } from "@/lib/commerce/providers/gelato/print-files";
 import { createPrintifyClient } from "@/lib/commerce/providers/printify/client";
 import { buildStripeIdempotencyKey } from "@/lib/commerce/payments/stripe-connect";
+import { getWearProviderRegion } from "@/lib/commerce/wear/routing";
 
 export async function createWearProviderOrders(order: CommerceOrder) {
   const wearItems = order.items.filter(
@@ -53,6 +55,9 @@ async function createWearProviderOrderForLine(
     productId: item.productId,
     variantId: item.variantId,
     provider: item.fulfillmentProvider,
+    region: order.customer?.shippingAddress?.country
+      ? getWearProviderRegion(order.customer.shippingAddress.country)
+      : undefined,
   });
 
   if (!mapping) {
@@ -135,13 +140,10 @@ async function createGelatoOrder(
     Awaited<ReturnType<ReturnType<typeof getCommerceRepository>["getProviderMapping"]>>
   >,
 ) {
-  const fileUrl =
-    typeof mapping.productMapping.metadata?.fileUrl === "string"
-      ? mapping.productMapping.metadata.fileUrl
-      : process.env.GELATO_DEFAULT_FILE_URL;
+  const files = resolveGelatoPrintFiles(mapping.productMapping.metadata);
 
-  if (!fileUrl) {
-    throw new Error("GELATO_DEFAULT_FILE_URL is required for Gelato orders.");
+  if (!files.length) {
+    throw new Error("Gelato print files are required for Gelato orders.");
   }
 
   const address = order.customer?.shippingAddress;
@@ -155,7 +157,7 @@ async function createGelatoOrder(
     customerReferenceId: order.customer?.email || order.orderId,
     productUid: mapping.productMapping.providerProductId,
     itemReferenceId: `${item.productId}:${item.variantId}`,
-    fileUrl,
+    files,
     quantity: item.quantity,
     currency: item.unitAmount.currency,
     country: address.country,

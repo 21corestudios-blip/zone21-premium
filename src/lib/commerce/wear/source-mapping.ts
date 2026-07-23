@@ -1,11 +1,19 @@
-import { wearProducts, type WearProductSize } from "@/data/wear.products";
+import {
+  buildWearVariantId,
+  wearLaunchColors,
+  wearProducts,
+  type WearProductColor,
+  type WearProductSize,
+} from "@/data/wear.products";
 import { getCommerceRepository } from "@/lib/commerce/persistence/repository";
 import type { ProviderMappingBundle } from "@/lib/commerce/persistence/types";
 import type { FulfillmentProvider } from "@/lib/commerce/types";
 
 export interface WearSourceVariantMapping {
   productId: string;
-  variantId: WearProductSize;
+  variantId: string;
+  size: WearProductSize;
+  color: WearProductColor;
   sku: string;
   providers: Partial<
     Record<
@@ -20,12 +28,16 @@ export interface WearSourceVariantMapping {
 
 export function getWearSourceMappings(): WearSourceVariantMapping[] {
   return wearProducts.flatMap((product) =>
-    product.availableSizes.map((size) => ({
-      productId: product.id,
-      variantId: size,
-      sku: `${product.id}-${size}`.toUpperCase(),
-      providers: {},
-    })),
+    product.availableSizes.flatMap((size) =>
+      (product.availableColors || [wearLaunchColors[0]]).map((color) => ({
+        productId: product.id,
+        variantId: buildWearVariantId(size, color),
+        size,
+        color,
+        sku: `${product.id}-${size}-${color}`.toUpperCase(),
+        providers: {},
+      })),
+    ),
   );
 }
 

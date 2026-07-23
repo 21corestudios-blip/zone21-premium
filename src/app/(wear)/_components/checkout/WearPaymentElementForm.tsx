@@ -69,6 +69,7 @@ export default function WearPaymentElementForm({
           items: items.map((item) => ({
             productId: item.productId,
             size: item.size,
+            color: item.color,
             quantity: item.quantity,
           })),
         }),

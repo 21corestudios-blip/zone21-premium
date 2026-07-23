@@ -1,6 +1,11 @@
-import { getWearProductById, isWearProductSize } from "@/data/wear.products";
+import {
+  getWearProductById,
+  parseWearVariantId,
+  wearLaunchColors,
+} from "@/data/wear.products";
 import type { CommerceMoney, FulfillmentProvider } from "@/lib/commerce/types";
 import { createGelatoClient } from "../providers/gelato/client";
+import { resolveGelatoPrintFiles } from "../providers/gelato/print-files";
 import { createPrintifyClient } from "../providers/printify/client";
 import { getWearProviderCandidates, type WearDestination } from "./routing";
 import { getPersistedWearProviderMapping } from "./source-mapping";
@@ -37,11 +42,16 @@ export async function quoteWearLine(input: WearQuoteInput): Promise<WearQuote> {
     throw new Error("WEAR_PRODUCT_NOT_FOUND");
   }
 
-  if (!isWearProductSize(input.variantId)) {
+  const variant = parseWearVariantId(input.variantId);
+
+  if (!variant) {
     throw new Error("WEAR_VARIANT_INVALID");
   }
 
-  if (!product.availableSizes.includes(input.variantId)) {
+  if (
+    !product.availableSizes.includes(variant.size) ||
+    !(product.availableColors || [wearLaunchColors[0]]).includes(variant.color)
+  ) {
     throw new Error("WEAR_VARIANT_UNAVAILABLE");
   }
 
@@ -62,7 +72,7 @@ export async function quoteWearLine(input: WearQuoteInput): Promise<WearQuote> {
       productId: input.productId,
       variantId: input.variantId,
       provider: candidate.provider,
-      region: candidate.provider === "gelato" ? "EU" : "US",
+      region: candidate.providerRegion,
     });
 
     if (!mapping) {
@@ -83,7 +93,7 @@ export async function quoteWearLine(input: WearQuoteInput): Promise<WearQuote> {
         variantId: input.variantId,
         quantity: input.quantity,
         provider: candidate.provider,
-        providerDecisionReason: candidate.reason,
+        providerDecisionReason: `${candidate.reason} (${candidate.providerRegion})`,
         itemTotal: { amountCents: itemTotalCents, currency: "EUR" },
         shipping: {
           amountCents: providerQuote.shippingCents,
@@ -149,13 +159,10 @@ async function quoteProviderShipping({
 
   if (provider === "gelato") {
     const client = createGelatoClient();
-    const fileUrl =
-      typeof mapping.productMapping.metadata?.fileUrl === "string"
-        ? mapping.productMapping.metadata.fileUrl
-        : process.env.GELATO_DEFAULT_FILE_URL;
+    const files = resolveGelatoPrintFiles(mapping.productMapping.metadata);
 
-    if (!fileUrl) {
-      throw new Error("gelato_file_url_missing");
+    if (!files.length) {
+      throw new Error("gelato_print_files_missing");
     }
 
     const quote = await client.quoteShipping({
@@ -163,7 +170,7 @@ async function quoteProviderShipping({
       customerReferenceId: "zone21-customer-pending",
       productUid: mapping.productMapping.providerProductId,
       itemReferenceId: `${input.productId}:${input.variantId}`,
-      fileUrl,
+      files,
       quantity: input.quantity,
       currency: "EUR",
       country: input.destination.country,

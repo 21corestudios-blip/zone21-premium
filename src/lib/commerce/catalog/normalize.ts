@@ -1,7 +1,12 @@
 import type { CoreProduct } from "@/data/core.products";
 import type { ProductionSellable } from "@/data/production.products";
 import type { TalentsProduct } from "@/data/talents.products";
-import type { WearProduct } from "@/data/wear.products";
+import {
+  buildWearVariantId,
+  wearColorLabels,
+  wearLaunchColors,
+  type WearProduct,
+} from "@/data/wear.products";
 import type {
   CommerceBrandId,
   CommerceMoney,
@@ -27,7 +32,7 @@ const wearShippingProfile: CommerceShippingProfile = {
   id: "wear-print-on-demand",
   shipsPhysicalGoods: true,
   requiresAddress: true,
-  regions: ["EU", "US"],
+  regions: ["EU", "US-CA", "OC"],
 };
 
 function eur(amountCents: number): CommerceMoney {
@@ -74,15 +79,22 @@ export function normalizeWearProduct(product: WearProduct): CommerceProduct {
     shippingProfile: wearShippingProfile,
     fulfillmentProvider: "printify",
     sellable: true,
-    variants: product.availableSizes.map((size) => ({
-      ...baseVariant(size, size, price),
-      sku: `${product.id}-${size}`.toUpperCase(),
-      fulfillmentProvider: "printify",
-      metadata: { size },
-    })),
+    variants: product.availableSizes.flatMap((size) =>
+      (product.availableColors || [wearLaunchColors[0]]).map((color) => {
+        const id = buildWearVariantId(size, color);
+
+        return {
+          ...baseVariant(id, `${size} · ${wearColorLabels[color]}`, price),
+          sku: `${product.id}-${size}-${color}`.toUpperCase(),
+          fulfillmentProvider: "gelato" as const,
+          metadata: { size, color },
+        };
+      }),
+    ),
     metadata: {
       collection: product.collection,
       commerceRole: "wear-catalog",
+      launchColors: (product.availableColors || [wearLaunchColors[0]]).join(","),
     },
   });
 }

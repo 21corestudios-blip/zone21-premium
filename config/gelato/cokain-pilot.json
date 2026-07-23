@@ -1,0 +1,63 @@
+{
+  "brand": "CO-KAIN",
+  "status": "configuration",
+  "regions": ["EU", "US-CA", "OC"],
+  "destinationChecks": {
+    "EU": { "country": "FR", "postalCode": "75001", "city": "Paris" },
+    "US-CA": { "country": "US", "postalCode": "10001", "city": "New York" },
+    "OC": { "country": "AU", "postalCode": "2000", "city": "Sydney" }
+  },
+  "colors": [
+    { "id": "black", "label": "Noir", "artworkTone": "white" },
+    { "id": "white", "label": "Blanc", "artworkTone": "black" },
+    {
+      "id": "heather-grey",
+      "label": "Gris chiné",
+      "artworkTone": "black"
+    }
+  ],
+  "artwork": {
+    "principal": {
+      "black": "COKAIN_LOGO_PRINCIPAL_NOIR_v2.svg",
+      "white": "COKAIN_LOGO_PRINCIPAL_BLANC_v2.svg"
+    },
+    "monogram": {
+      "black": "COKAIN_LOGO_MONOGRAMME-K_NOIR_v2.svg",
+      "white": "COKAIN_LOGO_MONOGRAMME-K_BLANC_v2.svg"
+    },
+    "rules": [
+      {
+        "printArea": "front",
+        "artwork": "principal",
+        "placement": "center-chest",
+        "maxWidthPercent": 58
+      },
+      {
+        "printArea": "back",
+        "artwork": "monogram",
+        "placement": "upper-center",
+        "maxWidthPercent": 18
+      }
+    ]
+  },
+  "products": [
+    {
+      "internalProductId": "classic-tee-01",
+      "type": "t-shirt",
+      "minimumFabricWeightGsm": 180,
+      "allowedPrintMethods": ["dtg"]
+    },
+    {
+      "internalProductId": "classic-hoodie-01",
+      "type": "hoodie",
+      "minimumFabricWeightGsm": 280,
+      "allowedPrintMethods": ["dtg", "embroidery"]
+    },
+    {
+      "internalProductId": "classic-sweatshirt-01",
+      "type": "sweatshirt",
+      "minimumFabricWeightGsm": 270,
+      "allowedPrintMethods": ["dtg", "embroidery"]
+    }
+  ]
+}

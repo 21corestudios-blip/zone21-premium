@@ -2,6 +2,12 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 
 import { loadCommerceScriptEnv } from "./lib/load-commerce-env";
+import {
+  buildWearVariantId,
+  wearLaunchColors,
+  wearStandardSizes,
+} from "../src/data/wear.products";
+import { resolveGelatoPrintFiles } from "../src/lib/commerce/providers/gelato/print-files";
 
 loadCommerceScriptEnv();
 
@@ -21,7 +27,7 @@ type SeedMapping = {
   }>;
 };
 
-const requiredWearSizes = ["XS", "S", "M", "L", "XL"];
+const requiredWearSizes = wearStandardSizes;
 const seedPath = path.join(
   process.cwd(),
   "db",
@@ -47,26 +53,31 @@ async function main() {
     }
 
     if (mapping.provider === "gelato") {
-      const fileUrl =
-        mapping.metadata?.fileUrl || process.env.GELATO_DEFAULT_FILE_URL;
-      assertRealValue(fileUrl, `${mapping.id}.metadata.fileUrl`, issues);
+      const printFiles = resolveGelatoPrintFiles(mapping.metadata);
+
+      if (!printFiles.length) {
+        issues.push(`${mapping.id}.metadata.printFiles is empty`);
+      }
     }
 
     for (const size of requiredWearSizes) {
-      const variant = mapping.variants?.find(
-        (entry) => entry.internalVariantId === size,
-      );
+      for (const color of wearLaunchColors) {
+        const internalVariantId = buildWearVariantId(size, color);
+        const variant = mapping.variants?.find(
+          (entry) => entry.internalVariantId === internalVariantId,
+        );
 
-      if (!variant) {
-        issues.push(`${mapping.id}.variants missing ${size}`);
-        continue;
+        if (!variant) {
+          issues.push(`${mapping.id}.variants missing ${internalVariantId}`);
+          continue;
+        }
+
+        assertRealValue(
+          variant.providerVariantId,
+          `${mapping.id}.variants.${internalVariantId}.providerVariantId`,
+          issues,
+        );
       }
-
-      assertRealValue(
-        variant.providerVariantId,
-        `${mapping.id}.variants.${size}.providerVariantId`,
-        issues,
-      );
     }
   }
 
